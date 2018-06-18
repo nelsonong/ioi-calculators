@@ -1,56 +1,45 @@
 import React, { Component } from 'react';
+import Model from './Model';
+import HardwareVersion from './HardwareVersion';
+import Format from './Format';
+import Resolution from './Resolution';
+import Options from './Options';
+import Capabilities from './Capabilities';
 import './calculator.css';
 
 class Calculator extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            link: 'cl',                                     // Link type (Camera Link, CoaXPress)
+            model: '2M360MCL/NCL',                          // Camera model
+            hwversion: 2,                                   // Hardware version
+            format: 'Base 8-bit x 2',                       // Camera link format
+            bitDepth: 8, linkCount: 1, linkSpeed: 'CXP-3',  // CoaXpress format
+            width: 1920,                                    // Resolution - width
+            height: 1080                                    // Resolution - height
+        };
+
+        this.updateState = this.updateState.bind(this);
+    }
+
+    updateState(newState) {
+        this.setState(newState);
+    }
+
+    componentDidUpdate() {
+        console.log(this.state);
+    }
+
     render() {
         return (
             <div className="Calculator">
-                <fieldset>
-                <legend>Model</legend>
-                    <select>
-                        <option value="cl">Camera Link</option>
-                        <option value="cx">CoaXPress</option>
-                    </select>
-                    <br />
-                    <select>
-                        <option value="cl">2M360MCL/NCL</option>
-                    </select>
-                </fieldset>
-                <fieldset>
-                <legend>Hardware Version</legend>
-                    <input type="radio" name="hv" value="1" />1
-                    <input type="radio" name="hv" value="2" />2
-                </fieldset>
-                <fieldset>
-                <legend>Camera Link Format</legend>
-                    <select>
-                        <option value="b8b2">Base 8-bit x 2</option>
-                    </select>
-                </fieldset>
-                <fieldset>
-                <legend>Resolution</legend>
-                    <span>Presets:</span>&nbsp;&nbsp;
-                    <select>
-                        <option value="b8b2">FHD (1920x1080)</option>
-                    </select>
-                    <br />
-                    <span>W x H:</span>&nbsp;&nbsp;
-                    <input type="number" min="10" max="20" required />&nbsp;&nbsp;
-                    <input type="number" min="10" max="20" required />
-                </fieldset>
-                <fieldset>
-                <legend>Options</legend>
-                    <input type="checkbox" name="hv" value="1" />Enable sub-sampling
-                    <br />
-                    <input type="checkbox" name="hv" value="2" />Enabled reduced line rate mode
-                </fieldset>
-                <fieldset>
-                <legend>Capabilities</legend>
-                    <span>Frame rate:</span>&nbsp;&nbsp;<input type="text" name="framerate" />
-                    <br/><br/>
-                    <label htmlFor="resolution">Resolution:</label>
-                    <input type="text" name="resolution" />
-                </fieldset>
+                <Model updateLink={this.updateLink} updateState={this.updateState}/>
+                <HardwareVersion updateHWVersion={this.updateHWVersion}/>
+                <Format link={this.state.link} model={this.state.model} updateFormat={this.updateFormat}/>
+                <Resolution />
+                <Options />
+                <Capabilities />
             </div>
         );
     }
