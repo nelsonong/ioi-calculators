@@ -37,7 +37,7 @@ class Calculator extends Component {
                 <Model updateLink={this.updateLink} updateState={this.updateState}/>
                 <HardwareVersion updateState={this.updateState}/>
                 <Format link={this.state.link} model={this.state.model} updateState={this.updateState}/>
-                <Resolution updateState={this.updateState}/>
+                <Resolution updateState={this.updateState} width={this.state.width} height={this.state.height}/>
                 <Options updateState={this.updateState}/>
                 <Capabilities updateState={this.updateState}/>
             </div>
