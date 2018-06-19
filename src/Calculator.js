@@ -13,7 +13,7 @@ class Calculator extends Component {
         this.state = {
             link: 'cl',                                     // Link type (Camera Link, CoaXPress)
             model: '2M360MCL/NCL',                          // Camera model
-            hwversion: 2,                                   // Hardware version
+            hwversion: '2',                                   // Hardware version
             format: 'Base 8-bit x 2',                       // Camera link format
             bitDepth: 8, linkCount: 1, linkSpeed: 'CXP-3',  // CoaXpress format
             width: 1920,                                    // Resolution - width
@@ -35,11 +35,11 @@ class Calculator extends Component {
         return (
             <div className="Calculator">
                 <Model updateLink={this.updateLink} updateState={this.updateState}/>
-                <HardwareVersion updateHWVersion={this.updateHWVersion}/>
-                <Format link={this.state.link} model={this.state.model} updateFormat={this.updateFormat}/>
-                <Resolution />
-                <Options />
-                <Capabilities />
+                <HardwareVersion updateState={this.updateState}/>
+                <Format link={this.state.link} model={this.state.model} updateState={this.updateState}/>
+                <Resolution updateState={this.updateState}/>
+                <Options updateState={this.updateState}/>
+                <Capabilities updateState={this.updateState}/>
             </div>
         );
     }

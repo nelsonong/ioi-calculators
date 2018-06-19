@@ -4,7 +4,7 @@ class HardwareVersion extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            hwversion: 2
+            hwversion: '2'
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -22,8 +22,8 @@ class HardwareVersion extends Component {
         return (
             <fieldset>
             <legend>Hardware Version</legend>
-                <input type="radio" value="1" checked={this.state.hwversion === 1} onChange={this.handleChange} />1&nbsp;
-                <input type="radio" value="2" checked={this.state.hwversion === 2} onChange={this.handleChange} />2
+                <input type='radio' value='1' checked={this.state.hwversion === '1'} onChange={this.handleChange} />1&nbsp;
+                <input type='radio' value='2' checked={this.state.hwversion === '2'} onChange={this.handleChange} />2
             </fieldset>
         );
     }
