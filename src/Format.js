@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class CameraLinkFormat extends Component {
+class Format extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -176,4 +176,4 @@ class CameraLinkFormat extends Component {
     }
 }
 
-export default CameraLinkFormat;
+export default Format;
