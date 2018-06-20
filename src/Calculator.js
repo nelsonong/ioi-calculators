@@ -4,7 +4,7 @@ import HardwareVersion from './HardwareVersion';
 import Format from './Format';
 import Resolution from './Resolution';
 import Options from './Options';
-import Capabilities from './Capabilities';
+import FrameRate from './FrameRate';
 import './calculator.css';
 
 class Calculator extends Component {
@@ -38,11 +38,11 @@ class Calculator extends Component {
         return (
             <div className="Calculator">
                 <Model updateState={this.updateState}/>
-                <HardwareVersion updateState={this.updateState}/>
+                <HardwareVersion hwversion={this.state.hwversion} updateState={this.updateState}/>
                 <Format link={this.state.link} model={this.state.model} updateState={this.updateState}/>
                 <Resolution updateState={this.updateState} width={this.state.width} height={this.state.height}/>
                 <Options link={this.state.link} model={this.state.model} format={this.state.format} updateState={this.updateState}/>
-                <Capabilities updateState={this.updateState}/>
+                <FrameRate updateState={this.updateState}/>
             </div>
         );
     }

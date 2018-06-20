@@ -13,7 +13,7 @@
 }
 
 fieldset {
-    background-color: rgb(253, 238, 214);
+    background: rgb(253, 238, 214);
     text-align: left;
     margin: 5px 0 5px 0;
     border-style: ridge;
@@ -27,18 +27,21 @@ legend {
 }
 
 select {
-    margin: 2px;
     font-size: 11px;
+    margin: 2px;
 }
 
 input {
-    margin: 2px;
     font-size: 11px;
+    margin: 2px;
 }
 
-input[type="text"] {
-    background-color: rgb(230, 230, 230);
-    width: 120px;
-    float: right;
-    margin-right: 4px;
+.framerate {
+    font-size: 12px;
+    height: 20px;
+    width: 60%;
+    display: block;
+    margin: 9px auto;
+    border-style: ridge;
+    border-radius: 5px;
 }
