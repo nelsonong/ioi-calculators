@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
+import { resolutionPresets } from './Constants';
 
 class Resolution extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            presets: [ 'Maximum', [3840, 2160], [2048, 1024], [1920, 1080], [1280, 1024], [1280, 720], [1024, 1024], [1024, 768], [800, 600], [640, 480], [320, 240], 'Minimum' ]
-        };
 
         this.handleChangePreset = this.handleChangePreset.bind(this);
         this.handleChangeWidth = this.handleChangeWidth.bind(this);
@@ -13,7 +11,7 @@ class Resolution extends Component {
     }
 
     loadPresets() {
-        return this.state.presets.map((preset, i) => {
+        return resolutionPresets.map((preset, i) => {
             let presetString;
             if (preset === 'Maximum' || preset === 'Minimum') {
                 presetString = preset;
@@ -25,7 +23,7 @@ class Resolution extends Component {
     }
 
     handleChangePreset(e) {
-        let preset = e.target.value;
+        const preset = e.target.value;
         let resolution = [];
         if (preset === 'Maximum') {
             resolution[0] = 4096;

@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
+import { cameras } from './Constants';
 
 class Model extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            cameras: [
-                { link: 'cl', models: [ '2M360MCL/NCL', '2M360CCL', '4M180MCL/NCL', '4M180CCL', '12M125MCL/NCL', '12M125CCL' ] },
-                { link: 'cx', models: [ '2M280MCX/NCX', '2M280CCX', '4M140MCX/NCX', '4M140CCX', '12M180MCX/NCX', '12M180CCX', '48M30MCX', '48M30CCX' ] }
-            ],
             link: 'cl'
         };
 
@@ -35,7 +32,7 @@ class Model extends Component {
 
     render() {
         // Get camera object with correct models (cl or cx).
-        let camera = this.state.cameras.filter(camera => {
+        const camera = cameras.filter(camera => {
             return camera.link === this.state.link
         });
 

@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
+import { slowModeFormats } from './Constants';
 
 class Options extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            supportedFormats: [ 'Full 8-bit x 8', '80-bit 10-bit x 8' ]
-        };
-
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
@@ -20,7 +17,7 @@ class Options extends Component {
         const model = this.props.model;
         const format = this.props.format;
 
-        return (link !== 'cl' || model.startsWith('12M') || !this.state.supportedFormats.includes(format));
+        return (link !== 'cl' || model.startsWith('12M') || !slowModeFormats.includes(format));
     }
 
     handleInputChange(e) {
