@@ -1,8 +1,8 @@
 // Camera models
-const cameras = [
-    { link: 'cl', models: [ '2M360MCL/NCL', '2M360CCL', '4M180MCL/NCL', '4M180CCL', '12M125MCL/NCL', '12M125CCL' ] },
-    { link: 'cx', models: [ '2M280MCX/NCX', '2M280CCX', '4M140MCX/NCX', '4M140CCX', '12M180MCX/NCX', '12M180CCX', '48M30MCX', '48M30CCX' ] }
-];
+const models = {
+    cl: [ '2M360MCL/NCL', '2M360CCL', '4M180MCL/NCL', '4M180CCL', '12M125MCL/NCL', '12M125CCL' ],
+    cx: [ '2M280MCX/NCX', '2M280CCX', '4M140MCX/NCX', '4M140CCX', '12M180MCX/NCX', '12M180CCX', '48M30MCX', '48M30CCX' ]
+};
 
 // Formats
 const clFormats = {
@@ -38,4 +38,4 @@ const slowModeFormats = [ 'Full 8-bit x 8', '80-bit 10-bit x 8' ];
 // Resolution Presets
 const resolutionPresets = [ 'Maximum', [3840, 2160], [2048, 1024], [1920, 1080], [1280, 1024], [1280, 720], [1024, 1024], [1024, 768], [800, 600], [640, 480], [320, 240], 'Minimum' ];
 
-export { cameras, clFormats, cxFormats, slowModeFormats, resolutionPresets };
+export { models, clFormats, cxFormats, slowModeFormats, resolutionPresets };

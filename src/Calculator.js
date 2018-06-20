@@ -37,7 +37,7 @@ class Calculator extends Component {
     render() {
         return (
             <div className="Calculator">
-                <Model updateState={this.updateState}/>
+                <Model link={this.state.link} updateState={this.updateState}/>
                 <HardwareVersion hwversion={this.state.hwversion} updateState={this.updateState}/>
                 <Format link={this.state.link} model={this.state.model} updateState={this.updateState}/>
                 <Resolution updateState={this.updateState} width={this.state.width} height={this.state.height}/>
