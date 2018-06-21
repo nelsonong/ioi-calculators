@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { cxFormats, clFormats } from './Constants';
+import { cxFormats, clFormats } from '../utils/Constants';
 
 class Format extends Component {
     constructor(props) {

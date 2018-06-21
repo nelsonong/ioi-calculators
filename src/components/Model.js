@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { models } from './Constants';
+import { models } from '../utils/Constants';
 
 class Model extends Component {
     constructor(props) {

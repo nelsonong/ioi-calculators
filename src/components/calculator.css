@@ -43,6 +43,7 @@ input {
     width: 60%;
     display: block;
     margin: 9px auto;
+    border-width: thick;
     border-style: ridge;
     border-radius: 5px;
 }
