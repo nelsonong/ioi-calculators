@@ -1,4 +1,4 @@
-.Calculator {
+.FlareCalculator {
     background-color: rgb(253, 222, 214);
     background: linear-gradient(to bottom right, rgb(253, 222, 214), rgb(253, 235, 214));
     font-family: 'Roboto Thin', sans-serif;
@@ -37,7 +37,7 @@ input {
     margin: 2px;
 }
 
-.framerate {
+.frameRate {
     background-color: rgb(199, 100, 100);
     font-size: 12px;
     font-weight: 700;

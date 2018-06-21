@@ -8,7 +8,7 @@ import FrameRate from '../components/FrameRate';
 import { calculateFrameRate } from '../utils/calculate-frame-rate';
 import './FlareCalculator.css';
 
-class Calculator extends Component {
+class FlareCalculator extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -39,7 +39,7 @@ class Calculator extends Component {
 
     render() {
         return (
-            <div className="Calculator">
+            <div className="FlareCalculator">
                 <Model link={this.state.link} hwversion={this.state.hwversion} updateState={this.updateState}/>
                 <HardwareVersion hwversion={this.state.hwversion} updateState={this.updateState}/>
                 <Format link={this.state.link} model={this.state.model} updateState={this.updateState}/>
@@ -51,4 +51,4 @@ class Calculator extends Component {
     }
 }
 
-export default Calculator;
+export default FlareCalculator;
