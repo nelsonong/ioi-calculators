@@ -1,4 +1,4 @@
-import { clFormat } from './Constants';
+import { clFormat } from '../constants/formats';
 
 const calculateFrameRate = (parentState) => {
 
