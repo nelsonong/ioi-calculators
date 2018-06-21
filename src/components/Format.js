@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { cxFormats, clFormats } from '../utils/Constants';
+import { clFormats, cxFormats } from '../constants/formats';
 
 class Format extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentModel: '2M360MCL/NCL',
+            currentLink: 'cl',
             clFormat: clFormats.cl_2_4m,
             cxFormat: cxFormats.cx_2_4m
         };
@@ -28,9 +28,9 @@ class Format extends Component {
 
     renderFormats() {
         // If model has changed, reload formats
-        if (this.props.model !== this.state.currentModel) {
-            this.setState({ currentModel: this.props.model });
-            if (this.props.link === 'cl') {
+        if (this.props.link !== this.state.currentLink) {
+            this.setState({ currentLink: this.props.link });
+            if (this.state.currentLink === 'cl') {
                 this.reloadCLFormats();
             } else {
                 this.reloadCXFormats();
@@ -74,7 +74,7 @@ class Format extends Component {
     }
 
     renderCLFormats() {
-        return this.state.clFormat.formats.map((format, i) => {
+        return this.state.clFormat.map((format, i) => {
             return <option key={i}>{format}</option>;
         });
     }
@@ -92,19 +92,19 @@ class Format extends Component {
 
     renderCXBitDepths() {
         return this.state.cxFormat.bitDepths.map((bitDepth, i) => {
-            return <option key={i}>{bitDepth}</option>;
+            return <option key={i} value={bitDepth}>{bitDepth}</option>;
         });
     }
 
     renderCXLinkCounts() {
         return this.state.cxFormat.linkCounts.map((linkCount, i) => {
-            return <option key={i}>{linkCount}</option>;
+            return <option key={i} value={linkCount}>{linkCount}</option>;
         });
     }
 
     renderCXLinkSpeeds() {
         return this.state.cxFormat.linkSpeeds.map((linkSpeed, i) => {
-            return <option key={i}>{linkSpeed}</option>;
+            return <option key={i} value={linkSpeed}>{linkSpeed}</option>;
         });
     }
 

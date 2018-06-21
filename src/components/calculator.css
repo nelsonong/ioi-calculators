@@ -38,12 +38,17 @@ input {
 }
 
 .framerate {
+    background-color: rgb(199, 100, 100);
     font-size: 12px;
+    font-weight: 700;
+    color: white;
+    text-align: center;
     height: 20px;
-    width: 60%;
+    width: 55%;
+    height: 22px;
     display: block;
-    margin: 9px auto;
+    margin: 8px auto;
     border-width: thick;
-    border-style: ridge;
+    border: solid rgb(131, 131, 131);
     border-radius: 5px;
 }

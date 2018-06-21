@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { models } from '../utils/Constants';
+import { models } from '../constants/models';
 
 class Model extends Component {
     constructor(props) {
@@ -24,18 +24,19 @@ class Model extends Component {
         this.setState({ currentModel: firstModel });
 
         // Update model and default hardware version
-        this.props.updateState({ model: firstModel, hwversion: '1' });
+        this.props.updateState({ model: firstModel, hwversion: 1 });
     }
 
     handleChangeModel(e) {
         const value = e.target.value;
         this.props.updateState({ 'model': value });
+        this.setState({ currentModel: value });
 
         // Update default hardware version
         if (this.props.link === 'cl' && value.startsWith('12M')) {
-            this.props.updateState({ hwversion: '2' });
+            this.props.updateState({ hwversion: 2 });
         } else {
-            this.props.updateState({ hwversion: '1' });
+            this.props.updateState({ hwversion: 1 });
         }
     }
 

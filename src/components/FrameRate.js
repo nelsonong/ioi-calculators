@@ -5,7 +5,7 @@ class FrameRate extends Component {
         return (
             <fieldset>
             <legend>Frame Rate</legend>
-                <input type='text' className='framerate' disabled={true} />
+                <input type='text' className='framerate' disabled={true} value={this.props.frameRate + ' FPS'} />
             </fieldset>
         );
     }

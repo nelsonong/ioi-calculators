@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { slowModeFormats } from '../utils/Constants';
+import { slowModeFormats } from '../constants/formats';
 
 class Options extends Component {
     constructor(props) {

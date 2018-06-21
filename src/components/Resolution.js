@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { resolutionPresets } from '../utils/Constants';
+import { resolutionPresets } from '../constants/resolutions';
 
 class Resolution extends Component {
     constructor(props) {
