@@ -1,2 +1,2 @@
-# flare-calc
-Frame rate calculator for Flare cameras from IO Industries Inc.
+# io-calc
+App for calculating performance of several IO Industries products (framerate, storage, etc.)
