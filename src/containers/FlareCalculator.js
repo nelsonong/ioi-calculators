@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Model from './Model';
-import HardwareVersion from './HardwareVersion';
-import Format from './Format';
-import Resolution from './Resolution';
-import Options from './Options';
-import FrameRate from './FrameRate';
+import Model from '../components/Model';
+import HardwareVersion from '../components/HardwareVersion';
+import Format from '../components/Format';
+import Resolution from '../components/Resolution';
+import Options from '../components/Options';
+import FrameRate from '../components/FrameRate';
 import { calculateFrameRate } from '../utils/calculate-frame-rate';
-import './calculator.css';
+import './FlareCalculator.css';
 
 class Calculator extends Component {
     constructor(props) {

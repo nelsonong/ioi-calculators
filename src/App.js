@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Calculator from './components/Calculator';
+import FlareCalculator from './containers/FlareCalculator';
 import './App.css';
 
 class App extends Component {
@@ -9,9 +9,9 @@ class App extends Component {
             <h3>
                 Flare Frame Rate Calculator
             </h3>
-            <Calculator />
-            <Calculator />
-            <Calculator />
+            <FlareCalculator />
+            <FlareCalculator />
+            <FlareCalculator />
         </div>
     );
   }
