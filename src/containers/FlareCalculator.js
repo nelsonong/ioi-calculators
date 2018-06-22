@@ -46,7 +46,7 @@ class FlareCalculator extends Component {
         return (
             <div className="FlareCalculator">
                 <Model link={this.state.link} hwversion={this.state.hwversion} updateState={this.updateState}/>
-                <HardwareVersion hwversion={this.state.hwversion} updateState={this.updateState}/>
+                <HardwareVersion link={this.state.link} model={this.state.model} hwversion={this.state.hwversion} updateState={this.updateState}/>
                 <Format link={this.state.link} model={this.state.model} updateState={this.updateState}/>
                 <Resolution updateState={this.updateState} width={this.state.width} height={this.state.height}/>
                 <Options link={this.state.link} model={this.state.model} format={this.state.format} updateState={this.updateState}/>
