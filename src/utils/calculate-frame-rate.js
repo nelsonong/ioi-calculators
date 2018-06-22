@@ -5,13 +5,31 @@ const calculateFrameRate = (parentState) => {
     // Parameters from parent state
     const link = parentState.link;
     const model = parentState.model;
-    const height = parentState.height;
+    const format = parentState.format;
+    let width = parentState.width
+    let height = parentState.height;
+    const subSampling = parentState.subSampling;
+
+    // Adjust width and height (if subsampling enabled)
+    if (subSampling) {
+        width /= 2;
+        let step = widthMultiple(link, model, format);
+        let clks = width / step;
+        if (width % step) clks++;
+        width = clks * step;
+        
+        height /= 2;
+        step = heightMultiple(link, model);
+        let lines = height / step;
+        if (height % step) lines++;
+        height = lines * step;
+    }
 
     // Frame overhead time + line time
     let { frameOverheadTimeUs, lineTimeUs, frameRate } = (link === 'cl') ? calculateCLOverheadAndLineTime(parentState) : calculateCXOverheadAndLineTime(parentState);
     if (frameOverheadTimeUs === 0) throw new Error("Frame overhead time is zero.");
     if (lineTimeUs === 0) throw new Error("Line time is zero.");
-    if (frameRate > 0)  {
+    if (frameRate > 0) {
         frameRate = Math.round(frameRate * 100)/100;
         return frameRate;
     }
@@ -31,14 +49,32 @@ const calculateFrameRate = (parentState) => {
     return frameRate;
 }
 
-// TODO
-const widthMultiple = (model) => {
-
+// -------------- Get width multiple --------------
+const widthMultiple = (link, model, format) => {
+    if (link === 'cl') {
+        if (format === clFormat.output_3x8) return 12;
+        if (format === clFormat.output_10x8) return 10;
+        if (format === clFormat.output_20x8) return 10;
+        return 8;
+    } else if (link === 'cx') {
+        if (model.startsWith('48M')) return 16;
+        if (model.startsWith('12M')) return 64;
+        return 8;
+    } else {  // TODO: SDI
+        return 1;
+//        return maxWidth(model);
+    }
 }
 
-// TODO
-const heightMultiple = (model) => {
-
+// -------------- Get height multiple --------------
+const heightMultiple = (link, model) => {
+    if(link === 'cl' || link === 'cx') {
+        if (model.startsWith('12M') && link === 'cx') return 4;
+        if (colorModels.includes(model)) return 4;
+        return 2;
+    } else {    // SDI
+//        return maxHeight(model);
+    }
 }
 
 // -------------- Get frame overhead and line time --------------
