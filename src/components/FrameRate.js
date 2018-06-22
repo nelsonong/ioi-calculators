@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 function FrameRate(props) {
     return (
         <fieldset>
         <legend>Frame Rate</legend>
-            <input type='text' className='frameRate' disabled={true} value={props.frameRate + ' FPS'} />
+            <input type='text' className='frameRate' disabled={true} value={props.frameRate} />
         </fieldset>
     );
 }

@@ -13,7 +13,7 @@ class FlareCalculator extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            link: LINK.CL,                                  // Link type (Camera Link or CoaXPress)
+            link: LINK.CL,                                 // Link type (Camera Link or CoaXPress)
             model: CL_MODEL.Type2M360MCL,                   // Camera model
             hwversion: 2,                                   // Hardware version
             format: CL_FORMAT.Output2x8,                    // Camera link format
@@ -22,16 +22,17 @@ class FlareCalculator extends Component {
             height: 1080,                                   // Resolution - height
             subSampling: false,                             // Sub-sampling enabled
             slowMode: false,                                // Slow-mode enabled
-            frameRate: 0                                    // Maximum frame-rate
+            frameRate: 'N/A'                                   // Maximum frame-rate
         };
 
         this.updateState = this.updateState.bind(this);
     }
 
+    // Update state and recalculate frame-rate
     updateState(newState) {
-        // Recalculate frame-rate
-        newState.frameRate = calculateFrameRate(this.state);
-        this.setState(newState);
+        this.setState(newState, () => {
+            this.setState({ frameRate: calculateFrameRate(this.state) });
+        });
     }
 
     componentDidUpdate() {
@@ -46,7 +47,7 @@ class FlareCalculator extends Component {
                 <Format link={this.state.link} model={this.state.model} updateState={this.updateState}/>
                 <Resolution updateState={this.updateState} width={this.state.width} height={this.state.height}/>
                 <Options link={this.state.link} model={this.state.model} format={this.state.format} updateState={this.updateState}/>
-                <FrameRate frameRate={this.state.frameRate} updateState={this.updateState}/>
+                <FrameRate frameRate={this.state.frameRate} />
             </div>
         );
     }
