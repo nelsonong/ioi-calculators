@@ -13,17 +13,20 @@ class FlareCalculator extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            link: LINK.CL,                                 // Link type (Camera Link or CoaXPress)
+            link: LINK.CL,                                  // Link type (Camera Link or CoaXPress)
             model: CL_MODEL.Type2M360MCL,                   // Camera model
-            hwversion: 2,                                   // Hardware version
+            hwversion: 1,                                   // Hardware version
             format: CL_FORMAT.Output2x8,                    // Camera link format
             bitDepth: 8, linkCount: 1, linkSpeed: LINK_SPEEDS.CXP3,  // CoaXpress format
             width: 1920,                                    // Resolution - width
             height: 1080,                                   // Resolution - height
             subSampling: false,                             // Sub-sampling enabled
             slowMode: false,                                // Slow-mode enabled
-            frameRate: 'N/A'                                   // Maximum frame-rate
+            frameRate: 'N/A'                                // Maximum frame-rate
         };
+
+        // Initialize framerate
+        this.state.frameRate = calculateFrameRate(this.state);
 
         this.updateState = this.updateState.bind(this);
     }
