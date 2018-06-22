@@ -1,4 +1,5 @@
-import { LINK, COLOR_MODELS, CL_FORMAT, CL_DUAL_FORMAT, LINK_SPEEDS } from '../constants/flare';
+import { LINK, CL_FORMAT, CL_DUAL_FORMAT, LINK_SPEEDS } from '../constants/flare';
+import { widthMultiple, heightMultiple } from './resolution';
 
 const calculateFrameRate = (parentState) => {
 
@@ -27,12 +28,12 @@ const calculateFrameRate = (parentState) => {
 
     // Frame overhead time + line time
     let { frameOverheadTimeUs, lineTimeUs, frameRate } = (link === LINK.CL) ? calculateCLOverheadAndLineTime(parentState, width) : calculateCXOverheadAndLineTime(parentState, width, height);
-    if (frameOverheadTimeUs === 0) throw new Error("Frame overhead time is zero.");
-    if (lineTimeUs === 0) throw new Error("Line time is zero.");
     if (frameRate > 0) {
         frameRate = Math.round(frameRate * 100)/100;
-        return frameRate;
+        return frameRate + ' FPS [' + width + ' x ' + height + ']';
     }
+    if (frameOverheadTimeUs === 0) throw new Error("Frame overhead time is zero.");
+    if (lineTimeUs === 0) throw new Error("Line time is zero.");
 
     // Line scale factor
     const lineScaleFactor = model.startsWith('12M') ? 2 : 1;
@@ -47,34 +48,6 @@ const calculateFrameRate = (parentState) => {
     frameRate = frameRateX10 / 10.0;
     frameRate = Math.round(frameRate * 100)/100;
     return frameRate + ' FPS [' + width + ' x ' + height + ']';
-}
-
-// -------------- Get width multiple --------------
-const widthMultiple = (link, model, format) => {
-    if (link === LINK.CL) {
-        if (format === CL_FORMAT.Output3x8) return 12;
-        if (format === CL_FORMAT.Output10x8) return 10;
-        if (format === CL_FORMAT.Output20x8) return 10;
-        return 8;
-    } else if (link === LINK.CX) {
-        if (model.startsWith('48M')) return 16;
-        if (model.startsWith('12M')) return 64;
-        return 8;
-    } else {  // TODO: SDI
-        return 1;
-//        return maxWidth(model);
-    }
-}
-
-// -------------- Get height multiple --------------
-const heightMultiple = (link, model) => {
-    if(link === LINK.CL || link === LINK.CX) {
-        if (model.startsWith('12M') && link === LINK.CX) return 4;
-        if (COLOR_MODELS.includes(model)) return 4;
-        return 2;
-    } else {    // SDI
-//        return maxHeight(model);
-    }
 }
 
 // -------------- Get frame overhead and line time --------------
