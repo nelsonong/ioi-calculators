@@ -26,7 +26,7 @@ const calculateFrameRate = (parentState) => {
     }
 
     // Frame overhead time + line time
-    let { frameOverheadTimeUs, lineTimeUs, frameRate } = (link === LINK.CL) ? calculateCLOverheadAndLineTime(parentState) : calculateCXOverheadAndLineTime(parentState);
+    let { frameOverheadTimeUs, lineTimeUs, frameRate } = (link === LINK.CL) ? calculateCLOverheadAndLineTime(parentState, width) : calculateCXOverheadAndLineTime(parentState, width, height);
     if (frameOverheadTimeUs === 0) throw new Error("Frame overhead time is zero.");
     if (lineTimeUs === 0) throw new Error("Line time is zero.");
     if (frameRate > 0) {
@@ -46,7 +46,7 @@ const calculateFrameRate = (parentState) => {
     const frameRateX10 = frameRate * 10;
     frameRate = frameRateX10 / 10.0;
     frameRate = Math.round(frameRate * 100)/100;
-    return frameRate;
+    return frameRate + ' FPS [' + width + ' x ' + height + ']';
 }
 
 // -------------- Get width multiple --------------
@@ -78,13 +78,12 @@ const heightMultiple = (link, model) => {
 }
 
 // -------------- Get frame overhead and line time --------------
-const calculateCLOverheadAndLineTime = (parentState) => {
+const calculateCLOverheadAndLineTime = (parentState, width) => {
 
     // Parameters from parent state
     const model = parentState.model;
     const hwversion = parentState.hwversion;
     const format = parentState.format;
-    const width = parentState.width;
     const slowMode = parentState.slowMode;
 
     // Initialization
@@ -425,19 +424,16 @@ const calculateCLOverheadAndLineTime = (parentState) => {
         throw new Error("Unsupported camera type");
     }
 
-    const frameRate = 0;
-    return { frameOverheadTimeUs, lineTimeUs, frameRate };
+    return { frameOverheadTimeUs, lineTimeUs, frameRate: 0 };
 }
 
-const calculateCXOverheadAndLineTime = (parentState) => {
+const calculateCXOverheadAndLineTime = (parentState, width, height) => {
 
     // Paramaters from parent state
     const model = parentState.model;
     const bitDepth = parentState.bitDepth;
     const linkSpeed = parentState.linkSpeed;
     const linkCount = parentState.linkCount;
-    const width = parentState.width;
-    const height = parentState.height;
 
     // Selected CoaXPress format options
     const is8bit = bitDepth === 8;
@@ -853,8 +849,7 @@ const calculateCXOverheadAndLineTime = (parentState) => {
         throw new Error("Unsupported camera type.");
     }
     
-    const frameRate = 0;
-    return { frameOverheadTimeUs, lineTimeUs, frameRate };
+    return { frameOverheadTimeUs, lineTimeUs, frameRate: 0 };
 }
 
 export { calculateFrameRate, widthMultiple, heightMultiple };
