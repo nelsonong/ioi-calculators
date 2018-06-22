@@ -1,5 +1,5 @@
 
-export const resolutionPresets = [
+export const RESOLUTION_PRESETS = [
     'Maximum',
     [3840, 2160],
     [2048, 1024],

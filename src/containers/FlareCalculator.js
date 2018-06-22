@@ -5,6 +5,7 @@ import Format from '../components/Format';
 import Resolution from '../components/Resolution';
 import Options from '../components/Options';
 import FrameRate from '../components/FrameRate';
+import { LINK, CL_MODEL, CL_FORMAT, LINK_SPEEDS } from '../constants/flare';
 import { calculateFrameRate } from '../utils/calculate-frame-rate';
 import './FlareCalculator.css';
 
@@ -12,11 +13,11 @@ class FlareCalculator extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            link: 'cl',                                     // Link type (Camera Link or CoaXPress)
-            model: '2M360MCL/NCL',                          // Camera model
+            link: LINK.CL,                                  // Link type (Camera Link or CoaXPress)
+            model: CL_MODEL.Type2M360MCL,                   // Camera model
             hwversion: 2,                                   // Hardware version
-            format: 'Base 8-bit x 2',                       // Camera link format
-            bitDepth: 8, linkCount: 1, linkSpeed: 'CXP-3',  // CoaXpress format
+            format: CL_FORMAT.Output2x8,                    // Camera link format
+            bitDepth: 8, linkCount: 1, linkSpeed: LINK_SPEEDS.CXP3,  // CoaXpress format
             width: 1920,                                    // Resolution - width
             height: 1080,                                   // Resolution - height
             subSampling: false,                             // Sub-sampling enabled

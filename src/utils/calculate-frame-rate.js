@@ -1,4 +1,4 @@
-import { clFormat } from '../constants/formats';
+import { LINK, COLOR_MODELS, CL_FORMAT, CL_DUAL_FORMAT, LINK_SPEEDS } from '../constants/flare';
 
 const calculateFrameRate = (parentState) => {
 
@@ -26,7 +26,7 @@ const calculateFrameRate = (parentState) => {
     }
 
     // Frame overhead time + line time
-    let { frameOverheadTimeUs, lineTimeUs, frameRate } = (link === 'cl') ? calculateCLOverheadAndLineTime(parentState) : calculateCXOverheadAndLineTime(parentState);
+    let { frameOverheadTimeUs, lineTimeUs, frameRate } = (link === LINK.CL) ? calculateCLOverheadAndLineTime(parentState) : calculateCXOverheadAndLineTime(parentState);
     if (frameOverheadTimeUs === 0) throw new Error("Frame overhead time is zero.");
     if (lineTimeUs === 0) throw new Error("Line time is zero.");
     if (frameRate > 0) {
@@ -51,12 +51,12 @@ const calculateFrameRate = (parentState) => {
 
 // -------------- Get width multiple --------------
 const widthMultiple = (link, model, format) => {
-    if (link === 'cl') {
-        if (format === clFormat.output_3x8) return 12;
-        if (format === clFormat.output_10x8) return 10;
-        if (format === clFormat.output_20x8) return 10;
+    if (link === LINK.CL) {
+        if (format === CL_FORMAT.Output3x8) return 12;
+        if (format === CL_FORMAT.Output10x8) return 10;
+        if (format === CL_FORMAT.Output20x8) return 10;
         return 8;
-    } else if (link === 'cx') {
+    } else if (link === LINK.CX) {
         if (model.startsWith('48M')) return 16;
         if (model.startsWith('12M')) return 64;
         return 8;
@@ -68,9 +68,9 @@ const widthMultiple = (link, model, format) => {
 
 // -------------- Get height multiple --------------
 const heightMultiple = (link, model) => {
-    if(link === 'cl' || link === 'cx') {
-        if (model.startsWith('12M') && link === 'cx') return 4;
-        if (colorModels.includes(model)) return 4;
+    if(link === LINK.CL || link === LINK.CX) {
+        if (model.startsWith('12M') && link === LINK.CX) return 4;
+        if (COLOR_MODELS.includes(model)) return 4;
         return 2;
     } else {    // SDI
 //        return maxHeight(model);
@@ -93,7 +93,7 @@ const calculateCLOverheadAndLineTime = (parentState) => {
     if (model.startsWith('2M')) {
         switch (format) {
             case 'Base 8-bit x 2':
-            case clFormat.output_2x10:
+            case CL_FORMAT.Output2x10:
                 if (width > 1024) {
                     frameOverheadTimeUs = 59;
                     lineTimeUs = 12.90;
@@ -106,7 +106,7 @@ const calculateCLOverheadAndLineTime = (parentState) => {
                 }
                 break;
 
-            case clFormat.output_3x8:
+            case CL_FORMAT.Output3x8:
                 if (width > 1704) {
                     frameOverheadTimeUs = 61;
                     lineTimeUs = 8.6;
@@ -134,8 +134,8 @@ const calculateCLOverheadAndLineTime = (parentState) => {
                 }
                 break;
 
-            case clFormat.output_4x8:
-            case clFormat.output_4x10:
+            case CL_FORMAT.Output4x8:
+            case CL_FORMAT.Output4x10:
                 if (width > 1024) {
                     frameOverheadTimeUs = 46;
                     lineTimeUs = 6.45;
@@ -145,7 +145,7 @@ const calculateCLOverheadAndLineTime = (parentState) => {
                 }
                 break;
 
-            case clFormat.output_8x8:
+            case CL_FORMAT.Output8x8:
                 if (slowMode) {
                     frameOverheadTimeUs = 43;
                     lineTimeUs = 3.58;
@@ -155,12 +155,12 @@ const calculateCLOverheadAndLineTime = (parentState) => {
                 }
                 break;
 
-            case clFormat.output_10x8:
+            case CL_FORMAT.Output10x8:
                 frameOverheadTimeUs = 33;
                 lineTimeUs = 2.69;
                 break;
 
-            case clFormat.output_8x10:
+            case CL_FORMAT.Output8x10:
                 if (slowMode) {
                     frameOverheadTimeUs = 43;
                     lineTimeUs = 3.58;
@@ -175,8 +175,8 @@ const calculateCLOverheadAndLineTime = (parentState) => {
         }
     } else if (model.startsWith('4M')) {
         switch (format) {
-            case clFormat.output_2x8:
-            case clFormat.output_2x10:
+            case CL_FORMAT.Output2x8:
+            case CL_FORMAT.Output2x10:
                 if (width > 1024) {
                     frameOverheadTimeUs = 91;
                     lineTimeUs = 12.90;
@@ -189,7 +189,7 @@ const calculateCLOverheadAndLineTime = (parentState) => {
                 }
                 break;
 
-            case clFormat.output_3x8:
+            case CL_FORMAT.Output3x8:
                 if (width > 1704) {
                     frameOverheadTimeUs = 104;
                     lineTimeUs = 8.6;
@@ -217,8 +217,8 @@ const calculateCLOverheadAndLineTime = (parentState) => {
                 }
                 break;
 
-            case clFormat.output_4x8:
-            case clFormat.output_4x10:
+            case CL_FORMAT.Output4x8:
+            case CL_FORMAT.Output4x10:
                 if (width > 1024) {
                     frameOverheadTimeUs = 78;
                     lineTimeUs = 6.45;
@@ -228,7 +228,7 @@ const calculateCLOverheadAndLineTime = (parentState) => {
                 }
                 break;
 
-            case clFormat.output_8x8:
+            case CL_FORMAT.Output8x8:
                 if (slowMode) {
                     frameOverheadTimeUs = 79;
                     lineTimeUs = 3.58;
@@ -238,12 +238,12 @@ const calculateCLOverheadAndLineTime = (parentState) => {
                 }
                 break;
 
-            case clFormat.output_10x8:
+            case CL_FORMAT.Output10x8:
                 frameOverheadTimeUs = 60;
                 lineTimeUs = 2.69;
                 break;
 
-            case clFormat.output_8x10:
+            case CL_FORMAT.Output8x10:
                 if (slowMode) {
                     frameOverheadTimeUs = 79;
                     lineTimeUs = 3.58;
@@ -258,8 +258,8 @@ const calculateCLOverheadAndLineTime = (parentState) => {
         }
     } else if (model.startsWith('12M')) {
         switch (format) {
-            case clFormat.output_2x8:
-            case clFormat.output_2x10:
+            case CL_FORMAT.Output2x8:
+            case CL_FORMAT.Output2x10:
                 if (hwversion === '2') {
                     if (width > 2048) {
                         frameOverheadTimeUs = 207;
@@ -283,7 +283,7 @@ const calculateCLOverheadAndLineTime = (parentState) => {
                 }
                 break;
 
-            case clFormat.output_3x8:
+            case CL_FORMAT.Output3x8:
                 if (hwversion === '2') {
                     if (width > 2040) {
                         frameOverheadTimeUs = 172;
@@ -307,8 +307,8 @@ const calculateCLOverheadAndLineTime = (parentState) => {
                 }
                 break;
 
-            case clFormat.output_4x8:
-            case clFormat.output_4x10:
+            case CL_FORMAT.Output4x8:
+            case CL_FORMAT.Output4x10:
                 if (hwversion === '2') {
                     if (width > 2048) {
                         frameOverheadTimeUs = 129;
@@ -332,8 +332,8 @@ const calculateCLOverheadAndLineTime = (parentState) => {
                 }
                 break;
 
-            case clFormat.output_8x8:
-            case clFormat.output_8x10:
+            case CL_FORMAT.Output8x8:
+            case CL_FORMAT.Output8x10:
                 if (hwversion === '2') {
                     if (width > 2048) {
                         frameOverheadTimeUs = 104;
@@ -357,7 +357,7 @@ const calculateCLOverheadAndLineTime = (parentState) => {
                 }
                 break;
 
-            case clFormat.output_10x8:
+            case CL_FORMAT.Output10x8:
                 if (hwversion === '2') {
                     if (width > 2050) {
                         frameOverheadTimeUs = 104;
@@ -381,8 +381,8 @@ const calculateCLOverheadAndLineTime = (parentState) => {
                 }
                 break;
 
-            case clFormat.output_16x8:
-            case clFormat.output_16x10:
+            case CL_DUAL_FORMAT.Output16x8:
+            case CL_DUAL_FORMAT.Output16x10:
                 if (hwversion === '2') {
                     if (width > 2048) {
                         frameOverheadTimeUs = 91;
@@ -400,7 +400,7 @@ const calculateCLOverheadAndLineTime = (parentState) => {
                 }
                 break;
 
-            case clFormat.output_20x8:
+            case CL_DUAL_FORMAT.Output20x8:
                 if (hwversion === '2') {
                     if (width > 2050) {
                         frameOverheadTimeUs = 84;
@@ -443,10 +443,10 @@ const calculateCXOverheadAndLineTime = (parentState) => {
     const is8bit = bitDepth === 8;
     const is10bit = bitDepth === 10;
     const is12bit = bitDepth === 12;
-    const is2G = linkSpeed === 'CXP-2';
-    const is3G = linkSpeed === 'CXP-3';
-    const is5G = linkSpeed === 'CXP-5';
-    const is6G = linkSpeed === 'CXP-6';
+    const is2G = linkSpeed === LINK_SPEEDS.CXP2;
+    const is3G = linkSpeed === LINK_SPEEDS.CXP3;
+    const is5G = linkSpeed === LINK_SPEEDS.CXP5;
+    const is6G = linkSpeed === LINK_SPEEDS.CXP6;
     const isSingleLink = linkCount === 1;
     const isDualLink = linkCount === 2;
     const isQuadLink = linkCount === 4;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { resolutionPresets } from '../constants/resolutions';
+import { RESOLUTION_PRESETS } from '../constants/flare';
 
 class Resolution extends Component {
     constructor(props) {
@@ -11,7 +11,7 @@ class Resolution extends Component {
     }
 
     loadPresets() {
-        return resolutionPresets.map((preset, i) => {
+        return RESOLUTION_PRESETS.map((preset, i) => {
             let presetString;
             if (preset === 'Maximum' || preset === 'Minimum') {
                 presetString = preset;

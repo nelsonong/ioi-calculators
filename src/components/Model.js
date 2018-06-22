@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { models } from '../constants/models';
+import { LINK, CL_MODEL, CL_MODELS, CX_MODELS } from '../constants/flare';
 
 class Model extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentModel: models.cl[0],
-            currentModels: models.cl
+            currentModel: CL_MODEL.Type2M360MCL,
+            currentModels: CL_MODELS
         }
 
         this.handleChangeLink = this.handleChangeLink.bind(this);
@@ -18,7 +18,7 @@ class Model extends Component {
         this.props.updateState({ 'link': value });
 
         // Update and reset current models
-        const cameraModels = (value === 'cl') ? models.cl : models.cx;
+        const cameraModels = (value === LINK.CL) ? CL_MODELS : CX_MODELS;
         const firstModel = cameraModels[0];
         this.setState({ currentModels: cameraModels });
         this.setState({ currentModel: firstModel });
@@ -33,7 +33,7 @@ class Model extends Component {
         this.setState({ currentModel: value });
 
         // Update default hardware version
-        if (this.props.link === 'cl' && value.startsWith('12M')) {
+        if (this.props.link === LINK.CL && value.startsWith('12M')) {
             this.props.updateState({ hwversion: 2 });
         } else {
             this.props.updateState({ hwversion: 1 });
@@ -51,8 +51,8 @@ class Model extends Component {
             <fieldset>
             <legend>Model</legend>
                 <select onChange={this.handleChangeLink}>
-                    <option value='cl'>Camera Link</option>
-                    <option value='cx'>CoaXPress</option>
+                    <option value={LINK.CL}>Camera Link</option>
+                    <option value={LINK.CX}>CoaXPress</option>
                 </select>
                 <br />
                 <select value={this.state.currentModel} onChange={this.handleChangeModel}>
