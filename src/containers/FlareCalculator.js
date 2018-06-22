@@ -6,7 +6,7 @@ import Resolution from '../components/Resolution';
 import Options from '../components/Options';
 import FrameRate from '../components/FrameRate';
 import { LINK, CL_MODEL, CL_FORMAT, LINK_SPEEDS } from '../constants/flare';
-import { calculateFrameRate } from '../utils/calculate-frame-rate';
+import { calculateFrameRate } from '../utils/frame-rate';
 import './FlareCalculator.css';
 
 class FlareCalculator extends Component {
@@ -45,11 +45,11 @@ class FlareCalculator extends Component {
     render() {
         return (
             <div className="FlareCalculator">
-                <Model link={this.state.link} hwversion={this.state.hwversion} updateState={this.updateState}/>
-                <HardwareVersion link={this.state.link} model={this.state.model} hwversion={this.state.hwversion} updateState={this.updateState}/>
-                <Format link={this.state.link} model={this.state.model} updateState={this.updateState}/>
-                <Resolution updateState={this.updateState} width={this.state.width} height={this.state.height}/>
-                <Options link={this.state.link} model={this.state.model} format={this.state.format} updateState={this.updateState}/>
+                <Model link={this.state.link} hwversion={this.state.hwversion} updateState={this.updateState} />
+                <HardwareVersion link={this.state.link} model={this.state.model} hwversion={this.state.hwversion} updateState={this.updateState} />
+                <Format link={this.state.link} model={this.state.model} updateState={this.updateState} />
+                <Resolution link={this.state.link} model={this.state.model} format={this.state.format} width={this.state.width} height={this.state.height} updateState={this.updateState} />
+                <Options link={this.state.link} model={this.state.model} format={this.state.format} updateState={this.updateState} />
                 <FrameRate frameRate={this.state.frameRate} />
             </div>
         );

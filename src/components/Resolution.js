@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import { RESOLUTION_PRESETS } from '../constants/flare';
+import { minWidth, maxWidth, minHeight, maxHeight } from '../utils/resolution';
 
 class Resolution extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            currentModel: props.model,
+            preset: RESOLUTION_PRESETS[0]
+        }
+
+        // Initialize resolution
+        this.setMinMaxResolution(this.state.preset);
 
         this.handleChangePreset = this.handleChangePreset.bind(this);
         this.handleChangeWidth = this.handleChangeWidth.bind(this);
@@ -22,20 +31,32 @@ class Resolution extends Component {
         });
     }
 
-    handleChangePreset(e) {
-        const preset = e.target.value;
-        let resolution = [];
-        if (preset === 'Maximum') {
-            resolution[0] = 4096;
-            resolution[1] = 3072
-        } else if (preset === 'Minimum') {
-            resolution[0] = 6;
-            resolution[1] = 4;
-        } else {
-            resolution = preset.split('x');
+    setMinMaxResolution() {
+        let width = 0, height = 0;
+        if (this.state.preset === 'Maximum') {
+            width = maxWidth(this.props.model, this.props.format);
+            height = maxHeight(this.props.model);
+        } else if (this.state.preset === 'Minimum') {
+            width = minWidth(this.props.link, this.props.model, this.props.format);
+            height = minHeight(this.props.link, this.props.model);
         }
 
-        this.props.updateState({ width: resolution[0], height: resolution[1] });
+        this.props.updateState({ width: width, height: height });
+    }
+
+    handleChangePreset(e) {
+        const preset = e.target.value;
+        this.setState({ preset: preset }, (preset) => {
+            if (this.state.preset === 'Maximum' || this.state.preset === 'Minimum') {
+                this.setMinMaxResolution();
+            } else {
+                const resolution = this.state.preset.split('x');
+                const width = resolution[0];
+                const height = resolution[1];
+                
+                this.props.updateState({ width: width, height: height });
+            }
+        });
     }
 
     handleChangeWidth(e) {
@@ -47,6 +68,13 @@ class Resolution extends Component {
     }
 
     render() {
+        // If model changes, and max/min selected, recalculate
+        if (this.props.model !== this.state.currentModel) {
+            this.setState({ currentModel: this.props.model });
+            if (this.state.preset === 'Maximum' || this.state.preset === 'Minimum') {
+                this.setMinMaxResolution();
+            }
+        }
         return (
             <fieldset>
             <legend>Resolution</legend>
@@ -56,8 +84,8 @@ class Resolution extends Component {
                 </select>
                 <br />
                 <span>W x H:</span>&nbsp;&nbsp;
-                <input type="number" min="6" max="4096" value={this.props.width} onChange={this.handleChangeWidth} />&nbsp;&nbsp;
-                <input type="number" min="4" max="3072" value={this.props.height} onChange={this.handleChangeHeight} />
+                <input type="number" min="1" max="9999" value={this.props.width} onChange={this.handleChangeWidth} />&nbsp;&nbsp;
+                <input type="number" min="1" max="9999" value={this.props.height} onChange={this.handleChangeHeight} />
             </fieldset>
         );
     }
