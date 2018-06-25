@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LINK, CL_FORMATS, CX_FORMATS } from '../constants/flare';
+import { LINK, CL_FORMATS, CX_FORMATS } from '../../constants/victorem';
 
 class Format extends Component {
     constructor(props) {

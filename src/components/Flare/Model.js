@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LINK, CL_MODEL, CL_MODELS, CX_MODELS } from '../constants/flare';
+import { LINK, CL_MODEL, CL_MODELS, CX_MODELS } from '../../constants/flare';
 
 class Model extends Component {
     constructor(props) {

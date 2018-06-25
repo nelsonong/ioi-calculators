@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LINK } from '../constants/flare';
+import { LINK } from '../../constants/flare';
 
 class HardwareVersion extends Component {
     constructor(props) {

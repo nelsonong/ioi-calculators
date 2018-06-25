@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LINK, SLOW_MODE_FORMATS } from '../constants/flare';
+import { LINK, SLOW_MODE_FORMATS } from '../../constants/flare';
 
 class Options extends Component {
     constructor(props) {

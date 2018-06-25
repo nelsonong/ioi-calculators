@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import { Model, HardwareVersion, Format, Resolution, Options, FrameRate } from '../components/Flare';
+import { Model, ModelInfo, Format, Resolution, Options, FrameRate } from '../components/Victorem';
 import { LINK, CL_MODEL, CL_FORMAT, LINK_SPEEDS } from '../constants/flare';
 import { calculateFrameRate } from '../utils/frame-rate';
-import './FlareCalculator.css';
+import './VictoremCalculator.css';
 
-class FlareCalculator extends Component {
+class VictoremCalculator extends Component {
     constructor(props) {
         super(props);
         this.state = {
             link: LINK.CL,                                  // Link type (Camera Link or CoaXPress)
             model: CL_MODEL.Type2M360MCL,                   // Camera model
-            hwversion: 1,                                   // Hardware version
             format: CL_FORMAT.Output2x8,                    // Camera link format
             bitDepth: 8, linkCount: 1, linkSpeed: LINK_SPEEDS.CXP3,  // CoaXpress format
             width: 1920,                                    // Resolution - width
@@ -39,13 +38,13 @@ class FlareCalculator extends Component {
 
     render() {
         return (
-            <div className="FlareCalculator">
+            <div className="VictoremCalculator">
                 <div className='TopBar'>
-                    <div className='FlareTitle'>Flare Frame Rate Calculator</div>
-                    <button className='CloseFlare' type='button' onClick={() => this.props.deleteCalculator(this.props.id)}>✖</button>
+                    <div className='VictoremTitle'>Victorem Frame Rate Calculator</div>
+                    <button className='CloseCalculator' type='button' onClick={() => this.props.deleteCalculator(this.props.id)}>✖</button>
                 </div>
-                <Model link={this.state.link} hwversion={this.state.hwversion} updateState={this.updateState} />
-                <HardwareVersion link={this.state.link} model={this.state.model} hwversion={this.state.hwversion} updateState={this.updateState} />
+                <Model link={this.state.link} updateState={this.updateState} />
+                <ModelInfo />
                 <Format link={this.state.link} model={this.state.model} updateState={this.updateState} />
                 <Resolution link={this.state.link} model={this.state.model} format={this.state.format} width={this.state.width} height={this.state.height} updateState={this.updateState} />
                 <Options link={this.state.link} model={this.state.model} format={this.state.format} updateState={this.updateState} />
@@ -55,4 +54,4 @@ class FlareCalculator extends Component {
     }
 }
 
-export default FlareCalculator;
+export default VictoremCalculator;
