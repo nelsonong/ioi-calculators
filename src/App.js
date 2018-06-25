@@ -21,10 +21,10 @@ class App extends Component {
         return (
             <div className="App">
                 <h3>
-                    Flare Frame Rate Calculator
+                    IOI Calculators
                 </h3>
-                <div className='AddButtons'>
-                    <button type='button' onClick={this.addFlare}>Add Flare Calculator</button>
+                <div>
+                    <button type='button' className='AddFlare' onClick={this.addFlare}>+ Flare Calculator</button>
                 </div>
                 {this.state.flareCalculators}
             </div>

@@ -8,6 +8,21 @@
   border-width: medium;
 }
 
+.AddFlare {
+  background-color: rgb(199, 100, 100);
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  width: 130px;
+  height: 28px;
+  display: block;
+  margin: 0px auto;
+  border-width: thick;
+  border: solid rgb(131, 131, 131);
+  border-radius: 5px;
+}
+
 h3 {
   font-size: 20px;
   text-align: center;

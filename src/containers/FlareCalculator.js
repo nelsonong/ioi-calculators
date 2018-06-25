@@ -45,6 +45,7 @@ class FlareCalculator extends Component {
     render() {
         return (
             <div className="FlareCalculator">
+                <div className='FlareTitle'>Flare Frame Rate Calculator</div>
                 <Model link={this.state.link} hwversion={this.state.hwversion} updateState={this.updateState} />
                 <HardwareVersion link={this.state.link} model={this.state.model} hwversion={this.state.hwversion} updateState={this.updateState} />
                 <Format link={this.state.link} model={this.state.model} updateState={this.updateState} />
