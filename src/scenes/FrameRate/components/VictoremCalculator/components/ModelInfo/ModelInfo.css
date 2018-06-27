@@ -1,0 +1,23 @@
+.model-info-labels {
+    width: 50%;
+    display: inline-block;
+}
+
+.model-info-label {
+    font-style: italic;
+    margin: 8px 15px;
+}
+
+.model-info-inputs {
+    width: 50%;
+    display: inline-block;
+}
+
+.model-info-input {
+    text-align: center;
+    font-weight: 700;
+    margin: 1px;
+    width: 70%;
+    border: solid rgb(131, 131, 131);
+    border-radius: 2px;
+}

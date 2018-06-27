@@ -1,0 +1,19 @@
+.options-outer {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.options-left {
+    width: 50%;
+    display: inline-block;
+}
+
+.options-right {
+    width: 50%;
+    display: inline-block;
+}
+
+.options-label {
+    display: inline;
+    margin: auto 3px;
+}

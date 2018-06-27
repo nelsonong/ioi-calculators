@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BIT_DEPTHS } from '../../constants';
+import './Format.css';
 
 class Format extends Component {
     constructor(props) {
@@ -31,12 +32,13 @@ class Format extends Component {
         return (
             <fieldset>
             <legend>Output Format</legend>
-                Link:&nbsp;
-                <select name='format' onChange={this.handleInputChange}>
+                <div className='format-label'>Link:</div>
+                <select className='format-select' name='format' onChange={this.handleInputChange}>
                     {this.renderFormats()}
-                </select>&nbsp;
-                Bit Depth:&nbsp;
-                <select name='bitDepth' onChange={this.handleInputChange}>
+                </select>
+
+                <div className='format-label'>Bit Depth:</div>
+                <select className='format-select' name='bitDepth' onChange={this.handleInputChange}>
                     {this.renderBitDepths()}
                 </select>
             </fieldset>

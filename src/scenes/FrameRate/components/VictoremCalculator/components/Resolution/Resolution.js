@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { RESOLUTION, RESOLUTIONS, CAMERA_OPTION } from '../../constants';
+import './Resolution.css';
 
 class Resolution extends Component {
     constructor(props) {
@@ -50,14 +51,18 @@ class Resolution extends Component {
         return (
             <fieldset>
             <legend>Resolution</legend>
-                <span>Presets:</span>&nbsp;&nbsp;
-                <select value={this.props.resolutionPreset} disabled={subSamplingSelected} onChange={this.handleChangePreset}>
-                    {this.loadPresets()}
-                </select>
-                <br />
-                <span>W x H:</span>&nbsp;&nbsp;
-                <input type="number" min="1" max="9999" value={this.props.width} disabled={subSamplingSelected} onChange={this.handleChangeWidth} />&nbsp;&nbsp;
-                <input type="number" min="1" max="9999" value={this.props.height} disabled={subSamplingSelected} onChange={this.handleChangeHeight} />
+                <div className='resolution-labels'>
+                    <div className='resolution-label'>Presets:</div>
+                    <div className='resolution-label'>W x H:</div>
+                </div>
+                <div className='resolution-controls'>
+                    <select className='resolution-control' value={this.props.resolutionPreset} disabled={subSamplingSelected} onChange={this.handleChangePreset}>
+                        {this.loadPresets()}
+                    </select>
+                    <br />
+                    <input type="number" className='resolution-control' min="1" max="9999" value={this.props.width} disabled={subSamplingSelected} onChange={this.handleChangeWidth} />
+                    <input type="number" className='resolution-control' min="1" max="9999" value={this.props.height} disabled={subSamplingSelected} onChange={this.handleChangeHeight} />
+                </div>
             </fieldset>
         );
     }

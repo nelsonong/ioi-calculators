@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { CAMERA_OPTION } from '../../constants';
+import './Options.css';
 
 class Options extends Component {
     constructor(props) {
@@ -27,37 +28,49 @@ class Options extends Component {
         }
     }
 
-    render() {return (
+    render() {
+        return (
             <fieldset>
             <legend>Options</legend>
-                <input
-                    type="radio"
-                    name='none'
-                    checked={this.props.cameraOption === CAMERA_OPTION.NONE}
-                    onChange={this.handleInputChange}
-                />None&nbsp;
-                <input
-                    type="radio"
-                    name='subSampling'
-                    checked={this.props.cameraOption === CAMERA_OPTION.SUBSAMPLING}
-                    disabled={!this.props.supportsSubSampling}
-                    onChange={this.handleInputChange}
-                />Sub-Sample
-                <br />
-                <input
-                    type="radio"
-                    name='binv'
-                    checked={this.props.cameraOption === CAMERA_OPTION.BIN_VERTICAL}
-                    disabled={!this.props.supportsVerticalBinning}
-                    onChange={this.handleInputChange}
-                />Vertical Bin&nbsp;
-                <input
-                    type="radio"
-                    name='bin2'
-                    checked={this.props.cameraOption === CAMERA_OPTION.BIN_2X2}
-                    disabled={!this.props.supports2x2Binning}
-                    onChange={this.handleInputChange}
-                />2x2 Bin
+                <div className='options-outer'>
+                    <div className='options-left'>
+                        <input
+                            type="radio"
+                            name='none'
+                            checked={this.props.cameraOption === CAMERA_OPTION.NONE}
+                            onChange={this.handleInputChange}
+                        />
+                        <div className='options-label'>None</div>
+                        <br />
+                        <input
+                            type="radio"
+                            name='binv'
+                            checked={this.props.cameraOption === CAMERA_OPTION.BIN_VERTICAL}
+                            disabled={!this.props.supportsVerticalBinning}
+                            onChange={this.handleInputChange}
+                        />
+                        <div className='options-label'>Vertical Bin</div>
+                    </div>
+                    <div className='options-right'>
+                        <input
+                            type="radio"
+                            name='subSampling'
+                            checked={this.props.cameraOption === CAMERA_OPTION.SUBSAMPLING}
+                            disabled={!this.props.supportsSubSampling}
+                            onChange={this.handleInputChange}
+                        />
+                        <div className='options-label'>Sub-Sample</div>
+                        <br />
+                        <input
+                            type="radio"
+                            name='bin2'
+                            checked={this.props.cameraOption === CAMERA_OPTION.BIN_2X2}
+                            disabled={!this.props.supports2x2Binning}
+                            onChange={this.handleInputChange}
+                        />
+                        <div className='options-label'>2x2 Bin</div>
+                    </div>
+                </div>
             </fieldset>
         );
     }
