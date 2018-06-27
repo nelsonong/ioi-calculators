@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { RESOLUTION_PRESETS } from '../../constants/flare';
-import { minWidth, maxWidth, minHeight, maxHeight } from '../../utils/resolution';
+import { minWidth, maxWidth, minHeight, maxHeight } from '../../utils/flare/resolution';
 
 class Resolution extends Component {
     constructor(props) {

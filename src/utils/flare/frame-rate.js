@@ -1,15 +1,10 @@
-import { LINK, CL_FORMAT, CL_DUAL_FORMAT, LINK_SPEEDS } from '../constants/flare';
+import { LINK, CL_FORMAT, CL_DUAL_FORMAT, LINK_SPEEDS } from '../../constants/flare';
 import { widthMultiple, heightMultiple } from './resolution';
 
 const calculateFrameRate = (parentState) => {
 
     // Parameters from parent state
-    const link = parentState.link;
-    const model = parentState.model;
-    const format = parentState.format;
-    let width = parentState.width
-    let height = parentState.height;
-    const subSampling = parentState.subSampling;
+    let { link, model, hwversion, format, bitDepth, linkSpeed, linkCount, width, height, subSampling, slowMode } = parentState;
 
     // Adjust width and height (if subsampling enabled)
     if (subSampling) {
@@ -27,7 +22,9 @@ const calculateFrameRate = (parentState) => {
     }
 
     // Frame overhead time + line time
-    let { frameOverheadTimeUs, lineTimeUs, frameRate } = (link === LINK.CL) ? calculateCLOverheadAndLineTime(parentState, width) : calculateCXOverheadAndLineTime(parentState, width, height);
+    let { frameOverheadTimeUs, lineTimeUs, frameRate } = (link === LINK.CL) ?
+        calculateCLOverheadAndLineTime(model, hwversion, format, width, slowMode) :
+        calculateCXOverheadAndLineTime(model, bitDepth, width, height, linkSpeed, linkCount);
     if (frameRate > 0) {
         frameRate = Math.round(frameRate * 100)/100;
         return frameRate + ' FPS [' + width + ' x ' + height + ']';
@@ -51,17 +48,8 @@ const calculateFrameRate = (parentState) => {
 }
 
 // -------------- Get frame overhead and line time --------------
-const calculateCLOverheadAndLineTime = (parentState, width) => {
-
-    // Parameters from parent state
-    const model = parentState.model;
-    const hwversion = parentState.hwversion;
-    const format = parentState.format;
-    const slowMode = parentState.slowMode;
-
-    // Initialization
+const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMode) => {
     let frameOverheadTimeUs = 0, lineTimeUs = 0;
-
     if (model.startsWith('2M')) {
         switch (format) {
             case 'Base 8-bit x 2':
@@ -400,13 +388,7 @@ const calculateCLOverheadAndLineTime = (parentState, width) => {
     return { frameOverheadTimeUs, lineTimeUs, frameRate: 0 };
 }
 
-const calculateCXOverheadAndLineTime = (parentState, width, height) => {
-
-    // Paramaters from parent state
-    const model = parentState.model;
-    const bitDepth = parentState.bitDepth;
-    const linkSpeed = parentState.linkSpeed;
-    const linkCount = parentState.linkCount;
+const calculateCXOverheadAndLineTime = (model, bitDepth, width, height, linkSpeed, linkCount) => {
 
     // Selected CoaXPress format options
     const is8bit = bitDepth === 8;

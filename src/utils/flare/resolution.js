@@ -1,4 +1,4 @@
-import { LINK, CL_MODEL, CX_MODEL, CL_FORMAT, COLOR_MODELS } from '../constants/flare';
+import { LINK, CL_MODEL, CX_MODEL, CL_FORMAT, COLOR_MODELS } from '../../constants/flare';
 
 const minWidth = (link, model, format) => {
     if (link === LINK.CL) {

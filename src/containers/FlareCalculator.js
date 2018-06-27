@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Model, HardwareVersion, Format, Resolution, Options, FrameRate } from '../components/Flare';
 import { LINK, CL_MODEL, CL_FORMAT, LINK_SPEEDS } from '../constants/flare';
-import { calculateFrameRate } from '../utils/frame-rate';
+import { calculateFrameRate } from '../utils/flare/frame-rate';
 import './FlareCalculator.css';
 
 class FlareCalculator extends Component {
@@ -21,7 +21,7 @@ class FlareCalculator extends Component {
         };
 
         // Initialize framerate
-        this.state.frameRate = calculateFrameRate(this.state);
+        this.state.frameRate = calculateFrameRate({...this.state});
 
         this.updateState = this.updateState.bind(this);
     }
@@ -29,7 +29,7 @@ class FlareCalculator extends Component {
     // Update state and recalculate frame-rate
     updateState(newState) {
         this.setState(newState, () => {
-            this.setState({ frameRate: calculateFrameRate(this.state) });
+            this.setState({ frameRate: calculateFrameRate({...this.state}) });
         });
     }
 
@@ -47,7 +47,7 @@ class FlareCalculator extends Component {
                 <Model link={this.state.link} hwversion={this.state.hwversion} updateState={this.updateState} />
                 <HardwareVersion link={this.state.link} model={this.state.model} hwversion={this.state.hwversion} updateState={this.updateState} />
                 <Format link={this.state.link} model={this.state.model} updateState={this.updateState} />
-                <Resolution link={this.state.link} model={this.state.model} format={this.state.format} width={this.state.width} height={this.state.height} updateState={this.updateState} />
+                <Resolution {...this.state} updateState={this.updateState} />
                 <Options link={this.state.link} model={this.state.model} format={this.state.format} updateState={this.updateState} />
                 <FrameRate frameRate={this.state.frameRate} />
             </div>
