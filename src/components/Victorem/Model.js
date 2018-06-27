@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MODELS, SENSOR, FORMATS, MAX_RESOLUTION, CAMERA_OPTION } from '../../constants/victorem';
+import { MODELS, SENSOR, FORMAT, FORMATS, MAX_RESOLUTION, CAMERA_OPTION } from '../../constants/victorem';
 
 class Model extends Component {
     constructor(props) {
@@ -39,7 +39,8 @@ class Model extends Component {
             sensor: SENSOR[model],
             maxWidth: MAX_RESOLUTION[model][0],
             maxHeight: MAX_RESOLUTION[model][1],
-            format: formats,
+            format: FORMAT.CXP2x1,
+            formats: formats,
             supportsSubSampling: supportsSubSampling,
             supportsVerticalBinning: supportsVerticalBinning,
             supports2x2Binning: supports2x2Binning,

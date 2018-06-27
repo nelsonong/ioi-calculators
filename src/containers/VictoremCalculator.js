@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Model, ModelInfo, Format, Resolution, Options, FrameRate } from '../components/Victorem';
-import { MODEL, SENSOR, FORMAT, CAMERA_OPTION, RESOLUTION, MAX_RESOLUTION } from '../constants/victorem';
+import { MODEL, SENSOR, FORMAT, FORMATS, CAMERA_OPTION, RESOLUTION, MAX_RESOLUTION } from '../constants/victorem';
 import { calculateFrameRate } from '../utils/victorem/frame-rate';
 import { minWidth, maxWidth, minHeight, maxHeight } from '../utils/victorem/resolution';
 import './VictoremCalculator.css';
@@ -13,7 +13,8 @@ class VictoremCalculator extends Component {
             sensor: SENSOR[MODEL.Type51B163MCX],                    // Camera's sensor
             maxWidth: MAX_RESOLUTION[MODEL.Type51B163MCX][0],       // Max width of camera
             maxHeight: MAX_RESOLUTION[MODEL.Type51B163MCX][1],      // Max height of camera
-            formats: FORMAT.CXP2x1,                                 // CoaXPress format
+            format: FORMAT.CXP2x1,                                  // Current format selected
+            formats: FORMATS.CXX,                                   // Formats supported by camera
             bitDepth: 8,                                            // Bit depth
             resolutionPreset: RESOLUTION.MAXIMUM,                   // Resolution preset selected
             width: 2464,                                            // Width
@@ -82,7 +83,7 @@ class VictoremCalculator extends Component {
                     maxHeight={this.state.maxHeight}
                 />
                 <Format
-                    formats={this.state.format}
+                    formats={this.state.formats}
                     updateState={this.updateState}
                 />
                 <Resolution
