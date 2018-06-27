@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { LINK } from '../../constants';
+import './HardwareVersion.css';
 
 class HardwareVersion extends Component {
     constructor(props) {
@@ -19,8 +20,10 @@ class HardwareVersion extends Component {
         return (
             <fieldset>
             <legend>Hardware Version</legend>
-                <input type='radio' value={1} checked={this.props.hwversion === 1} disabled={this.disableHWVersion()} onChange={this.handleChange} />1&nbsp;
-                <input type='radio' value={2} checked={this.props.hwversion === 2} disabled={this.disableHWVersion()} onChange={this.handleChange} />2
+                <input type='radio' value={1} checked={this.props.hwversion === 1} disabled={this.disableHWVersion()} onChange={this.handleChange} />
+                <div className='hardware-version-label'>1</div>
+                <input type='radio' value={2} checked={this.props.hwversion === 2} disabled={this.disableHWVersion()} onChange={this.handleChange} />
+                <div className='hardware-version-label'>2</div>
             </fieldset>
         );
     }

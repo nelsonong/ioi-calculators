@@ -1,0 +1,18 @@
+.resolution-labels {
+    width: 22%;
+    display: inline-block;
+}
+
+.resolution-label {
+    margin: 8px auto;
+}
+
+.resolution-controls {
+    width: 78%;
+    display: inline-block;
+}
+
+.resolution-control {
+    margin: 2px 3px;
+    padding: 1px 2px;
+}

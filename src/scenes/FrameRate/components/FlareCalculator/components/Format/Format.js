@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { LINK, CL_FORMATS, CX_FORMATS } from '../../constants';
+import './Format.css';
 
 class Format extends Component {
     constructor(props) {
@@ -48,19 +49,26 @@ class Format extends Component {
         } else if (this.props.link === LINK.CX) {
             return (
                 <div>
-                    Bit Depth&nbsp;&nbsp;&nbsp;
-                    <select name='bitDepth' onChange={this.handleInputChange}>
-                        {this.renderCXBitDepths()}
-                    </select>
-                    <br />
-                    Link Count&nbsp;
-                    <select name='linkCount' onChange={this.handleInputChange}>
-                        {this.renderCXLinkCounts()}
-                    </select>&nbsp;&nbsp;
-                    Link Speed&nbsp;
-                    <select name='linkSpeed' onChange={this.handleInputChange}>
-                        {this.renderCXLinkSpeeds()}
-                    </select>
+                    <div className='flare-format-left'>
+                        <div className='flare-format-labels'>
+                            <div className='flare-format-label'>Bit Depth</div>
+                            <div className='flare-format-label'>Links</div>
+                        </div>
+                        <div className='flare-format-selects'>
+                            <select className='flare-format-select' name='bitDepth' onChange={this.handleInputChange}>
+                                {this.renderCXBitDepths()}
+                            </select>
+                            <select className='flare-format-select' name='linkCount' onChange={this.handleInputChange}>
+                                {this.renderCXLinkCounts()}
+                            </select>
+                        </div>
+                    </div>
+                    <div className='flare-format-right'>
+                        <div className='flare-format-label'>Link Speed</div>
+                        <select className='flare-format-select' name='linkSpeed' onChange={this.handleInputChange}>
+                            {this.renderCXLinkSpeeds()}
+                        </select>
+                    </div>
                 </div>
             );
         }

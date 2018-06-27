@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { LINK, SLOW_MODE_FORMATS } from '../../constants';
+import './Options.css';
 
 class Options extends Component {
     constructor(props) {
@@ -31,9 +32,11 @@ class Options extends Component {
         return (
             <fieldset>
             <legend>Options</legend>
-                <input type="checkbox" name='subSampling' disabled={this.subSamplingDisabled()} onChange={this.handleInputChange}/>Enable sub-sampling
+                <input type="checkbox" name='subSampling' disabled={this.subSamplingDisabled()} onChange={this.handleInputChange}/>
+                <div className='options-label'>Enable sub-sampling</div>
                 <br />
-                <input type="checkbox" name='slowMode' disabled={this.slowModeDisabled()} onChange={this.handleInputChange}/>Enabled reduced line rate mode
+                <input type="checkbox" name='slowMode' disabled={this.slowModeDisabled()} onChange={this.handleInputChange}/>
+                <div className='options-label'>Enabled reduced line rate mode</div>
             </fieldset>
         );
     }
