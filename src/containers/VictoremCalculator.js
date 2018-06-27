@@ -1,34 +1,63 @@
 import React, { Component } from 'react';
 import { Model, ModelInfo, Format, Resolution, Options, FrameRate } from '../components/Victorem';
-import { LINK, CL_MODEL, CL_FORMAT, LINK_SPEEDS } from '../constants/flare';
-import { calculateFrameRate } from '../utils/frame-rate';
+import { MODEL, SENSOR, FORMAT, CAMERA_OPTION, RESOLUTION, MAX_RESOLUTION } from '../constants/victorem';
+import { calculateFrameRate } from '../utils/victorem/frame-rate';
+import { minWidth, maxWidth, minHeight, maxHeight } from '../utils/victorem/resolution';
 import './VictoremCalculator.css';
 
 class VictoremCalculator extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            link: LINK.CL,                                  // Link type (Camera Link or CoaXPress)
-            model: CL_MODEL.Type2M360MCL,                   // Camera model
-            format: CL_FORMAT.Output2x8,                    // Camera link format
-            bitDepth: 8, linkCount: 1, linkSpeed: LINK_SPEEDS.CXP3,  // CoaXpress format
-            width: 1920,                                    // Resolution - width
-            height: 1080,                                   // Resolution - height
-            subSampling: false,                             // Sub-sampling enabled
-            slowMode: false,                                // Slow-mode enabled
-            frameRate: 'N/A'                                // Maximum frame-rate
+            model: MODEL.Type51B163MCX,                             // Camera model
+            sensor: SENSOR[MODEL.Type51B163MCX],                    // Camera's sensor
+            maxWidth: MAX_RESOLUTION[MODEL.Type51B163MCX][0],       // Max width of camera
+            maxHeight: MAX_RESOLUTION[MODEL.Type51B163MCX][1],      // Max height of camera
+            formats: FORMAT.CXP2x1,                                 // CoaXPress format
+            bitDepth: 8,                                            // Bit depth
+            resolutionPreset: RESOLUTION.MAXIMUM,                   // Resolution preset selected
+            width: 2464,                                            // Width
+            height: 2056,                                           // Height
+            cameraOption: CAMERA_OPTION.NONE,                       // Camera options [none, sub-sample, vertical bin, 2x2 bin]
+            frameRate: 'N/A',                                       // Maximum frame-rate
+            supportsSubSampling: true,                              // Sub-sampling supported by camera
+            supportsVerticalBinning: true,                          // Vertical binning supported by camera
+            supports2x2Binning: true                                // 2x2 binning supported by camera
         };
 
         // Initialize framerate
-        this.state.frameRate = calculateFrameRate(this.state);
+        this.state.frameRate = calculateFrameRate({...this.state});
 
         this.updateState = this.updateState.bind(this);
+        this.setMinResolution = this.setMinResolution.bind(this);
+        this.setMaxResolution = this.setMaxResolution.bind(this);
     }
 
     // Update state and recalculate frame-rate
     updateState(newState) {
+        const resolutionPreset = this.state.resolutionPreset;
         this.setState(newState, () => {
-            this.setState({ frameRate: calculateFrameRate(this.state) });
+            if (resolutionPreset === RESOLUTION.MINIMUM) {
+                this.setMinResolution();
+            } else if (resolutionPreset === RESOLUTION.MAXIMUM) {
+                this.setMaxResolution();
+            } else {
+                this.setState({ frameRate: calculateFrameRate({...this.state}) });
+            }
+        });
+    }
+
+    // Set minimum resolution and recalculate frame-rate
+    setMinResolution() {
+        this.setState({ width: minWidth(this.state.model), height: minHeight(this.state.model) }, () => {
+            this.setState({ frameRate: calculateFrameRate({...this.state}) });
+        });
+    }
+
+    // Set maximum resolution and recalculate frame-rate
+    setMaxResolution() {
+        this.setState({ width: maxWidth({...this.state}), height: maxHeight({...this.state}) }, () => {
+            this.setState({ frameRate: calculateFrameRate({...this.state}) });
         });
     }
 
@@ -43,12 +72,35 @@ class VictoremCalculator extends Component {
                     <div className='VictoremTitle'>Victorem Frame Rate Calculator</div>
                     <button className='CloseCalculator' type='button' onClick={() => this.props.deleteCalculator(this.props.id)}>✖</button>
                 </div>
-                <Model link={this.state.link} updateState={this.updateState} />
-                <ModelInfo />
-                <Format link={this.state.link} model={this.state.model} updateState={this.updateState} />
-                <Resolution link={this.state.link} model={this.state.model} format={this.state.format} width={this.state.width} height={this.state.height} updateState={this.updateState} />
-                <Options link={this.state.link} model={this.state.model} format={this.state.format} updateState={this.updateState} />
-                <FrameRate frameRate={this.state.frameRate} />
+                <Model
+                    model={this.state.model}
+                    updateState={this.updateState}
+                />
+                <ModelInfo
+                    sensor={this.state.sensor}
+                    maxWidth={this.state.maxWidth}
+                    maxHeight={this.state.maxHeight}
+                />
+                <Format
+                    formats={this.state.format}
+                    updateState={this.updateState}
+                />
+                <Resolution
+                    {...this.state}
+                    resolutionPreset={this.state.resolutionPreset}
+                    cameraOption={this.state.cameraOption}
+                    updateState={this.updateState}
+                />
+                <Options
+                    cameraOption={this.state.cameraOption}
+                    supportsSubSampling={this.state.supportsSubSampling}
+                    supportsVerticalBinning={this.state.supportsVerticalBinning}
+                    supports2x2Binning={this.state.supports2x2Binning}
+                    updateState={this.updateState}
+                />
+                <FrameRate
+                    frameRate={this.state.frameRate}
+                />
             </div>
         );
     }

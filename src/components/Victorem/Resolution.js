@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
-import { RESOLUTION_PRESETS } from '../../constants/victorem';
-import { minWidth, maxWidth, minHeight, maxHeight } from '../../utils/resolution';
+import { RESOLUTION, RESOLUTIONS, CAMERA_OPTION } from '../../constants/victorem';
 
 class Resolution extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            currentModel: props.model,
-            preset: RESOLUTION_PRESETS[0]
-        }
-
-        // Initialize resolution
-        this.setMinMaxResolution(this.state.preset);
 
         this.handleChangePreset = this.handleChangePreset.bind(this);
         this.handleChangeWidth = this.handleChangeWidth.bind(this);
@@ -20,9 +11,9 @@ class Resolution extends Component {
     }
 
     loadPresets() {
-        return RESOLUTION_PRESETS.map((preset, i) => {
+        return RESOLUTIONS.map((preset, i) => {
             let presetString;
-            if (preset === 'Maximum' || preset === 'Minimum') {
+            if ([RESOLUTION.MINIMUM, RESOLUTION.MAXIMUM, RESOLUTION.CUSTOM].includes(preset)) {
                 presetString = preset;
             } else {
                 presetString = preset[0] + 'x' + preset[1];
@@ -31,61 +22,42 @@ class Resolution extends Component {
         });
     }
 
-    setMinMaxResolution() {
-        let width = 0, height = 0;
-        if (this.state.preset === 'Maximum') {
-            width = maxWidth(this.props.model, this.props.format);
-            height = maxHeight(this.props.model);
-        } else if (this.state.preset === 'Minimum') {
-            width = minWidth(this.props.link, this.props.model, this.props.format);
-            height = minHeight(this.props.link, this.props.model);
-        }
-
-        this.props.updateState({ width: width, height: height });
-    }
-
     handleChangePreset(e) {
         const preset = e.target.value;
-        this.setState({ preset: preset }, (preset) => {
-            if (this.state.preset === 'Maximum' || this.state.preset === 'Minimum') {
-                this.setMinMaxResolution();
-            } else {
-                const resolution = this.state.preset.split('x');
-                const width = resolution[0];
-                const height = resolution[1];
-                
-                this.props.updateState({ width: width, height: height });
-            }
-        });
+        if (preset === 'Custom') {
+            return;
+        } else if (preset === RESOLUTION.MINIMUM || preset === RESOLUTION.MAXIMUM) {
+            this.props.updateState({ resolutionPreset: preset });
+        } else {
+            const resolution = preset.split('x');
+            const width = resolution[0];
+            const height = resolution[1];
+            
+            this.props.updateState({ resolutionPreset: preset, width: Number(width), height: Number(height) });
+        }
     }
 
     handleChangeWidth(e) {
-        this.props.updateState({ width: e.target.value });
+        this.props.updateState({ resolutionPreset: RESOLUTION.CUSTOM, width: Number(e.target.value) });  // Set selected preset to 'Custom'
     }
 
     handleChangeHeight(e) {
-        this.props.updateState({ height: e.target.value });
+        this.props.updateState({ resolutionPreset: RESOLUTION.CUSTOM, height: Number(e.target.value) });  // Set selected preset to 'Custom'
     }
 
     render() {
-        // If model changes, and max/min selected, recalculate
-        if (this.props.model !== this.state.currentModel) {
-            this.setState({ currentModel: this.props.model });
-            if (this.state.preset === 'Maximum' || this.state.preset === 'Minimum') {
-                this.setMinMaxResolution();
-            }
-        }
+        const subSamplingSelected = (this.props.cameraOption === CAMERA_OPTION.SUBSAMPLING);
         return (
             <fieldset>
             <legend>Resolution</legend>
                 <span>Presets:</span>&nbsp;&nbsp;
-                <select onChange={this.handleChangePreset}>
+                <select value={this.props.resolutionPreset} disabled={subSamplingSelected} onChange={this.handleChangePreset}>
                     {this.loadPresets()}
                 </select>
                 <br />
                 <span>W x H:</span>&nbsp;&nbsp;
-                <input type="number" min="1" max="9999" value={this.props.width} onChange={this.handleChangeWidth} />&nbsp;&nbsp;
-                <input type="number" min="1" max="9999" value={this.props.height} onChange={this.handleChangeHeight} />
+                <input type="number" min="1" max="9999" value={this.props.width} disabled={subSamplingSelected} onChange={this.handleChangeWidth} />&nbsp;&nbsp;
+                <input type="number" min="1" max="9999" value={this.props.height} disabled={subSamplingSelected} onChange={this.handleChangeHeight} />
             </fieldset>
         );
     }

@@ -1,46 +1,64 @@
-export const CL_MODEL = {
-    Type2M360MCL: '2M360MCL',
-    Type2M360CCL: '2M360CCL',
-    Type2M360CCLENR: '2M360CCLENR',
-    Type2M360NCL: '2M360NCL',
-    Type4M180MCL: '4M180MCL',
-    Type4M180CCL: '4M180CCL',
-    Type4M180NCL: '4M180NCL',
-    Type12M125MCL: '12M125MCL',
-    Type12M125CCL: '12M125CCL',
-    Type12M125NCL: '12M125NCL'
+export const MODEL = {
+//    Type24A164MCX: '24A164MCX',
+//    Type24A164CCX: '24A164CCX',
+//    Type205R26MCX: '205R26MCX',
+//    Type205R26CCX: '205R26CCX',
+    Type51B163MCX: '51B163MCX',
+    Type51B163CCX: '51B163CCX',
+    Type32B216MCX: '32B216MCX',
+    Type32B216CCX: '32B216CCX',
+    Type120B68MCX: '120B68MCX',
+    Type120B68CCX: '120B68CCX',
+    Type89B93MCX: '89B93MCX',
+    Type89B93CCX: '89B93CCX',
+    Type16B276MCX: '16B276MCX',
+    Type16B276CCX: '16B276CCX',
+    Type4B523MCX: '4B523MCX',
+    Type4B523CCX: '4B523CCX',
 };
 
-export const CL_MODELS = Object.values(CL_MODEL);
-
-export const CX_MODEL = {
-    Type2M280MCX: '2M280MCX',
-    Type2M280CCX: '2M280CCX',
-    Type2M280CCXENR: '2M280CCXENR',
-    Type2M280NCX: '2M280NCX',
-    Type4M140MCX: '4M140MCX',
-    Type4M140CCX: '4M140CCX',
-    Type4M140NCX: '4M140NCX',
-    Type12M180MCX: '12M180MCX',
-    Type12M180CCX: '12M180CCX',
-    Type12M180NCX: '12M180NCX',
-    Type48M30MCX: '48M30MCX',
-    Type48M30CCX: '48M30CCX'
+export const MODELS = {
+    ALL: Object.values(MODEL),
+    TYPE_250: [
+        MODEL.Type51B163MCX,
+        MODEL.Type51B163CCX
+    ],
+    TYPE_252: [
+        MODEL.Type32B216MCX,
+        MODEL.Type32B216CCX,
+    //    MODEL.Type2KMSDIMINI,
+    //    MODEL.Type2KMSDIMINID
+    ],
+    TYPE_253: [
+        MODEL.Type120B68MCX,
+        MODEL.Type120B68CCX
+    ],
+    TYPE_255: [
+        MODEL.Type89B93MCX,
+        MODEL.Type89B93CCX,
+    //    MODEL.Type4KMSDIMINI,
+    //    MODEL.Type4KMSDIMINID
+    ],
+    TYPE_273: [
+        MODEL.Type16B276MCX,
+        MODEL.Type16B276CCX
+    ],
+    TYPE_287: [
+        MODEL.Type4B523MCX,
+        MODEL.Type4B523CCX
+    ],
+    TYPE_MONO: [
+        MODEL.Type24A164MCX,
+        MODEL.Type205R26MCX,
+        MODEL.Type51B163MCX,
+        MODEL.Type32B216MCX,
+        MODEL.Type120B68MCX,
+        MODEL.Type89B93MCX,
+        MODEL.Type16B276MCX,
+        MODEL.Type4B523MCX,
+    //    MODEL.Type2KMSDIMINI,
+    //    MODEL.Type2KMSDIMINID,
+    //    MODEL.Type4KMSDIMINI,
+    //    MODEL.Type4KMSDIMINID
+    ]
 };
-
-export const CX_MODELS = Object.values(CX_MODEL);
-
-export const COLOR_MODELS = [
-    CL_MODEL.Type2M360CCL,
-    CL_MODEL.Type2M360CCLENR,
-    CX_MODEL.Type2M280CCX,
-    CX_MODEL.Type2M280CCXENR,
-    CX_MODEL.Type48M30CCX,
-    CL_MODEL.Type4M180CCL,
-    CX_MODEL.Type4M140CCX,
-    CL_MODEL.Type12M125CCL,
-    CX_MODEL.Type12M180CCX
-//    Type2KSDI,
-//    Type2KSDIENR,
-//    Type4KSDI
-];

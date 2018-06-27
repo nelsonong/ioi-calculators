@@ -1,48 +1,49 @@
 import React, { Component } from 'react';
-import { LINK, CL_MODEL, CL_MODELS, CX_MODELS } from '../../constants/victorem';
+import { MODELS, SENSOR, FORMATS, MAX_RESOLUTION, CAMERA_OPTION } from '../../constants/victorem';
 
 class Model extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            currentModel: CL_MODEL.Type2M360MCL,
-            currentModels: CL_MODELS
-        }
-
-        this.handleChangeLink = this.handleChangeLink.bind(this);
         this.handleChangeModel = this.handleChangeModel.bind(this);
     }
 
-    handleChangeLink(e) {
-        const value = e.target.value;
-        this.props.updateState({ 'link': value });
+    supportsSubSampling(model) {
+        return MODELS.TYPE_250.includes(model) || MODELS.TYPE_252.includes(model) || MODELS.TYPE_253.includes(model) || MODELS.TYPE_255.includes(model) || MODELS.TYPE_273.includes(model);
+    }
 
-        // Update and reset current models
-        const cameraModels = (value === LINK.CL) ? CL_MODELS : CX_MODELS;
-        const firstModel = cameraModels[0];
-        this.setState({ currentModels: cameraModels });
-        this.setState({ currentModel: firstModel });
+    supportsVerticalBinning(model) {
+        return MODELS.TYPE_MONO.includes(model) && (MODELS.TYPE_250.includes(model) || MODELS.TYPE_252.includes(model) || MODELS.TYPE_253.includes(model) || MODELS.TYPE_255.includes(model));
+    }
 
-        // Update model and default hardware version
-        this.props.updateState({ model: firstModel, hwversion: 1 });
+    supports2x2Binning(model) {
+        return MODELS.TYPE_253.includes(model) || MODELS.TYPE_255.includes(model) || MODELS.TYPE_273.includes(model);
     }
 
     handleChangeModel(e) {
-        const value = e.target.value;
-        this.props.updateState({ 'model': value });
-        this.setState({ currentModel: value });
+        const model = e.target.value;
+        const supportsSubSampling = this.supportsSubSampling(model);
+        const supportsVerticalBinning = this.supportsVerticalBinning(model);
+        const supports2x2Binning = this.supports2x2Binning(model);
 
-        // Update default hardware version
-        if (this.props.link === LINK.CL && value.startsWith('12M')) {
-            this.props.updateState({ hwversion: 2 });
+        let formats = FORMATS.CX4B;
+        if (this.props.model.startsWith('4B')) {
+            formats = FORMATS.CX4B;
+        } else if (this.props.model.startsWith('16B')) {
+            formats = FORMATS.CX16B;
         } else {
-            this.props.updateState({ hwversion: 1 });
+            formats = FORMATS.CXX;
         }
-    }
 
-    renderModels() {
-        return this.state.currentModels.map((model, i) => {
-            return <option key={i}>{model}</option>;
+        this.props.updateState({
+            model: model,
+            sensor: SENSOR[model],
+            maxWidth: MAX_RESOLUTION[model][0],
+            maxHeight: MAX_RESOLUTION[model][1],
+            format: formats,
+            supportsSubSampling: supportsSubSampling,
+            supportsVerticalBinning: supportsVerticalBinning,
+            supports2x2Binning: supports2x2Binning,
+            cameraOption: CAMERA_OPTION.NONE
         });
     }
 
@@ -50,13 +51,8 @@ class Model extends Component {
         return (
             <fieldset>
             <legend>Model</legend>
-                <select onChange={this.handleChangeLink}>
-                    <option value={LINK.CL}>Camera Link</option>
-                    <option value={LINK.CX}>CoaXPress</option>
-                </select>
-                <br />
-                <select value={this.state.currentModel} onChange={this.handleChangeModel}>
-                    {this.renderModels()}
+                <select name='model' onChange={this.handleChangeModel}>
+                    { MODELS.ALL.map((model, i) => { return <option key={i}>{model}</option> }) }
                 </select>
             </fieldset>
         );

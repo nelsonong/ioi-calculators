@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LINK, SLOW_MODE_FORMATS } from '../../constants/victorem';
+import { CAMERA_OPTION } from '../../constants/victorem';
 
 class Options extends Component {
     constructor(props) {
@@ -7,33 +7,57 @@ class Options extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    subSamplingDisabled() {
-        const currentModel = this.props.model;
-        return (currentModel.startsWith('12M') || currentModel.startsWith('48M'));
-    }
-
-    slowModeDisabled() {
-        const link = this.props.link;
-        const model = this.props.model;
-        const format = this.props.format;
-
-        return (link !== LINK.CL || model.startsWith('12M') || !SLOW_MODE_FORMATS.includes(format));
-    }
-
     handleInputChange(e) {
         const name = e.target.name;
-        const checked = e.target.checked;
-
-        this.props.updateState({ [name]: checked });
+        switch (name) {
+            case 'none':
+                this.props.updateState({ cameraOption: CAMERA_OPTION.NONE });
+                break;
+            case 'subSampling':
+                this.props.updateState({ cameraOption: CAMERA_OPTION.SUBSAMPLING });
+                break;
+            case 'binv':
+                this.props.updateState({ cameraOption: CAMERA_OPTION.BIN_VERTICAL });
+                break;
+            case 'bin2':
+                this.props.updateState({ cameraOption: CAMERA_OPTION.BIN_2X2 });
+                break;
+            default:
+                break;
+        }
     }
 
-    render() {
-        return (
+    render() {return (
             <fieldset>
             <legend>Options</legend>
-                <input type="checkbox" name='subSampling' disabled={this.subSamplingDisabled()} onChange={this.handleInputChange}/>Enable sub-sampling
+                <input
+                    type="radio"
+                    name='none'
+                    checked={this.props.cameraOption === CAMERA_OPTION.NONE}
+                    onChange={this.handleInputChange}
+                />None&nbsp;
+                <input
+                    type="radio"
+                    name='subSampling'
+                    checked={this.props.cameraOption === CAMERA_OPTION.SUBSAMPLING}
+                    disabled={!this.props.supportsSubSampling}
+                    onChange={this.handleInputChange}
+                />Sub-Sample
                 <br />
-                <input type="checkbox" name='slowMode' disabled={this.slowModeDisabled()} onChange={this.handleInputChange}/>Enabled reduced line rate mode
+                <input
+                    type="radio"
+                    name='binv'
+                    checked={this.props.cameraOption === CAMERA_OPTION.BIN_VERTICAL}
+                    disabled={!this.props.supportsVerticalBinning}
+                    onChange={this.handleInputChange}
+                />Vertical Bin&nbsp;
+                <input
+                    type="radio"
+                    name='bin2'
+                    checked={this.props.cameraOption === CAMERA_OPTION.BIN_2X2}
+                    disabled={!this.props.supports2x2Binning}
+                    onChange={this.handleInputChange}
+                />2x2 Bin
             </fieldset>
         );
     }

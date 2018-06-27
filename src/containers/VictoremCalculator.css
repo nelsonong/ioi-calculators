@@ -31,7 +31,7 @@
     border: none;
     background: transparent;
     float: right;
-    position: fixed;
+    position: absolute;
     padding-left: 20px;
 }
 
@@ -55,6 +55,11 @@ select {
 input {
     font-size: 11px;
     margin: 2px;
+}
+
+input[type='text'] {
+    text-align: center;
+    width: 40%;
 }
 
 .VictoremCalculator .frameRate {
