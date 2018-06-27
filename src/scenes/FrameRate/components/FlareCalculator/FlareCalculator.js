@@ -39,10 +39,10 @@ class FlareCalculator extends Component {
 
     render() {
         return (
-            <div className="FlareCalculator">
-                <div className='TopBar'>
-                    <div className='FlareTitle'>Flare Frame Rate Calculator</div>
-                    <button className='CloseFlare' type='button' onClick={() => this.props.deleteCalculator(this.props.id)}>✖</button>
+            <div className="flare-calculator">
+                <div>
+                    <div className='flare-calculator-title'>Flare Frame Rate Calculator</div>
+                    <button className='close-calculator-button' type='button' onClick={() => this.props.deleteCalculator(this.props.id)}>✖</button>
                 </div>
                 <Model link={this.state.link} hwversion={this.state.hwversion} updateState={this.updateState} />
                 <HardwareVersion link={this.state.link} model={this.state.model} hwversion={this.state.hwversion} updateState={this.updateState} />

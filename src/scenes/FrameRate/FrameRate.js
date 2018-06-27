@@ -51,13 +51,13 @@ class FrameRate extends Component {
 
     render() {
         return (
-            <div className="FrameRate">
-                <h3>
+            <div className="frame-rate">
+                <div className='frame-rate-title'>
                     IOI Calculators
-                </h3>
+                </div>
                 <div>
-                    <button type='button' className='AddFlare' onClick={() => this.addCalculator('flare')}>+ Flare Calculator</button>
-                    <button type='button' className='AddVictorem' onClick={() => this.addCalculator('victorem')}>+ Victorem Calculator</button>
+                    <button type='button' className='add-flare-button' onClick={() => this.addCalculator('flare')}>+ Flare Calculator</button>
+                    <button type='button' className='add-victorem-button' onClick={() => this.addCalculator('victorem')}>+ Victorem Calculator</button>
                 </div>
                 {this.renderCalculators()}
             </div>

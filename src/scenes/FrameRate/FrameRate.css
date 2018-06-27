@@ -1,4 +1,4 @@
-.FrameRate {
+.frame-rate {
   background-color: rgb(236, 236, 236);
   margin: 30px auto 0 auto;
   padding: 20px 30px 20px 30px;
@@ -11,7 +11,14 @@
   border-width: medium;
 }
 
-.AddFlare {
+.frame-rate-title {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  margin: 20px;
+}
+
+.add-flare-button {
   background: rgb(199, 100, 100);
   font-size: 12px;
   font-weight: 700;
@@ -26,7 +33,7 @@
   border-radius: 5px;
 }
 
-.AddVictorem {
+.add-victorem-button {
   background: rgb(187, 94, 130);
   font-size: 12px;
   font-weight: 700;
@@ -41,32 +48,26 @@
   border-radius: 5px;
 }
 
-h3 {
-  font-size: 20px;
-  text-align: center;
+.close-calculator-button {
+    background: transparent;
+    position: absolute;
+    float: right;
+    padding-left: 20px;
+    border: none;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+fieldset {
+    background: rgb(253, 238, 214);
+    text-align: left;
+    margin: 5px 0 5px 0;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+select {
+    font-size: 11px;
+    margin: 2px;
 }
 
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+input {
+    font-size: 11px;
+    margin: 2px;
 }

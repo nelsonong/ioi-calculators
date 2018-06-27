@@ -68,10 +68,10 @@ class VictoremCalculator extends Component {
 
     render() {
         return (
-            <div className="VictoremCalculator">
-                <div className='TopBar'>
-                    <div className='VictoremTitle'>Victorem Frame Rate Calculator</div>
-                    <button className='CloseCalculator' type='button' onClick={() => this.props.deleteCalculator(this.props.id)}>✖</button>
+            <div className="victorem-calculator">
+                <div>
+                    <div className='victorem-calculator-title'>Victorem Frame Rate Calculator</div>
+                    <button className='close-calculator-button' type='button' onClick={() => this.props.deleteCalculator(this.props.id)}>✖</button>
                 </div>
                 <Model
                     model={this.state.model}
