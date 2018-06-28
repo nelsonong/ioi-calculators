@@ -4,24 +4,18 @@ import VictoremCalculator from './components/VictoremCalculator';
 import './FrameRate.css';
 
 class FrameRate extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            calculators: []
-        };
+    state = {
+        calculators: []
+    };
 
-        this.addCalculator = this.addCalculator.bind(this);
-        this.deleteCalculator = this.deleteCalculator.bind(this);
-    }
-
-    unique_id() {
+    unique_id = () => {
         // Math.random should be unique because of its seeding algorithm.
         // Convert it to base 36 (numbers + letters), and grab the first 9 characters
         // after the decimal.
         return '_' + Math.random().toString(36).substr(2, 9);
     };
 
-    addCalculator(type) {
+    addCalculator = (type) => {
         const calculators = this.state.calculators;
         const key = this.unique_id();
         if (type === 'flare') {
@@ -31,7 +25,7 @@ class FrameRate extends Component {
         }
     }
 
-    deleteCalculator(id) {
+    deleteCalculator = (id) => {
         // Get calculator with id
         const index = this.state.calculators.findIndex(calculator => calculator.id === id);
         if (index === -1)
@@ -43,13 +37,13 @@ class FrameRate extends Component {
         this.setState(newState);
     }
 
-    renderCalculators() {
+    renderCalculators = () => {
         return this.state.calculators.map((calculator) => {
             return calculator.calculator;
         });
     }
 
-    render() {
+    render = () => {
         return (
             <div className="frame-rate">
                 <div className='frame-rate-title'>

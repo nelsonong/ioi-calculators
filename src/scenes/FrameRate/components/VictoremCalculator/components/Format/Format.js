@@ -3,32 +3,26 @@ import { BIT_DEPTHS } from '../../constants';
 import './Format.css';
 
 class Format extends Component {
-    constructor(props) {
-        super(props);
-        this.handleInputChange = this.handleInputChange.bind(this);
-    }
-
-    // -------------- Change Handlers --------------
-    handleInputChange(e) {
+    handleInputChange = (e) => {
         const name = e.target.name;
         const value = (name === 'bitDepth') ? Number(e.target.value) : e.target.value;
         
         this.props.updateState({ [name]: value });
     }
 
-    renderFormats() {
+    renderFormats = () => {
         return this.props.formats.map((format, i) => {
             return <option key={i}>{format}</option>
         });
     }
 
-    renderBitDepths() {
+    renderBitDepths = () => {
         return BIT_DEPTHS.map((bitDepth, i) => {
             return <option key={i} value={bitDepth}>{bitDepth}</option>;
         });
     }
 
-    render() {
+    render = () => {
         return (
             <fieldset>
             <legend>Output Format</legend>

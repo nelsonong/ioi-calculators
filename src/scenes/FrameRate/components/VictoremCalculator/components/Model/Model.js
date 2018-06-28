@@ -2,24 +2,19 @@ import React, { Component } from 'react';
 import { MODELS, SENSOR, FORMAT, FORMATS, MAX_RESOLUTION, CAMERA_OPTION } from '../../constants';
 
 class Model extends Component {
-    constructor(props) {
-        super(props);
-        this.handleChangeModel = this.handleChangeModel.bind(this);
-    }
-
-    supportsSubSampling(model) {
+    supportsSubSampling = (model) => {
         return MODELS.TYPE_250.includes(model) || MODELS.TYPE_252.includes(model) || MODELS.TYPE_253.includes(model) || MODELS.TYPE_255.includes(model) || MODELS.TYPE_273.includes(model);
     }
 
-    supportsVerticalBinning(model) {
+    supportsVerticalBinning = (model) => {
         return MODELS.TYPE_MONO.includes(model) && (MODELS.TYPE_250.includes(model) || MODELS.TYPE_252.includes(model) || MODELS.TYPE_253.includes(model) || MODELS.TYPE_255.includes(model));
     }
 
-    supports2x2Binning(model) {
+    supports2x2Binning = (model) => {
         return MODELS.TYPE_253.includes(model) || MODELS.TYPE_255.includes(model) || MODELS.TYPE_273.includes(model);
     }
 
-    handleChangeModel(e) {
+    handleChangeModel = (e) => {
         const model = e.target.value;
         const supportsSubSampling = this.supportsSubSampling(model);
         const supportsVerticalBinning = this.supportsVerticalBinning(model);
@@ -48,7 +43,7 @@ class Model extends Component {
         });
     }
 
-    render() {
+    render = () => {
         return (
             <fieldset>
             <legend>Model</legend>

@@ -3,17 +3,12 @@ import { LINK, SLOW_MODE_FORMATS } from '../../constants';
 import './Options.css';
 
 class Options extends Component {
-    constructor(props) {
-        super(props);
-        this.handleInputChange = this.handleInputChange.bind(this);
-    }
-
-    subSamplingDisabled() {
+    subSamplingDisabled = () => {
         const currentModel = this.props.model;
         return (currentModel.startsWith('12M') || currentModel.startsWith('48M'));
     }
 
-    slowModeDisabled() {
+    slowModeDisabled = () => {
         const link = this.props.link;
         const model = this.props.model;
         const format = this.props.format;
@@ -21,14 +16,14 @@ class Options extends Component {
         return (link !== LINK.CL || model.startsWith('12M') || !SLOW_MODE_FORMATS.includes(format));
     }
 
-    handleInputChange(e) {
+    handleInputChange = (e) => {
         const name = e.target.name;
         const checked = e.target.checked;
 
         this.props.updateState({ [name]: checked });
     }
 
-    render() {
+    render = () => {
         return (
             <fieldset>
             <legend>Options</legend>

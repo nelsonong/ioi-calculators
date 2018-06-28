@@ -2,18 +2,12 @@ import React, { Component } from 'react';
 import { LINK, CL_MODEL, CL_MODELS, CX_MODELS } from '../../constants';
 
 class Model extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            currentModel: CL_MODEL.Type2M360MCL,
-            currentModels: CL_MODELS
-        }
-
-        this.handleChangeLink = this.handleChangeLink.bind(this);
-        this.handleChangeModel = this.handleChangeModel.bind(this);
+    state = {
+        currentModel: CL_MODEL.Type2M360MCL,
+        currentModels: CL_MODELS
     }
 
-    handleChangeLink(e) {
+    handleChangeLink = (e) => {
         const value = e.target.value;
         this.props.updateState({ 'link': value });
 
@@ -27,7 +21,7 @@ class Model extends Component {
         this.props.updateState({ model: firstModel, hwversion: 1 });
     }
 
-    handleChangeModel(e) {
+    handleChangeModel = (e) => {
         const value = e.target.value;
         this.props.updateState({ 'model': value });
         this.setState({ currentModel: value });
@@ -40,13 +34,13 @@ class Model extends Component {
         }
     }
 
-    renderModels() {
+    renderModels = () => {
         return this.state.currentModels.map((model, i) => {
             return <option key={i}>{model}</option>;
         });
     }
 
-    render() {
+    render = () => {
         return (
             <fieldset>
             <legend>Model</legend>

@@ -3,20 +3,15 @@ import { LINK } from '../../constants';
 import './HardwareVersion.css';
 
 class HardwareVersion extends Component {
-    constructor(props) {
-        super(props);
-        this.handleChange = this.handleChange.bind(this);
-    }
-
-    handleChange(e) {
+    handleChange = (e) => {
         this.props.updateState({ hwversion: Number(e.target.value) });
     }
 
-    disableHWVersion() {
+    disableHWVersion = () => {
         return (this.props.link !== LINK.CL || !this.props.model.startsWith('12M'));
     }
 
-    render() {
+    render = () => {
         return (
             <fieldset>
             <legend>Hardware Version</legend>

@@ -3,15 +3,7 @@ import { RESOLUTION, RESOLUTIONS, CAMERA_OPTION } from '../../constants';
 import './Resolution.css';
 
 class Resolution extends Component {
-    constructor(props) {
-        super(props);
-
-        this.handleChangePreset = this.handleChangePreset.bind(this);
-        this.handleChangeWidth = this.handleChangeWidth.bind(this);
-        this.handleChangeHeight = this.handleChangeHeight.bind(this);
-    }
-
-    loadPresets() {
+    loadPresets = () => {
         return RESOLUTIONS.map((preset, i) => {
             let presetString;
             if ([RESOLUTION.MINIMUM, RESOLUTION.MAXIMUM, RESOLUTION.CUSTOM].includes(preset)) {
@@ -23,7 +15,7 @@ class Resolution extends Component {
         });
     }
 
-    handleChangePreset(e) {
+    handleChangePreset = (e) => {
         const preset = e.target.value;
         if (preset === 'Custom') {
             return;
@@ -38,15 +30,15 @@ class Resolution extends Component {
         }
     }
 
-    handleChangeWidth(e) {
+    handleChangeWidth = (e) => {
         this.props.updateState({ resolutionPreset: RESOLUTION.CUSTOM, width: Number(e.target.value) });  // Set selected preset to 'Custom'
     }
 
-    handleChangeHeight(e) {
+    handleChangeHeight = (e) => {
         this.props.updateState({ resolutionPreset: RESOLUTION.CUSTOM, height: Number(e.target.value) });  // Set selected preset to 'Custom'
     }
 
-    render() {
+    render = () => {
         const subSamplingSelected = (this.props.cameraOption === CAMERA_OPTION.SUBSAMPLING);
         return (
             <fieldset>

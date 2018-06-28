@@ -3,12 +3,7 @@ import { CAMERA_OPTION } from '../../constants';
 import './Options.css';
 
 class Options extends Component {
-    constructor(props) {
-        super(props);
-        this.handleInputChange = this.handleInputChange.bind(this);
-    }
-
-    handleInputChange(e) {
+    handleInputChange = (e) => {
         const name = e.target.name;
         switch (name) {
             case 'none':
@@ -28,7 +23,7 @@ class Options extends Component {
         }
     }
 
-    render() {
+    render = () => {
         return (
             <fieldset>
             <legend>Options</legend>

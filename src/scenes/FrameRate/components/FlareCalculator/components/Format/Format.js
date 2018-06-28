@@ -3,20 +3,15 @@ import { LINK, CL_FORMATS, CX_FORMATS } from '../../constants';
 import './Format.css';
 
 class Format extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            currentLink: props.link,
-            currentModel: props.model,
-            clFormats: CL_FORMATS.CL2_4m,
-            cxFormats: CX_FORMATS.CX2_4m
-        };
-
-        this.handleInputChange = this.handleInputChange.bind(this);
-    }
+    state = {
+        currentLink: this.props.link,
+        currentModel: this.props.model,
+        clFormats: CL_FORMATS.CL2_4m,
+        cxFormats: CX_FORMATS.CX2_4m
+    };
 
     // -------------- Change Handlers --------------
-    handleInputChange(e) {
+    handleInputChange = (e) => {
         const name = e.target.name;
         const value = (name === 'bitDepth' || name === 'linkCount') ? Number(e.target.value) : e.target.value;
         
@@ -24,11 +19,11 @@ class Format extends Component {
     }
 
     // -------------- Render UI --------------
-    renderTitle() {
+    renderTitle = () => {
         return this.props.link === LINK.CL ? 'Camera Link Format' : 'CoaXPress Format';
     }
 
-    renderFormats() {
+    renderFormats = () => {
         // If model has changed, reload formats
         const linkOrModelChanged = this.props.link !== this.state.currentLink || this.props.model !== this.state.currentModel;
         if (linkOrModelChanged) {
@@ -75,7 +70,7 @@ class Format extends Component {
     }
 
     // -------------- CL Format Controls --------------
-    reloadCLFormats() {
+    reloadCLFormats = () => {
         if (this.props.model.startsWith('12M')) {
             this.setState({ clFormats: CL_FORMATS.CL12m });
         } else {
@@ -83,14 +78,14 @@ class Format extends Component {
         }
     }
 
-    renderCLFormats() {
+    renderCLFormats = () => {
         return this.state.clFormats.map((format, i) => {
             return <option key={i}>{format}</option>;
         });
     }
 
     // -------------- CX Format Controls --------------
-    reloadCXFormats() {
+    reloadCXFormats = () => {
         if (this.props.model.startsWith('48M')) {
             this.setState({ cxFormats: CX_FORMATS.CX48m });
         } else if (this.props.model.startsWith('12M')) {
@@ -100,25 +95,25 @@ class Format extends Component {
         }
     }
 
-    renderCXBitDepths() {
+    renderCXBitDepths = () => {
         return this.state.cxFormats.BitDepths.map((bitDepth, i) => {
             return <option key={i} value={bitDepth}>{bitDepth}</option>;
         });
     }
 
-    renderCXLinkCounts() {
+    renderCXLinkCounts = () => {
         return this.state.cxFormats.LinkCounts.map((linkCount, i) => {
             return <option key={i} value={linkCount}>{linkCount}</option>;
         });
     }
 
-    renderCXLinkSpeeds() {
+    renderCXLinkSpeeds = () => {
         return this.state.cxFormats.LinkSpeeds.map((linkSpeed, i) => {
             return <option key={i} value={linkSpeed}>{linkSpeed}</option>;
         });
     }
 
-    render() {
+    render = () => {
         return (
             <fieldset>
             <legend>{this.renderTitle()}</legend>

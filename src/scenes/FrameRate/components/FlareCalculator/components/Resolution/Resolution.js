@@ -4,23 +4,12 @@ import { minWidth, maxWidth, minHeight, maxHeight } from '../../utils/resolution
 import './Resolution.css';
 
 class Resolution extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            currentModel: props.model,
-            preset: RESOLUTION_PRESETS[0]
-        }
-
-        // Initialize resolution
-        this.setMinMaxResolution(this.state.preset);
-
-        this.handleChangePreset = this.handleChangePreset.bind(this);
-        this.handleChangeWidth = this.handleChangeWidth.bind(this);
-        this.handleChangeHeight = this.handleChangeHeight.bind(this);
+    state = {
+        currentModel: this.props.model,
+        preset: RESOLUTION_PRESETS[0]
     }
 
-    loadPresets() {
+    loadPresets = () => {
         return RESOLUTION_PRESETS.map((preset, i) => {
             let presetString;
             if (preset === 'Maximum' || preset === 'Minimum') {
@@ -32,7 +21,7 @@ class Resolution extends Component {
         });
     }
 
-    setMinMaxResolution() {
+    setMinMaxResolution = () => {
         let width = 0, height = 0;
         if (this.state.preset === 'Maximum') {
             width = maxWidth(this.props.model, this.props.format);
@@ -45,7 +34,7 @@ class Resolution extends Component {
         this.props.updateState({ width: width, height: height });
     }
 
-    handleChangePreset(e) {
+    handleChangePreset = (e) => {
         const preset = e.target.value;
         this.setState({ preset: preset }, (preset) => {
             if (this.state.preset === 'Maximum' || this.state.preset === 'Minimum') {
@@ -60,15 +49,15 @@ class Resolution extends Component {
         });
     }
 
-    handleChangeWidth(e) {
+    handleChangeWidth = (e) => {
         this.props.updateState({ width: e.target.value });
     }
 
-    handleChangeHeight(e) {
+    handleChangeHeight = (e) => {
         this.props.updateState({ height: e.target.value });
     }
 
-    render() {
+    render = () => {
         // If model changes, and max/min selected, recalculate
         if (this.props.model !== this.state.currentModel) {
             this.setState({ currentModel: this.props.model });
