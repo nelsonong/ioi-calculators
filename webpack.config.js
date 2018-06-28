@@ -17,6 +17,9 @@ module.exports = {
                 'style-loader',
                 'css-loader'
             ]
+        }, {
+            test: /\.(woff|woff2|eot|ttf|svg)$/,
+            loader: 'file-loader'
         }]
     },
     devtool: 'cheap-module-eval-source-map',
