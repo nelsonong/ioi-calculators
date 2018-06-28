@@ -53,7 +53,7 @@ class FrameRate extends Component {
         return (
             <div className="frame-rate">
                 <div className='frame-rate-title'>
-                    IOI Calculators
+                    Frame Rate Calculators
                 </div>
                 <div>
                     <button type='button' className='add-flare-button' onClick={() => this.addCalculator('flare')}>+ Flare Calculator</button>
