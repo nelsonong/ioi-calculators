@@ -1,8 +1,8 @@
 import React, { Component } from 'React';
+import DVRCalculator from './components/DVRCalculator';
 import './Storage.css';
 
 class Storage extends Component {
-
     state = {
         calculators: []
     }
@@ -14,8 +14,10 @@ class Storage extends Component {
         return '_' + Math.random().toString(36).substr(2, 9);
     };
 
-    addCalculator = () => {
-
+    addCalculator = (type) => {
+        const calculators = this.state.calculators;
+        const key = this.unique_id();
+        this.setState({ calculators: calculators.concat({ id: key, calculator: <DVRCalculator key={key} id={key} deleteCalculator={this.deleteCalculator} /> }) });
     }
 
     renderCalculators = () => {

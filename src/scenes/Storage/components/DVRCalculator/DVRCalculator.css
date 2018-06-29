@@ -1,0 +1,34 @@
+.dvr-calculator {
+    background: rgb(172, 172, 172);
+    background: linear-gradient(to bottom right, rgb(201, 201, 201), rgb(190, 190, 190));
+    font-family: 'Roboto Thin', sans-serif;
+    font-weight: 100;
+    margin: 25px 7px 25px 7px;
+    display: inline-block;
+    text-align: center;
+    width: 380px;
+    border: solid rgb(90, 90, 90);
+    border-width: thick;
+    border-radius: 5px;
+    padding: 0px 11px 7px 11px;
+}
+
+.dvr-calculator-title {
+    background: rgb(77, 60, 60);
+    color: white;
+    width: 70%;
+    padding: 4px;
+    margin: 0px auto;
+    margin-bottom: 11px;
+    display: inline-block;
+    border: solid rgb(90, 90, 90);
+    border-top-style: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.dvr-calculator > fieldset {
+    background: rgb(224, 224, 224);
+    text-align: left;
+    margin: 5px 0 5px 0;
+}
