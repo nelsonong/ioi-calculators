@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import FlareCalculator from './components/FlareCalculator';
 import VictoremCalculator from './components/VictoremCalculator';
+import InstructionBox from '../../components/InstructionBox';
 import './FrameRate.css';
 
 class FrameRate extends Component {
@@ -44,6 +45,8 @@ class FrameRate extends Component {
     }
 
     render = () => {
+        const text = 'Please select a button above to add a calculator.';
+        const instructionBox = (this.state.calculators.length === 0) ? <InstructionBox text={text} /> : '';
         return (
             <div className="frame-rate">
                 <div className='frame-rate-title'>
@@ -52,6 +55,7 @@ class FrameRate extends Component {
                 <div>
                     <button type='button' className='add-flare-button' onClick={() => this.addCalculator('flare')}>+ FLARE</button>
                     <button type='button' className='add-victorem-button' onClick={() => this.addCalculator('victorem')}>+ VICTOREM</button>
+                    {instructionBox}
                 </div>
                 {this.renderCalculators()}
             </div>

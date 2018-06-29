@@ -1,5 +1,6 @@
 import React, { Component } from 'React';
 import DVRCalculator from './components/DVRCalculator';
+import InstructionBox from '../../components/InstructionBox';
 import './Storage.css';
 
 class Storage extends Component {
@@ -39,6 +40,9 @@ class Storage extends Component {
     }
 
     render = () => {
+        const text = 'Please click the button above to add a calculator.';
+        const instructionBox = (this.state.calculators.length === 0) ? <InstructionBox text={text} /> : '';
+
         return (
             <div className="storage">
                 <div className='storage-title'>
@@ -46,6 +50,7 @@ class Storage extends Component {
                 </div>
                 <div>
                     <button type='button' className='add-dvr-button' onClick={() => this.addCalculator()}>+ DVR</button>
+                    {instructionBox}
                 </div>
                 {this.renderCalculators()}
             </div>
