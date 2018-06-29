@@ -1,59 +1,63 @@
 .frame-rate {
   background-color: rgb(236, 236, 236);
-  margin: 30px auto 0 auto;
-  padding: 20px 30px 20px 30px;
+  margin: 20px auto 0px auto;
   text-align: center;
   width: fit-content;
-  min-width: 500px;
-  min-height: 100px;
+  min-width: 900px;
+  min-height: 500px;
   max-width: 900px;
-  border: solid rgb(90, 90, 90);
+  border: solid rgb(61, 61, 61);
   border-width: medium;
+  border-radius: 2px;
 }
 
 .frame-rate-title {
-  font-size: 20px;
+  background: rgb(61, 61, 61);
+  color: white;
+  font-size: 22px;
   font-weight: 700;
-  text-align: center;
-  margin: 20px;
+  margin: 0px 0px 28px 0px;
+  padding: 14px;
 }
 
 .add-flare-button {
   background: rgb(199, 100, 100);
-  font-size: 12px;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
   font-weight: 700;
   color: white;
   text-align: center;
-  width: 130px;
-  height: 28px;
+  width: 110px;
+  height: 34px;
   display: inline-block;
-  margin: 0px 4px;
-  border-width: thick;
-  border: solid rgb(131, 131, 131);
-  border-radius: 5px;
+  margin: 0px 6px;
+  border-width: medium;
+  border-radius: 3px;
+  border-color: rgb(94, 94, 94);
 }
 
 .add-victorem-button {
   background: rgb(187, 94, 130);
-  font-size: 12px;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
   font-weight: 700;
   color: white;
   text-align: center;
-  width: 150px;
-  height: 28px;
+  width: 130px;
+  height: 34px;
   display: inline-block;
-  margin: 0px 4px;
-  border-width: thick;
-  border: solid rgb(131, 131, 131);
-  border-radius: 5px;
+  margin: 0px 6px;
+  border-width: medium;
+  border-radius: 3px;
+  border-color: rgb(94, 94, 94);
 }
 
 .close-calculator-button {
-    background: transparent;
-    position: absolute;
-    float: right;
-    padding-left: 20px;
-    border: none;
+  background: transparent;
+  position: absolute;
+  float: right;
+  padding-left: 20px;
+  border: none;
 }
 
 fieldset {

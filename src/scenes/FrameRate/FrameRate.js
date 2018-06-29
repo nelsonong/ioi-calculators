@@ -50,8 +50,8 @@ class FrameRate extends Component {
                     Frame Rate Calculators
                 </div>
                 <div>
-                    <button type='button' className='add-flare-button' onClick={() => this.addCalculator('flare')}>+ Flare Calculator</button>
-                    <button type='button' className='add-victorem-button' onClick={() => this.addCalculator('victorem')}>+ Victorem Calculator</button>
+                    <button type='button' className='add-flare-button' onClick={() => this.addCalculator('flare')}>+ FLARE</button>
+                    <button type='button' className='add-victorem-button' onClick={() => this.addCalculator('victorem')}>+ VICTOREM</button>
                 </div>
                 {this.renderCalculators()}
             </div>
