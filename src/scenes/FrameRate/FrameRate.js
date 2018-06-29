@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import FlareCalculator from './components/FlareCalculator';
-import VictoremCalculator from './components/VictoremCalculator';
+import FlareCalculator from '../../components/FlareCalculator';
+import VictoremCalculator from '../../components/VictoremCalculator';
 import InstructionBox from '../../components/InstructionBox';
 import './FrameRate.css';
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'React';
-import DVRCalculator from './components/DVRCalculator';
+import DVRCalculator from '../../components/DVRCalculator';
 import InstructionBox from '../../components/InstructionBox';
 import './Storage.css';
 
