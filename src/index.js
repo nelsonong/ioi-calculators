@@ -2,6 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'typeface-roboto';
 import './index.css';
-import FrameRate from './scenes/FrameRate/FrameRate';
+import AppRouter from './routers/AppRouter';
 
-ReactDOM.render(<FrameRate />, document.getElementById('root'));
+ReactDOM.render(<AppRouter />, document.getElementById('root'));
