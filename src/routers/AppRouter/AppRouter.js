@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Header from '../../components/Header';
-import Home from '../../scenes/Home';
-import FrameRate from '../../scenes/FrameRate';
-import Storage from '../../scenes/Storage';
+import Home from '../../screens/Home';
+import FrameRate from '../../screens/FrameRate';
+import Storage from '../../screens/Storage';
 import Footer from '../../components/Footer';
 
 const AppRouter = () => (
