@@ -1,0 +1,16 @@
+.instruction-box-container {
+    background: aliceblue;
+    margin: 34px auto;
+    padding: 26px;
+    width: 70%;
+    max-width: 400px;
+    border: solid 2px black;
+    border-width: medium;
+    border-radius: 5px;
+}
+
+.instruction-box-text {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+}
