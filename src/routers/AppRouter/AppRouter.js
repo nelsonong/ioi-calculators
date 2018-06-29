@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import Home from '../../scenes/Home';
 import FrameRate from '../../scenes/FrameRate';
 import Storage from '../../scenes/Storage';
+import Footer from '../../components/Footer';
 
 const AppRouter = () => (
     <BrowserRouter>
@@ -14,6 +15,7 @@ const AppRouter = () => (
                 <Route path='/framerate' component={FrameRate} />
                 <Route path='/storage' component={Storage} />
             </Switch>
+            <Footer />
         </div>
     </BrowserRouter>
 )
