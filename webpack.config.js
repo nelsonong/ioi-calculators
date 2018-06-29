@@ -19,7 +19,7 @@ module.exports = {
                 'css-loader'
             ]
         }, {
-            test: /\.(woff|woff2|eot|ttf|svg)$/,
+            test: /\.(woff|woff2|eot|ttf|svg|png)$/,
             loader: 'file-loader'
         }]
     },
