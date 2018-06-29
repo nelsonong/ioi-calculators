@@ -1,0 +1,61 @@
+.storage {
+  background-color: rgb(236, 236, 236);
+  margin: 20px auto 0px auto;
+  text-align: center;
+  width: fit-content;
+  min-width: 900px;
+  min-height: 500px;
+  max-width: 900px;
+  border: solid rgb(61, 61, 61);
+  border-width: medium;
+  border-radius: 2px;
+}
+
+.storage-title {
+  background: rgb(61, 61, 61);
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0px 0px 28px 0px;
+  padding: 14px;
+}
+
+.add-dvr-button {
+  background: rgb(114, 114, 114);
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  width: 110px;
+  height: 34px;
+  display: inline-block;
+  margin: 0px 6px;
+  border-width: medium;
+  border-radius: 3px;
+  border-color: rgb(94, 94, 94);
+}
+
+.close-calculator-button {
+  background: transparent;
+  position: absolute;
+  float: right;
+  padding-left: 20px;
+  border: none;
+}
+
+fieldset {
+    background: rgb(253, 238, 214);
+    text-align: left;
+    margin: 5px 0 5px 0;
+}
+
+select {
+    font-size: 11px;
+    margin: 2px;
+}
+
+input {
+    font-size: 11px;
+    margin: 2px;
+}
