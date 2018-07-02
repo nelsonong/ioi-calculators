@@ -1,5 +1,5 @@
-export { MODEL, MODELS } from './models';
-export { SENSOR } from './sensors';
-export { FORMAT, FORMATS, BIT_DEPTHS } from './formats';
-export { RESOLUTION, RESOLUTIONS, MAX_RESOLUTION } from './resolutions';
-export { CAMERA_OPTION } from './camera_options';
+export { MODEL, MODELS } from './victorem-models';
+export { SENSOR } from './victorem-sensors';
+export { FORMAT, FORMATS, BIT_DEPTHS } from './victorem-formats';
+export { RESOLUTION, RESOLUTIONS, MAX_RESOLUTION } from './victorem-resolutions';
+export { CAMERA_OPTION } from './victorem-camera-options';

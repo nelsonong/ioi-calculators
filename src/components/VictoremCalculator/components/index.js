@@ -1,6 +1,6 @@
-export { Model } from './Model';
-export { ModelInfo } from './ModelInfo';
-export { Format } from './Format';
-export { Resolution } from './Resolution';
-export { Options } from './Options';
-export { FrameRate } from './FrameRate';
+export { VictoremModel } from './VictoremModel';
+export { VictoremModelInfo } from './VictoremModelInfo';
+export { VictoremFormat } from './VictoremFormat';
+export { VictoremResolution } from './VictoremResolution';
+export { VictoremOptions } from './VictoremOptions';
+export { VictoremFrameRate } from './VictoremFrameRate';

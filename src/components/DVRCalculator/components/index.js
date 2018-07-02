@@ -1,5 +1,5 @@
-export { Model } from './Model';
-export { Configuration } from './Configuration';
-export { Cameras } from './Cameras';
-export { Drives } from './Drives';
-export { RecordingTime } from './RecordingTime';
+export { DVRCameras } from './DVRCameras';
+export { DVRConfiguration } from './DVRConfiguration';
+export { DVRDrives } from './DVRDrives';
+export { DVRModel } from './DVRModel';
+export { DVRRecordingTime } from './DVRRecordingTime';

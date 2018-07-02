@@ -1,0 +1,1 @@
+export { default as VictoremFormat } from './VictoremFormat';

@@ -1,6 +1,6 @@
-export { Model } from './Model';
-export { HardwareVersion } from './HardwareVersion';
-export { Format } from './Format';
-export { Resolution } from './Resolution';
-export { Options } from './Options';
-export { FrameRate } from './FrameRate';
+export { FlareModel } from './FlareModel';
+export { FlareHardwareVersion } from './FlareHardwareVersion';
+export { FlareFormat } from './FlareFormat';
+export { FlareResolution } from './FlareResolution';
+export { FlareOptions } from './FlareOptions';
+export { FlareFrameRate } from './FlareFrameRate';

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Model, ModelInfo, Format, Resolution, Options, FrameRate } from './components';
+import { VictoremModel, VictoremModelInfo, VictoremFormat, VictoremResolution, VictoremOptions, VictoremFrameRate } from './components';
 import { MODEL, SENSOR, FORMAT, FORMATS, CAMERA_OPTION, RESOLUTION, MAX_RESOLUTION } from './constants';
-import { calculateFrameRate } from './utils/frame-rate';
-import { minWidth, maxWidth, minHeight, maxHeight } from './utils/resolution';
+import { calculateFrameRate } from './utils/victorem-frame-rate';
+import { minWidth, maxWidth, minHeight, maxHeight } from './utils/victorem-resolution';
 import './VictoremCalculator.css';
 
 class VictoremCalculator extends Component {
@@ -59,33 +59,33 @@ class VictoremCalculator extends Component {
                     <div className='victorem-calculator-title'>Victorem Frame Rate Calculator</div>
                     <button className='close-calculator-button' type='button' onClick={() => this.props.deleteCalculator(this.props.id)}>✖</button>
                 </div>
-                <Model
+                <VictoremModel
                     model={this.state.model}
                     updateState={this.updateState}
                 />
-                <ModelInfo
+                <VictoremModelInfo
                     sensor={this.state.sensor}
                     maxWidth={this.state.maxWidth}
                     maxHeight={this.state.maxHeight}
                 />
-                <Format
+                <VictoremFormat
                     formats={this.state.formats}
                     updateState={this.updateState}
                 />
-                <Resolution
+                <VictoremResolution
                     {...this.state}
                     resolutionPreset={this.state.resolutionPreset}
                     cameraOption={this.state.cameraOption}
                     updateState={this.updateState}
                 />
-                <Options
+                <VictoremOptions
                     cameraOption={this.state.cameraOption}
                     supportsSubSampling={this.state.supportsSubSampling}
                     supportsVerticalBinning={this.state.supportsVerticalBinning}
                     supports2x2Binning={this.state.supports2x2Binning}
                     updateState={this.updateState}
                 />
-                <FrameRate
+                <VictoremFrameRate
                     frameRate={this.state.frameRate}
                 />
             </div>

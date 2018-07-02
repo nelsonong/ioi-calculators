@@ -18,7 +18,10 @@ class Storage extends Component {
     addCalculator = (type) => {
         const calculators = this.state.calculators;
         const key = this.unique_id();
-        this.setState({ calculators: calculators.concat({ id: key, calculator: <DVRCalculator key={key} id={key} deleteCalculator={this.deleteCalculator} /> }) });
+        this.setState({ calculators: calculators.concat({
+            id: key,
+            calculator: <DVRCalculator key={key} id={key} deleteCalculator={this.deleteCalculator} /> })
+        });
     }
 
     renderCalculators = () => {

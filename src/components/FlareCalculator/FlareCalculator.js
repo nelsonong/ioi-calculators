@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Model, HardwareVersion, Format, Resolution, Options, FrameRate } from './components';
+import { FlareModel, FlareHardwareVersion, FlareFormat, FlareResolution, FlareOptions, FlareFrameRate } from './components';
 import { LINK, CL_MODEL, CL_FORMAT, LINK_SPEEDS } from './constants';
-import { calculateFrameRate } from './utils/frame-rate';
+import { calculateFrameRate } from './utils/flare-frame-rate';
 import './FlareCalculator.css';
 
 class FlareCalculator extends Component {
@@ -32,12 +32,12 @@ class FlareCalculator extends Component {
                     <div className='flare-calculator-title'>Flare Frame Rate Calculator</div>
                     <button className='close-calculator-button' type='button' onClick={() => this.props.deleteCalculator(this.props.id)}>✖</button>
                 </div>
-                <Model link={this.state.link} hwversion={this.state.hwversion} updateState={this.updateState} />
-                <HardwareVersion link={this.state.link} model={this.state.model} hwversion={this.state.hwversion} updateState={this.updateState} />
-                <Format link={this.state.link} model={this.state.model} updateState={this.updateState} />
-                <Resolution {...this.state} updateState={this.updateState} />
-                <Options link={this.state.link} model={this.state.model} format={this.state.format} updateState={this.updateState} />
-                <FrameRate frameRate={this.state.frameRate} />
+                <FlareModel link={this.state.link} hwversion={this.state.hwversion} updateState={this.updateState} />
+                <FlareHardwareVersion link={this.state.link} model={this.state.model} hwversion={this.state.hwversion} updateState={this.updateState} />
+                <FlareFormat link={this.state.link} model={this.state.model} updateState={this.updateState} />
+                <FlareResolution {...this.state} updateState={this.updateState} />
+                <FlareOptions link={this.state.link} model={this.state.model} format={this.state.format} updateState={this.updateState} />
+                <FlareFrameRate frameRate={this.state.frameRate} />
             </div>
         );
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Model, Configuration, Cameras, Drives, RecordingTime } from './components';
+import { DVRCameras, DVRConfiguration, DVRDrives, DVRModel, DVRRecordingTime } from './components';
 import './DVRCalculator.css';
 
 class DVRCalculator extends Component {
@@ -40,21 +40,21 @@ class DVRCalculator extends Component {
                     <div className='dvr-calculator-title'>DVR Storage Calculator</div>
                     <button className='close-calculator-button' type='button' onClick={() => this.props.deleteCalculator(this.props.id)}>✖</button>
                 </div>
-                <Model
+                <DVRModel
                     updateState={this.updateState}
                 />
-                <Configuration
+                <DVRConfiguration
                     configurationOptions={this.state.configurationOptions}
                     updateState={this.updateState}
                 />
-                <Cameras
+                <DVRCameras
                     updateCameras={this.updateCameras}
                     updateState={this.updateState}
                 />
-                <Drives
+                <DVRDrives
                     updateState={this.updateState}
                 />
-                <RecordingTime
+                <DVRRecordingTime
                     recordingTime={this.state.recordingTime}
                 />
             </div>

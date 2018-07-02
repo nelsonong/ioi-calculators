@@ -1,3 +1,3 @@
-export { MODEL, MODELS } from './models';
-export { CONFIGURATIONS } from './configurations';
-export { DRIVES } from './drives';
+export { CONFIGURATIONS } from './dvr-configurations';
+export { DRIVES } from './dvr-drives';
+export { MODEL, MODELS } from './dvr-models';
