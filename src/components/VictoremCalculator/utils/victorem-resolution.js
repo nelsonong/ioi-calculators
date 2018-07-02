@@ -5,7 +5,7 @@ const minWidth = (model) => {
     //    if (isSdi2k(model)) return 2048;
     //    if (isSdi4k(model)) return 4096;
     return 16;
-}
+};
 
 const maxWidth = (parentState) => {
 
@@ -82,13 +82,13 @@ const maxWidth = (parentState) => {
         //        return 4096;
     }
     return 0;
-}
+};
 
 const minHeight = (model) => {
     //    if (isSdi2k(model)) return 1080;
     //    if (isSdi4k(model)) return 2160;
     return 4;
-}
+};
 
 const maxHeight = (parentState) => {
 
@@ -174,11 +174,6 @@ const maxHeight = (parentState) => {
 //        return 2160;
     }
     return 0;
-}
-
-export {
-    minWidth,
-    maxWidth,
-    minHeight,
-    maxHeight
 };
+
+export { minWidth, maxWidth, minHeight,  maxHeight };

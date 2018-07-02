@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { DVR_CONFIGURATIONS } from '../../constants';
 
-class DVRConfiguration extends Component {
-    render = () => (
+const DVRConfiguration = ({ handleChange }) => {
+    const configOptions = DVR_CONFIGURATIONS.map((configuration, i) => <option key={i}>{configuration}</option>);
+    return (
         <fieldset>
         <legend>Configuration</legend>
-            <select name='configuration' onChange={this.props.updateState}>
-                { DVR_CONFIGURATIONS.map((configuration, i) => { return <option key={i}>{configuration}</option> }) }
+            <select name='configuration' onChange={handleChange}>
+                {configOptions}
             </select>
         </fieldset>
     );
-}
+};
 
 export default DVRConfiguration;

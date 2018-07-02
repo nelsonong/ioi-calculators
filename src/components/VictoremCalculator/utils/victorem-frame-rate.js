@@ -20,7 +20,7 @@ export const calculateFrameRate = (parentState) => {
     let frameRate = 1 / (linetime * (height + minVertBlank) / 1000000);
     frameRate = Math.round(frameRate * 100)/100;
     return frameRate + ' FPS [' + width + ' x ' + height + ']';
-}
+};
 
 const getHMaxAndMinVertBlank = (model, bitDepth, linkSpeed, linkCount, subSampling, binv, bin2) => {
     let hmax = 0;
@@ -525,4 +525,4 @@ const getHMaxAndMinVertBlank = (model, bitDepth, linkSpeed, linkCount, subSampli
     }
 
     return { hmax, minVertBlank };
-}
+};

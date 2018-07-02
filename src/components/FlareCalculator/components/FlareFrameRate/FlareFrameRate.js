@@ -8,6 +8,6 @@ function FlareFrameRate({ frameRate }) {
             <input type='text' className='frame-rate-input' disabled={true} value={frameRate} />
         </fieldset>
     );
-}
+};
 
 export default FlareFrameRate;

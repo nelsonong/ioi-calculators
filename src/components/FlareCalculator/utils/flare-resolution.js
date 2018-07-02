@@ -9,7 +9,7 @@ const minWidth = (link, model, format) => {
     } else {    // SDI
         return maxWidth( model );
     }
-}
+};
 
 const maxWidth = (model, format) => {
     switch (model) {
@@ -71,7 +71,7 @@ const maxWidth = (model, format) => {
         default:
             throw new Error("Unrecognized model type \"" + model + "\".");
     }
-}
+};
 
 const minHeight = (link, model) => {
     if (link === FLARE_LINK.CL || link === FLARE_LINK.CX) {
@@ -82,7 +82,7 @@ const minHeight = (link, model) => {
     } else {    // SDI
         return maxHeight(model);
     }
-}
+};
 
 const maxHeight = (model) => {
     switch (model) {
@@ -146,7 +146,7 @@ const maxHeight = (model) => {
         default:
             throw new Error("Unrecognized model type \"" + model + "\".");
     }
-}
+};
 
 const widthMultiple = (link, model, format) => {
     if (link === FLARE_LINK.CL) {
@@ -162,7 +162,7 @@ const widthMultiple = (link, model, format) => {
         return 1;
 //        return maxWidth(model);
     }
-}
+};
 
 const heightMultiple = (link, model) => {
     if(link === FLARE_LINK.CL || link === FLARE_LINK.CX) {
@@ -173,6 +173,6 @@ const heightMultiple = (link, model) => {
         return 1
 //        return maxHeight(model);
     }
-}
+};
 
 export { minWidth, maxWidth, minHeight, maxHeight, widthMultiple, heightMultiple };

@@ -1,43 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { VIC_BIT_DEPTHS } from '../../constants';
 import './VictoremFormat.css';
 
-class VictoremFormat extends Component {
-    handleInputChange = (e) => {
-        const name = e.target.name;
-        const value = (name === 'bitDepth') ? Number(e.target.value) : e.target.value;
-        
-        this.props.updateState({ [name]: value });
-    }
+const VictoremFormat = ({ formats, handleChange }) => {
+    const formatOptions = formats.map((format, i) => <option key={i}>{format}</option>);
+    const bitDepthOptions = VIC_BIT_DEPTHS.map((bitDepth, i) => <option key={i} value={bitDepth}>{bitDepth}</option>);
+    return (
+        <fieldset>
+        <legend>Output Format</legend>
+            <div className='format-label'>Link:</div>
+            <select className='format-select' name='format' onChange={handleChange}>
+                {formatOptions}
+            </select>
 
-    renderFormats = () => {
-        return this.props.formats.map((format, i) => {
-            return <option key={i}>{format}</option>
-        });
-    }
-
-    renderBitDepths = () => {
-        return VIC_BIT_DEPTHS.map((bitDepth, i) => {
-            return <option key={i} value={bitDepth}>{bitDepth}</option>;
-        });
-    }
-
-    render = () => {
-        return (
-            <fieldset>
-            <legend>Output Format</legend>
-                <div className='format-label'>Link:</div>
-                <select className='format-select' name='format' onChange={this.handleInputChange}>
-                    {this.renderFormats()}
-                </select>
-
-                <div className='format-label'>Bit Depth:</div>
-                <select className='format-select' name='bitDepth' onChange={this.handleInputChange}>
-                    {this.renderBitDepths()}
-                </select>
-            </fieldset>
-        );
-    }
-}
+            <div className='format-label'>Bit Depth:</div>
+            <select className='format-select' name='bitDepth' onChange={handleChange}>
+                {bitDepthOptions}
+            </select>
+        </fieldset>
+    );
+};
 
 export default VictoremFormat;

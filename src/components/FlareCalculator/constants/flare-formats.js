@@ -8,13 +8,13 @@ export const FLARE_CL_FORMAT = {
     Output2x10: 'Base 10-bit x 2',
     Output4x10: 'Medium 10-bit x 4',
     Output8x10: '80-bit 10-bit x 8'
-}
+};
 
 export const FLARE_CL_DUAL_FORMAT = {
     Output16x8: 'Dual Full 8-bit x 16',
     Output16x10: 'Dual 80-bit 10-bit x 16',
     Output20x8: 'Dual 80-bit 8-bit x 20'
-}
+};
 
 const clDualFormats = Object.values(FLARE_CL_FORMAT).concat(Object.values(FLARE_CL_DUAL_FORMAT));
 

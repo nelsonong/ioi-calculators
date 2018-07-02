@@ -45,7 +45,7 @@ const calculateFrameRate = (parentState) => {
     frameRate = frameRateX10 / 10.0;
     frameRate = Math.round(frameRate * 100)/100;
     return frameRate + ' FPS [' + width + ' x ' + height + ']';
-}
+};
 
 // -------------- Get frame overhead and line time --------------
 const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMode) => {
@@ -386,7 +386,7 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
     }
 
     return { frameOverheadTimeUs, lineTimeUs, frameRate: 0 };
-}
+};
 
 const calculateCXOverheadAndLineTime = (model, bitDepth, width, height, linkSpeed, linkCount) => {
 
@@ -805,6 +805,6 @@ const calculateCXOverheadAndLineTime = (model, bitDepth, width, height, linkSpee
     }
     
     return { frameOverheadTimeUs, lineTimeUs, frameRate: 0 };
-}
+};
 
 export { calculateFrameRate, widthMultiple, heightMultiple };

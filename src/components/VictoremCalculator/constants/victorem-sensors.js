@@ -13,4 +13,4 @@ export const VIC_SENSOR = {
     [VIC_MODEL.Type16B276CCX]: '273LQ',
     [VIC_MODEL.Type4B523MCX]: '287LL',
     [VIC_MODEL.Type4B523CCX]: '287LQ'
-}
+};

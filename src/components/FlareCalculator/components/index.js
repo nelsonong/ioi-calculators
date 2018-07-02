@@ -1,5 +1,6 @@
+export { FlareCLFormat } from './FlareCLFormat';
+export { FlareCXFormat } from './FlareCXFormat';
 export { FlareHardwareVersion } from './FlareHardwareVersion';
-export { FlareFormat } from './FlareFormat';
 export { FlareFrameRate } from './FlareFrameRate';
 export { FlareModel } from './FlareModel';
 export { FlareOptions } from './FlareOptions';

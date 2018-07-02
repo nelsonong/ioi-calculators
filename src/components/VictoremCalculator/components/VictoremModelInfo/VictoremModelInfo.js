@@ -1,8 +1,8 @@
 import React from 'react';
 import './VictoremModelInfo.css';
 
-function VictoremModelInfo({ sensor, maxWidth, maxHeight }) {
-    const maxResolutionText = maxWidth + ' x ' + maxHeight;
+const VictoremModelInfo = ({ sensor, maxWidth, maxHeight }) => {
+    const maxResolutionText = `${maxWidth} x ${maxHeight}`;
     return (
         <fieldset>
         <legend>Model Information</legend>
@@ -17,6 +17,6 @@ function VictoremModelInfo({ sensor, maxWidth, maxHeight }) {
             </div>
         </fieldset>
     );
-}
+};
 
 export default VictoremModelInfo;
