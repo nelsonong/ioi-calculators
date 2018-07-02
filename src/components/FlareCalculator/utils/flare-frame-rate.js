@@ -1,4 +1,4 @@
-import { LINK, CL_FORMAT, CL_DUAL_FORMAT, LINK_SPEEDS } from '../constants';
+import { FLARE_LINK, FLARE_CL_FORMAT, FLARE_CL_DUAL_FORMAT, FLARE_LINK_SPEEDS } from '../constants';
 import { widthMultiple, heightMultiple } from './flare-resolution';
 
 const calculateFrameRate = (parentState) => {
@@ -22,7 +22,7 @@ const calculateFrameRate = (parentState) => {
     }
 
     // Frame overhead time + line time
-    let { frameOverheadTimeUs, lineTimeUs, frameRate } = (link === LINK.CL) ?
+    let { frameOverheadTimeUs, lineTimeUs, frameRate } = (link === FLARE_LINK.CL) ?
         calculateCLOverheadAndLineTime(model, hwversion, format, width, slowMode) :
         calculateCXOverheadAndLineTime(model, bitDepth, width, height, linkSpeed, linkCount);
     if (frameRate > 0) {
@@ -53,7 +53,7 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
     if (model.startsWith('2M')) {
         switch (format) {
             case 'Base 8-bit x 2':
-            case CL_FORMAT.Output2x10:
+            case FLARE_CL_FORMAT.Output2x10:
                 if (width > 1024) {
                     frameOverheadTimeUs = 59;
                     lineTimeUs = 12.90;
@@ -66,7 +66,7 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
                 }
                 break;
 
-            case CL_FORMAT.Output3x8:
+            case FLARE_CL_FORMAT.Output3x8:
                 if (width > 1704) {
                     frameOverheadTimeUs = 61;
                     lineTimeUs = 8.6;
@@ -94,8 +94,8 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
                 }
                 break;
 
-            case CL_FORMAT.Output4x8:
-            case CL_FORMAT.Output4x10:
+            case FLARE_CL_FORMAT.Output4x8:
+            case FLARE_CL_FORMAT.Output4x10:
                 if (width > 1024) {
                     frameOverheadTimeUs = 46;
                     lineTimeUs = 6.45;
@@ -105,7 +105,7 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
                 }
                 break;
 
-            case CL_FORMAT.Output8x8:
+            case FLARE_CL_FORMAT.Output8x8:
                 if (slowMode) {
                     frameOverheadTimeUs = 43;
                     lineTimeUs = 3.58;
@@ -115,12 +115,12 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
                 }
                 break;
 
-            case CL_FORMAT.Output10x8:
+            case FLARE_CL_FORMAT.Output10x8:
                 frameOverheadTimeUs = 33;
                 lineTimeUs = 2.69;
                 break;
 
-            case CL_FORMAT.Output8x10:
+            case FLARE_CL_FORMAT.Output8x10:
                 if (slowMode) {
                     frameOverheadTimeUs = 43;
                     lineTimeUs = 3.58;
@@ -135,8 +135,8 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
         }
     } else if (model.startsWith('4M')) {
         switch (format) {
-            case CL_FORMAT.Output2x8:
-            case CL_FORMAT.Output2x10:
+            case FLARE_CL_FORMAT.Output2x8:
+            case FLARE_CL_FORMAT.Output2x10:
                 if (width > 1024) {
                     frameOverheadTimeUs = 91;
                     lineTimeUs = 12.90;
@@ -149,7 +149,7 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
                 }
                 break;
 
-            case CL_FORMAT.Output3x8:
+            case FLARE_CL_FORMAT.Output3x8:
                 if (width > 1704) {
                     frameOverheadTimeUs = 104;
                     lineTimeUs = 8.6;
@@ -177,8 +177,8 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
                 }
                 break;
 
-            case CL_FORMAT.Output4x8:
-            case CL_FORMAT.Output4x10:
+            case FLARE_CL_FORMAT.Output4x8:
+            case FLARE_CL_FORMAT.Output4x10:
                 if (width > 1024) {
                     frameOverheadTimeUs = 78;
                     lineTimeUs = 6.45;
@@ -188,7 +188,7 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
                 }
                 break;
 
-            case CL_FORMAT.Output8x8:
+            case FLARE_CL_FORMAT.Output8x8:
                 if (slowMode) {
                     frameOverheadTimeUs = 79;
                     lineTimeUs = 3.58;
@@ -198,12 +198,12 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
                 }
                 break;
 
-            case CL_FORMAT.Output10x8:
+            case FLARE_CL_FORMAT.Output10x8:
                 frameOverheadTimeUs = 60;
                 lineTimeUs = 2.69;
                 break;
 
-            case CL_FORMAT.Output8x10:
+            case FLARE_CL_FORMAT.Output8x10:
                 if (slowMode) {
                     frameOverheadTimeUs = 79;
                     lineTimeUs = 3.58;
@@ -218,8 +218,8 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
         }
     } else if (model.startsWith('12M')) {
         switch (format) {
-            case CL_FORMAT.Output2x8:
-            case CL_FORMAT.Output2x10:
+            case FLARE_CL_FORMAT.Output2x8:
+            case FLARE_CL_FORMAT.Output2x10:
                 if (hwversion === '2') {
                     if (width > 2048) {
                         frameOverheadTimeUs = 207;
@@ -243,7 +243,7 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
                 }
                 break;
 
-            case CL_FORMAT.Output3x8:
+            case FLARE_CL_FORMAT.Output3x8:
                 if (hwversion === '2') {
                     if (width > 2040) {
                         frameOverheadTimeUs = 172;
@@ -267,8 +267,8 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
                 }
                 break;
 
-            case CL_FORMAT.Output4x8:
-            case CL_FORMAT.Output4x10:
+            case FLARE_CL_FORMAT.Output4x8:
+            case FLARE_CL_FORMAT.Output4x10:
                 if (hwversion === '2') {
                     if (width > 2048) {
                         frameOverheadTimeUs = 129;
@@ -292,8 +292,8 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
                 }
                 break;
 
-            case CL_FORMAT.Output8x8:
-            case CL_FORMAT.Output8x10:
+            case FLARE_CL_FORMAT.Output8x8:
+            case FLARE_CL_FORMAT.Output8x10:
                 if (hwversion === '2') {
                     if (width > 2048) {
                         frameOverheadTimeUs = 104;
@@ -317,7 +317,7 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
                 }
                 break;
 
-            case CL_FORMAT.Output10x8:
+            case FLARE_CL_FORMAT.Output10x8:
                 if (hwversion === '2') {
                     if (width > 2050) {
                         frameOverheadTimeUs = 104;
@@ -341,8 +341,8 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
                 }
                 break;
 
-            case CL_DUAL_FORMAT.Output16x8:
-            case CL_DUAL_FORMAT.Output16x10:
+            case FLARE_CL_DUAL_FORMAT.Output16x8:
+            case FLARE_CL_DUAL_FORMAT.Output16x10:
                 if (hwversion === '2') {
                     if (width > 2048) {
                         frameOverheadTimeUs = 91;
@@ -360,7 +360,7 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
                 }
                 break;
 
-            case CL_DUAL_FORMAT.Output20x8:
+            case FLARE_CL_DUAL_FORMAT.Output20x8:
                 if (hwversion === '2') {
                     if (width > 2050) {
                         frameOverheadTimeUs = 84;
@@ -394,10 +394,10 @@ const calculateCXOverheadAndLineTime = (model, bitDepth, width, height, linkSpee
     const is8bit = bitDepth === 8;
     const is10bit = bitDepth === 10;
     const is12bit = bitDepth === 12;
-    const is2G = linkSpeed === LINK_SPEEDS.CXP2;
-    const is3G = linkSpeed === LINK_SPEEDS.CXP3;
-    const is5G = linkSpeed === LINK_SPEEDS.CXP5;
-    const is6G = linkSpeed === LINK_SPEEDS.CXP6;
+    const is2G = linkSpeed === FLARE_LINK_SPEEDS.CXP2;
+    const is3G = linkSpeed === FLARE_LINK_SPEEDS.CXP3;
+    const is5G = linkSpeed === FLARE_LINK_SPEEDS.CXP5;
+    const is6G = linkSpeed === FLARE_LINK_SPEEDS.CXP6;
     const isSingleLink = linkCount === 1;
     const isDualLink = linkCount === 2;
     const isQuadLink = linkCount === 4;

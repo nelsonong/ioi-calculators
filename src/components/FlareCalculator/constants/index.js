@@ -1,4 +1,4 @@
-export { LINK } from './flare-links';
-export { CL_MODEL, CL_MODELS, CX_MODEL, CX_MODELS, COLOR_MODELS } from './flare-models';
-export { CL_FORMAT, CL_DUAL_FORMAT, CL_FORMATS, LINK_SPEEDS, CX_FORMATS, SLOW_MODE_FORMATS } from './flare-formats';
-export { RESOLUTION_PRESETS } from './flare-resolutions';
+export { FLARE_CL_FORMAT, FLARE_CL_DUAL_FORMAT, FLARE_CL_FORMATS, FLARE_LINK_SPEEDS, FLARE_CX_FORMATS, FLARE_SLOW_MODE_FORMATS } from './flare-formats';
+export { FLARE_LINK } from './flare-links';
+export { FLARE_CL_MODEL, FLARE_CL_MODELS, FLARE_CX_MODEL, FLARE_CX_MODELS, FLARE_COLOR_MODELS } from './flare-models';
+export { FLARE_RESOLUTIONS } from './flare-resolutions';

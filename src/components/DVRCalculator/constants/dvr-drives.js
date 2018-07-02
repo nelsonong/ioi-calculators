@@ -1,3 +1,3 @@
-export const DRIVES = [
+export const DVR_DRIVES = [
 
 ];

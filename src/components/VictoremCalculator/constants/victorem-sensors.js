@@ -1,16 +1,16 @@
-import { MODEL } from './victorem-models';
+import { VIC_MODEL } from './victorem-models';
 
-export const SENSOR = {
-    [MODEL.Type51B163MCX]: '250LL',
-    [MODEL.Type51B163CCX]: '250LQ',
-    [MODEL.Type32B216MCX]: '252LL',
-    [MODEL.Type32B216CCX]: '252LQ',
-    [MODEL.Type120B68MCX]: '252LL',
-    [MODEL.Type120B68CCX]: '252LQ',
-    [MODEL.Type89B93MCX]: '255LL',
-    [MODEL.Type89B93CCX]: '255LQ',
-    [MODEL.Type16B276MCX]: '273LL',
-    [MODEL.Type16B276CCX]: '273LQ',
-    [MODEL.Type4B523MCX]: '287LL',
-    [MODEL.Type4B523CCX]: '287LQ'
+export const VIC_SENSOR = {
+    [VIC_MODEL.Type51B163MCX]: '250LL',
+    [VIC_MODEL.Type51B163CCX]: '250LQ',
+    [VIC_MODEL.Type32B216MCX]: '252LL',
+    [VIC_MODEL.Type32B216CCX]: '252LQ',
+    [VIC_MODEL.Type120B68MCX]: '252LL',
+    [VIC_MODEL.Type120B68CCX]: '252LQ',
+    [VIC_MODEL.Type89B93MCX]: '255LL',
+    [VIC_MODEL.Type89B93CCX]: '255LQ',
+    [VIC_MODEL.Type16B276MCX]: '273LL',
+    [VIC_MODEL.Type16B276CCX]: '273LQ',
+    [VIC_MODEL.Type4B523MCX]: '287LL',
+    [VIC_MODEL.Type4B523CCX]: '287LQ'
 }

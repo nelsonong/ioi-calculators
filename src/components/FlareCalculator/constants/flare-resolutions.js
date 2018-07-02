@@ -1,4 +1,4 @@
-export const RESOLUTION_PRESETS = [
+export const FLARE_RESOLUTIONS = [
     'Maximum',
     [3840, 2160],
     [2048, 1024],

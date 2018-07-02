@@ -1,4 +1,4 @@
-export const FORMAT = {
+export const VIC_FORMAT = {
     CXP2x1: '1 x CXP2',
     CXP3x1: '1 x CXP3',
     CXP5x1: '1 x CXP5',
@@ -9,26 +9,26 @@ export const FORMAT = {
     CXP6x2: '2 x CXP6',
 };
 
-export const FORMATS = {
+export const VIC_FORMATS = {
     CX4B: [
-        FORMAT.CXP2x1,
-        FORMAT.CXP3x1
+        VIC_FORMAT.CXP2x1,
+        VIC_FORMAT.CXP3x1
     ],
     CX16B: [
-        FORMAT.CXP2x1,
-        FORMAT.CXP3x1,
-        FORMAT.CXP5x1
+        VIC_FORMAT.CXP2x1,
+        VIC_FORMAT.CXP3x1,
+        VIC_FORMAT.CXP5x1
     ],
     CXX: [
-        FORMAT.CXP2x1,
-        FORMAT.CXP3x1,
-        FORMAT.CXP5x1,
-        FORMAT.CXP6x1,
-        FORMAT.CXP2x2,
-        FORMAT.CXP3x2,
-        FORMAT.CXP5x2,
-        FORMAT.CXP6x2
+        VIC_FORMAT.CXP2x1,
+        VIC_FORMAT.CXP3x1,
+        VIC_FORMAT.CXP5x1,
+        VIC_FORMAT.CXP6x1,
+        VIC_FORMAT.CXP2x2,
+        VIC_FORMAT.CXP3x2,
+        VIC_FORMAT.CXP5x2,
+        VIC_FORMAT.CXP6x2
     ]
 };
 
-export const BIT_DEPTHS = [ 8, 10, 12 ];
+export const VIC_BIT_DEPTHS = [ 8, 10, 12 ];

@@ -1,4 +1,4 @@
-export const CL_MODEL = {
+export const FLARE_CL_MODEL = {
     Type2M360MCL: '2M360MCL',
     Type2M360CCL: '2M360CCL',
     Type2M360CCLENR: '2M360CCLENR',
@@ -11,9 +11,9 @@ export const CL_MODEL = {
     Type12M125NCL: '12M125NCL'
 };
 
-export const CL_MODELS = Object.values(CL_MODEL);
+export const FLARE_CL_MODELS = Object.values(FLARE_CL_MODEL);
 
-export const CX_MODEL = {
+export const FLARE_CX_MODEL = {
     Type2M280MCX: '2M280MCX',
     Type2M280CCX: '2M280CCX',
     Type2M280CCXENR: '2M280CCXENR',
@@ -28,18 +28,18 @@ export const CX_MODEL = {
     Type48M30CCX: '48M30CCX'
 };
 
-export const CX_MODELS = Object.values(CX_MODEL);
+export const FLARE_CX_MODELS = Object.values(FLARE_CX_MODEL);
 
-export const COLOR_MODELS = [
-    CL_MODEL.Type2M360CCL,
-    CL_MODEL.Type2M360CCLENR,
-    CX_MODEL.Type2M280CCX,
-    CX_MODEL.Type2M280CCXENR,
-    CX_MODEL.Type48M30CCX,
-    CL_MODEL.Type4M180CCL,
-    CX_MODEL.Type4M140CCX,
-    CL_MODEL.Type12M125CCL,
-    CX_MODEL.Type12M180CCX
+export const FLARE_COLOR_MODELS = [
+    FLARE_CL_MODEL.Type2M360CCL,
+    FLARE_CL_MODEL.Type2M360CCLENR,
+    FLARE_CX_MODEL.Type2M280CCX,
+    FLARE_CX_MODEL.Type2M280CCXENR,
+    FLARE_CX_MODEL.Type48M30CCX,
+    FLARE_CL_MODEL.Type4M180CCL,
+    FLARE_CX_MODEL.Type4M140CCX,
+    FLARE_CL_MODEL.Type12M125CCL,
+    FLARE_CX_MODEL.Type12M180CCX
 //    Type2KSDI,
 //    Type2KSDIENR,
 //    Type4KSDI

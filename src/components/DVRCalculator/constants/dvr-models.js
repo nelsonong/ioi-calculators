@@ -1,3 +1,3 @@
-export const MODELS = [
+export const DVR_MODELS = [
 
 ];

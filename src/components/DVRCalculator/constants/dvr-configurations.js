@@ -1,3 +1,3 @@
-export const CONFIGURATIONS = [
+export const DVR_CONFIGURATIONS = [
 
 ];

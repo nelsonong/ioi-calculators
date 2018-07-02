@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import { RESOLUTION_PRESETS } from '../../constants';
+import { FLARE_RESOLUTIONS } from '../../constants';
 import { minWidth, maxWidth, minHeight, maxHeight } from '../../utils/flare-resolution';
 import './FlareResolution.css';
 
 class FlareResolution extends Component {
     state = {
         currentModel: this.props.model,
-        preset: RESOLUTION_PRESETS[0]
+        preset: FLARE_RESOLUTIONS[0]
     }
 
     loadPresets = () => {
-        return RESOLUTION_PRESETS.map((preset, i) => {
+        return FLARE_RESOLUTIONS.map((preset, i) => {
             let presetString;
             if (preset === 'Maximum' || preset === 'Minimum') {
                 presetString = preset;

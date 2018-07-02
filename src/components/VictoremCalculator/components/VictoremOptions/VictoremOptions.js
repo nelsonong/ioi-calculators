@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CAMERA_OPTION } from '../../constants';
+import { VIC_OPTION } from '../../constants';
 import './VictoremOptions.css';
 
 class VictoremOptions extends Component {
@@ -7,16 +7,16 @@ class VictoremOptions extends Component {
         const name = e.target.name;
         switch (name) {
             case 'none':
-                this.props.updateState({ cameraOption: CAMERA_OPTION.NONE });
+                this.props.updateState({ cameraOption: VIC_OPTION.NONE });
                 break;
             case 'subSampling':
-                this.props.updateState({ cameraOption: CAMERA_OPTION.SUBSAMPLING });
+                this.props.updateState({ cameraOption: VIC_OPTION.SUBSAMPLING });
                 break;
             case 'binv':
-                this.props.updateState({ cameraOption: CAMERA_OPTION.BIN_VERTICAL });
+                this.props.updateState({ cameraOption: VIC_OPTION.BIN_VERTICAL });
                 break;
             case 'bin2':
-                this.props.updateState({ cameraOption: CAMERA_OPTION.BIN_2X2 });
+                this.props.updateState({ cameraOption: VIC_OPTION.BIN_2X2 });
                 break;
             default:
                 break;
@@ -32,7 +32,7 @@ class VictoremOptions extends Component {
                         <input
                             type="radio"
                             name='none'
-                            checked={this.props.cameraOption === CAMERA_OPTION.NONE}
+                            checked={this.props.cameraOption === VIC_OPTION.NONE}
                             onChange={this.handleInputChange}
                         />
                         <div className='options-label'>None</div>
@@ -40,7 +40,7 @@ class VictoremOptions extends Component {
                         <input
                             type="radio"
                             name='binv'
-                            checked={this.props.cameraOption === CAMERA_OPTION.BIN_VERTICAL}
+                            checked={this.props.cameraOption === VIC_OPTION.BIN_VERTICAL}
                             disabled={!this.props.supportsVerticalBinning}
                             onChange={this.handleInputChange}
                         />
@@ -50,7 +50,7 @@ class VictoremOptions extends Component {
                         <input
                             type="radio"
                             name='subSampling'
-                            checked={this.props.cameraOption === CAMERA_OPTION.SUBSAMPLING}
+                            checked={this.props.cameraOption === VIC_OPTION.SUBSAMPLING}
                             disabled={!this.props.supportsSubSampling}
                             onChange={this.handleInputChange}
                         />
@@ -59,7 +59,7 @@ class VictoremOptions extends Component {
                         <input
                             type="radio"
                             name='bin2'
-                            checked={this.props.cameraOption === CAMERA_OPTION.BIN_2X2}
+                            checked={this.props.cameraOption === VIC_OPTION.BIN_2X2}
                             disabled={!this.props.supports2x2Binning}
                             onChange={this.handleInputChange}
                         />

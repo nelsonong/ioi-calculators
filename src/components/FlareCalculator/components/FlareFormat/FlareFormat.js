@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { LINK, CL_FORMATS, CX_FORMATS } from '../../constants';
+import { FLARE_LINK, FLARE_CL_FORMATS, FLARE_CX_FORMATS } from '../../constants';
 import './FlareFormat.css';
 
 class FlareFormat extends Component {
     state = {
         currentLink: this.props.link,
         currentModel: this.props.model,
-        clFormats: CL_FORMATS.CL2_4m,
-        cxFormats: CX_FORMATS.CX2_4m
+        clFormats: FLARE_CL_FORMATS.CL2_4m,
+        cxFormats: FLARE_CX_FORMATS.CX2_4m
     };
 
     // -------------- Change Handlers --------------
@@ -20,7 +20,7 @@ class FlareFormat extends Component {
 
     // -------------- Render UI --------------
     renderTitle = () => {
-        return this.props.link === LINK.CL ? 'Camera Link Format' : 'CoaXPress Format';
+        return this.props.link === FLARE_LINK.CL ? 'Camera Link Format' : 'CoaXPress Format';
     }
 
     renderFormats = () => {
@@ -28,20 +28,20 @@ class FlareFormat extends Component {
         const linkOrModelChanged = this.props.link !== this.state.currentLink || this.props.model !== this.state.currentModel;
         if (linkOrModelChanged) {
             this.setState({ currentLink: this.props.link, currentModel: this.props.model });
-            if (this.state.currentLink === LINK.CL) {
+            if (this.state.currentLink === FLARE_LINK.CL) {
                 this.reloadCLFormats();
             } else {
                 this.reloadCXFormats();
             }
         }
 
-        if (this.props.link === LINK.CL) {
+        if (this.props.link === FLARE_LINK.CL) {
             return (
                 <select name='format' onChange={this.handleInputChange}>
                     {this.renderCLFormats()}
                 </select>
             );
-        } else if (this.props.link === LINK.CX) {
+        } else if (this.props.link === FLARE_LINK.CX) {
             return (
                 <div>
                     <div className='flare-format-left'>
@@ -72,9 +72,9 @@ class FlareFormat extends Component {
     // -------------- CL Format Controls --------------
     reloadCLFormats = () => {
         if (this.props.model.startsWith('12M')) {
-            this.setState({ clFormats: CL_FORMATS.CL12m });
+            this.setState({ clFormats: FLARE_CL_FORMATS.CL12m });
         } else {
-            this.setState({ clFormats: CL_FORMATS.CL2_4m });
+            this.setState({ clFormats: FLARE_CL_FORMATS.CL2_4m });
         }
     }
 
@@ -87,11 +87,11 @@ class FlareFormat extends Component {
     // -------------- CX Format Controls --------------
     reloadCXFormats = () => {
         if (this.props.model.startsWith('48M')) {
-            this.setState({ cxFormats: CX_FORMATS.CX48m });
+            this.setState({ cxFormats: FLARE_CX_FORMATS.CX48m });
         } else if (this.props.model.startsWith('12M')) {
-            this.setState({ cxFormats: CX_FORMATS.CX12m });
+            this.setState({ cxFormats: FLARE_CX_FORMATS.CX12m });
         } else {
-            this.setState({ cxFormats: CX_FORMATS.CX2_4m });
+            this.setState({ cxFormats: FLARE_CX_FORMATS.CX2_4m });
         }
     }
 

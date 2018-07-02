@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BIT_DEPTHS } from '../../constants';
+import { VIC_BIT_DEPTHS } from '../../constants';
 import './VictoremFormat.css';
 
 class VictoremFormat extends Component {
@@ -17,7 +17,7 @@ class VictoremFormat extends Component {
     }
 
     renderBitDepths = () => {
-        return BIT_DEPTHS.map((bitDepth, i) => {
+        return VIC_BIT_DEPTHS.map((bitDepth, i) => {
             return <option key={i} value={bitDepth}>{bitDepth}</option>;
         });
     }

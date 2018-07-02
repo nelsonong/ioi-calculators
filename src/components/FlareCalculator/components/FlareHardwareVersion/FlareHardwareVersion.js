@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LINK } from '../../constants';
+import { FLARE_LINK } from '../../constants';
 import './FlareHardwareVersion.css';
 
 class FlareHardwareVersion extends Component {
@@ -8,7 +8,7 @@ class FlareHardwareVersion extends Component {
     }
 
     disableHWVersion = () => {
-        return (this.props.link !== LINK.CL || !this.props.model.startsWith('12M'));
+        return (this.props.link !== FLARE_LINK.CL || !this.props.model.startsWith('12M'));
     }
 
     render = () => {

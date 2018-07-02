@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import { FlareModel, FlareHardwareVersion, FlareFormat, FlareResolution, FlareOptions, FlareFrameRate } from './components';
-import { LINK, CL_MODEL, CL_FORMAT, LINK_SPEEDS } from './constants';
+import { FlareHardwareVersion, FlareFormat, FlareFrameRate, FlareOptions, FlareModel, FlareResolution } from './components';
+import { FLARE_LINK, FLARE_CL_MODEL, FLARE_CL_FORMAT, FLARE_LINK_SPEEDS } from './constants';
 import { calculateFrameRate } from './utils/flare-frame-rate';
 import './FlareCalculator.css';
 
 class FlareCalculator extends Component {
     state = {
-        link: LINK.CL,                                  // Link type (Camera Link or CoaXPress)
-        model: CL_MODEL.Type2M360MCL,                   // Camera model
+        link: FLARE_LINK.CL,                                  // Link type (Camera Link or CoaXPress)
+        model: FLARE_CL_MODEL.Type2M360MCL,                   // Camera model
         hwversion: 1,                                   // Hardware version
-        format: CL_FORMAT.Output2x8,                    // Camera link format
-        bitDepth: 8, linkCount: 1, linkSpeed: LINK_SPEEDS.CXP3,  // CoaXpress format
+        format: FLARE_CL_FORMAT.Output2x8,                    // Camera link format
+        bitDepth: 8, linkCount: 1, linkSpeed: FLARE_LINK_SPEEDS.CXP3,  // CoaXpress format
         width: 2048,                                    // Resolution - width
         height: 1088,                                   // Resolution - height
         subSampling: false,                             // Sub-sampling enabled

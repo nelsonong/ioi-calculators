@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { LINK, SLOW_MODE_FORMATS } from '../../constants';
+import { FLARE_LINK, FLARE_SLOW_MODE_FORMATS } from '../../constants';
 import './FlareOptions.css';
 
 class FlareOptions extends Component {
@@ -13,7 +13,7 @@ class FlareOptions extends Component {
         const model = this.props.model;
         const format = this.props.format;
 
-        return (link !== LINK.CL || model.startsWith('12M') || !SLOW_MODE_FORMATS.includes(format));
+        return (link !== FLARE_LINK.CL || model.startsWith('12M') || !FLARE_SLOW_MODE_FORMATS.includes(format));
     }
 
     handleInputChange = (e) => {

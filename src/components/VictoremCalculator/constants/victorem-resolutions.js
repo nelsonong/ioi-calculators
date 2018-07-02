@@ -1,6 +1,6 @@
-import { MODEL } from './victorem-models';
+import { VIC_MODEL } from './victorem-models';
 
-export const RESOLUTION = {
+export const VIC_RESOLUTION = {
     MAXIMUM: 'Maximum',
     UHD: [3840, 2160],
     FHD: [1920, 1080],
@@ -15,19 +15,19 @@ export const RESOLUTION = {
     CUSTOM: 'Custom'
 };
 
-export const RESOLUTIONS = Object.values(RESOLUTION);
+export const VIC_RESOLUTIONS = Object.values(VIC_RESOLUTION);
 
-export const MAX_RESOLUTION = {
-    [MODEL.Type51B163MCX]: [2464, 2056],
-    [MODEL.Type51B163CCX]: [2464, 2056],
-    [MODEL.Type32B216MCX]: [2064, 1544],
-    [MODEL.Type32B216CCX]: [2064, 1544],
-    [MODEL.Type120B68MCX]: [4112, 3008],
-    [MODEL.Type120B68CCX]: [4112, 3008],
-    [MODEL.Type89B93MCX]: [4112, 2176],
-    [MODEL.Type89B93CCX]: [4112, 4112],
-    [MODEL.Type16B276MCX]: [1456, 1088],
-    [MODEL.Type16B276CCX]: [1456, 1088],
-    [MODEL.Type4B523MCX]: [728, 544],
-    [MODEL.Type4B523CCX]: [728, 544]
+export const VIC_MAX_RESOLUTION = {
+    [VIC_MODEL.Type51B163MCX]: [2464, 2056],
+    [VIC_MODEL.Type51B163CCX]: [2464, 2056],
+    [VIC_MODEL.Type32B216MCX]: [2064, 1544],
+    [VIC_MODEL.Type32B216CCX]: [2064, 1544],
+    [VIC_MODEL.Type120B68MCX]: [4112, 3008],
+    [VIC_MODEL.Type120B68CCX]: [4112, 3008],
+    [VIC_MODEL.Type89B93MCX]: [4112, 2176],
+    [VIC_MODEL.Type89B93CCX]: [4112, 4112],
+    [VIC_MODEL.Type16B276MCX]: [1456, 1088],
+    [VIC_MODEL.Type16B276CCX]: [1456, 1088],
+    [VIC_MODEL.Type4B523MCX]: [728, 544],
+    [VIC_MODEL.Type4B523CCX]: [728, 544]
 }

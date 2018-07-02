@@ -1,4 +1,4 @@
-import { MODELS, CAMERA_OPTION } from '../constants';
+import { VIC_MODELS, VIC_OPTION } from '../constants';
 
 export const calculateFrameRate = (parentState) => {
     
@@ -6,9 +6,9 @@ export const calculateFrameRate = (parentState) => {
     let { model, format, bitDepth, width, height, cameraOption } = parentState;
     const linkSpeed = Number(format.slice(-1));
     const linkCount = Number(format.slice(0, 1));
-    const subSampling = (cameraOption === CAMERA_OPTION.SUBSAMPLING);
-    const binv = (cameraOption === CAMERA_OPTION.BIN_VERTICAL);
-    const bin2 = (cameraOption === CAMERA_OPTION.BIN_2X2);
+    const subSampling = (cameraOption === VIC_OPTION.SUBSAMPLING);
+    const binv = (cameraOption === VIC_OPTION.BIN_VERTICAL);
+    const bin2 = (cameraOption === VIC_OPTION.BIN_2X2);
 
     // Determine HMAX and minimum vertical blanking
     let { hmax, minVertBlank } = getHMaxAndMinVertBlank(model, bitDepth, linkSpeed, linkCount, subSampling, binv, bin2);
@@ -26,7 +26,7 @@ const getHMaxAndMinVertBlank = (model, bitDepth, linkSpeed, linkCount, subSampli
     let hmax = 0;
     let minVertBlank = 0;
 
-    if (MODELS.TYPE_250.includes(model)) {
+    if (VIC_MODELS.TYPE_250.includes(model)) {
         minVertBlank = 38;
         if (linkSpeed === 2) {
             if (linkCount === 1) {
@@ -107,7 +107,7 @@ const getHMaxAndMinVertBlank = (model, bitDepth, linkSpeed, linkCount, subSampli
                 }
             }
         }
-    } else if (MODELS.TYPE_252.includes(model)) {
+    } else if (VIC_MODELS.TYPE_252.includes(model)) {
         minVertBlank = 38;
         if (linkSpeed === 2) {
             if (linkCount === 1) {
@@ -182,7 +182,7 @@ const getHMaxAndMinVertBlank = (model, bitDepth, linkSpeed, linkCount, subSampli
                 }
             }
         }
-    } else if (MODELS.TYPE_253.includes(model)) {
+    } else if (VIC_MODELS.TYPE_253.includes(model)) {
         minVertBlank = 54;
         if (linkSpeed === 2) {
             if (linkCount === 1) {
@@ -300,7 +300,7 @@ const getHMaxAndMinVertBlank = (model, bitDepth, linkSpeed, linkCount, subSampli
                 }
             }
         }
-    } else if (MODELS.TYPE_255.includes(model)) {
+    } else if (VIC_MODELS.TYPE_255.includes(model)) {
         minVertBlank = 54;
         if (linkSpeed === 2) {
             if (linkCount === 1) {
@@ -418,7 +418,7 @@ const getHMaxAndMinVertBlank = (model, bitDepth, linkSpeed, linkCount, subSampli
                 }
             }
         }
-    } else if (MODELS.TYPE_273.includes(model)) {
+    } else if (VIC_MODELS.TYPE_273.includes(model)) {
         minVertBlank = 42;
         if (linkSpeed === 2) {
             if (linkCount === 1) {
@@ -511,7 +511,7 @@ const getHMaxAndMinVertBlank = (model, bitDepth, linkSpeed, linkCount, subSampli
                 }
             }
         }
-    } else if (MODELS.TYPE_287.includes(model)) {
+    } else if (VIC_MODELS.TYPE_287.includes(model)) {
         minVertBlank = 42;
         if (bitDepth === 8) {
             hmax = 242;

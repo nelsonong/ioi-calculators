@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import { VictoremModel, VictoremModelInfo, VictoremFormat, VictoremResolution, VictoremOptions, VictoremFrameRate } from './components';
-import { MODEL, SENSOR, FORMAT, FORMATS, CAMERA_OPTION, RESOLUTION, MAX_RESOLUTION } from './constants';
+import { VIC_MODEL, VIC_SENSOR, VIC_FORMAT, VIC_FORMATS, VIC_OPTION, VIC_RESOLUTION, VIC_MAX_RESOLUTION } from './constants';
 import { calculateFrameRate } from './utils/victorem-frame-rate';
 import { minWidth, maxWidth, minHeight, maxHeight } from './utils/victorem-resolution';
 import './VictoremCalculator.css';
 
 class VictoremCalculator extends Component {
     state = {
-        model: MODEL.Type51B163MCX,                             // Camera model
-        sensor: SENSOR[MODEL.Type51B163MCX],                    // Camera's sensor
-        maxWidth: MAX_RESOLUTION[MODEL.Type51B163MCX][0],       // Max width of camera
-        maxHeight: MAX_RESOLUTION[MODEL.Type51B163MCX][1],      // Max height of camera
-        format: FORMAT.CXP2x1,                                  // Current format selected
-        formats: FORMATS.CXX,                                   // Formats supported by camera
+        model: VIC_MODEL.Type51B163MCX,                             // Camera model
+        sensor: VIC_SENSOR[VIC_MODEL.Type51B163MCX],                    // Camera's sensor
+        maxWidth: VIC_MAX_RESOLUTION[VIC_MODEL.Type51B163MCX][0],       // Max width of camera
+        maxHeight: VIC_MAX_RESOLUTION[VIC_MODEL.Type51B163MCX][1],      // Max height of camera
+        format: VIC_FORMAT.CXP2x1,                                  // Current format selected
+        formats: VIC_FORMATS.CXX,                                   // Formats supported by camera
         bitDepth: 8,                                            // Bit depth
-        resolutionPreset: RESOLUTION.MAXIMUM,                   // Resolution preset selected
+        resolutionPreset: VIC_RESOLUTION.MAXIMUM,                   // Resolution preset selected
         width: 2464,                                            // Width
         height: 2056,                                           // Height
-        cameraOption: CAMERA_OPTION.NONE,                       // Camera options [none, sub-sample, vertical bin, 2x2 bin]
+        cameraOption: VIC_OPTION.NONE,                       // Camera options [none, sub-sample, vertical bin, 2x2 bin]
         frameRate: 'N/A',                                       // Maximum frame-rate
         supportsSubSampling: true,                              // Sub-sampling supported by camera
         supportsVerticalBinning: true,                          // Vertical binning supported by camera
@@ -28,9 +28,9 @@ class VictoremCalculator extends Component {
     updateState = (newState) => {
         const resolutionPreset = this.state.resolutionPreset;
         this.setState(newState, () => {
-            if (resolutionPreset === RESOLUTION.MINIMUM) {
+            if (resolutionPreset === VIC_RESOLUTION.MINIMUM) {
                 this.setMinResolution();
-            } else if (resolutionPreset === RESOLUTION.MAXIMUM) {
+            } else if (resolutionPreset === VIC_RESOLUTION.MAXIMUM) {
                 this.setMaxResolution();
             } else {
                 this.setState({ frameRate: calculateFrameRate({...this.state}) });

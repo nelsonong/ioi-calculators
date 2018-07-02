@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { RESOLUTION, RESOLUTIONS, CAMERA_OPTION } from '../../constants';
+import { VIC_RESOLUTION, VIC_RESOLUTIONS, VIC_OPTION } from '../../constants';
 import './VictoremResolution.css';
 
 class VictoremResolution extends Component {
     loadPresets = () => {
-        return RESOLUTIONS.map((preset, i) => {
+        return VIC_RESOLUTIONS.map((preset, i) => {
             let presetString;
-            if ([RESOLUTION.MINIMUM, RESOLUTION.MAXIMUM, RESOLUTION.CUSTOM].includes(preset)) {
+            if ([VIC_RESOLUTION.MINIMUM, VIC_RESOLUTION.MAXIMUM, VIC_RESOLUTION.CUSTOM].includes(preset)) {
                 presetString = preset;
             } else {
                 presetString = preset[0] + 'x' + preset[1];
@@ -19,7 +19,7 @@ class VictoremResolution extends Component {
         const preset = e.target.value;
         if (preset === 'Custom') {
             return;
-        } else if (preset === RESOLUTION.MINIMUM || preset === RESOLUTION.MAXIMUM) {
+        } else if (preset === VIC_RESOLUTION.MINIMUM || preset === VIC_RESOLUTION.MAXIMUM) {
             this.props.updateState({ resolutionPreset: preset });
         } else {
             const resolution = preset.split('x');
@@ -31,15 +31,15 @@ class VictoremResolution extends Component {
     }
 
     handleChangeWidth = (e) => {
-        this.props.updateState({ resolutionPreset: RESOLUTION.CUSTOM, width: Number(e.target.value) });  // Set selected preset to 'Custom'
+        this.props.updateState({ resolutionPreset: VIC_RESOLUTION.CUSTOM, width: Number(e.target.value) });  // Set selected preset to 'Custom'
     }
 
     handleChangeHeight = (e) => {
-        this.props.updateState({ resolutionPreset: RESOLUTION.CUSTOM, height: Number(e.target.value) });  // Set selected preset to 'Custom'
+        this.props.updateState({ resolutionPreset: VIC_RESOLUTION.CUSTOM, height: Number(e.target.value) });  // Set selected preset to 'Custom'
     }
 
     render = () => {
-        const subSamplingSelected = (this.props.cameraOption === CAMERA_OPTION.SUBSAMPLING);
+        const subSamplingSelected = (this.props.cameraOption === VIC_OPTION.SUBSAMPLING);
         return (
             <fieldset>
             <legend>Resolution</legend>
