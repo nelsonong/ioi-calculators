@@ -1,5 +1,5 @@
 import React from 'react';
-import { FLARE_LINK } from '../../constants';
+import { FLARE_LINK, FLARE_MODE } from '../../constants';
 
 const FlareModel = ({ link, models, mode, handleChangeLink, handleChangeModel }) => {
     const modelOptions = models.map((model, i) => <option key={i} value={model}>{model}</option>);

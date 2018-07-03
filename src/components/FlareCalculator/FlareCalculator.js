@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FlareCLFormat, FlareCXFormat, FlareHardwareVersion, FlareFrameRate, FlareOptions, FlareModel, FlareResolution } from './components';
 import { FLARE_LINK, FLARE_CL_FORMAT, FLARE_CL_FORMATS, FLARE_CL_MODEL, FLARE_CL_MODELS,
-         FLARE_CX_FORMATS, FLARE_CX_MODELS, FLARE_LINK_SPEEDS, FLARE_RESOLUTION } from './constants';
+         FLARE_CX_FORMATS, FLARE_CX_MODELS, FLARE_LINK_SPEEDS, FLARE_MODE, FLARE_RESOLUTION } from './constants';
 import { calculateFrameRate } from './utils/flare-frame-rate';
 import { minWidth, maxWidth, minHeight, maxHeight } from './utils/flare-resolution';
 import './FlareCalculator.css';
@@ -27,12 +27,27 @@ class FlareCalculator extends Component {
         mode: this.props.mode                   // Mode (Base or Full if in DVR calculator)
     };
 
-    // If inside DVR calculator, set a link
     componentDidMount() {
-        if (this.props.mode) {
-            const e = { target: { value: this.props.link } };
-            this.handleChangeLink(e);
+        const { link, mode } = this.props;
+        if (link && mode) {
+            this.initDVRMode(link, mode);
         }
+    }
+    
+    // Init if in DVR calculator
+    initDVRMode = (link, mode) => {
+        let models = (link === FLARE_LINK.CL) ? FLARE_CL_MODELS : FLARE_CX_MODELS;
+        let model = models[0];
+
+        if (mode === FLARE_MODE.DUAL_FULL && link === FLARE_LINK.CL) {
+            model = FLARE_CL_MODEL.Type12M125MCL;
+            models = models.filter(model => model.startsWith('12M'));
+        }
+
+        this.setState(() => ({ link, model, models, hwversion: 1 }));
+        this.updateFormat();
+        this.updateMinMaxResolution();
+        this.updateFrameRate();
     }
 
     // General change handler (requires input element to have name attribute)
@@ -53,6 +68,7 @@ class FlareCalculator extends Component {
         const firstModel = models[0];
         this.setState(() => ({ link: link, model: firstModel, models: models, hwversion: 1 }));
         
+        this.updateFormat();
         this.updateMinMaxResolution();
         this.updateFrameRate();
     }
@@ -65,25 +81,49 @@ class FlareCalculator extends Component {
         const isCL = this.state.link === FLARE_LINK.CL;
         const isVersion2 = isCL && model.startsWith('12M');
         const hwversion = isVersion2 ? 2 : 1;
-        
-        // Get and set new formats
-        if (isCL) {
-            const clFormats = model.startsWith('12M') ? FLARE_CL_FORMATS.CL12m : FLARE_CL_FORMATS.CL2_4m;
-            this.setState(() => ({ model: model, hwversion: hwversion, clFormats: clFormats }));
-        } else {
-            let cxFormats;
-            if (model.startsWith('48M')) {
-                cxFormats = FLARE_CX_FORMATS.CX48m;
-            } else if (model.startsWith('12M')) {
-                cxFormats = FLARE_CX_FORMATS.CX12m;
-            } else {
-                cxFormats = FLARE_CX_FORMATS.CX2_4m;
-            }
-            this.setState(() => ({ model: model, hwversion: hwversion, cxFormats: cxFormats }));
-        }
-        
+        this.setState(() => ({ model, hwversion }));
+
+        this.updateFormat();
         this.updateMinMaxResolution();
         this.updateFrameRate();
+    }
+
+    // Update format when link or model changes
+    updateFormat = () => {
+        this.setState((prevState) => {
+            const isCL = prevState.link === FLARE_LINK.CL;
+
+            // Get and set new formats
+            if (isCL) {
+                let clFormats = prevState.model.startsWith('12M') ? FLARE_CL_FORMATS.CL12m : FLARE_CL_FORMATS.CL2_4m;
+                const mode = prevState.mode;
+                if (mode) {
+                    switch (mode) {
+                    case FLARE_MODE.BASE:
+                        clFormats = clFormats.filter(clFormat => clFormat.startsWith('Base'));
+                        break;
+                    case FLARE_MODE.FULL:
+                        clFormats = clFormats.filter(clFormat => !clFormat.startsWith('Base'));
+                        break;
+                    case FLARE_MODE.DUAL_FULL:
+                        clFormats = clFormats.filter(clFormat => (clFormat.startsWith('80') || clFormat.startsWith('Dual')));
+                        break;
+                    }
+                }
+                return ({ clFormats });
+            } else {
+                let cxFormats;
+                const model = prevState.model;
+                if (model.startsWith('48M')) {
+                    cxFormats = FLARE_CX_FORMATS.CX48m;
+                } else if (model.startsWith('12M')) {
+                    cxFormats = FLARE_CX_FORMATS.CX12m;
+                } else {
+                    cxFormats = FLARE_CX_FORMATS.CX2_4m;
+                }
+                return ({ cxFormats });
+            }
+        });
     }
 
     // Change resolution preset
@@ -138,6 +178,7 @@ class FlareCalculator extends Component {
         }));
     }
 
+    // Replace format component when link changes
     renderFormatComponent = () => {
         const isCL = this.state.link === FLARE_LINK.CL;
         return isCL ?
@@ -148,6 +189,7 @@ class FlareCalculator extends Component {
         /> :
         <FlareCXFormat
             cxFormats={this.state.cxFormats}
+            mode={this.state.mode}
             handleChange={this.handleChange}
         />;
     }
