@@ -1,3 +1,10 @@
-export const DVR_MODELS = [
+export const DVR_MODEL = {
+    CORE2CL: 'CORE2CL',
+    CORE2CLPLUS: 'CORE2CLPLUS',
+    CORE2CX: 'CORE2CX',
+    CORE2CXPLUS: 'CORE2CXPLUS',
+    COREGEV: 'COREGEV',
+    CORENTSC: 'CORENTSC'
+};
 
-];
+export const DVR_MODELS = Object.values(DVR_MODEL);
