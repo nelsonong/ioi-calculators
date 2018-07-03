@@ -8,7 +8,7 @@ import './FlareCalculator.css';
 
 class FlareCalculator extends Component {
     state = {
-        link: FLARE_LINK.CL,                    // Link type (Camera Link or CoaXPress)
+        link: this.props.link,                  // Link type (Camera Link or CoaXPress)
         model: FLARE_CL_MODEL.Type2M360MCL,     // Camera model
         models: FLARE_CL_MODELS,                // Current models (changes based on link)
         hwversion: 1,                           // Hardware version
@@ -23,8 +23,17 @@ class FlareCalculator extends Component {
         height: 1088,                           // Resolution - height
         subSampling: false,                     // Sub-sampling enabled
         slowMode: false,                        // Slow-mode enabled
-        frameRate: '70.95 FPS [2048 x 1088]'    // Maximum frame-rate
+        frameRate: '70.95 FPS [2048 x 1088]',   // Maximum frame-rate
+        mode: this.props.mode                   // Mode (Base or Full if in DVR calculator)
     };
+
+    // If inside DVR calculator, set a link
+    componentDidMount() {
+        if (this.props.mode) {
+            const e = { target: { value: this.props.link } };
+            this.handleChangeLink(e);
+        }
+    }
 
     // General change handler (requires input element to have name attribute)
     handleChange = (e) => {
@@ -134,6 +143,7 @@ class FlareCalculator extends Component {
         return isCL ?
         <FlareCLFormat
             clFormats={this.state.clFormats}
+            mode={this.state.mode}
             handleChange={this.handleChange}
         /> :
         <FlareCXFormat
@@ -149,7 +159,9 @@ class FlareCalculator extends Component {
                 <button className='close-calculator-button' type='button' onClick={() => this.props.deleteCalculator(this.props.id)}>✖</button>
             </div>
             <FlareModel
+                link={this.state.link}
                 models={this.state.models}
+                mode={this.state.mode}
                 handleChangeLink={this.handleChangeLink}
                 handleChangeModel={this.handleChangeModel}
             />
@@ -178,6 +190,11 @@ class FlareCalculator extends Component {
             />
         </div>
     );
+}
+
+FlareCalculator.defaultProps = {
+    link: FLARE_LINK.CL,
+    mode: false
 }
 
 export default FlareCalculator;
