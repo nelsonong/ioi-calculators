@@ -9,42 +9,41 @@ class FrameRate extends Component {
         calculators: []
     };
 
+    // Math.random should be unique because of its seeding algorithm.
+    // Convert it to base 36 (numbers + letters), and grab the first 9 characters
+    // after the decimal.
     unique_id = () => {
-        // Math.random should be unique because of its seeding algorithm.
-        // Convert it to base 36 (numbers + letters), and grab the first 9 characters
-        // after the decimal.
         return '_' + Math.random().toString(36).substr(2, 9);
     };
 
+    // Add calculator
     addCalculator = (type) => {
         const calculators = this.state.calculators;
         const key = this.unique_id();
         if (type === 'flare') {
-            this.setState({ calculators: calculators.concat({ id: key, calculator: <FlareCalculator key={key} id={key} deleteCalculator={this.deleteCalculator} /> }) });
+            const newCalculators = calculators.concat({
+                id: key,
+                calculator: <FlareCalculator key={key} id={key} deleteCalculator={this.deleteCalculator} />
+            });
+            this.setState(() => ({ calculators: newCalculators }));
         } else if (type === 'victorem') {
-            this.setState({ calculators: calculators.concat({ id: key, calculator: <VictoremCalculator key={key} id={key} deleteCalculator={this.deleteCalculator} /> }) });
+            const newCalculators = calculators.concat({
+                id: key,
+                calculator: <VictoremCalculator key={key} id={key} deleteCalculator={this.deleteCalculator} />
+            });
+            this.setState(() => ({ calculators: newCalculators }));
         }
     }
 
+    // Remove calculator
     deleteCalculator = (id) => {
-        // Get calculator with id
-        const index = this.state.calculators.findIndex(calculator => calculator.id === id);
-        if (index === -1)
-            return;
-        
-        // Remove calculator + rerender
-        const newState = this.state;
-        newState.calculators.splice(index, 1);
-        this.setState(newState);
-    }
-
-    renderCalculators = () => {
-        return this.state.calculators.map((calculator) => {
-            return calculator.calculator;
-        });
+        const calculators = this.state.calculators;
+        const newCalculators = calculators.filter(calculator => calculator.id !== id);
+        this.setState(() => ({ calculators: newCalculators }));
     }
 
     render = () => {
+        const calculatorComponents = this.state.calculators.map(calculator => calculator.calculator);
         const text = 'Please select a button above to add a calculator.';
         const instructionBox = (this.state.calculators.length === 0) ? <InstructionBox text={text} /> : '';
         return (
@@ -57,7 +56,7 @@ class FrameRate extends Component {
                     <button type='button' className='add-victorem-button' onClick={() => this.addCalculator('victorem')}>+ VICTOREM</button>
                     {instructionBox}
                 </div>
-                {this.renderCalculators()}
+                {calculatorComponents}
             </div>
         );
     }

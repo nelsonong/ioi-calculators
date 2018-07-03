@@ -6,6 +6,6 @@ const Home = () => {
     return (
         <InstructionBox text={text} />
     );
-}
+};
 
 export default Home;
