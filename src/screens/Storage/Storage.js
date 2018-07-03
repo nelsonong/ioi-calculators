@@ -1,4 +1,4 @@
-import React, { Component } from 'React';
+import React, { Component } from 'react';
 import DVRCalculator from '../../components/DVRCalculator';
 import InstructionBox from '../../components/InstructionBox';
 import './Storage.css';
