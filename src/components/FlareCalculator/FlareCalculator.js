@@ -23,7 +23,7 @@ class FlareCalculator extends Component {
         height: 1088,                           // Resolution - height
         subSampling: false,                     // Sub-sampling enabled
         slowMode: false,                        // Slow-mode enabled
-        frameRate: '70.95 FPS [2048 x 1088]',   // Maximum frame-rate
+        frameRate: 70.95,                       // Maximum frame-rate
         mode: this.props.mode                   // Mode (Base or Full if in DVR calculator)
     };
 
@@ -178,6 +178,16 @@ class FlareCalculator extends Component {
         }));
     }
 
+    // If in DVR modal, don't show button
+    renderCloseButton = () => {
+        const button = (
+            <button className='close-calculator-button' type='button' onClick={() => this.props.deleteCalculator(this.props.id)}>
+                ✖
+            </button>
+        );
+        return (!this.props.mode) ? button : '';
+    }
+
     // Replace format component when link changes
     renderFormatComponent = () => {
         const isCL = this.state.link === FLARE_LINK.CL;
@@ -198,7 +208,7 @@ class FlareCalculator extends Component {
         <div className="flare-calculator">
             <div>
                 <div className='flare-calculator-title'>Flare Frame Rate Calculator</div>
-                <button className='close-calculator-button' type='button' onClick={() => this.props.deleteCalculator(this.props.id)}>✖</button>
+                {this.renderCloseButton()}
             </div>
             <FlareModel
                 link={this.state.link}
@@ -229,6 +239,8 @@ class FlareCalculator extends Component {
             />
             <FlareFrameRate
                 frameRate={this.state.frameRate}
+                width={this.state.width}
+                height={this.state.height}
             />
         </div>
     );

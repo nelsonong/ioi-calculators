@@ -1,0 +1,57 @@
+.dvr-camera-modal {
+    background-color: rgb(236, 236, 236);
+    position: absolute;
+    outline: none;
+    margin: 20px auto 0px auto;
+    text-align: center;
+    width: 500px;
+    min-height: 500px;
+    border: solid rgb(61, 61, 61);
+    border-width: medium;
+    border-radius: 2px;
+}
+
+.dvr-camera-modal-overlay {
+    background-color: rgba(0, 0, 0, 0.35);
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Title bar */
+.dvr-camera-modal-title-bar {
+    background: rgb(61, 61, 61);
+    color: white;
+    font-size: 22px;
+    font-weight: 700;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dvr-camera-modal-left-spacer {
+    margin-left: 10px;
+    width: 32px;
+}
+
+.dvr-camera-modal-title {
+    padding: 5px 1px 1px 1px;
+}
+
+.dvr-camera-modal-close-button {
+    background: transparent;
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+    margin-right: 5px;
+    border: none;
+}
+
+.dvr-camera-modal-close-button:hover {
+    color: bisque;
+}

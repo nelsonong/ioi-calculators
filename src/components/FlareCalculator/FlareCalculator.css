@@ -26,3 +26,9 @@
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
+
+.flare-calculator > fieldset {
+    background: rgb(253, 238, 214);
+    text-align: left;
+    margin: 5px 0 5px 0;
+}

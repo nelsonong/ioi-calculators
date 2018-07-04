@@ -44,7 +44,7 @@ const calculateFrameRate = (parentState) => {
     const frameRateX10 = frameRate * 10;
     frameRate = frameRateX10 / 10.0;
     frameRate = Math.round(frameRate * 100)/100;
-    return frameRate + ' FPS [' + width + ' x ' + height + ']';
+    return frameRate;
 };
 
 // -------------- Get frame overhead and line time --------------

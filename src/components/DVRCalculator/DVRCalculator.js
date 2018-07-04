@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { DVRCameras, DVRConfiguration, DVRDrives, DVRModel, DVRRecordingTime } from './components';
-import FlareCalculator from '../FlareCalculator';
-import { DVR_CONFIG, DVR_LINK, DVR_MODEL, DVR_MODES, DVR_CL_CONFIGS, DVR_CLPLUS_CONFIGS, DVR_CX_CONFIGS, DVR_CXPLUS_CONFIGS } from './constants';
+import { DVRCamera, DVRCameras, DVRConfiguration, DVRDrives, DVRModel, DVRRecordingTime } from './components';
+import { DVR_CONFIG, DVR_LINK, DVR_MODEL, DVR_MODES, DVR_CL_CONFIGS, DVR_CLPLUS_CONFIGS, DVR_CX_CONFIGS, DVR_CXPLUS_CONFIGS, DVR_DRIVE_CAPACITY } from './constants';
 import './DVRCalculator.css';
 
 class DVRCalculator extends Component {
@@ -11,8 +10,9 @@ class DVRCalculator extends Component {
         configuration: DVR_CONFIG.CL.BASEx4,
         configurations: DVR_CL_CONFIGS,
         cameras: [],
-        dataRate: 5,
-        capacity: 100,
+        dataRates: [],
+        totalDataRate: 0,
+        capacity: 892,
         recordingTime: 'N/A'
     };
 
@@ -61,31 +61,66 @@ class DVRCalculator extends Component {
         this.reloadCameras();
     }
 
+    handleChangeDrive = (e) => {
+        const drive = e.target.value;
+        const capacity = DVR_DRIVE_CAPACITY[drive];
+        this.setState(() => ({ capacity }));
+
+        this.updateRecordingTime();
+    }
+
     reloadCameras = () => {
         this.setState((prevState) => {
             const modes = DVR_MODES[prevState.configuration];
-            console.log(modes);
             const cameras = modes.map(mode => {
                 const key = this.unique_id();
                 return ({
                     id: key,
-                    camera: <FlareCalculator key={key} id={key} deleteCalculator={this.deleteCamera} link={prevState.link} mode={mode} />
+                    camera: <DVRCamera
+                        key={key}
+                        id={key}
+                        pushDataRate={this.pushDataRate}
+                        deleteDataRate={this.deleteDataRate}
+                        link={prevState.link}
+                        mode={mode}
+                    />
                 });
             });
             return { cameras };
         });
     }
+        
+    // Push/replace existing data rate
+    pushDataRate = (id, newDataRate) => {
+        let dataRates = this.state.dataRates.filter(dataRate => dataRate.id !== id);
+        dataRates.push({ id, value: newDataRate });
+        this.updateTotalDataRate(dataRates);
+    }
+
+    // Delete existing data rate
+    deleteDataRate = (id) => {
+        const dataRates = this.state.dataRates.filter(dataRate => dataRate.id !== id);
+        this.updateTotalDataRate(dataRates);
+    }
+
+    // Recalculate total data rate with updated data
+    updateTotalDataRate = (dataRates) => {
+        let totalDataRate = 0;
+        for (let dataRate of dataRates) {
+            totalDataRate += dataRate.value;
+        }
+
+        this.setState(() => ({ dataRates, totalDataRate }));
+        this.updateRecordingTime();
+    }
 
     // Update recording time after setting state
     updateRecordingTime = () => {
-        this.setState((prevState) => ({ recordingTime: this.state.capacity / this.state.dataRate }));
-    }
-
-    // Remove calculator
-    deleteCamera = (id) => {
-        const cameras = this.state.cameras;
-        const newCameras = cameras.filter(camera => camera.id !== id);
-        this.setState(() => ({ cameras: newCameras }));
+        this.setState((prevState) => {
+            const seconds = prevState.capacity / prevState.totalDataRate;
+            const recordingTime = isFinite(seconds) ? this.secondsTohhmmss(seconds) : 'N/A';
+            return ({ recordingTime });
+        });
     }
 
     // Math.random should be unique because of its seeding algorithm.
@@ -94,6 +129,21 @@ class DVRCalculator extends Component {
     unique_id = () => {
         return '_' + Math.random().toString(36).substr(2, 9);
     };
+
+    secondsTohhmmss = (totalSeconds) => {
+        let hours   = Math.floor(totalSeconds / 3600);
+        let minutes = Math.floor((totalSeconds - (hours * 3600)) / 60);
+        let seconds = totalSeconds - (hours * 3600) - (minutes * 60);
+        
+        // round seconds
+        seconds = Math.round(seconds);
+        hours = (hours < 10) ? "0" + hours : hours;
+        minutes = (minutes < 10) ? "0" + minutes : minutes;
+        seconds = (seconds  < 10) ? "0" + seconds : seconds;
+
+        let result = `${hours}h ${minutes}m ${seconds}s`;
+        return result;
+    }
 
     render = () => (
         <div className="dvr-calculator">
@@ -112,7 +162,7 @@ class DVRCalculator extends Component {
                 cameras={this.state.cameras}
             />
             <DVRDrives
-            handleChange={this.handleChange}
+                handleChangeDrive={this.handleChangeDrive}
             />
             <DVRRecordingTime
                 recordingTime={this.state.recordingTime}

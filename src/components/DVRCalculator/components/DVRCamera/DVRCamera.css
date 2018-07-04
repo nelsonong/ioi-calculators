@@ -1,0 +1,96 @@
+.dvr-camera-container {
+    background: rgb(253, 222, 214);
+    background: repeating-linear-gradient(
+        45deg,
+        rgb(253, 222, 214),
+        rgb(253, 222, 214) 10px,
+        rgb(252, 230, 224) 10px,
+        rgb(252, 230, 224) 20px
+    );
+    font-family: 'Roboto Thin', sans-serif;
+    font-weight: 100;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    width: 21%;
+    height: 110px;
+    margin: 3px;
+    border: solid rgb(90, 90, 90);
+    border-width: medium;
+    border-radius: 5px;
+    opacity: 0.85;
+    transition: 0.3s;
+}
+
+.dvr-camera-container:hover {
+    opacity: 1.0;
+}
+
+.dvr-camera-container-added {
+    background: rgb(253, 222, 214);
+    opacity: 1.0;
+}
+
+.dvr-camera-title {
+    background: rgb(77, 60, 60);
+    color: white;
+    width: 70%;
+    padding: 1px;
+    margin: 0px auto;
+    margin-bottom: 5px;
+    display: inline-block;
+    border: solid rgb(90, 90, 90);
+    border-top-style: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.dvr-camera-info {
+    background: rgb(253, 238, 214);
+    font-family: 'Roboto Thin', sans-serif;
+    text-align: center;
+    margin: 1px 2px;
+    padding: 3px;
+    border: solid 2px rgb(90, 90, 90);
+    border-radius: 2px;
+}
+
+.dvr-camera-add-button {
+    background: transparent;
+    margin-top: 16px;
+    border: none;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+.dvr-camera-add-button:hover {
+    opacity: 1;
+}
+
+.dvr-camera-edit-button {
+    background: rgb(223, 210, 135);
+    margin: 20px 2px;
+    padding: 3px 4px;
+    border: solid 2px rgb(70, 70, 70);
+    border-radius: 3px;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+.dvr-camera-edit-button:hover {
+    opacity: 1;
+}
+
+.dvr-camera-close-button {
+    background: rgb(185, 90, 90);
+    margin: 20px 2px;
+    padding: 3px 4px;
+    border: solid 2px rgb(70, 70, 70);
+    border-radius: 3px;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+.dvr-camera-close-button:hover {
+    opacity: 1;
+}
