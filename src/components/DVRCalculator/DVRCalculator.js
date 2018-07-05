@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import uuid from 'uuid';
 import { DVRCamera, DVRCameras, DVRConfiguration, DVRDrives, DVRModel, DVRRecordingTime } from './components';
 import { DVR_CONFIG, DVR_LINK, DVR_MODEL, DVR_MODES, DVR_CL_CONFIGS, DVR_CLPLUS_CONFIGS, DVR_CX_CONFIGS, DVR_CXPLUS_CONFIGS, DVR_DRIVE_CAPACITY } from './constants';
 import './DVRCalculator.css';
@@ -73,7 +74,7 @@ class DVRCalculator extends Component {
         this.setState((prevState) => {
             const modes = DVR_MODES[prevState.configuration];
             const cameras = modes.map(mode => {
-                const key = this.unique_id();
+                const key = uuid();
                 return ({
                     id: key,
                     camera: <DVRCamera
@@ -122,13 +123,6 @@ class DVRCalculator extends Component {
             return ({ recordingTime });
         });
     }
-
-    // Math.random should be unique because of its seeding algorithm.
-    // Convert it to base 36 (numbers + letters), and grab the first 9 characters
-    // after the decimal.
-    unique_id = () => {
-        return '_' + Math.random().toString(36).substr(2, 9);
-    };
 
     secondsTohhmmss = (totalSeconds) => {
         let hours   = Math.floor(totalSeconds / 3600);
