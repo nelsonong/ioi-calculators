@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { FlareCLFormat, FlareCXFormat, FlareHardwareVersion, FlareFrameRate, FlareOptions, FlareModel, FlareResolution } from './components';
+import { FlareFormat, FlareHardwareVersion, FlareFrameRate, FlareOptions, FlareModel, FlareResolution, FlareTitle } from './components';
 import { FLARE_LINK, FLARE_CL_FORMAT, FLARE_CL_FORMATS, FLARE_CL_MODEL, FLARE_CL_MODELS,
-         FLARE_CX_FORMATS, FLARE_CX_MODELS, FLARE_LINK_SPEEDS, FLARE_MODE, FLARE_RESOLUTION } from './constants';
+         FLARE_CX_FORMATS, FLARE_CX_MODELS, FLARE_LINK_SPEEDS, FLARE_MODE, FLARE_RESOLUTION, FLARE_SDI_MODELS } from './constants';
 import { calculateFrameRate } from './utils/flare-frame-rate';
 import { minWidth, maxWidth, minHeight, maxHeight } from './utils/flare-resolution';
 import './FlareCalculator.css';
@@ -45,6 +45,7 @@ class FlareCalculator extends Component {
         }
 
         this.setState(() => ({ link, model, models, hwversion: 1 }));
+
         this.updateFormat();
         this.updateMinMaxResolution();
         this.updateFrameRate();
@@ -64,9 +65,20 @@ class FlareCalculator extends Component {
     // Reset model options and hardware version
     handleChangeLink = (e) => {
         const link = e.target.value;
-        const models = (link === FLARE_LINK.CL) ? FLARE_CL_MODELS : FLARE_CX_MODELS;
-        const firstModel = models[0];
-        this.setState(() => ({ link: link, model: firstModel, models: models, hwversion: 1 }));
+        let models;
+        switch (link) {
+            case FLARE_LINK.CL:
+                models = FLARE_CL_MODELS;
+                break;
+            case FLARE_LINK.CX:
+                models= FLARE_CX_MODELS;
+                break;
+            case FLARE_LINK.SDI:
+                models = FLARE_SDI_MODELS;
+        }
+
+        const model = models[0];    // First model
+        this.setState(() => ({ link, model, models, hwversion: 1 }));
         
         this.updateFormat();
         this.updateMinMaxResolution();
@@ -144,10 +156,7 @@ class FlareCalculator extends Component {
 
     // Change resolution and set preset to 'Custom'
     handleChangeResolution = (e) => {
-        console.log(e.target.value);
         let { name, value } = e.target;
-        console.log(name);
-        console.log(value);
         this.setState(() => ({ resolutionPreset: FLARE_RESOLUTION.CUSTOM, [name]: Number(value) }));
 
         this.updateFrameRate();
@@ -178,42 +187,11 @@ class FlareCalculator extends Component {
         }));
     }
 
-    renderTitle = () => {
-        return (!this.props.mode) ? 'Flare Frame Rate Calculator' : 'Flare Camera';
-    }
-
-    // If in DVR modal, don't show button
-    renderCloseButton = () => {
-        const button = (
-            <button className='close-calculator-button' type='button' onClick={() => this.props.deleteCalculator(this.props.id)}>
-                ✖
-            </button>
-        );
-        return (!this.props.mode) ? button : '';
-    }
-
-    // Replace format component when link changes
-    renderFormatComponent = () => {
-        const isCL = this.state.link === FLARE_LINK.CL;
-        return isCL ?
-        <FlareCLFormat
-            clFormats={this.state.clFormats}
-            mode={this.state.mode}
-            handleChange={this.handleChange}
-        /> :
-        <FlareCXFormat
-            cxFormats={this.state.cxFormats}
-            mode={this.state.mode}
-            handleChange={this.handleChange}
-        />;
-    }
-
     render = () => (
         <div className="flare-calculator">
-            <div>
-                <div className='flare-calculator-title'>{this.renderTitle()}</div>
-                {this.renderCloseButton()}
-            </div>
+            <FlareTitle
+                mode={this.state.mode}
+            />
             <FlareModel
                 link={this.state.link}
                 models={this.state.models}
@@ -227,7 +205,13 @@ class FlareCalculator extends Component {
                 hwversion={this.state.hwversion}
                 handleChange={this.handleChange}
             />
-            {this.renderFormatComponent()}
+            <FlareFormat
+                link={this.state.link}
+                clFormats={this.state.clFormats}
+                cxFormats={this.state.cxFormats}
+                mode={this.state.mode}
+                handleChange={this.handleChange}
+            />
             <FlareResolution
                 resolutionPreset={this.state.resolutionPreset}
                 width={this.state.width}
