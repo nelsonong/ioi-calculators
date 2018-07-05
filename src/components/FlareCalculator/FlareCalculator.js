@@ -178,6 +178,10 @@ class FlareCalculator extends Component {
         }));
     }
 
+    renderTitle = () => {
+        return (!this.props.mode) ? 'Flare Frame Rate Calculator' : 'Flare Camera';
+    }
+
     // If in DVR modal, don't show button
     renderCloseButton = () => {
         const button = (
@@ -207,7 +211,7 @@ class FlareCalculator extends Component {
     render = () => (
         <div className="flare-calculator">
             <div>
-                <div className='flare-calculator-title'>Flare Frame Rate Calculator</div>
+                <div className='flare-calculator-title'>{this.renderTitle()}</div>
                 {this.renderCloseButton()}
             </div>
             <FlareModel

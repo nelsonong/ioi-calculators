@@ -13,7 +13,9 @@ class DVRCalculator extends Component {
         cameras: [],
         dataRates: [],
         totalDataRate: 0,
-        capacity: 892,
+        driveCapacity: 240,
+        driveAmount: 1,
+        totalCapacity: 240,
         recordingTime: 'N/A'
     };
 
@@ -64,8 +66,17 @@ class DVRCalculator extends Component {
 
     handleChangeDrive = (e) => {
         const drive = e.target.value;
-        const capacity = DVR_DRIVE_CAPACITY[drive];
-        this.setState(() => ({ capacity }));
+        const driveCapacity = DVR_DRIVE_CAPACITY[drive];
+        const totalCapacity = driveCapacity * this.state.driveAmount;
+        this.setState(() => ({ driveCapacity, totalCapacity }));
+
+        this.updateRecordingTime();
+    }
+
+    handleChangeDriveAmount = (e) => {
+        const driveAmount = Number(e.target.value);
+        const totalCapacity = driveAmount * this.state.driveCapacity;
+        this.setState(() => ({ driveAmount, totalCapacity }));
 
         this.updateRecordingTime();
     }
@@ -118,7 +129,7 @@ class DVRCalculator extends Component {
     // Update recording time after setting state
     updateRecordingTime = () => {
         this.setState((prevState) => {
-            const seconds = prevState.capacity / prevState.totalDataRate;
+            const seconds = prevState.totalCapacity / prevState.totalDataRate;
             const recordingTime = isFinite(seconds) ? this.secondsTohhmmss(seconds) : 'N/A';
             return ({ recordingTime });
         });
@@ -143,7 +154,7 @@ class DVRCalculator extends Component {
         <div className="dvr-calculator">
             <div>
                 <div className='dvr-calculator-title'>DVR Storage Calculator</div>
-                <button className='close-calculator-button' type='button' onClick={() => this.props.deleteCalculator(this.props.id)}>✖</button>
+                <button className='dvr-calculator-close-button' type='button' onClick={() => this.props.deleteCalculator(this.props.id)}>✖</button>
             </div>
             <DVRModel
                 handleChangeModel={this.handleChangeModel}
@@ -156,6 +167,8 @@ class DVRCalculator extends Component {
                 cameras={this.state.cameras}
             />
             <DVRDrives
+                totalCapacity={this.state.totalCapacity}
+                handleChangeDriveAmount={this.handleChangeDriveAmount}
                 handleChangeDrive={this.handleChangeDrive}
             />
             <DVRRecordingTime

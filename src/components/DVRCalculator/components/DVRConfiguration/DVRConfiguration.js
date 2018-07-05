@@ -1,15 +1,17 @@
 import React from 'react';
-import { DVR_CONFIG, DVR_CL_CONFIGS, DVR_CLPLUS_CONFIGS, DVR_CX_CONFIGS, DVR_CXPLUS_CONFIGS, DVR_MODEL } from '../../constants';
+import './DVRConfiguration.css';
 
 const DVRConfiguration = ({ configurations, handleChangeConfiguration }) => {
     const configOptions = configurations.map((configuration, i) => <option key={i}>{configuration}</option>);
     return (
-        <fieldset>
-        <legend>Configuration</legend>
-            <select name='configuration' onChange={handleChangeConfiguration}>
-                {configOptions}
-            </select>
-        </fieldset>
+        <div className='dvr-configuration'>
+            <fieldset>
+            <legend>Configuration</legend>
+                <select className='dvr-configuration-select' name='configuration' onChange={handleChangeConfiguration}>
+                    {configOptions}
+                </select>
+            </fieldset>
+        </div>
     );
 };
 

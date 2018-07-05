@@ -1,0 +1,14 @@
+.dvr-configuration {
+  display: inline-block;
+  width: 49%;
+  margin: 0px 0px 2px 3px;
+}
+
+.dvr-configuration > fieldset {
+  background: rgb(224, 224, 224);
+  margin: 0px 1px;
+}
+
+.dvr-configuration-select {
+  padding: 2px 0px;
+}

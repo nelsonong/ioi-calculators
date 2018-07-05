@@ -16,7 +16,7 @@
 .dvr-calculator-title {
     background: rgb(77, 60, 60);
     color: white;
-    width: 70%;
+    width: 60%;
     padding: 4px;
     margin: 0px auto;
     margin-bottom: 11px;
@@ -31,4 +31,12 @@
     background: rgb(224, 224, 224);
     text-align: left;
     margin: 5px 0 5px 0;
+}
+
+.dvr-calculator-close-button {
+    background: transparent;
+    position: absolute;
+    float: right;
+    padding-left: 45px;
+    border: none;
 }
