@@ -36,7 +36,7 @@ class DVRCamera extends Component {
         const calculatorState = this.state.camera.current.state;
         const { model, format, width, height, frameRate } = calculatorState;
         const resolution = `${width}x${height}`;
-        const dataRate = (frameRate * width * height) / 1000000000;    // In GB/s
+        const dataRate = (frameRate * width * height) / ( 1024 * 1024 * 1024 );    // In GB/s
         this.setState(() => ({ model, format, resolution, dataRate, modalIsOpen: false, isHovered: false }));
         
         this.props.pushDataRate(this.props.id, dataRate);
