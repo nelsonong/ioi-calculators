@@ -1,0 +1,13 @@
+.dvr-model-configuration {
+    margin: 0px 0px 2px 0px;
+}
+
+.dvr-model-configuration > fieldset {
+    background: rgb(224, 224, 224);
+    margin: 0px 1px;
+}
+
+.dvr-model-configuration-select {
+    margin-right: 8px;
+    padding: 2px 0px;
+}

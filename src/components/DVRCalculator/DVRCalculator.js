@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
-import { DVRCamera, DVRCameras, DVRConfiguration, DVRDrives, DVRModel, DVRRecordingTime } from './components';
+import { DVRCamera, DVRCameras, DVRDrives, DVRModelConfiguration, DVRRecordingTime } from './components';
 import { DVR_CONFIG, DVR_LINK, DVR_MODEL, DVR_MODES, DVR_CL_CONFIGS, DVR_CLPLUS_CONFIGS, DVR_CX_CONFIGS, DVR_CXPLUS_CONFIGS, DVR_DRIVE_CAPACITY } from './constants';
 import './DVRCalculator.css';
 
@@ -13,9 +13,9 @@ class DVRCalculator extends Component {
         cameras: [],
         dataRates: [],
         totalDataRate: 0,
-        driveCapacity: 240,
+        driveCapacity: 223.6,
         driveAmount: 1,
-        totalCapacity: 240,
+        totalCapacity: 223.6,
         recordingTime: 'N/A'
     };
 
@@ -156,11 +156,9 @@ class DVRCalculator extends Component {
                 <div className='dvr-calculator-title'>DVR Storage Calculator</div>
                 <button className='dvr-calculator-close-button' type='button' onClick={() => this.props.deleteCalculator(this.props.id)}>✖</button>
             </div>
-            <DVRModel
-                handleChangeModel={this.handleChangeModel}
-            />
-            <DVRConfiguration
+            <DVRModelConfiguration
                 configurations={this.state.configurations}
+                handleChangeModel={this.handleChangeModel}
                 handleChangeConfiguration={this.handleChangeConfiguration}
             />
             <DVRCameras
