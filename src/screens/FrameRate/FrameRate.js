@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
-import FlareCalculator from '../../components/FlareCalculator';
+import FlareCLCalculator from '../../components/FlareCLCalculator';
+import FlareCXCalculator from '../../components/FlareCXCalculator';
+import FlareSDICalculator from '../../components/FlareSDICalculator';
 import VictoremCalculator from '../../components/VictoremCalculator';
 import InstructionBox from '../../components/InstructionBox';
 import './FrameRate.css';
@@ -12,28 +14,30 @@ class FrameRate extends Component {
 
     // Add calculator
     addCalculator = (type) => {
-        const calculators = this.state.calculators;
         const key = uuid();
-        if (type === 'flare') {
-            const newCalculators = calculators.concat({
-                id: key,
-                calculator: <FlareCalculator key={key} id={key} deleteCalculator={this.deleteCalculator} />
-            });
-            this.setState(() => ({ calculators: newCalculators }));
-        } else if (type === 'victorem') {
-            const newCalculators = calculators.concat({
-                id: key,
-                calculator: <VictoremCalculator key={key} id={key} deleteCalculator={this.deleteCalculator} />
-            });
-            this.setState(() => ({ calculators: newCalculators }));
+        let calculator;
+        switch (type) {
+            case 'flare-cl':
+                calculator = <FlareCLCalculator key={key} id={key} deleteCalculator={this.deleteCalculator} />;
+                break;
+            case 'flare-cx':
+                calculator = <FlareCXCalculator key={key} id={key} deleteCalculator={this.deleteCalculator} />
+                break;
+            case 'flare-sdi':
+                calculator = <FlareSDICalculator key={key} id={key} deleteCalculator={this.deleteCalculator} />
+                break;
+            case 'victorem':
+                calculator = <VictoremCalculator key={key} id={key} deleteCalculator={this.deleteCalculator} />
         }
+
+        const calculators = this.state.calculators.concat({ id: key, calculator });
+        this.setState(() => ({ calculators }));
     }
 
     // Remove calculator
     deleteCalculator = (id) => {
-        const calculators = this.state.calculators;
-        const newCalculators = calculators.filter(calculator => calculator.id !== id);
-        this.setState(() => ({ calculators: newCalculators }));
+        const calculators = this.state.calculators.filter(calculator => calculator.id !== id);
+        this.setState(() => ({ calculators }));
     }
 
     render = () => {
@@ -46,7 +50,9 @@ class FrameRate extends Component {
                     Frame Rate Calculators
                 </div>
                 <div>
-                    <button type='button' className='add-flare-button' onClick={() => this.addCalculator('flare')}>+ FLARE</button>
+                    <button type='button' className='add-flare-button' onClick={() => this.addCalculator('flare-cl')}>+ FLARE CL</button>
+                    <button type='button' className='add-flare-button' onClick={() => this.addCalculator('flare-cx')}>+ FLARE CX</button>
+                    <button type='button' className='add-flare-button' onClick={() => this.addCalculator('flare-sdi')}>+ FLARE SDI</button>
                     <button type='button' className='add-victorem-button' onClick={() => this.addCalculator('victorem')}>+ VICTOREM</button>
                     {instructionBox}
                 </div>

@@ -1,1 +1,0 @@
-export { default as FlareResolution } from './FlareResolution';

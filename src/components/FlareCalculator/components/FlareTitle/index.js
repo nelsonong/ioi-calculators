@@ -1,1 +1,0 @@
-export { default as FlareTitle } from './FlareTitle';
