@@ -1,4 +1,3 @@
-export { FlareCXTitle } from './FlareCXTitle';
 export { FlareCXModel } from './FlareCXModel';
 export { FlareCXFormat } from './FlareCXFormat';
 export { FlareCXResolution } from './FlareCXResolution';

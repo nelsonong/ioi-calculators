@@ -52,14 +52,6 @@
   border-color: rgb(94, 94, 94);
 }
 
-.close-calculator-button {
-  background: transparent;
-  position: absolute;
-  float: right;
-  padding-left: 20px;
-  border: none;
-}
-
 select {
     font-size: 11px;
     margin: 2px;

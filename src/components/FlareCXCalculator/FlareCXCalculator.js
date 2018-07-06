@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { FlareCXTitle, FlareCXModel, FlareCXFormat, FlareCXResolution, FlareCXOptions, FlareCXFrameRate } from './components';
+import CalculatorTopBar from '../CalculatorTopBar';
+import { FlareCXModel, FlareCXFormat, FlareCXResolution, FlareCXOptions, FlareCXFrameRate } from './components';
 import { MODEL, FORMATS, LINK_SPEEDS, RESOLUTION } from './constants';
 import { calculateFrameRate } from './utils/calculateFrameRate';
 import { minWidth, maxWidth, minHeight, maxHeight } from './utils/resolution';
@@ -100,8 +101,9 @@ class FlareCXCalculator extends Component {
 
     render = () => (
         <div className="flare-calculator">
-            <FlareCXTitle
+            <CalculatorTopBar
                 mode={this.state.mode}
+                type={'Flare CX'}
                 deleteCalculator={this.props.deleteCalculator}
                 id={this.props.id}
             />

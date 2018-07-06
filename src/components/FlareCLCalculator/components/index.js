@@ -1,4 +1,3 @@
-export { FlareCLTitle } from './FlareCLTitle';
 export { FlareCLModel } from './FlareCLModel';
 export { FlareCLHardwareVersion } from './FlareCLHardwareVersion';
 export { FlareCLFormat } from './FlareCLFormat';
