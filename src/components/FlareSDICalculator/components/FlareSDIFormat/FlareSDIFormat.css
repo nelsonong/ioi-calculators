@@ -1,0 +1,14 @@
+.sdi-format-labels {
+    width: 30%;
+    display: inline-block;
+}
+
+.sdi-format-label {
+    margin: 8px;
+    display: block;
+}
+
+.sdi-format-controls {
+    width: 70%;
+    display: inline-block;
+}

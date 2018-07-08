@@ -1,5 +1,5 @@
 export { FlareSDIModel } from './FlareSDIModel';
-export { FlareSDIInterface } from './FlareSDIInterface';
+export { FlareSDIFormat } from './FlareSDIFormat';
 export { FlareSDIColor } from './FlareSDIColor';
 export { FlareSDIResolution } from './FlareSDIResolution';
 export { FlareSDIFrameRate } from './FlareSDIFrameRate';

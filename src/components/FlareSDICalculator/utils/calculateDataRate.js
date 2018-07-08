@@ -2,12 +2,6 @@ import { LINK, COLOR } from '../constants';
 
 export const calculateDataRate = (frameRate, link, resolution, color) => {
 
-    // Determine link size
-    let linkSize;
-    if (link === LINK.SINGLE) linkSize = 1;
-    else if (link === LINK.DUAL) linkSize = 2;
-    else if (link === LINK.QUAD) linkSize = 4;
-
     // Extract width + height
     const [ width, height ] = splitResolution(resolution);
 
@@ -16,7 +10,7 @@ export const calculateDataRate = (frameRate, link, resolution, color) => {
     if (color === COLOR.YCbCr) pixelSize = 20;
     else if (color === COLOR.RGB) pixelSize = 30;
 
-    const dataRate = ( frameRate * width * height * linkSize * pixelSize ) / ( 1024 * 1024 );
+    const dataRate = ( frameRate * width * height * link * pixelSize ) / ( 1024 * 1024 );
     return dataRate.toFixed(2);
 };
 

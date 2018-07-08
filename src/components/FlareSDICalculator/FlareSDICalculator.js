@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CalculatorTopBar from '../CalculatorTopBar';
-import { FlareSDIModel, FlareSDIInterface, FlareSDIColor, FlareSDIResolution, FlareSDIFrameRate, FlareSDIOutput } from './components';
+import { FlareSDIModel, FlareSDIFormat, FlareSDIColor, FlareSDIResolution, FlareSDIFrameRate, FlareSDIOutput } from './components';
 import { MODEL, MODELS, LINKS, SDI_TREE } from './constants';
 import { calculateDataRate } from './utils/calculateDataRate';
 import './FlareSDICalculator.css';
@@ -29,7 +29,9 @@ class FlareSDICalculator extends Component {
 
     // General change handler (requires input element to have name attribute)
     handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name } = e.target;
+        let { value } = e.target;
+        if (!isNaN(value)) value = Number(value);
         switch (name) {
             case 'model': {
                 this.updateBelowModel(value);
@@ -109,13 +111,13 @@ class FlareSDICalculator extends Component {
             <FlareSDIModel
                 model={this.state.model}
                 models={this.state.models}
-                link={this.state.link}
-                links={this.state.links}
                 handleChange={this.handleChange}
             />
-            <FlareSDIInterface
+            <FlareSDIFormat
                 sdiInterface={this.state.sdiInterface}
                 sdiInterfaces={this.state.sdiInterfaces}
+                link={this.state.link}
+                links={this.state.links}
                 handleChange={this.handleChange}
             />
             <FlareSDIResolution

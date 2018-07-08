@@ -1,9 +1,9 @@
 import { MODEL } from './models';
 
 export const LINK = {
-    SINGLE: 'SINGLE',
-    DUAL: 'DUAL',
-    QUAD: 'QUAD'
+    SINGLE: 1,
+    DUAL: 2,
+    QUAD: 4
 };
 
 export const LINKS = {
