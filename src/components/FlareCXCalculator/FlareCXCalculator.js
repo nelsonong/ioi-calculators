@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import CalculatorTopBar from '../CalculatorTopBar';
-import { FlareCXModel, FlareCXFormat, FlareCXResolution, FlareCXOptions, FlareCXFrameRate } from './components';
+import { FlareCXModel, FlareCXFormat, FlareCXResolution, FlareCXOptions, FlareCXOutput } from './components';
 import { MODEL, FORMATS, LINK_SPEEDS, RESOLUTION } from './constants';
 import { calculateFrameRate } from './utils/calculateFrameRate';
+import { calculateDataRate } from './utils/calculateDataRate';
 import { minWidth, maxWidth, minHeight, maxHeight } from './utils/resolution';
 import './FlareCXCalculator.css';
 
@@ -18,6 +19,7 @@ class FlareCXCalculator extends Component {
         height: 1088,                           // Resolution - height
         subSampling: false,                     // Sub-sampling enabled
         frameRate: 132.72,                      // Maximum frame-rate
+        dataRate: 282.03,                       // Data-rate (in MB/s)
         mode: this.props.mode                   // Mode (Base or Full if in DVR calculator)
     };
 
@@ -30,7 +32,7 @@ class FlareCXCalculator extends Component {
         this.setState(() => ({ [name]: value }));
 
         this.updateMinMaxResolution();
-        this.updateFrameRate();
+        this.updateOutput();
     }
     
     // Update model and formats
@@ -48,7 +50,7 @@ class FlareCXCalculator extends Component {
         
         this.setState(() => ({ model, formats }));
         this.updateMinMaxResolution();
-        this.updateFrameRate();
+        this.updateOutput();
     }
 
     // Change resolution preset
@@ -64,39 +66,40 @@ class FlareCXCalculator extends Component {
             this.setState(() => ({ resolutionPreset, width: Number(width), height: Number(height) }));
         }
 
-        this.updateFrameRate();
+        this.updateOutput();
     }
 
     // Change resolution and set preset to 'Custom'
     handleChangeResolution = (e) => {
-        let { name, value } = e.target;
+        const { name, value } = e.target;
         this.setState(() => ({ resolutionPreset: RESOLUTION.CUSTOM, [name]: Number(value) }));
-        this.updateFrameRate();
+        this.updateOutput();
     }
 
     // Update minimum/maximum resolution
     updateMinMaxResolution = () => {
-        this.setState((prevState) => {
-            const resolutionPreset = prevState.resolutionPreset;
+        this.setState(({ resolutionPreset, model }) => {
             if (resolutionPreset === RESOLUTION.MINIMUM) {
                 return {
-                    width: minWidth(prevState.model),
-                    height: minHeight(prevState.model)
+                    width: minWidth(model),
+                    height: minHeight(model)
                 };
             } else if (resolutionPreset === RESOLUTION.MAXIMUM) {
                 return {
-                    width: maxWidth(prevState.model),
-                    height: maxHeight(prevState.model)
+                    width: maxWidth(model),
+                    height: maxHeight(model)
                 }
             };
         });
     }
 
-    // Update frame-rate
-    updateFrameRate = () => {
-        this.setState((prevState) => ({
-            frameRate: calculateFrameRate({...prevState})
-        }));
+    // Update output
+    updateOutput = () => {
+        this.setState((prevState) => {
+            const frameRate = calculateFrameRate({ ...prevState });
+            const dataRate = calculateDataRate({ ...prevState, frameRate });
+            return { frameRate, dataRate };
+        });
     }
 
     render = () => (
@@ -128,10 +131,9 @@ class FlareCXCalculator extends Component {
                 format={this.state.format}
                 handleChange={this.handleChange}
             />
-            <FlareCXFrameRate
+            <FlareCXOutput
                 frameRate={this.state.frameRate}
-                width={this.state.width}
-                height={this.state.height}
+                dataRate={this.state.dataRate}
             />
         </div>
     );

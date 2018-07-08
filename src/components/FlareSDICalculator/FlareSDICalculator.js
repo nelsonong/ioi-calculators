@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CalculatorTopBar from '../CalculatorTopBar';
-import { FlareSDIModel, FlareSDIInterface, FlareSDIColor, FlareSDIResolution, FlareSDIFrameRate, FlareSDITotalFrameRate } from './components';
+import { FlareSDIModel, FlareSDIInterface, FlareSDIColor, FlareSDIResolution, FlareSDIFrameRate, FlareSDIOutput } from './components';
 import { MODEL, MODELS, LINKS, SDI_TREE } from './constants';
 import { calculateDataRate } from './utils/calculateDataRate';
 import './FlareSDICalculator.css';
@@ -94,8 +94,7 @@ class FlareSDICalculator extends Component {
     updateDataRate = () => {
         this.setState(({ frameRate, link, resolution, color }) => {
             const dataRate = calculateDataRate(frameRate, link, resolution, color);
-            console.log(dataRate);
-            return { dataRate: dataRate };
+            return { dataRate };
         });
     }
 
@@ -132,8 +131,11 @@ class FlareSDICalculator extends Component {
             <FlareSDIFrameRate
                 frameRate={this.state.frameRate}
                 frameRates={this.state.frameRates}
-                dataRate={this.state.dataRate}
                 handleChange={this.handleChange}
+            />
+            <FlareSDIOutput
+                frameRate={this.state.frameRate}
+                dataRate={this.state.dataRate}
             />
         </div>
     );

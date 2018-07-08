@@ -1,11 +1,16 @@
 import { LINK_SPEEDS } from '../constants';
 import { widthMultiple, heightMultiple } from './resolution';
 
-const calculateFrameRate = (parentState) => {
-
-    // Parameters from parent state
-    let { model, format, bitDepth, linkSpeed, linkCount, width, height, subSampling } = parentState;
-
+const calculateFrameRate = ({
+    model,
+    format,
+    bitDepth,
+    linkSpeed,
+    linkCount,
+    width,
+    height,
+    subSampling
+}) => {
     // Adjust width and height (if subsampling enabled)
     if (subSampling) {
         width /= 2;
@@ -22,9 +27,10 @@ const calculateFrameRate = (parentState) => {
     }
 
     // Frame overhead time + line time
-    let { frameOverheadTimeUs, lineTimeUs, frameRate } = calculateCXOverheadAndLineTime(model, bitDepth, width, height, linkSpeed, linkCount);
-    if (frameRate > 0) {
-        return Math.round(frameRate * 100) / 100;
+    let { frameOverheadTimeUs, lineTimeUs, frameRate48m } = 
+        calculateCXOverheadAndLineTime(model, bitDepth, width, height, linkSpeed, linkCount);
+    if (frameRate48m > 0) {
+        return frameRate48m.toFixed(2);
     }
     if (frameOverheadTimeUs === 0) throw new Error("Frame overhead time is zero.");
     if (lineTimeUs === 0) throw new Error("Line time is zero.");
@@ -37,11 +43,8 @@ const calculateFrameRate = (parentState) => {
     if (framePeriodUs === 0) throw new Error("Frame period is zero.");
 
     // Calculate and return framerate
-    frameRate = 1000000.0 / framePeriodUs;
-    const frameRateX10 = frameRate * 10;
-    frameRate = frameRateX10 / 10.0;
-    frameRate = Math.round(frameRate * 100)/100;
-    return frameRate;
+    const frameRate = 1000000.0 / framePeriodUs;
+    return frameRate.toFixed(2);
 };
 
 // -------------- Get frame overhead and line time --------------
@@ -464,4 +467,4 @@ const calculateCXOverheadAndLineTime = (model, bitDepth, width, height, linkSpee
     return { frameOverheadTimeUs, lineTimeUs, frameRate: 0 };
 };
 
-export { calculateFrameRate, widthMultiple, heightMultiple };
+export { calculateFrameRate };

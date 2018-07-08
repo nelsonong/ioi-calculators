@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import CalculatorTopBar from '../CalculatorTopBar';
-import { FlareCLModel, FlareCLHardwareVersion, FlareCLFormat, FlareCLResolution, FlareCLOptions, FlareCLFrameRate } from './components';
+import { FlareCLModel, FlareCLHardwareVersion, FlareCLFormat, FlareCLResolution, FlareCLOptions, FlareCLOutput } from './components';
 import { FORMAT, FORMATS, MODEL, MODE, RESOLUTION } from './constants';
 import { calculateFrameRate } from './utils/calculateFrameRate';
+import { calculateDataRate } from './utils/calculateDataRate';
 import { minWidth, maxWidth, minHeight, maxHeight } from './utils/resolution';
 import './FlareCLCalculator.css';
 
@@ -18,6 +19,7 @@ class FlareCLCalculator extends Component {
         subSampling: false,                     // Sub-sampling enabled
         slowMode: false,                        // Slow-mode enabled
         frameRate: 70.95,                       // Maximum frame-rate
+        dataRate: 150.77,                       // Data-rate (in MB/s)
         mode: this.props.mode                   // Mode (Base or Full if in DVR calculator)
     };
 
@@ -30,7 +32,7 @@ class FlareCLCalculator extends Component {
 
         this.setState(() => ({ [name]: value }));
         this.updateMinMaxResolution();
-        this.updateFrameRate();
+        this.updateOutput();
     }
 
     // Update hardware version and formats
@@ -60,7 +62,7 @@ class FlareCLCalculator extends Component {
         
         this.setState(() => ({ model, hwversion, formats }));
         this.updateMinMaxResolution();
-        this.updateFrameRate();
+        this.updateOutput();
     }
 
     // Change resolution preset
@@ -76,39 +78,40 @@ class FlareCLCalculator extends Component {
             this.setState(() => ({ resolutionPreset, width: Number(width), height: Number(height) }));
         }
 
-        this.updateFrameRate();
+        this.updateOutput();
     }
 
     // Change resolution and set preset to 'Custom'
     handleChangeResolution = (e) => {
         const { name, value } = e.target;
         this.setState(() => ({ resolutionPreset: RESOLUTION.CUSTOM, [name]: Number(value) }));
-        this.updateFrameRate();
+        this.updateOutput();
     }
 
     // Update minimum/maximum resolution
     updateMinMaxResolution = () => {
-        this.setState((prevState) => {
-            const resolutionPreset = prevState.resolutionPreset;
+        this.setState(({ resolutionPreset, model, format }) => {
             if (resolutionPreset === RESOLUTION.MINIMUM) {
                 return {
-                    width: minWidth(prevState.model, prevState.format),
-                    height: minHeight(prevState.model, prevState.format)
+                    width: minWidth(model, format),
+                    height: minHeight(model, format)
                 };
             } else if (resolutionPreset === RESOLUTION.MAXIMUM) {
                 return {
-                    width: maxWidth(prevState.model, prevState.format),
-                    height: maxHeight(prevState.model)
+                    width: maxWidth(model, format),
+                    height: maxHeight(model)
                 }
             };
         });
     }
 
-    // Update frame-rate
-    updateFrameRate = () => {
-        this.setState((prevState) => ({
-            frameRate: calculateFrameRate({...prevState})
-        }));
+    // Update output
+    updateOutput = () => {
+        this.setState((prevState) => {
+            const frameRate = calculateFrameRate({ ...prevState });
+            const dataRate = calculateDataRate({ ...prevState, frameRate });
+            return { frameRate, dataRate };
+        });
     }
 
     render = () => (
@@ -145,10 +148,9 @@ class FlareCLCalculator extends Component {
                 format={this.state.format}
                 handleChange={this.handleChange}
             />
-            <FlareCLFrameRate
+            <FlareCLOutput
                 frameRate={this.state.frameRate}
-                width={this.state.width}
-                height={this.state.height}
+                dataRate={this.state.dataRate}
             />
         </div>
     );

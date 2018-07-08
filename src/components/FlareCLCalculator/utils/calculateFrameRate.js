@@ -1,11 +1,15 @@
 import { FORMAT, DUAL_FORMATS } from '../constants';
 import { widthMultiple, heightMultiple } from './resolution';
 
-const calculateFrameRate = (parentState) => {
-
-    // Parameters from parent state
-    let { model, hwversion, format, bitDepth, linkSpeed, linkCount, width, height, subSampling, slowMode } = parentState;
-
+export const calculateFrameRate = ({
+    model,
+    hwversion,
+    format,
+    width,
+    height,
+    subSampling,
+    slowMode
+}) => {
     // Adjust width and height (if subsampling enabled)
     if (subSampling) {
         width /= 2;
@@ -22,10 +26,10 @@ const calculateFrameRate = (parentState) => {
     }
 
     // Frame overhead time + line time
-    let { frameOverheadTimeUs, lineTimeUs, frameRate } = calculateCLOverheadAndLineTime(model, hwversion, format, width, slowMode);
-    if (frameRate > 0) {
-        frameRate = Math.round(frameRate * 100)/100;
-        return frameRate + ' FPS [' + width + ' x ' + height + ']';
+    const { frameOverheadTimeUs, lineTimeUs, frameRate48m } = 
+        calculateCLOverheadAndLineTime(model, hwversion, format, width, slowMode);
+    if (frameRate48m > 0) {
+        return frameRate48m.toFixed(2);
     }
     if (frameOverheadTimeUs === 0) throw new Error("Frame overhead time is zero.");
     if (lineTimeUs === 0) throw new Error("Line time is zero.");
@@ -38,11 +42,8 @@ const calculateFrameRate = (parentState) => {
     if (framePeriodUs === 0) throw new Error("Frame period is zero.");
 
     // Calculate and return framerate
-    frameRate = 1000000.0 / framePeriodUs;
-    const frameRateX10 = frameRate * 10;
-    frameRate = frameRateX10 / 10.0;
-    frameRate = Math.round(frameRate * 100)/100;
-    return frameRate;
+    const frameRate = 1000000.0 / framePeriodUs;
+    return frameRate.toFixed(2);
 };
 
 // -------------- Get frame overhead and line time --------------
@@ -377,13 +378,11 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
                 break;
 
             default:
-                throw new Error("Unsupported Camera Link format \"" + format + "\"");
+                throw new Error("Unsupported Camera Link format \"" + format + "\".");
         }
     } else {
-        throw new Error("Unsupported camera type");
+        throw new Error("Unsupported camera type.");
     }
 
     return { frameOverheadTimeUs, lineTimeUs, frameRate: 0 };
 };
-
-export { calculateFrameRate, widthMultiple, heightMultiple };
