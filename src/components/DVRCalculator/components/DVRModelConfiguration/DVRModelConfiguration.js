@@ -1,9 +1,9 @@
 import React from 'react';
-import { DVR_MODELS } from '../../constants';
+import { MODELS } from '../../constants';
 import styles from './DVRModelConfiguration.css';
 
 const DVRModel = ({ handleChangeModel, configurations, handleChangeConfiguration }) => {
-    const modelOptions = DVR_MODELS.map((model, i) => <option key={i}>{model}</option>);
+    const modelOptions = MODELS.map((model, i) => <option key={i}>{model}</option>);
     const configOptions = configurations.map((configuration, i) => <option key={i}>{configuration}</option>);
     return (
         <div className={styles.root}>

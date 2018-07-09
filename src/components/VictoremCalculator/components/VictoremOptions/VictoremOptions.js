@@ -1,5 +1,5 @@
 import React from 'react';
-import { VIC_OPTION } from '../../constants';
+import { OPTION } from '../../constants';
 import styles from './VictoremOptions.css';
 
 const VictoremOptions = ({
@@ -16,8 +16,8 @@ const VictoremOptions = ({
                 <input
                     type="radio"
                     name='cameraOption'
-                    value={VIC_OPTION.NONE}
-                    checked={cameraOption === VIC_OPTION.NONE}
+                    value={OPTION.NONE}
+                    checked={cameraOption === OPTION.NONE}
                     onChange={handleChange}
                 />
                 <div className={styles.label}>None</div>
@@ -25,8 +25,8 @@ const VictoremOptions = ({
                 <input
                     type="radio"
                     name='cameraOption'
-                    value={VIC_OPTION.BIN_VERTICAL}
-                    checked={cameraOption === VIC_OPTION.BIN_VERTICAL}
+                    value={OPTION.BIN_VERTICAL}
+                    checked={cameraOption === OPTION.BIN_VERTICAL}
                     disabled={!supportsVerticalBinning}
                     onChange={handleChange}
                 />
@@ -36,8 +36,8 @@ const VictoremOptions = ({
                 <input
                     type="radio"
                     name='cameraOption'
-                    value={VIC_OPTION.SUBSAMPLING}
-                    checked={cameraOption === VIC_OPTION.SUBSAMPLING}
+                    value={OPTION.SUBSAMPLING}
+                    checked={cameraOption === OPTION.SUBSAMPLING}
                     disabled={!supportsSubSampling}
                     onChange={handleChange}
                 />
@@ -46,8 +46,8 @@ const VictoremOptions = ({
                 <input
                     type="radio"
                     name='cameraOption'
-                    value={VIC_OPTION.BIN_2X2}
-                    checked={cameraOption === VIC_OPTION.BIN_2X2}
+                    value={OPTION.BIN_2X2}
+                    checked={cameraOption === OPTION.BIN_2X2}
                     disabled={!supports2x2Binning}
                     onChange={handleChange}
                 />

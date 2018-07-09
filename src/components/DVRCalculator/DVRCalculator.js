@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import CalculatorTopBar from '../CalculatorTopBar';
 import { DVRCamera, DVRCameras, DVRDrives, DVRModelConfiguration, DVRRecordingTime } from './components';
-import { DVR_CONFIG, DVR_LINK, DVR_MODEL, MODES, DVR_CL_CONFIGS, DVR_CLPLUS_CONFIGS, DVR_CX_CONFIGS, DVR_CXPLUS_CONFIGS, DVR_SDI_CONFIGS, DVR_DRIVE_CAPACITY } from './constants';
+import { CONFIG, LINK, MODEL, MODES, CL_CONFIGS, CLPLUS_CONFIGS, CX_CONFIGS, CXPLUS_CONFIGS, SDI_CONFIGS, DRIVE_CAPACITY } from './constants';
 import uuid from 'uuid';
 import styles from './DVRCalculator.css';
 
 class DVRCalculator extends Component {
     state = {
-        model: DVR_MODEL.CORE2CL,
-        link: DVR_LINK.CL,
-        configuration: DVR_CONFIG.CL.BASEx4,
-        configurations: DVR_CL_CONFIGS,
+        model: MODEL.CORE2CL,
+        link: LINK.CL,
+        configuration: CONFIG.CL.BASEx4,
+        configurations: CL_CONFIGS,
         cameras: [],
         dataRates: [],
         totalDataRate: 0,
@@ -39,25 +39,25 @@ class DVRCalculator extends Component {
         let link;
         let configurations;
         switch (model) {
-            case DVR_MODEL.CORE2CL:
-                configurations = DVR_CL_CONFIGS;
-                link = DVR_LINK.CL;
+            case MODEL.CORE2CL:
+                configurations = CL_CONFIGS;
+                link = LINK.CL;
                 break;
-            case DVR_MODEL.CORE2CLPLUS:
-                configurations = DVR_CLPLUS_CONFIGS;
-                link = DVR_LINK.CL;
+            case MODEL.CORE2CLPLUS:
+                configurations = CLPLUS_CONFIGS;
+                link = LINK.CL;
                 break;
-            case DVR_MODEL.CORE2CX:
-                configurations = DVR_CX_CONFIGS;
-                link = DVR_LINK.CX;
+            case MODEL.CORE2CX:
+                configurations = CX_CONFIGS;
+                link = LINK.CX;
                 break;
-            case DVR_MODEL.CORE2CXPLUS:
-                configurations = DVR_CXPLUS_CONFIGS;
-                link = DVR_LINK.CX;
+            case MODEL.CORE2CXPLUS:
+                configurations = CXPLUS_CONFIGS;
+                link = LINK.CX;
                 break;
-            case DVR_MODEL.CORE2SDI:
-                configurations = DVR_SDI_CONFIGS;
-                link = DVR_LINK.SDI;
+            case MODEL.CORE2SDI:
+                configurations = SDI_CONFIGS;
+                link = LINK.SDI;
         }
         this.setState(() => ({ model, link, configurations }));
         this.reloadCameras();
@@ -70,7 +70,7 @@ class DVRCalculator extends Component {
 
     handleChangeDrive = (e) => {
         const drive = e.target.value;
-        const driveCapacity = DVR_DRIVE_CAPACITY[drive];
+        const driveCapacity = DRIVE_CAPACITY[drive];
         const totalCapacity = driveCapacity * this.state.driveAmount;
         this.setState(() => ({ driveCapacity, totalCapacity }));
 

@@ -1,4 +1,4 @@
-export const DVR_LINK = {
+export const LINK = {
     CL: 'cl',
     CX: 'cx',
     SDI: 'sdi'

@@ -1,4 +1,4 @@
-export const DVR_MODEL = {
+export const MODEL = {
     CORE2CL: 'CORE2CL',
     CORE2CLPLUS: 'CORE2CLPLUS',
     CORE2CX: 'CORE2CX',
@@ -8,4 +8,4 @@ export const DVR_MODEL = {
     CORENTSC: 'CORENTSC'
 };
 
-export const DVR_MODELS = Object.values(DVR_MODEL);
+export const MODELS = Object.values(MODEL);

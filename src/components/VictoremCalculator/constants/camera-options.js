@@ -1,4 +1,4 @@
-export const VIC_OPTION = {
+export const OPTION = {
     NONE: 0,
     SUBSAMPLING: 1,
     BIN_VERTICAL: 2,

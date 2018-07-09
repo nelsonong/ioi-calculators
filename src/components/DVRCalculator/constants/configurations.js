@@ -1,4 +1,4 @@
-export const DVR_CONFIG = {
+export const CONFIG = {
     CL: {
         BASEx4: 'Base x4',
         FULL_BASEx2: 'Full + Base x2',
@@ -23,21 +23,21 @@ export const DVR_CONFIG = {
 };
 
 // Camera Link configurations
-export const DVR_CL_CONFIGS = [
-    DVR_CONFIG.CL.BASEx4,
-    DVR_CONFIG.CL.FULL_BASEx2
+export const CL_CONFIGS = [
+    CONFIG.CL.BASEx4,
+    CONFIG.CL.FULL_BASEx2
 ];
 
-export const DVR_CLPLUS_CONFIGS = Object.values(DVR_CONFIG.CL);
+export const CLPLUS_CONFIGS = Object.values(CONFIG.CL);
 
 // CoaXPress configurations
-export const DVR_CX_CONFIGS = [
-    DVR_CONFIG.CX.SINGLEx4,
-    DVR_CONFIG.CX.DUALx2,
-    DVR_CONFIG.CX.SINGLEx2_DUAL
+export const CX_CONFIGS = [
+    CONFIG.CX.SINGLEx4,
+    CONFIG.CX.DUALx2,
+    CONFIG.CX.SINGLEx2_DUAL
 ];
 
-export const DVR_CXPLUS_CONFIGS = Object.values(DVR_CONFIG.CX);
+export const CXPLUS_CONFIGS = Object.values(CONFIG.CX);
 
 // SDI configurations
-export const DVR_SDI_CONFIGS = Object.values(DVR_CONFIG.SDI);
+export const SDI_CONFIGS = Object.values(CONFIG.SDI);

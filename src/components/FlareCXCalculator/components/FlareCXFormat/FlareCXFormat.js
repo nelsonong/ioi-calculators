@@ -1,5 +1,5 @@
 import React from 'react';
-import { MODE } from '../../../DVRCalculator/constants/dvr-modes';;
+import { MODE } from '../../constants';
 import styles from './FlareCXFormat.css';
 
 const renderLinkCountOptions = (formats, mode) => {

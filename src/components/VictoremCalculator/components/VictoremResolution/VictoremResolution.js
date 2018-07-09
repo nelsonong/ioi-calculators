@@ -1,5 +1,5 @@
 import React from 'react';
-import { VIC_RESOLUTIONS, VIC_NAN_RESOLUTIONS, VIC_OPTION } from '../../constants';
+import { RESOLUTIONS, NAN_RESOLUTIONS, OPTION } from '../../constants';
 import styles from './VictoremResolution.css';
 
 const VictoremResolution = ({
@@ -10,9 +10,9 @@ const VictoremResolution = ({
     handleChangePreset,
     handleChangeResolution
 }) => {
-    const subSamplingSelected = (cameraOption === VIC_OPTION.SUBSAMPLING);
-    const resolutionPresetOptions = VIC_RESOLUTIONS.map((preset, i) => {
-        if (!VIC_NAN_RESOLUTIONS.includes(preset)) {
+    const subSamplingSelected = (cameraOption === OPTION.SUBSAMPLING);
+    const resolutionPresetOptions = RESOLUTIONS.map((preset, i) => {
+        if (!NAN_RESOLUTIONS.includes(preset)) {
             preset = `${preset[0]}x${preset[1]}`;
         }
         return <option key={i} value={preset}>{preset}</option>;

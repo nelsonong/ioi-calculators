@@ -3,7 +3,7 @@ import { DVRCameraModal } from '../DVRCameraModal';
 import FlareCLCalculator from '../../../FlareCLCalculator';
 import FlareCXCalculator from '../../../FlareCXCalculator';
 import FlareSDICalculator from '../../../FlareSDICalculator';
-import { DVR_LINK } from '../../constants';
+import { LINK } from '../../constants';
 import plus from './images/plus.png';
 import edit from './images/edit.png';
 import remove from './images/remove.png';
@@ -30,13 +30,13 @@ class DVRCamera extends Component {
         const { cameraRef, mode, link } = this.state;
         let camera;
         switch (link) {
-            case DVR_LINK.CL:
+            case LINK.CL:
                 camera = <FlareCLCalculator ref={cameraRef} mode={mode} />;
                 break;
-            case DVR_LINK.CX:
+            case LINK.CX:
                 camera = <FlareCXCalculator ref={cameraRef} mode={mode} />;
                 break;
-            case DVR_LINK.SDI:
+            case LINK.SDI:
                 camera = <FlareSDICalculator ref={cameraRef} mode={mode} />;
         }
         const modal = (

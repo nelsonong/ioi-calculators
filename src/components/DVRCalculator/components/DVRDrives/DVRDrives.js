@@ -1,10 +1,10 @@
 import React from 'react';
-import { DVR_DRIVES } from '../../constants';
+import { DRIVES } from '../../constants';
 import styles from './DVRDrives.css';
 
 const DVRDrives = ({ totalCapacity, handleChangeDriveAmount, handleChangeDrive }) => {
     const driveAmountOptions = [ 1, 2, 4, 6 ].map((amount, i) => <option key={i} value={amount}>{amount}</option>)
-    const driveOptions = DVR_DRIVES.map((drive, i) => <option key={i}>{drive}</option>);
+    const driveOptions = DRIVES.map((drive, i) => <option key={i}>{drive}</option>);
     const totalCapacityText = `${totalCapacity} GB`;
     return (
         <fieldset className={styles.root}>
