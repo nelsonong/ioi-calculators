@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import CalculatorTopBar from '../CalculatorTopBar';
 import { FlareSDIModel, FlareSDIFormat, FlareSDIColor, FlareSDIResolution, FlareSDIFrameRate, FlareSDIOutput } from './components';
-import { MODEL, MODELS, LINKS, SDI_TREE } from './constants';
+import { MODEL, MODELS, LINKS, MODE, SDI_TREE } from './constants';
+import { splitResolution } from './utils/splitResolution';
 import { calculateDataRate } from './utils/calculateDataRate';
 import './FlareSDICalculator.css';
 
 class FlareSDICalculator extends Component {
     state = {
-        model: MODEL.Type2KSDI,
-        models: MODELS,
+        model: '',
+        models: [],
         link: '',
         links: [],
         sdiInterface: '',
         sdiInterfaces: [],
+        width: 0,
+        height: 0,
         resolution: '',
         resolutions: [],
         color: '',
@@ -24,14 +27,37 @@ class FlareSDICalculator extends Component {
     };
 
     componentDidMount = () => {
-        this.updateBelowModel(this.state.model);
+        let models = MODELS;
+        let links = LINKS[models[0]];
+        const mode = this.state.mode;
+
+        if (mode) {
+            switch (mode) {
+                case MODE.SINGLE:
+                    models = [ MODEL.Type2KSDI ];
+                    links = [ 1 ];
+                    break;
+                case MODE.DUAL:
+                    models = [ MODEL.Type2KSDI, MODEL.Type4KSDI ]
+                    links = [ 2 ];
+                    break;
+                case MODE.QUAD:
+                    models = [ MODEL.Type4KSDI ];
+                    links = [ 4 ];
+            }
+        }
+
+        const model = models[0];
+        const link = links[0];
+        this.setState(() => ({ model, models, link, links }));
+        this.updateBelowModel(model);
     }
 
     // General change handler (requires input element to have name attribute)
     handleChange = (e) => {
-        const { name } = e.target;
-        let { value } = e.target;
-        if (!isNaN(value)) value = Number(value);
+        const name = e.target.name;
+        let value = e.target.value;
+        value = !isNaN(value) ? Number(value) : value;
         switch (name) {
             case 'model': {
                 this.updateBelowModel(value);
@@ -48,7 +74,8 @@ class FlareSDICalculator extends Component {
             }
             case 'resolution': {
                 const { model, sdiInterface } = this.state;
-                this.updateBelowResolution({ model, sdiInterface, resolution: value });
+                const [ width, height ] = splitResolution(value);
+                this.updateBelowResolution({ model, sdiInterface, width, height, resolution: value });
                 break;
             }
             case 'color': {
@@ -66,16 +93,21 @@ class FlareSDICalculator extends Component {
     updateBelowModel = (model) => {
         const sdiInterfaces = Object.keys(SDI_TREE[model]);
         const sdiInterface = sdiInterfaces[0];
-        const links = this.props.mode ? LINKS[model].filter(link => link === mode) : LINKS[model];
-        const link = links[0];
-        this.updateBelowInterface({model, sdiInterface, sdiInterfaces, link, links });
+        if (this.props.mode) {
+            this.updateBelowInterface({ model, sdiInterface, sdiInterfaces });
+        } else {
+            const links = LINKS[model];
+            const link = links[0];
+            this.updateBelowInterface({ model, sdiInterface, sdiInterfaces, link, links });
+        }
     }
 
     updateBelowInterface = (aboveInterface) => {
         const { model, sdiInterface } = aboveInterface;
         const resolutions = Object.keys(SDI_TREE[model][sdiInterface]);
         const resolution = resolutions[0];
-        this.updateBelowResolution({ ...aboveInterface, resolution, resolutions });
+        const [ width, height ] = splitResolution(resolution);
+        this.updateBelowResolution({ ...aboveInterface, width, height, resolution, resolutions });
     }
 
     updateBelowResolution = (aboveResolution) => {
@@ -94,8 +126,8 @@ class FlareSDICalculator extends Component {
     }
 
     updateDataRate = () => {
-        this.setState(({ frameRate, link, resolution, color }) => {
-            const dataRate = calculateDataRate(frameRate, link, resolution, color);
+        this.setState(({ frameRate, link, width, height, color }) => {
+            const dataRate = calculateDataRate(frameRate, link, width, height, color);
             return { dataRate };
         });
     }
@@ -103,7 +135,7 @@ class FlareSDICalculator extends Component {
     render = () => (
         <div className="flare-calculator">
             <CalculatorTopBar
-                mode={this.state.mode}
+                inModal={this.state.mode}
                 type={'Flare SDI'}
                 deleteCalculator={this.props.deleteCalculator}
                 id={this.props.id}

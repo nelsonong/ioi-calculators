@@ -23,6 +23,15 @@ class FlareCLCalculator extends Component {
         mode: this.props.mode                   // Mode (Base or Full if in DVR calculator)
     };
 
+    componentDidMount = () => {
+        const { model, mode } = this.state;
+        let formats = model.startsWith('12M') ? FORMATS.CL12m : FORMATS.CL2_4m;
+        if (mode) {
+            formats = this.filterFormats(formats, mode);
+            this.setState(() => ({ formats }));
+        }
+    }
+
     // General change handler (requires input element to have name attribute)
     handleChange = (e) => {
         const { name, checked } = e.target;
@@ -45,19 +54,9 @@ class FlareCLCalculator extends Component {
 
         // Formats
         let formats = model.startsWith('12M') ? FORMATS.CL12m : FORMATS.CL2_4m;
-        const mode = this.props.mode;
+        const mode = this.state.mode;
         if (mode) {
-            switch (mode) {
-            case MODE.BASE:
-                formats = formats.filter(clFormat => clFormat.startsWith('Base'));
-                break;
-            case MODE.FULL:
-                formats = formats.filter(clFormat => !clFormat.startsWith('Base'));
-                break;
-            case MODE.DUAL_FULL:
-                formats = formats.filter(clFormat => (clFormat.startsWith('80') || clFormat.startsWith('Dual')));
-                break;
-            }
+            formats = this.filterFormats(formats, mode);
         }
         
         this.setState(() => ({ model, hwversion, formats }));
@@ -114,10 +113,23 @@ class FlareCLCalculator extends Component {
         });
     }
 
+    filterFormats = (formats, mode) => {
+        switch (mode) {
+            case MODE.BASE:
+                return formats.filter(clFormat => clFormat.startsWith('Base'));
+            case MODE.FULL:
+                return formats.filter(clFormat => !clFormat.startsWith('Base'));
+            case MODE.DUAL_FULL:
+                return formats.filter(clFormat => (clFormat.startsWith('80') || clFormat.startsWith('Dual')));
+            default:
+                throw new Error('Mode not found.');
+        }
+    }
+
     render = () => (
         <div className="flare-calculator">
             <CalculatorTopBar
-                mode={this.state.mode}
+                inModal={this.state.mode}
                 type={'Flare CL'}
                 deleteCalculator={this.props.deleteCalculator}
                 id={this.props.id}

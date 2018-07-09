@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { DVRCameraModal } from '../DVRCameraModal';
-import FlareCalculator from '../../../FlareCalculator';
+import FlareCLCalculator from '../../../FlareCLCalculator';
+import FlareCXCalculator from '../../../FlareCXCalculator';
+import FlareSDICalculator from '../../../FlareSDICalculator';
 import plus from './images/plus.png';
 import edit from './images/edit.png';
 import remove from './images/remove.png';
 import './DVRCamera.css';
+import { DVR_LINK } from '../../constants';
 
 class DVRCamera extends Component {
     state = {
         modal: null,
-        camera: React.createRef(),
+        cameraRef: React.createRef(),
         model: '',
         format: '',
         resolution: '',
@@ -18,12 +21,31 @@ class DVRCamera extends Component {
         modal: '',
         format: '',
         resolution: '',
-        dataRate: 0
+        dataRate: 0,
+        mode: this.props.mode,
+        link: this.props.link
     };
 
     addCamera = () => {
-        const camera = <FlareCalculator ref={this.state.camera} link={this.props.link} mode={this.props.mode} />;
-        const modal = <DVRCameraModal isOpen={this.state.modalIsOpen} camera={camera} closeModal={this.closeModal} />;
+        const { cameraRef, mode, link } = this.state;
+        let camera;
+        switch (link) {
+            case DVR_LINK.CL:
+                camera = <FlareCLCalculator ref={cameraRef} mode={mode} />;
+                break;
+            case DVR_LINK.CX:
+                camera = <FlareCXCalculator ref={cameraRef} mode={mode} />;
+                break;
+            case DVR_LINK.SDI:
+                camera = <FlareSDICalculator ref={cameraRef} mode={mode} />;
+        }
+        const modal = (
+            <DVRCameraModal
+                isOpen={this.state.modalIsOpen}
+                camera={camera}
+                closeModal={this.closeModal}
+            />
+        );
         this.setState(() => ({ added: true, modalIsOpen: true, modal }));
     }
 
@@ -32,13 +54,11 @@ class DVRCamera extends Component {
     }
 
     closeModal = () => {
-        console.log(this.state.camera.current);
-        const calculatorState = this.state.camera.current.state;
-        const { model, format, width, height, frameRate } = calculatorState;
+        const calculatorState = this.state.cameraRef.current.state;
+        const { model, format, width, height, dataRate } = calculatorState;
         const resolution = `${width}x${height}`;
-        const dataRate = (frameRate * width * height) / ( 1024 * 1024 * 1024 );    // In GB/s
+
         this.setState(() => ({ model, format, resolution, dataRate, modalIsOpen: false, isHovered: false }));
-        
         this.props.pushDataRate(this.props.id, dataRate);
     }
 
@@ -65,10 +85,10 @@ class DVRCamera extends Component {
                 {this.state.model}
             </div>
             <div className='dvr-camera-info'>
-                {this.state.format}
-            </div>
-            <div className='dvr-camera-info'>
                 {this.state.resolution}
+            </div>
+            <div className='dvr-camera-data-rate'>
+                {(this.state.dataRate / 1024).toFixed(2)} GB/s
             </div>
         </div>
     );

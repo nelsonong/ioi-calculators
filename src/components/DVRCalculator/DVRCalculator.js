@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
+import CalculatorTopBar from '../CalculatorTopBar';
 import { DVRCamera, DVRCameras, DVRDrives, DVRModelConfiguration, DVRRecordingTime } from './components';
-import { DVR_CONFIG, DVR_LINK, DVR_MODEL, DVR_MODES, DVR_CL_CONFIGS, DVR_CLPLUS_CONFIGS, DVR_CX_CONFIGS, DVR_CXPLUS_CONFIGS, DVR_DRIVE_CAPACITY } from './constants';
+import { DVR_CONFIG, DVR_LINK, DVR_MODEL, MODES, DVR_CL_CONFIGS, DVR_CLPLUS_CONFIGS, DVR_CX_CONFIGS, DVR_CXPLUS_CONFIGS, DVR_SDI_CONFIGS, DVR_DRIVE_CAPACITY } from './constants';
 import './DVRCalculator.css';
 
 class DVRCalculator extends Component {
@@ -54,6 +55,9 @@ class DVRCalculator extends Component {
                 configurations = DVR_CXPLUS_CONFIGS;
                 link = DVR_LINK.CX;
                 break;
+            case DVR_MODEL.CORE2SDI:
+                configurations = DVR_SDI_CONFIGS;
+                link = DVR_LINK.SDI;
         }
         this.setState(() => ({ model, link, configurations }));
         this.reloadCameras();
@@ -82,8 +86,8 @@ class DVRCalculator extends Component {
     }
 
     reloadCameras = () => {
-        this.setState((prevState) => {
-            const modes = DVR_MODES[prevState.configuration];
+        this.setState(({ link, configuration }) => {
+            const modes = MODES[configuration];
             const cameras = modes.map(mode => {
                 const key = uuid();
                 return ({
@@ -93,19 +97,21 @@ class DVRCalculator extends Component {
                         id={key}
                         pushDataRate={this.pushDataRate}
                         deleteDataRate={this.deleteDataRate}
-                        link={prevState.link}
+                        link={link}
                         mode={mode}
                     />
                 });
             });
-            return { cameras };
+            return { cameras, dataRates: [], totalDataRate: 0 };
         });
+        
+        this.updateRecordingTime();
     }
         
     // Push/replace existing data rate
-    pushDataRate = (id, newDataRate) => {
+    pushDataRate = (id, dataRate) => {
         let dataRates = this.state.dataRates.filter(dataRate => dataRate.id !== id);
-        dataRates.push({ id, value: newDataRate });
+        dataRates.push({ id, value: dataRate });
         this.updateTotalDataRate(dataRates);
     }
 
@@ -128,8 +134,8 @@ class DVRCalculator extends Component {
 
     // Update recording time after setting state
     updateRecordingTime = () => {
-        this.setState((prevState) => {
-            const seconds = prevState.totalCapacity / prevState.totalDataRate;
+        this.setState(({ totalCapacity, totalDataRate }) => {
+            const seconds = totalCapacity / totalDataRate * 1024;   // Convert to MB/s
             const recordingTime = isFinite(seconds) ? this.secondsTohhmmss(seconds) : 'N/A';
             return ({ recordingTime });
         });
@@ -152,10 +158,12 @@ class DVRCalculator extends Component {
 
     render = () => (
         <div className="dvr-calculator">
-            <div>
-                <div className='dvr-calculator-title'>DVR Storage Calculator</div>
-                <button className='dvr-calculator-close-button' type='button' onClick={() => this.props.deleteCalculator(this.props.id)}>✖</button>
-            </div>
+            <CalculatorTopBar
+                inModal={false}
+                type={'DVR Storage'}
+                deleteCalculator={this.props.deleteCalculator}
+                id={this.props.id}
+            />
             <DVRModelConfiguration
                 configurations={this.state.configurations}
                 handleChangeModel={this.handleChangeModel}

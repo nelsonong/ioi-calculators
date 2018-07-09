@@ -12,6 +12,13 @@ export const DVR_CONFIG = {
         DUALx2: 'Dual-Link x2',
         SINGLEx2_DUAL: 'Single-Link x2 + Dual-Link',
         QUAD: 'Quad-Link'
+    },
+    SDI: {
+        SINGLEx4: 'Single-Link x4',
+        DUALx2: 'Dual-Link x2',
+        QUAD: 'Quad-Link',
+        SINGLE_IOx2: 'Single-Link x2 In/Out',
+        DUAL_IO: 'Dual-Link In/Out'
     }
 };
 
@@ -31,3 +38,6 @@ export const DVR_CX_CONFIGS = [
 ];
 
 export const DVR_CXPLUS_CONFIGS = Object.values(DVR_CONFIG.CX);
+
+// SDI configurations
+export const DVR_SDI_CONFIGS = Object.values(DVR_CONFIG.SDI);

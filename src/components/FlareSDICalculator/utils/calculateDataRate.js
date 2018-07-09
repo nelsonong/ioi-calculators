@@ -1,9 +1,6 @@
-import { LINK, COLOR } from '../constants';
+import { COLOR } from '../constants';
 
-export const calculateDataRate = (frameRate, link, resolution, color) => {
-
-    // Extract width + height
-    const [ width, height ] = splitResolution(resolution);
+export const calculateDataRate = (frameRate, link, width, height, color) => {
 
     // Determine pixel size
     let pixelSize;
@@ -12,9 +9,4 @@ export const calculateDataRate = (frameRate, link, resolution, color) => {
 
     const dataRate = ( frameRate * width * height * link * pixelSize ) / ( 1024 * 1024 );
     return dataRate.toFixed(2);
-};
-
-// Remove parenthesis and split from 'x'
-const splitResolution = (resolution) => {
-    return resolution.match(/\((.*)\)/).pop().split('x').map(number => Number(number));
 };

@@ -1,61 +1,82 @@
 import { DVR_CONFIG } from './dvr-configurations';
 
-export const DVR_CL_MODE = {
+export const MODE = {
+    // CL
     BASE: 'BASE',
     FULL: 'FULL',
-    DUAL_FULL: 'DUAL_FULL'
-};
+    DUAL_FULL: 'DUAL_FULL',
 
-export const DVR_CX_MODE = {
+    // CX/SDI
     SINGLE: 'SINGLE',
     DUAL: 'DUAL',
     QUAD: 'QUAD'
 };
 
-export const DVR_MODES = {
+export const MODES = {
     // Camera Link modes
     [DVR_CONFIG.CL.BASEx4]: [
-        DVR_CL_MODE.BASE,
-        DVR_CL_MODE.BASE,
-        DVR_CL_MODE.BASE,
-        DVR_CL_MODE.BASE
+        MODE.BASE,
+        MODE.BASE,
+        MODE.BASE,
+        MODE.BASE
     ],
     [DVR_CONFIG.CL.FULL_BASEx2]: [
-        DVR_CL_MODE.FULL,
-        DVR_CL_MODE.BASE,
-        DVR_CL_MODE.BASE,
+        MODE.FULL,
+        MODE.BASE,
+        MODE.BASE,
     ],
     [DVR_CONFIG.CL.FULLx2]: [
-        DVR_CL_MODE.FULL,
-        DVR_CL_MODE.FULL,
+        MODE.FULL,
+        MODE.FULL,
     ],
     [DVR_CONFIG.CL.DUAL_FULL]: [
-        DVR_CL_MODE.DUAL_FULL
+        MODE.DUAL_FULL
     ],
     [DVR_CONFIG.CL.BASE_IOx2]: [
-        DVR_CL_MODE.BASE,
-        DVR_CL_MODE.BASE
+        MODE.BASE,
+        MODE.BASE
     ],
     [DVR_CONFIG.CL.FULL_IO]: [
-        DVR_CL_MODE.DUAL_FULL
+        MODE.DUAL_FULL
     ],
     // CoaXPress modes
     [DVR_CONFIG.CX.SINGLEx4]: [
-        DVR_CX_MODE.SINGLE,
-        DVR_CX_MODE.SINGLE,
-        DVR_CX_MODE.SINGLE,
-        DVR_CX_MODE.SINGLE
+        MODE.SINGLE,
+        MODE.SINGLE,
+        MODE.SINGLE,
+        MODE.SINGLE
     ],
     [DVR_CONFIG.CX.DUALx2]: [
-        DVR_CX_MODE.DUAL,
-        DVR_CX_MODE.DUAL
+        MODE.DUAL,
+        MODE.DUAL
     ],
     [DVR_CONFIG.CX.SINGLEx2_DUAL]: [
-        DVR_CX_MODE.DUAL,
-        DVR_CX_MODE.SINGLE,
-        DVR_CX_MODE.SINGLE
+        MODE.DUAL,
+        MODE.SINGLE,
+        MODE.SINGLE
     ],
     [DVR_CONFIG.CX.QUAD]: [
-        DVR_CX_MODE.QUAD
-    ]
+        MODE.QUAD
+    ],
+    // SDI modes
+    [DVR_CONFIG.SDI.SINGLEx4]: [
+        MODE.SINGLE,
+        MODE.SINGLE,
+        MODE.SINGLE,
+        MODE.SINGLE
+    ],
+    [DVR_CONFIG.SDI.DUALx2]: [
+        MODE.DUAL,
+        MODE.DUAL
+    ],
+    [DVR_CONFIG.SDI.QUAD]: [
+        MODE.QUAD
+    ],
+    [DVR_CONFIG.SDI.SINGLE_IOx2]: [
+        MODE.BASE,
+        MODE.BASE
+    ],
+    [DVR_CONFIG.SDI.DUAL_IO]: [
+        MODE.DUAL_FULL
+    ],
 };

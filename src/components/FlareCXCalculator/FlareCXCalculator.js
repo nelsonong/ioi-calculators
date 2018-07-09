@@ -105,7 +105,7 @@ class FlareCXCalculator extends Component {
     render = () => (
         <div className="flare-calculator">
             <CalculatorTopBar
-                mode={this.state.mode}
+                inModal={this.state.mode}
                 type={'Flare CX'}
                 deleteCalculator={this.props.deleteCalculator}
                 id={this.props.id}

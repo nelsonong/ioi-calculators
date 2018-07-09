@@ -27,10 +27,10 @@ const calculateFrameRate = ({
     }
 
     // Frame overhead time + line time
-    let { frameOverheadTimeUs, lineTimeUs, frameRate48m } = 
+    let { frameOverheadTimeUs, lineTimeUs, frameRate } = 
         calculateCXOverheadAndLineTime(model, bitDepth, width, height, linkSpeed, linkCount);
-    if (frameRate48m > 0) {
-        return frameRate48m.toFixed(2);
+    if (frameRate > 0) {
+        return frameRate.toFixed(2);
     }
     if (frameOverheadTimeUs === 0) throw new Error("Frame overhead time is zero.");
     if (lineTimeUs === 0) throw new Error("Line time is zero.");
@@ -43,7 +43,7 @@ const calculateFrameRate = ({
     if (framePeriodUs === 0) throw new Error("Frame period is zero.");
 
     // Calculate and return framerate
-    const frameRate = 1000000.0 / framePeriodUs;
+    frameRate = 1000000.0 / framePeriodUs;
     return frameRate.toFixed(2);
 };
 

@@ -1,9 +1,28 @@
 import React from 'react';
+import { MODE } from '../../../DVRCalculator/constants/dvr-modes';;
 import './FlareCXFormat.css';
 
-const FlareCXFormat = ({ formats, handleChange }) => {
+const renderLinkCountOptions = (formats, mode) => {
+    if (!mode) {
+        return formats.LinkCounts.map((linkCount, i) => <option key={i} value={linkCount}>{linkCount}</option>);
+    } else {
+        let linkCount;
+        switch (mode) {
+            case MODE.SINGLE:
+                linkCount = 1;
+                break;
+            case MODE.DUAL:
+                linkCount = 2;
+                break;
+            case MODE.QUAD:
+                linkCount = 4;
+        }
+        return <option value={linkCount}>{linkCount}</option>;
+    }
+};
+
+const FlareCXFormat = ({ formats, mode, handleChange }) => {
     const bitDepthOptions = formats.BitDepths.map((bitDepth, i) => <option key={i} value={bitDepth}>{bitDepth}</option>);
-    const linkCountOptions = formats.LinkCounts.map((linkCount, i) => <option key={i} value={linkCount}>{linkCount}</option>);
     const linkSpeedOptions = formats.LinkSpeeds.map((linkSpeed, i) => <option key={i} value={linkSpeed}>{linkSpeed}</option>);
     return (
         <fieldset>
@@ -18,7 +37,7 @@ const FlareCXFormat = ({ formats, handleChange }) => {
                     {bitDepthOptions}
                 </select>
                 <select className='flare-format-select' name='linkCount' onChange={handleChange}>
-                    {linkCountOptions}
+                    {renderLinkCountOptions(formats, mode)}
                 </select>
             </div>
         </div>
