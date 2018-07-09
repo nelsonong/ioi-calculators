@@ -1,4 +1,4 @@
-.victorem-calculator {
+.root {
     background-color: rgb(255, 227, 239);
     background: linear-gradient(to bottom right, rgb(255, 227, 239), rgb(252, 233, 241));
     font-family: 'Roboto Thin', sans-serif;
@@ -13,7 +13,7 @@
     padding: 0px 11px 7px 11px;
 }
 
-.victorem-calculator-title {
+.title {
     background: rgb(77, 60, 60);
     color: white;
     width: 70%;
@@ -25,10 +25,4 @@
     border-top-style: none;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-}
-
-.victorem-calculator > fieldset {
-    background: rgb(253, 241, 245);
-    text-align: left;
-    margin: 5px 0 5px 0;
 }

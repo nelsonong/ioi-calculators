@@ -1,18 +1,18 @@
 import React from 'react';
 import { DVR_MODELS } from '../../constants';
-import './DVRModelConfiguration.css';
+import styles from './DVRModelConfiguration.css';
 
 const DVRModel = ({ handleChangeModel, configurations, handleChangeConfiguration }) => {
     const modelOptions = DVR_MODELS.map((model, i) => <option key={i}>{model}</option>);
     const configOptions = configurations.map((configuration, i) => <option key={i}>{configuration}</option>);
     return (
-        <div className='dvr-model-configuration'>
-            <fieldset>
+        <div className={styles.root}>
+            <fieldset className={styles.root}>
             <legend>Model / Configuration</legend>
-                <select className='dvr-model-configuration-select' name='model' onChange={handleChangeModel}>
+                <select className={styles.select} name='model' onChange={handleChangeModel}>
                     {modelOptions}
                 </select>
-                <select className='dvr-model-configuration-select' name='configuration' onChange={handleChangeConfiguration}>
+                <select className={styles.select} name='configuration' onChange={handleChangeConfiguration}>
                     {configOptions}
                 </select>
             </fieldset>

@@ -1,12 +1,12 @@
 import React from 'react';
-import './FlareCXOutput.css';
+import styles from './FlareCXOutput.css';
 
 const FlareCXOutput = ({ frameRate, dataRate }) => {
     const frameRateInput = `${frameRate} FPS / ${dataRate} MB/s`;
     return (
-        <fieldset>
+        <fieldset className={styles.root}>
         <legend>Output</legend>
-            <input type='text' className='frame-rate-input' disabled={true} value={frameRateInput} />
+            <input type='text' className={styles.input} disabled={true} value={frameRateInput} />
         </fieldset>
     );
 };

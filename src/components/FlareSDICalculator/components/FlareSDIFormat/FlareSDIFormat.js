@@ -1,22 +1,22 @@
 import React from 'react';
-import './FlareSDIFormat.css';
+import styles from './FlareSDIFormat.css';
 
 const FlareSDIFormat = ({ sdiInterface, sdiInterfaces, link, links, handleChange }) => {
     const sdiInterfaceOptions = sdiInterfaces.map((sdiInterface, i) => <option key={i} value={sdiInterface}>{sdiInterface}</option>);
     let linkOptions = links.map((link, i) => <option key={i} value={link}>{link}</option>);
     return (
-        <fieldset>
+        <fieldset className={styles.root}>
         <legend>SDI Format</legend>
-            <div className='sdi-format-labels'>
-                <div className='sdi-format-label'>Interface:</div>
-                <div className='sdi-format-label'>Links:</div>
+            <div className={styles.labels}>
+                <div className={styles.label}>Interface:</div>
+                <div className={styles.label}>Links:</div>
             </div>
-            <div className='sdi-format-controls'>
-                <select name='sdiInterface' value={sdiInterface} onChange={handleChange}>
+            <div className={styles.controls}>
+                <select className={styles.control} name='sdiInterface' value={sdiInterface} onChange={handleChange}>
                     {sdiInterfaceOptions}
                 </select>
                 <br />
-                <select name='link' value={link} onChange={handleChange}>
+                <select className={styles.control} name='link' value={link} onChange={handleChange}>
                     {linkOptions}
                 </select>
             </div>

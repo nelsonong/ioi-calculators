@@ -1,23 +1,31 @@
-.resolution-labels {
+.root {
+    background: rgb(253, 238, 214);
+    text-align: left;
+    margin: 5px 0 5px 0;
+}
+
+.left {
     width: 22%;
     display: inline-block;
 }
 
-.resolution-label {
-    margin: 8px auto;
-}
-
-.resolution-controls {
+.right {
     width: 78%;
     display: inline-block;
 }
 
-.resolution-presets {
+.label {
+    margin: 8px auto;
+}
+
+.presets {
+    font-size: 11px;
     margin: 2px 3px;
     padding: 1px 2px;
 }
 
-.resolution-wxh {
+.wxh {
+    font-size: 11px;
     width: 40%;
     margin: 2px 3px;
     padding: 1px 2px;

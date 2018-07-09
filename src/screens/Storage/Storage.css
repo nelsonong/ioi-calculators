@@ -1,4 +1,4 @@
-.storage {
+.root {
   background-color: rgb(236, 236, 236);
   margin: 20px auto 0px auto;
   text-align: center;
@@ -11,7 +11,7 @@
   border-radius: 2px;
 }
 
-.storage-title {
+.title {
   background: rgb(61, 61, 61);
   color: white;
   font-size: 22px;
@@ -20,7 +20,7 @@
   padding: 14px;
 }
 
-.add-dvr-button {
+.add-button {
   background: rgb(114, 114, 114);
   font-size: 14px;
   font-family: 'Roboto', sans-serif;
@@ -34,28 +34,4 @@
   border-width: medium;
   border-radius: 3px;
   border-color: rgb(94, 94, 94);
-}
-
-.close-calculator-button {
-  background: transparent;
-  position: absolute;
-  float: right;
-  padding-left: 20px;
-  border: none;
-}
-
-fieldset {
-    background: rgb(253, 238, 214);
-    text-align: left;
-    margin: 5px 0 5px 0;
-}
-
-select {
-    font-size: 11px;
-    margin: 2px;
-}
-
-input {
-    font-size: 11px;
-    margin: 2px;
 }

@@ -1,19 +1,19 @@
 import React from 'react';
-import './VictoremModelInfo.css';
+import styles from './VictoremModelInfo.css';
 
 const VictoremModelInfo = ({ sensor, maxWidth, maxHeight }) => {
     const maxResolutionText = `${maxWidth} x ${maxHeight}`;
     return (
-        <fieldset>
+        <fieldset className={styles.root}>
         <legend>Model Information</legend>
-            <div className='model-info-labels'>
-                <div className='model-info-label'>Sensor:</div>
-                <div className='model-info-label'>Max Resolution:</div>
+            <div className={styles.labels}>
+                <div className={styles.label}>Sensor:</div>
+                <div className={styles.label}>Max Resolution:</div>
             </div>
-            <div className='model-info-inputs'>
-                <input type='text' className='model-info-input' disabled value={sensor} />
+            <div className={styles.inputs}>
+                <input type='text' className={styles.input} disabled value={sensor} />
                 <br />
-                <input type='text' className='model-info-input' disabled value={maxResolutionText}/>
+                <input type='text' className={styles.input} disabled value={maxResolutionText}/>
             </div>
         </fieldset>
     );

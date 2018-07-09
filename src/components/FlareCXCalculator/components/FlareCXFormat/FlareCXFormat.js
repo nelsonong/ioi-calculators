@@ -1,6 +1,6 @@
 import React from 'react';
 import { MODE } from '../../../DVRCalculator/constants/dvr-modes';;
-import './FlareCXFormat.css';
+import styles from './FlareCXFormat.css';
 
 const renderLinkCountOptions = (formats, mode) => {
     if (!mode) {
@@ -25,25 +25,25 @@ const FlareCXFormat = ({ formats, mode, handleChange }) => {
     const bitDepthOptions = formats.BitDepths.map((bitDepth, i) => <option key={i} value={bitDepth}>{bitDepth}</option>);
     const linkSpeedOptions = formats.LinkSpeeds.map((linkSpeed, i) => <option key={i} value={linkSpeed}>{linkSpeed}</option>);
     return (
-        <fieldset>
+        <fieldset className={styles.root}>
         <legend>CoaXPress Format</legend>
-        <div className='flare-format-left'>
-            <div className='flare-format-labels'>
-                <div className='flare-format-label'>Bit Depth</div>
-                <div className='flare-format-label'>Links</div>
+        <div className={styles.left}>
+            <div className={styles.labels}>
+                <div className={styles.label}>Bit Depth:</div>
+                <div className={styles.label}>Links:</div>
             </div>
-            <div className='flare-format-selects'>
-                <select className='flare-format-select' name='bitDepth' onChange={handleChange}>
+            <div className={styles.selects}>
+                <select className={styles.select} name='bitDepth' onChange={handleChange}>
                     {bitDepthOptions}
                 </select>
-                <select className='flare-format-select' name='linkCount' onChange={handleChange}>
+                <select className={styles.select} name='linkCount' onChange={handleChange}>
                     {renderLinkCountOptions(formats, mode)}
                 </select>
             </div>
         </div>
-        <div className='flare-format-right'>
-            <div className='flare-format-label'>Link Speed</div>
-            <select className='flare-format-select' name='linkSpeed' onChange={handleChange}>
+        <div className={styles.right}>
+            <div className={styles.label}>Speed:</div>
+            <select className={styles.select} name='linkSpeed' onChange={handleChange}>
                 {linkSpeedOptions}
             </select>
         </div>

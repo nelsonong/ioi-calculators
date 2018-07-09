@@ -1,9 +1,9 @@
 import React from 'react';
-import './InstructionBox.css';
+import styles from './InstructionBox.css';
 
 const InstructionBox = ({ text }) => (
-    <div className='instruction-box-container'>
-        <div className='instruction-box-text'>
+    <div className={styles.container}>
+        <div className={styles.text}>
             {text}
         </div>
     </div>

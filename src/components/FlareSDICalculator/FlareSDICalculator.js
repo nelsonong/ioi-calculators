@@ -4,7 +4,7 @@ import { FlareSDIModel, FlareSDIFormat, FlareSDIColor, FlareSDIResolution, Flare
 import { MODEL, MODELS, LINKS, MODE, SDI_TREE } from './constants';
 import { splitResolution } from './utils/splitResolution';
 import { calculateDataRate } from './utils/calculateDataRate';
-import './FlareSDICalculator.css';
+import styles from './FlareSDICalculator.css';
 
 class FlareSDICalculator extends Component {
     state = {
@@ -133,7 +133,7 @@ class FlareSDICalculator extends Component {
     }
 
     render = () => (
-        <div className="flare-calculator">
+        <div className={styles.root}>
             <CalculatorTopBar
                 inModal={this.state.mode}
                 type={'Flare SDI'}

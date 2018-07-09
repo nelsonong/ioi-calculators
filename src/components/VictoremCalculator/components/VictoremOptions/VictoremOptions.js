@@ -1,6 +1,6 @@
 import React from 'react';
 import { VIC_OPTION } from '../../constants';
-import './VictoremOptions.css';
+import styles from './VictoremOptions.css';
 
 const VictoremOptions = ({
     cameraOption,
@@ -9,10 +9,10 @@ const VictoremOptions = ({
     supportsVerticalBinning,
     handleChange
 }) => (
-    <fieldset>
+    <fieldset className={styles.root}>
     <legend>Options</legend>
-        <div className='options-outer'>
-            <div className='options-left'>
+        <div className={styles.container}>
+            <div className={styles.left}>
                 <input
                     type="radio"
                     name='cameraOption'
@@ -20,7 +20,7 @@ const VictoremOptions = ({
                     checked={cameraOption === VIC_OPTION.NONE}
                     onChange={handleChange}
                 />
-                <div className='options-label'>None</div>
+                <div className={styles.label}>None</div>
                 <br />
                 <input
                     type="radio"
@@ -30,9 +30,9 @@ const VictoremOptions = ({
                     disabled={!supportsVerticalBinning}
                     onChange={handleChange}
                 />
-                <div className='options-label'>Vertical Bin</div>
+                <div className={styles.label}>Vertical Bin</div>
             </div>
-            <div className='options-right'>
+            <div className={styles.right}>
                 <input
                     type="radio"
                     name='cameraOption'
@@ -41,7 +41,7 @@ const VictoremOptions = ({
                     disabled={!supportsSubSampling}
                     onChange={handleChange}
                 />
-                <div className='options-label'>Sub-Sample</div>
+                <div className={styles.label}>Sub-Sample</div>
                 <br />
                 <input
                     type="radio"
@@ -51,7 +51,7 @@ const VictoremOptions = ({
                     disabled={!supports2x2Binning}
                     onChange={handleChange}
                 />
-                <div className='options-label'>2x2 Bin</div>
+                <div className={styles.label}>2x2 Bin</div>
             </div>
         </div>
     </fieldset>

@@ -3,11 +3,11 @@ import { DVRCameraModal } from '../DVRCameraModal';
 import FlareCLCalculator from '../../../FlareCLCalculator';
 import FlareCXCalculator from '../../../FlareCXCalculator';
 import FlareSDICalculator from '../../../FlareSDICalculator';
+import { DVR_LINK } from '../../constants';
 import plus from './images/plus.png';
 import edit from './images/edit.png';
 import remove from './images/remove.png';
-import './DVRCamera.css';
-import { DVR_LINK } from '../../constants';
+import styles from './DVRCamera.css';
 
 class DVRCamera extends Component {
     state = {
@@ -76,18 +76,18 @@ class DVRCamera extends Component {
     }
 
     startContents = () => (
-        <button type='button' className='dvr-camera-add-button' onClick={this.addCamera}><img src={plus}></img></button>
+        <button type='button' className={styles.addButton} onClick={this.addCamera}><img src={plus}></img></button>
     );
 
     infoContents = () => (
         <div>
-            <div className='dvr-camera-info'>
+            <div className={styles.info}>
                 {this.state.model}
             </div>
-            <div className='dvr-camera-info'>
+            <div className={styles.info}>
                 {this.state.resolution}
             </div>
-            <div className='dvr-camera-data-rate'>
+            <div className={styles.dataRate}>
                 {(this.state.dataRate / 1024).toFixed(2)} GB/s
             </div>
         </div>
@@ -95,8 +95,8 @@ class DVRCamera extends Component {
 
     hoverContents = () => (
         <div>
-            <button type='button' className='dvr-camera-edit-button' onClick={this.openModal}><img src={edit}></img></button>
-            <button type='button' className='dvr-camera-close-button' onClick={this.deleteCamera}><img src={remove}></img></button>
+            <button type='button' className={styles.editButton} onClick={this.openModal}><img src={edit}></img></button>
+            <button type='button' className={styles.closeButton} onClick={this.deleteCamera}><img src={remove}></img></button>
         </div>
     );
 
@@ -110,15 +110,15 @@ class DVRCamera extends Component {
         }
         
         let contents = this.startContents();
-        let className = 'dvr-camera-container';
+        let className = styles.root;
         if (this.state.added) {
             contents = this.state.isHovered ? this.hoverContents() : this.infoContents();
-            className += ' dvr-camera-container-added';
+            className += ' ' + styles.added;
         }
 
         return (
             <div className={className} onMouseEnter={this.openHoverOverlay} onMouseLeave={this.closeHoverOverlay}>
-                <div className='dvr-camera-title'>
+                <div className={styles.title}>
                     {this.props.mode}
                 </div>
                 {contents}

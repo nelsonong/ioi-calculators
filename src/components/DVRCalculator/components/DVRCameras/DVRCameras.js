@@ -1,12 +1,12 @@
 import React from 'react';
-import './DVRCameras.css';
+import styles from './DVRCameras.css';
 
 const DVRCameras = ({ cameras }) => {
     const cameraComponents = cameras.map(camera => camera.camera);
     return (
-        <fieldset>
+        <fieldset className={styles.root}>
         <legend>Cameras</legend>
-            <div className='dvr-cameras-container'>
+            <div className={styles.container}>
                 {cameraComponents}
             </div>
         </fieldset>

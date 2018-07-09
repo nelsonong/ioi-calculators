@@ -1,10 +1,10 @@
 import React from 'react';
-import './DVRRecordingTime.css';
+import styles from './DVRRecordingTime.css';
 
 const DVRRecordingTime = ({ recordingTime }) => (
-    <fieldset>
+    <fieldset className={styles.root}>
     <legend>Recording Time</legend>
-        <input type='text' className='recording-time-input' disabled={true} value={recordingTime} />
+        <input type='text' className={styles.input} disabled={true} value={recordingTime} />
     </fieldset>
 );
 

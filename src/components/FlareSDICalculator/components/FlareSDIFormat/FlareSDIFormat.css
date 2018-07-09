@@ -1,14 +1,27 @@
-.sdi-format-labels {
+.root {
+    background: rgb(253, 238, 214);
+    text-align: left;
+    margin: 5px 0 5px 0;
+}
+
+.labels {
     width: 30%;
     display: inline-block;
 }
 
-.sdi-format-label {
+.label {
     margin: 8px;
     display: block;
 }
 
-.sdi-format-controls {
+.controls {
     width: 70%;
     display: inline-block;
+}
+
+.control {
+    font-size: 11px;
+    padding: 1px 0px;
+    margin: 1px;
+    min-width: 38px;
 }

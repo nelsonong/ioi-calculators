@@ -1,7 +1,7 @@
 
 import React from 'react';
 import Modal from 'react-modal';
-import './DVRCameraModal.css';
+import styles from './DVRCameraModal.css';
 
 Modal.setAppElement('#root');
 
@@ -11,16 +11,16 @@ const DVRCameraModal = ({ isOpen, camera, closeModal }) => (
         contentLabel='Edit Camera'
         onRequestClose={closeModal}
         closeTimeoutMS={200}
-        className='dvr-camera-modal'
-        overlayClassName='dvr-camera-modal-overlay'
+        className={styles.root}
+        overlayClassName={styles.overlay}
     >
         <div>
-            <div className='dvr-camera-modal-title-bar'>
-                <div className='dvr-camera-modal-left-spacer'></div>
-                <div className='dvr-camera-modal-title'>
+            <div className={styles.title}>
+                <div className={styles.leftSpacer}></div>
+                <div className={styles.text}>
                     Edit Camera
                 </div>
-                <button type='button' className='dvr-camera-modal-close-button' onClick={closeModal}>✖</button>
+                <button type='button' className={styles.closeButton} onClick={closeModal}>✖</button>
             </div>
             {camera}
         </div>

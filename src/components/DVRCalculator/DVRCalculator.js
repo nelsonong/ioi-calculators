@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import uuid from 'uuid';
 import CalculatorTopBar from '../CalculatorTopBar';
 import { DVRCamera, DVRCameras, DVRDrives, DVRModelConfiguration, DVRRecordingTime } from './components';
 import { DVR_CONFIG, DVR_LINK, DVR_MODEL, MODES, DVR_CL_CONFIGS, DVR_CLPLUS_CONFIGS, DVR_CX_CONFIGS, DVR_CXPLUS_CONFIGS, DVR_SDI_CONFIGS, DVR_DRIVE_CAPACITY } from './constants';
-import './DVRCalculator.css';
+import uuid from 'uuid';
+import styles from './DVRCalculator.css';
 
 class DVRCalculator extends Component {
     state = {
@@ -157,7 +157,7 @@ class DVRCalculator extends Component {
     }
 
     render = () => (
-        <div className="dvr-calculator">
+        <div className={styles.root}>
             <CalculatorTopBar
                 inModal={false}
                 type={'DVR Storage'}

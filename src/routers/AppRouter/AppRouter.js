@@ -5,10 +5,11 @@ import Home from '../../screens/Home';
 import FrameRate from '../../screens/FrameRate';
 import Storage from '../../screens/Storage';
 import Footer from '../../components/Footer';
+import styles from '../../index.css';
 
 const AppRouter = () => (
     <BrowserRouter>
-        <div>
+        <div className={styles.root}>
             <Header />
             <Switch>
                 <Route path='/' component={Home} exact={true} />

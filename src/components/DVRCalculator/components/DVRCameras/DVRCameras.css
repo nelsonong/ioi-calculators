@@ -1,3 +1,9 @@
-.dvr-cameras-container {
+.root {
+    background: rgb(224, 224, 224);
+    margin: 0px 1px;
+    text-align: left;
+}
+
+.container {
     text-align: center;
 }

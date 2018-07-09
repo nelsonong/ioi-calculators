@@ -1,9 +1,16 @@
-.format-label {
+.root {
+    background: rgb(253, 241, 245);
+    text-align: left;
+    margin: 5px 0 5px 0;
+}
+
+.label {
     margin: 8px auto;
     display: inline;
 }
 
-.format-select {
+.select {
+	font-size: 11px;
     margin: 2px 9px 2px 5px;
     padding: 1px 2px;
 }

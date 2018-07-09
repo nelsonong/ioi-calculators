@@ -1,4 +1,10 @@
-.flare-calculator .frame-rate-input {
+.root {
+    background: rgb(253, 238, 214);
+    text-align: left;
+    margin: 5px 0 5px 0;
+}
+
+.input {
     background: rgb(199, 100, 100);
     font-size: 12px;
     font-weight: 700;

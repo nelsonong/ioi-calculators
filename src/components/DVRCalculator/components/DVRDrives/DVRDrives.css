@@ -1,15 +1,20 @@
-.dvr-drives-label {
+.root {
+    background: rgb(224, 224, 224);
+    margin: 0px 1px;
+    text-align: left;
+}
+
+.label {
     display: inline-block;
     margin-right: 5px;
 }
 
-.dvr-drives-drive,
-.dvr-drives-amount {
+.drive, .amount {
     display: inline-block;
     margin-right: 8px;
 }
 
-.dvr-drives-total-capacity {
+.total-capacity {
     text-align: center;
     font-weight: 700;
     margin-left: 20px;
@@ -18,6 +23,6 @@
     border-radius: 2px;
 }
 
-.dvr-drives-select {
+.select {
     padding: 2px 0px;
 }

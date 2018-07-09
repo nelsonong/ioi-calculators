@@ -1,44 +1,52 @@
-.flare-format-left {
-    width: 45%;
+.root {
+    background: rgb(253, 238, 214);
+    text-align: left;
+    margin: 5px 0 5px 0;
+}
+
+.left {
+    width: 49%;
     display: inline-block;
 }
 
-.flare-format-right {
-    width: 55%;
+.right {
+    width: 51%;
     display: inline-block;
 }
 
-.flare-format-select {
+.select {
+    font-size: 11px;
     padding: 1px 0px;
+    margin: 1px 0px;
     min-width: 38px;
     display: inline;
 }
 
 /* ----- Left side ----- */
-.flare-format-left .flare-format-labels {
+.left .labels {
     width: 50%;
     display: inline-block;
 }
 
-.flare-format-left .flare-format-selects {
+.left .selects {
     width: 50%;
     display: inline-block;
 }
 
-.flare-format-left .flare-format-label {
-    margin: 8px 4px 8px 0px;
+.left .label {
+    margin: 8px 5px 8px 0px;
 }
 
 /* ----- Right side ----- */
-.flare-format-right .flare-format-selects {
+.right .selects {
     display: inline-block;
 }
 
-.flare-format-right .flare-format-labels {
+.right .labels {
     display: inline-block;
 }
 
-.flare-format-right .flare-format-label {
+.right .label {
     margin: 8px 4px 8px 0px;
     display: inline;
 }

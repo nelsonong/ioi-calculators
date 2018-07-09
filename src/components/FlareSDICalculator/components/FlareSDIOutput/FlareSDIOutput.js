@@ -1,12 +1,12 @@
 import React from 'react';
-import './FlareSDIOutput.css';
+import styles from './FlareSDIOutput.css';
 
 const FlareSDIOutput = ({ frameRate, dataRate }) => {
     const frameRateInput = `${frameRate} FPS / ${dataRate} MB/s`;
     return (
-        <fieldset>
+        <fieldset className={styles.root}>
         <legend>Output</legend>
-            <input type='text' className='frame-rate-input' disabled={true} value={frameRateInput} />
+            <input type='text' className={styles.input} disabled={true} value={frameRateInput} />
         </fieldset>
     );
 };

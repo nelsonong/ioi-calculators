@@ -1,10 +1,10 @@
 import React from 'react';
-import './VictoremFrameRate.css';
+import styles from './VictoremFrameRate.css';
 
 const VictoremFrameRate = ({ frameRate }) => (
-    <fieldset>
+    <fieldset className={styles.root}>
     <legend>Frame Rate</legend>
-        <input type='text' className='frame-rate-input' disabled={true} value={frameRate} />
+        <input type='text' className={styles.input} disabled={true} value={frameRate} />
     </fieldset>
 );
 

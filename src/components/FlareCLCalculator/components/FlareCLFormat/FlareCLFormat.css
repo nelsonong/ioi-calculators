@@ -1,44 +1,11 @@
-.flare-format-left {
-    width: 45%;
-    display: inline-block;
+.root {
+    background: rgb(253, 238, 214);
+    text-align: left;
+    margin: 5px 0 5px 0;
 }
 
-.flare-format-right {
-    width: 55%;
-    display: inline-block;
-}
-
-.flare-format-select {
+.select {
+    font-size: 11px;
     padding: 1px 0px;
-    min-width: 38px;
-    display: inline;
-}
-
-/* ----- Left side ----- */
-.flare-format-left .flare-format-labels {
-    width: 50%;
-    display: inline-block;
-}
-
-.flare-format-left .flare-format-selects {
-    width: 50%;
-    display: inline-block;
-}
-
-.flare-format-left .flare-format-label {
-    margin: 8px 4px 8px 0px;
-}
-
-/* ----- Right side ----- */
-.flare-format-right .flare-format-selects {
-    display: inline-block;
-}
-
-.flare-format-right .flare-format-labels {
-    display: inline-block;
-}
-
-.flare-format-right .flare-format-label {
-    margin: 8px 4px 8px 0px;
-    display: inline;
+    margin: 1px;
 }

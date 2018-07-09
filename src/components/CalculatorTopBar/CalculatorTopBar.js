@@ -1,17 +1,17 @@
 import React from 'react';
-import './CalculatorTopBar.css';
+import styles from './CalculatorTopBar.css';
 
 const CalculatorTopBar = ({ inModal, type, deleteCalculator, id }) => {
     const text = !inModal ? `${type} Calculator` : `${type} Camera`;
     const button = !inModal ? (
-        <button className='calculator-top-bar-close-button' type='button' onClick={() => deleteCalculator(id)}>
+        <button className={styles.closeButton} type='button' onClick={() => deleteCalculator(id)}>
             ✖
         </button>
     ) : '';
 
     return (
         <div>
-            <div className='calculator-top-bar'>{text}</div>
+            <div className={styles.root}>{text}</div>
             {button}
         </div>
     );

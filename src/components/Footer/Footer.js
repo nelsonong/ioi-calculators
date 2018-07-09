@@ -1,8 +1,8 @@
 import React from 'react';
-import './Footer.css';
+import styles from './Footer.css';
 
 const Footer = () => (
-    <div className='copyright'>
+    <div className={styles.text}>
         © Copyright 2018 IO Industries
     </div>
 );

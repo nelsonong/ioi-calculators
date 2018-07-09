@@ -1,30 +1,26 @@
-.content-container {
+.header {
+    background: rgb(66, 66, 66);
+}
+
+.container {
     margin: 0 auto;
     padding: 0 10px;
     max-width: 800px;
 }
 
-.header {
-    background: rgb(66, 66, 66);
-}
-
-.header-content {
+.content {
     align-items: center;
     display: flex;
     justify-content: space-between;
 }
 
-.header-title {
+.text {
     color: white;
     text-decoration: none;
     margin: 14px;
 }
 
-.header-title>h1 {
-    margin: 0;
-}
-
-.header-button {
+.button {
     background: rgb(66, 66, 66);
     color: white;
     font-size: 14px;

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import uuid from 'uuid';
 import DVRCalculator from '../../components/DVRCalculator';
 import InstructionBox from '../../components/InstructionBox';
-import './Storage.css';
+import uuid from 'uuid';
+import styles from './Storage.css';
 
 class Storage extends Component {
     state = {
@@ -11,20 +11,20 @@ class Storage extends Component {
 
     // Add calculator
     addCalculator = (type) => {
-        const calculators = this.state.calculators;
+        let calculators = this.state.calculators;
         const key = uuid();
-        const newCalculators = calculators.concat({
+        calculators = calculators.concat({
             id: key,
             calculator: <DVRCalculator key={key} id={key} deleteCalculator={this.deleteCalculator} />
         });
-        this.setState(() => ({ calculators: newCalculators }));
+        this.setState(() => ({ calculators }));
     }
 
     // Remove calculator
     deleteCalculator = (id) => {
-        const calculators = this.state.calculators;
-        const newCalculators = calculators.filter(calculator => calculator.id !== id);
-        this.setState(() => ({ calculators: newCalculators }));
+        let calculators = this.state.calculators;
+        calculators = calculators.filter(calculator => calculator.id !== id);
+        this.setState(() => ({ calculators }));
     }
 
     render = () => {
@@ -32,12 +32,12 @@ class Storage extends Component {
         const text = 'Please click the button above to add a calculator.';
         const instructionBox = (this.state.calculators.length === 0) ? <InstructionBox text={text} /> : '';
         return (
-            <div className="storage">
-                <div className='storage-title'>
+            <div className={styles.root}>
+                <div className={styles.title}>
                     Storage Calculators
                 </div>
                 <div>
-                    <button type='button' className='add-dvr-button' onClick={() => this.addCalculator()}>+ DVR</button>
+                    <button type='button' className={styles.addButton} onClick={() => this.addCalculator()}>+ DVR</button>
                     {instructionBox}
                 </div>
                 {calculatorComponents}

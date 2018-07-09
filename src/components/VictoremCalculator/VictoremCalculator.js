@@ -5,7 +5,8 @@ import { getFormats } from './utils/victorem-format';
 import { calculateFrameRate } from './utils/victorem-frame-rate';
 import { minWidth, maxWidth, minHeight, maxHeight } from './utils/victorem-resolution';
 import { supports2x2Binning, supportsSubSampling, supportsVerticalBinning } from './utils/victorem-support';
-import './VictoremCalculator.css';
+import styles from './VictoremCalculator.css';
+import CalculatorTopBar from '../CalculatorTopBar';
 
 class VictoremCalculator extends Component {
     state = {
@@ -104,11 +105,13 @@ class VictoremCalculator extends Component {
     }
 
     render = () => (
-        <div className="victorem-calculator">
-            <div>
-                <div className='victorem-calculator-title'>Victorem Frame Rate Calculator</div>
-                <button className='close-calculator-button' type='button' onClick={() => this.props.deleteCalculator(this.props.id)}>✖</button>
-            </div>
+        <div className={styles.root}>
+            <CalculatorTopBar
+                inModal={false}
+                type={'Victorem'}
+                deleteCalculator={this.props.deleteCalculator}
+                id={this.props.id}
+            />
             <VictoremModel
                 model={this.state.model}
                 handleChangeModel={this.handleChangeModel}

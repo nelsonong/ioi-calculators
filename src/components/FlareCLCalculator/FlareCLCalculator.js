@@ -5,7 +5,7 @@ import { FORMAT, FORMATS, MODEL, MODE, RESOLUTION } from './constants';
 import { calculateFrameRate } from './utils/calculateFrameRate';
 import { calculateDataRate } from './utils/calculateDataRate';
 import { minWidth, maxWidth, minHeight, maxHeight } from './utils/resolution';
-import './FlareCLCalculator.css';
+import styles from './FlareCLCalculator.css';
 
 class FlareCLCalculator extends Component {
     state = {
@@ -127,7 +127,7 @@ class FlareCLCalculator extends Component {
     }
 
     render = () => (
-        <div className="flare-calculator">
+        <div className={styles.root}>
             <CalculatorTopBar
                 inModal={this.state.mode}
                 type={'Flare CL'}

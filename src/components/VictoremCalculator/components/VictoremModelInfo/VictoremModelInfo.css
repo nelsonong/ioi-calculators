@@ -1,20 +1,27 @@
-.model-info-labels {
+.root {
+    background: rgb(253, 241, 245);
+    text-align: left;
+    margin: 5px 0 5px 0;
+}
+
+.labels {
     width: 50%;
     display: inline-block;
 }
 
-.model-info-label {
+.label {
     font-style: italic;
     margin: 8px 15px;
 }
 
-.model-info-inputs {
+.inputs {
     width: 50%;
     display: inline-block;
 }
 
-.model-info-input {
+.input {
     text-align: center;
+	font-size: 11px;
     font-weight: 700;
     margin: 1px;
     width: 70%;
