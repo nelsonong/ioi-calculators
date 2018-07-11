@@ -4,12 +4,30 @@ import FlareCXCalculator from '../../components/FlareCXCalculator';
 import FlareSDICalculator from '../../components/FlareSDICalculator';
 import VictoremCalculator from '../../components/VictoremCalculator';
 import InstructionBox from '../../components/InstructionBox';
+import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 import uuid from 'uuid';
 import styles from './FrameRate.css';
 
+const Calculator = SortableElement(({ calculator }) => calculator);
+
+const CalculatorList = SortableContainer(({ calculatorEntries }) => {
+  return (
+    <div className={styles.list}>
+      {calculatorEntries.map((calculatorEntry, i) => (
+        <Calculator
+            key={`item-${calculatorEntry.id}`}
+            index={i}
+            calculator={calculatorEntry.calculator}
+         />
+      ))}
+    </div>
+  );
+});
+
+
 class FrameRate extends Component {
     state = {
-        calculators: []
+        calculatorEntries: []
     };
 
     // Add calculator
@@ -30,20 +48,25 @@ class FrameRate extends Component {
                 calculator = <VictoremCalculator key={key} id={key} deleteCalculator={this.deleteCalculator} />
         }
 
-        const calculators = this.state.calculators.concat({ id: key, calculator });
-        this.setState(() => ({ calculators }));
+        const calculatorEntries = this.state.calculatorEntries.concat({ id: key, calculator });
+        this.setState(() => ({ calculatorEntries }));
     }
 
     // Remove calculator
     deleteCalculator = (id) => {
-        const calculators = this.state.calculators.filter(calculator => calculator.id !== id);
-        this.setState(() => ({ calculators }));
+        const calculatorEntries = this.state.calculatorEntries.filter(calculator => calculator.id !== id);
+        this.setState(() => ({ calculatorEntries }));
     }
 
+    onSortEnd = ({ oldIndex, newIndex }) => {
+        this.setState({
+            calculatorEntries: arrayMove(this.state.calculatorEntries, oldIndex, newIndex),
+        });
+    };
+
     render = () => {
-        const calculatorComponents = this.state.calculators.map(calculator => calculator.calculator);
         const text = 'Please select a button above to add a calculator.';
-        const instructionBox = (this.state.calculators.length === 0) ? <InstructionBox text={text} /> : '';
+        const instructionBox = (this.state.calculatorEntries.length === 0) ? <InstructionBox text={text} /> : '';
         return (
             <div className={styles.root}>
                 <div className={styles.title}>
@@ -56,7 +79,7 @@ class FrameRate extends Component {
                     <button type='button' className={styles.victoremButton} onClick={() => this.addCalculator('victorem')}>+ VICTOREM</button>
                     {instructionBox}
                 </div>
-                {calculatorComponents}
+                <CalculatorList calculatorEntries={this.state.calculatorEntries} axis='xy' onSortEnd={this.onSortEnd} />
             </div>
         );
     }
