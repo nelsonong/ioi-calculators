@@ -72,13 +72,19 @@ class FrameRate extends Component {
                 <div className={styles.title}>
                     Frame Rate Calculators
                 </div>
-                <div>
-                    <button type='button' className={styles.flareButton} onClick={() => this.addCalculator('flare-cl')}>+ FLARE CL</button>
-                    <button type='button' className={styles.flareButton} onClick={() => this.addCalculator('flare-cx')}>+ FLARE CX</button>
-                    <button type='button' className={styles.flareButton} onClick={() => this.addCalculator('flare-sdi')}>+ FLARE SDI</button>
-                    <button type='button' className={styles.victoremButton} onClick={() => this.addCalculator('victorem')}>+ VICTOREM</button>
-                    {instructionBox}
+                <div className={styles.buttonsContainer}>
+                    <div className={styles.left}>
+                        <button type='button' className={styles.flareButton} onClick={() => this.addCalculator('flare-cl')}>+ FLARE CL</button>
+                        <button type='button' className={styles.flareButton} onClick={() => this.addCalculator('flare-cx')}>+ FLARE CX</button>
+                        <button type='button' className={styles.flareButton} onClick={() => this.addCalculator('flare-sdi')}>+ FLARE SDI</button>
+                        <button type='button' className={styles.victoremButton} onClick={() => this.addCalculator('victorem')}>+ VICTOREM</button>
+                    </div>
+                    <div className={styles.right}>
+                        <button type='button' className={styles.importButton}>IMPORT</button>
+                        <button type='button' className={styles.exportButton}>EXPORT</button>
+                    </div>
                 </div>
+                {instructionBox}
                 <CalculatorList calculatorEntries={this.state.calculatorEntries} axis='xy' onSortEnd={this.onSortEnd} />
             </div>
         );
