@@ -36,6 +36,10 @@
 	border-color: rgb(94, 94, 94);
 }
 
+.flare-button:hover {
+	background: rgb(216, 118, 118);
+}
+
 .victorem-button {
 	background: rgb(187, 94, 130);
 	font-size: 1.4rem;
@@ -50,6 +54,10 @@
 	border-width: medium;
 	border-radius: 0.3rem;
 	border-color: rgb(94, 94, 94);
+}
+
+.victorem-button:hover {
+	background: rgb(199, 105, 141);
 }
 
 .list {

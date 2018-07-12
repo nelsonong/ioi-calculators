@@ -24,6 +24,7 @@
 
 .root:hover {
     opacity: 1.0;
+    cursor: default;
 }
 
 .added {
@@ -75,6 +76,7 @@
 
 .add-button:hover {
     opacity: 1;
+    cursor: pointer;
 }
 
 .edit-button {
@@ -89,6 +91,7 @@
 
 .edit-button:hover {
     opacity: 1;
+    cursor: pointer;
 }
 
 .close-button {
@@ -103,4 +106,5 @@
 
 .close-button:hover {
     opacity: 1;
+    cursor: pointer;
 }

@@ -12,3 +12,7 @@
     border-width: thick;
     border-radius: 0.5rem;
 }
+
+.root:hover {
+    cursor: move;
+}

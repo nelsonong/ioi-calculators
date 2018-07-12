@@ -12,3 +12,7 @@
     border-radius: 0.5rem;
     padding: 0rem 1.1rem 0.7rem 1.1rem;
 }
+
+.root:hover {
+    cursor: move;
+}
