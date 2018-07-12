@@ -14,14 +14,18 @@
     justify-content: space-between;
 }
 
-.logo:hover {
-    opacity: .9;
-}
-
-.text {
+.logo {
     color: white;
     text-decoration: none;
     margin: 1.4rem;
+}
+
+.logo:active, .logo:focus {
+    outline: none;
+}
+
+.logo:hover {
+    opacity: .9;
 }
 
 .button {
@@ -40,8 +44,13 @@
 
 .is-active {
     background: #505050;
+    outline: none;
     border-top: 0rem;
     border-bottom: 0rem;
     border-left: solid rgb(54, 54, 54) 0.4rem;
     border-right: solid rgb(54, 54, 54) 0.4rem ;
+}
+
+.is-active:active, .is-active:focus {
+    outline: none;
 }
