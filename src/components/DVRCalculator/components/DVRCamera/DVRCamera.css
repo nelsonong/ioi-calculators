@@ -3,9 +3,9 @@
     background: repeating-linear-gradient(
         45deg,
         rgb(253, 222, 214),
-        rgb(253, 222, 214) 10px,
-        rgb(252, 230, 224) 10px,
-        rgb(252, 230, 224) 20px
+        rgb(253, 222, 214) 1rem,
+        rgb(252, 230, 224) 1rem,
+        rgb(252, 230, 224) 2rem
     );
     font-family: 'Roboto Thin', sans-serif;
     font-weight: 100;
@@ -13,11 +13,11 @@
     vertical-align: top;
     text-align: center;
     width: 21%;
-    height: 110px;
-    margin: 3px;
+    height: 11rem;
+    margin: 0.3rem;
     border: solid rgb(90, 90, 90);
     border-width: medium;
-    border-radius: 5px;
+    border-radius: 0.5rem;
     opacity: 0.85;
     transition: 0.3s;
 }
@@ -35,39 +35,39 @@
     background: rgb(77, 60, 60);
     color: white;
     width: 70%;
-    padding: 1px;
-    margin: 0px auto;
-    margin-bottom: 5px;
+    padding: 0.1rem;
+    margin: 0rem auto;
+    margin-bottom: 0.5rem;
     display: inline-block;
     border: solid rgb(90, 90, 90);
     border-top-style: none;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
 }
 
 .info {
     background: rgb(253, 238, 214);
     font-family: 'Roboto Thin', sans-serif;
     text-align: center;
-    margin: 2px 2px;
-    padding: 3px;
-    border: solid 2px rgb(90, 90, 90);
-    border-radius: 2px;
+    margin: 0.2rem 0.2rem;
+    padding: 0.3rem;
+    border: solid 0.2rem rgb(90, 90, 90);
+    border-radius: 0.2rem;
 }
 
 .data-rate {
     background: rgb(214, 133, 133);
     font-family: 'Roboto Thin', sans-serif;
     text-align: center;
-    margin: 3px 2px;
-    padding: 3px;
-    border: solid 3px rgb(80, 80, 80);
-    border-radius: 2px;
+    margin: 0.3rem 0.2rem;
+    padding: 0.3rem;
+    border: solid 0.3rem rgb(80, 80, 80);
+    border-radius: 0.2rem;
 }
 
 .add-button {
     background: transparent;
-    margin-top: 16px;
+    margin-top: 1.6rem;
     border: none;
     opacity: 0.8;
     transition: 0.3s;
@@ -79,10 +79,10 @@
 
 .edit-button {
     background: rgb(223, 210, 135);
-    margin: 20px 2px;
-    padding: 3px 4px;
-    border: solid 2px rgb(70, 70, 70);
-    border-radius: 3px;
+    margin: 2rem 0.2rem;
+    padding: 0.3rem 0.4rem;
+    border: solid 0.2rem rgb(70, 70, 70);
+    border-radius: 0.3rem;
     opacity: 0.8;
     transition: 0.3s;
 }
@@ -93,10 +93,10 @@
 
 .close-button {
     background: rgb(185, 90, 90);
-    margin: 20px 2px;
-    padding: 3px 4px;
-    border: solid 2px rgb(70, 70, 70);
-    border-radius: 3px;
+    margin: 2rem 0.2rem;
+    padding: 0.3rem 0.4rem;
+    border: solid 0.2rem rgb(70, 70, 70);
+    border-radius: 0.3rem;
     opacity: 0.8;
     transition: 0.3s;
 }

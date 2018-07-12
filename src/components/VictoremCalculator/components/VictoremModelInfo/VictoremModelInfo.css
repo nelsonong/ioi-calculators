@@ -1,7 +1,7 @@
 .root {
     background: rgb(253, 241, 245);
     text-align: left;
-    margin: 5px 0 5px 0;
+    margin: 0.5rem 0 0.5rem 0;
 }
 
 .labels {
@@ -11,7 +11,7 @@
 
 .label {
     font-style: italic;
-    margin: 8px 15px;
+    margin: 0.8rem 1.5rem;
 }
 
 .inputs {
@@ -21,10 +21,10 @@
 
 .input {
     text-align: center;
-	font-size: 11px;
+	font-size: 1.1rem;
     font-weight: 700;
-    margin: 1px;
+    margin: 0.1rem;
     width: 70%;
     border: solid rgb(131, 131, 131);
-    border-radius: 2px;
+    border-radius: 0.2rem;
 }

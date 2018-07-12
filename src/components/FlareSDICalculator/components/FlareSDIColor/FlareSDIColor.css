@@ -1,12 +1,12 @@
 .root {
     background: rgb(253, 238, 214);
     text-align: left;
-    margin: 5px 0 5px 0;
+    margin: 0.5rem 0 0.5rem 0;
 }
 
 .select {
-    font-size: 11px;
-    padding: 1px 0px;
-    margin: 1px;
-    min-width: 38px;
+    font-size: 1.1rem;
+    padding: 0.1rem 0rem;
+    margin: 0.1rem;
+    min-width: 3.8rem;
 }

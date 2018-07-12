@@ -1,7 +1,7 @@
 .root {
     background: rgb(253, 238, 214);
     text-align: left;
-    margin: 5px 0 5px 0;
+    margin: 0.5rem 0 0.5rem 0;
 }
 
 .left {
@@ -15,18 +15,18 @@
 }
 
 .label {
-    margin: 8px auto;
+    margin: 0.8rem auto;
 }
 
 .presets {
-	font-size: 11px;
-	margin: 2px;
-    padding: 1px 2px;
+	font-size: 1.1rem;
+	margin: 0.2rem;
+    padding: 0.1rem 0.2rem;
 }
 
 .wxh {
     width: 40%;
-	font-size: 11px;
-	margin: 2px;
-    padding: 1px 2px;
+	font-size: 1.1rem;
+	margin: 0.2rem;
+    padding: 0.1rem 0.2rem;
 }

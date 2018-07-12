@@ -1,28 +1,28 @@
 .root {
     background: rgb(224, 224, 224);
-    margin: 0px 1px;
+    margin: 0rem 0.1rem;
     text-align: left;
 }
 
 .label {
     display: inline-block;
-    margin-right: 5px;
+    margin-right: 0.5rem;
 }
 
 .drive, .amount {
     display: inline-block;
-    margin-right: 8px;
+    margin-right: 0.8rem;
 }
 
 .total-capacity {
     text-align: center;
     font-weight: 700;
-    margin-left: 20px;
+    margin-left: 2rem;
     width: 20%;
     border: solid rgb(131, 131, 131);
-    border-radius: 2px;
+    border-radius: 0.2rem;
 }
 
 .select {
-    padding: 2px 0px;
+    padding: 0.2rem 0rem;
 }

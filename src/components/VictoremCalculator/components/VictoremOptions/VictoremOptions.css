@@ -1,7 +1,7 @@
 .root {
     background: rgb(253, 241, 245);
     text-align: left;
-    margin: 5px 0 5px 0;
+    margin: 0.5rem 0 0.5rem 0;
 }
 
 .container {
@@ -21,5 +21,5 @@
 
 .label {
     display: inline;
-    margin: auto 3px;
+    margin: auto 0.3rem;
 }
