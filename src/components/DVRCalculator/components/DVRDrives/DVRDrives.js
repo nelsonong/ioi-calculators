@@ -8,7 +8,7 @@ const DVRDrives = ({ totalCapacity, handleChangeDriveAmount, handleChangeDrive }
     const totalCapacityText = `${totalCapacity} GB`;
     return (
         <fieldset className={styles.root}>
-        <legend>Drives</legend>
+        <legend className={styles.legend}>Drives</legend>
             <div className={styles.drive}>
                 <div className={styles.label}>
                     Drive:

@@ -7,11 +7,11 @@ const FlareCLOptions = ({ model, format, handleChange }) => {
     const slowModeDisabled = model.startsWith('12M') || !SLOW_MODE_FORMATS.includes(format);
     return (
         <fieldset className={styles.root}>
-        <legend>Options</legend>
-            <input type="checkbox" name='subSampling' disabled={subSamplingDisabled} onChange={handleChange}/>
+        <legend className={styles.legend}>Options</legend>
+            <input type="checkbox" className={styles.checkbox} name='subSampling' disabled={subSamplingDisabled} onChange={handleChange}/>
             <div className={styles.text}>Enable sub-sampling</div>
             <br />
-            <input type="checkbox" name='slowMode' disabled={slowModeDisabled} onChange={handleChange}/>
+            <input type="checkbox" className={styles.checkbox} name='slowMode' disabled={slowModeDisabled} onChange={handleChange}/>
             <div className={styles.text}>Enabled reduced line rate mode</div>
         </fieldset>
     );

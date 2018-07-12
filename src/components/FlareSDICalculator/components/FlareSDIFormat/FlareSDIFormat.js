@@ -6,7 +6,7 @@ const FlareSDIFormat = ({ sdiInterface, sdiInterfaces, link, links, handleChange
     let linkOptions = links.map((link, i) => <option key={i} value={link}>{link}</option>);
     return (
         <fieldset className={styles.root}>
-        <legend>SDI Format</legend>
+        <legend className={styles.legend}>SDI Format</legend>
             <div className={styles.labels}>
                 <div className={styles.label}>Interface:</div>
                 <div className={styles.label}>Links:</div>

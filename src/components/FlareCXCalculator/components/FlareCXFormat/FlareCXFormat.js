@@ -26,7 +26,7 @@ const FlareCXFormat = ({ formats, mode, handleChange }) => {
     const linkSpeedOptions = formats.LinkSpeeds.map((linkSpeed, i) => <option key={i} value={linkSpeed}>{linkSpeed}</option>);
     return (
         <fieldset className={styles.root}>
-        <legend>CoaXPress Format</legend>
+        <legend className={styles.legend}>CoaXPress Format</legend>
         <div className={styles.left}>
             <div className={styles.labels}>
                 <div className={styles.label}>Bit Depth:</div>

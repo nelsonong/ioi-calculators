@@ -6,8 +6,8 @@ const FlareCXOptions = ({ model, handleChange }) => {
     const subSamplingDisabled = model.startsWith('12M') || model.startsWith('48M');
     return (
         <fieldset className={styles.root}>
-        <legend>Options</legend>
-            <input type="checkbox" name='subSampling' disabled={subSamplingDisabled} onChange={handleChange}/>
+        <legend className={styles.legend}>Options</legend>
+            <input type="checkbox" className={styles.checkbox} name='subSampling' disabled={subSamplingDisabled} onChange={handleChange}/>
             <div className={styles.text}>Enable sub-sampling</div>
         </fieldset>
     );

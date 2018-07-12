@@ -8,7 +8,7 @@ const DVRModel = ({ handleChangeModel, configurations, handleChangeConfiguration
     return (
         <div>
             <fieldset className={styles.root}>
-            <legend>Model / Configuration</legend>
+            <legend className={styles.legend}>Model / Configuration</legend>
                 <select className={styles.select} name='model' onChange={handleChangeModel}>
                     {modelOptions}
                 </select>

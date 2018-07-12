@@ -5,7 +5,7 @@ const VictoremModelInfo = ({ sensor, maxWidth, maxHeight }) => {
     const maxResolutionText = `${maxWidth} x ${maxHeight}`;
     return (
         <fieldset className={styles.root}>
-        <legend>Model Information</legend>
+        <legend className={styles.legend}>Model Information</legend>
             <div className={styles.labels}>
                 <div className={styles.label}>Sensor:</div>
                 <div className={styles.label}>Max Resolution:</div>

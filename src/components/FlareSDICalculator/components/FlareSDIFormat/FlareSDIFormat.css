@@ -2,6 +2,12 @@
     background: rgb(253, 238, 214);
     text-align: left;
     margin: 0.5rem 0 0.5rem 0;
+    padding: 0.4rem 0.8rem 0.6rem 0.8rem;
+    border: 0.2em groove rgb(199, 199, 199);
+}
+
+.legend {
+    padding: 0 0.3rem;
 }
 
 .labels {

@@ -17,7 +17,7 @@ const FlareCLResolution = ({
     });
     return (
         <fieldset className={styles.root}>
-        <legend>Resolution</legend>
+        <legend className={styles.legend}>Resolution</legend>
             <div className={styles.left}>
                 <div className={styles.label}>Presets:</div>
                 <div className={styles.label}>W x H:</div>

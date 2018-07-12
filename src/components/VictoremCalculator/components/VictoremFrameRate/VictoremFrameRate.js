@@ -3,7 +3,7 @@ import styles from './VictoremFrameRate.css';
 
 const VictoremFrameRate = ({ frameRate }) => (
     <fieldset className={styles.root}>
-    <legend>Frame Rate</legend>
+    <legend className={styles.legend}>Frame Rate</legend>
         <input type='text' className={styles.input} disabled={true} value={frameRate} />
     </fieldset>
 );
