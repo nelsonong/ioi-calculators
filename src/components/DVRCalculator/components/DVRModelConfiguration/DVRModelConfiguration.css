@@ -1,14 +1,11 @@
 .root {
-    margin: 0rem 0rem 0.2rem 0rem;
-}
-
-.root {
     background: rgb(224, 224, 224);
     margin: 0rem 0.1rem;
     text-align: left;
 }
 
 .select {
+    font-size: 1.1rem;
     margin-right: 0.8rem;
     padding: 0.2rem 0rem;
 }

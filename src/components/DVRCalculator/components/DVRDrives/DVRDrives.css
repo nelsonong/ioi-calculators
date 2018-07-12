@@ -1,5 +1,6 @@
 .root {
     background: rgb(224, 224, 224);
+    font-size: 1.1rem;
     margin: 0rem 0.1rem;
     text-align: left;
 }
@@ -16,6 +17,7 @@
 
 .total-capacity {
     text-align: center;
+    font-size: 1.1rem;
     font-weight: 700;
     margin-left: 2rem;
     width: 20%;
@@ -24,5 +26,6 @@
 }
 
 .select {
+    font-size: 1.1rem;
     padding: 0.2rem 0rem;
 }
