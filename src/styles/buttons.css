@@ -1,0 +1,94 @@
+.buttons-container {
+    background: repeating-linear-gradient(
+        45deg,
+        $buttons-container-light,
+        $buttons-container-light 1rem,
+        $buttons-container-dark 1rem,
+        $buttons-container-dark 2rem
+    );
+	display: flex;
+	justify-content: space-between;
+	padding: 2rem 3rem;
+	border-bottom: solid $container-border;
+	border-width: medium;
+}
+
+.left {
+	display: inline-block;
+	text-align: left;
+}
+
+.right {
+	display: inline-block;
+	text-align: right;
+}
+
+.button {
+	font-size: 1.3rem;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+	color: white;
+	text-align: center;
+	width: 10rem;
+	height: 3.2rem;
+	display: inline-block;
+	margin: 0rem 0.1rem;
+	border-width: medium;
+	border-radius: 0.3rem;
+	border-color: $button-border;
+    outline: none;
+}
+
+.button-container {
+	background: aliceblue;
+	display: inline-block;
+	border: groove $button-border;
+	border-width: medium;
+	border-radius: 0.3rem;
+}
+
+.button-container:hover {
+	cursor: default;
+}
+
+.button-container-text {
+	font-size: 1.3rem;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+	color: black;
+	display: inline-block;
+	text-align: center;
+	margin: 0 1.2rem;
+	padding: 0;
+}
+
+.sub-button {
+	font-size: 1.3rem;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+	color: white;
+	display: inline-block;
+	text-align: center;
+	height: 2.6rem;
+	margin: 0;
+	padding: 0 1em;
+	border: none;
+    outline: none;
+}
+
+@define-mixin left-divider {
+	display: inline-block;
+	border-width: medium;
+	border-left: ridge $button-border;
+}
+
+@define-mixin right-divider {
+	display: inline-block;
+	border-width: medium;
+	border-right: groove $button-border;
+}
+
+.button-spacer {
+	display: inline-block;
+	margin: 1rem;
+}

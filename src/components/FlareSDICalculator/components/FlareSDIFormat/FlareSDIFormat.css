@@ -1,7 +1,7 @@
-@import '../../../../styles/flare.css';
+@import '../../../../styles/flare-sdi.css';
 
 .root {
-    composes: flare-fieldset;
+    composes: flare-sdi-fieldset;
 }
 
 @mixin add-left-right 26%, 74%;

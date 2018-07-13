@@ -1,0 +1,22 @@
+@import './colors.css';
+@import './calculator.css';
+
+.flare-sdi-calculator {
+    composes: calculator;
+    background: $flare-sdi-background;
+    background: linear-gradient(to bottom right, $flare-sdi-background, $flare-sdi-background-light);
+}
+
+.flare-sdi-calculator {
+    cursor: move;
+}
+
+.flare-sdi-fieldset {
+    composes: fieldset;
+    background: $flare-sdi-fieldset;
+}
+
+.flare-sdi-input {
+    composes: input;
+    background: $flare-sdi-output;
+}

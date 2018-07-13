@@ -79,16 +79,22 @@ class FrameRate extends Component {
                 </div>
                 <div className={styles.buttonsContainer}>
                     <div>
-                        <button type='button' className={styles.flareButton} onClick={() => this.addCalculator('flare-cl')}>+ FLARE CL</button>
-                        <button type='button' className={styles.flareButton} onClick={() => this.addCalculator('flare-cx')}>+ FLARE CX</button>
-                        <button type='button' className={styles.flareButton} onClick={() => this.addCalculator('flare-sdi')}>+ FLARE SDI</button>
-                        <button type='button' className={styles.victoremButton} onClick={() => this.addCalculator('victorem')}>+ VICTOREM</button>
+                        <div className={styles.buttonContainer}>
+                            <div className={styles.buttonContainerText}>FLARE</div>
+                            <button type='button' className={styles.flareClButton} onClick={() => this.addCalculator('flare-cl')}>+ CL</button>
+                            <button type='button' className={styles.flareCxButton} onClick={() => this.addCalculator('flare-cx')}>+ CX</button>
+                            <button type='button' className={styles.flareSdiButton} onClick={() => this.addCalculator('flare-sdi')}>+ SDI</button>
+                        </div>
+                        <div className={styles.buttonSpacer}></div>
+                        <div className={styles.buttonContainer}>
+                        <div className={styles.buttonContainerText}>VICTOREM</div>
+                            <button type='button' className={styles.victoremButton} onClick={() => this.addCalculator('victorem')}>+ CX</button>
+                        </div>
                     </div>
                     <div>
                         <button type='button' className={styles.importButton}>IMPORT</button>
                         <button type='button' className={styles.exportButton}>EXPORT</button>
-                    </div>
-                    <div>
+                        <div className={styles.buttonSpacer}></div>
                         <button type='button' className={styles.clearButton} onClick={this.clearCalculators}>CLEAR</button>
                     </div>
                 </div>

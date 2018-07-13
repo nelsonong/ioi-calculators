@@ -1,7 +1,7 @@
-@import '../../../../styles/flare.css';
+@import '../../../../styles/flare-cx.css';
 
 .root {
-    composes: flare-fieldset;
+    composes: flare-cx-fieldset;
 }
 
 @mixin add-left-right 49%, 51%;

@@ -1,9 +1,9 @@
-@import '../../../../styles/flare.css';
+@import '../../../../styles/flare-cx.css';
 
 .root {
-    composes: flare-fieldset;
+    composes: flare-cx-fieldset;
 }
 
 .input {
-    composes: flare-input;
+    composes: flare-cx-input;
 }

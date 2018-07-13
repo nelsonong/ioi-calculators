@@ -5,19 +5,40 @@
 	composes: container;
 }
 
-.flare-button {
-	composes: button;
-	background: $flare-button;
+.flare-cl-button {
+	composes: sub-button;
+	background: $flare-cl-button;
+	@mixin left-divider;
 }
 
-.flare-button:hover {
-	background: $flare-button-light;
+.flare-cl-button:hover {
+	background: $flare-cl-button-light;
+}
+
+.flare-cx-button {
+	composes: sub-button;
+	background: $flare-cx-button;
+	@mixin left-divider;
+}
+
+.flare-cx-button:hover {
+	background: $flare-cx-button-light;
+}
+
+.flare-sdi-button {
+	composes: sub-button;
+	background: $flare-sdi-button;
+	@mixin left-divider;
+}
+
+.flare-sdi-button:hover {
+	background: $flare-sdi-button-light;
 }
 
 .victorem-button {
-	composes: button;
+	composes: sub-button;
 	background: $victorem-button;
-	margin-left: 1rem;
+	@mixin left-divider;
 }
 
 .victorem-button:hover {

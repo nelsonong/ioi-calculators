@@ -1,5 +1,5 @@
-@import '../../styles/flare.css';
+@import '../../styles/flare-cl.css';
 
 .root {
-    composes: flare-calculator;
+    composes: flare-cl-calculator;
 }

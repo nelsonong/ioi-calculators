@@ -1,13 +1,13 @@
 @import '../../../../styles/colors.css';
 
 .root {
-    background: $flare-background;
+    background: $mini-background;
     background: repeating-linear-gradient(
         45deg,
-        $flare-background,
-        $flare-background 1rem,
-        $flare-background-medium 1rem,
-        $flare-background-medium 2rem
+        $mini-background,
+        $mini-background 1rem,
+        $mini-background-dark 1rem,
+        $mini-background-dark 2rem
     );
     font-family: 'Roboto Thin', sans-serif;
     font-weight: 100;
@@ -30,7 +30,7 @@
 }
 
 .added {
-    background: $flare-background;
+    background: $mini-background;
     opacity: 1.0;
 }
 
@@ -49,7 +49,7 @@
 }
 
 .info {
-    background: $flare-fieldset;
+    background: $mini-fieldset;
     font-family: 'Roboto Thin', sans-serif;
     text-align: center;
     margin: 0.2rem 0.2rem;
@@ -59,7 +59,7 @@
 }
 
 .data-rate {
-    background: $flare-output-dark;
+    background: $mini-output;
     font-family: 'Roboto Thin', sans-serif;
     text-align: center;
     margin: 0.3rem 0.2rem;

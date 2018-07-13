@@ -26,23 +26,43 @@ $calculator-border-light: rgb(80, 80, 80);
 $calculator-border-dark: rgb(199, 199, 199);
 $calculator-info: rgb(131, 131, 131);
 
-/* Flare color scheme */
-$flare-background: rgb(253, 222, 214);
-$flare-background-medium: rgb(252, 230, 224);
-$flare-background-light: rgb(253, 235, 214);
-$flare-fieldset: rgb(253, 238, 214);
-$flare-output: rgb(199, 100, 100);
-$flare-output-dark: rgb(214, 133, 133);
-$flare-button: rgb(199, 100, 100);
-$flare-button-light: rgb(216, 118, 118);
+/* Flare CL color scheme */
+$flare-cl-background: rgb(253, 222, 214);
+$flare-cl-background-light: rgb(253, 235, 214);
+$flare-cl-fieldset: rgb(253, 238, 214);
+$flare-cl-output: rgb(216, 127, 93);
+$flare-cl-button: rgb(216, 127, 93);
+$flare-cl-button-light: rgb(237, 151, 118);
+
+/* Flare CX color scheme */
+$flare-cx-background: rgb(255, 208, 208);
+$flare-cx-background-light: rgb(252, 226, 226);
+$flare-cx-fieldset: rgb(254, 238, 238);
+$flare-cx-output: rgb(199, 100, 100);
+$flare-cx-button: rgb(199, 100, 100);
+$flare-cx-button-light: rgb(216, 118, 118);
+
+/* Flare SDI color scheme */
+$flare-sdi-background: rgb(255, 229, 229);
+$flare-sdi-background-light: rgb(255, 243, 243);
+$flare-sdi-fieldset: rgb(255, 247, 247);
+$flare-sdi-output: rgb(201, 110, 146);
+$flare-sdi-button: rgb(201, 110, 146);
+$flare-sdi-button-light: rgb(219, 127, 163);
+
+/* Mini calculator color scheme */
+$mini-background: rgb(253, 222, 214);
+$mini-background-dark: rgb(252, 230, 224);
+$mini-fieldset: rgb(253, 238, 214);
+$mini-output: rgb(214, 133, 133);
 
 /* Victorem color scheme */
 $victorem-background: rgb(255, 227, 239);
 $victorem-background-light: rgb(252, 233, 241);
 $victorem-fieldset: rgb(253, 241, 245);
-$victorem-output: rgb(187, 94, 130);
-$victorem-button: rgb(187, 94, 130);
-$victorem-button-light: rgb(199, 105, 141);
+$victorem-output: rgb(187, 94, 177);
+$victorem-button: rgb(187, 94, 177);
+$victorem-button-light: rgb(204, 114, 180);
 
 /* DVR color scheme */
 $dvr-background: rgb(201, 201, 201);
