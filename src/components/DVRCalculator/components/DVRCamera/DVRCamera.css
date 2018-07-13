@@ -1,11 +1,13 @@
+@import '../../../../styles/colors.css';
+
 .root {
-    background: rgb(253, 222, 214);
+    background: $flare-background;
     background: repeating-linear-gradient(
         45deg,
-        rgb(253, 222, 214),
-        rgb(253, 222, 214) 1rem,
-        rgb(252, 230, 224) 1rem,
-        rgb(252, 230, 224) 2rem
+        $flare-background,
+        $flare-background 1rem,
+        $flare-background-medium 1rem,
+        $flare-background-medium 2rem
     );
     font-family: 'Roboto Thin', sans-serif;
     font-weight: 100;
@@ -15,7 +17,7 @@
     width: 21%;
     height: 11rem;
     margin: 0.3rem;
-    border: solid rgb(90, 90, 90);
+    border: solid $calculator-border;
     border-width: medium;
     border-radius: 0.5rem;
     opacity: 0.85;
@@ -28,41 +30,41 @@
 }
 
 .added {
-    background: rgb(253, 222, 214);
+    background: $flare-background;
     opacity: 1.0;
 }
 
 .title {
-    background: rgb(77, 60, 60);
+    background: $calculator-title;
     color: white;
     width: 70%;
     padding: 0.1rem;
     margin: 0rem auto;
     margin-bottom: 0.5rem;
     display: inline-block;
-    border: solid rgb(90, 90, 90);
+    border: solid $calculator-title;
     border-top-style: none;
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
 }
 
 .info {
-    background: rgb(253, 238, 214);
+    background: $flare-fieldset;
     font-family: 'Roboto Thin', sans-serif;
     text-align: center;
     margin: 0.2rem 0.2rem;
     padding: 0.3rem;
-    border: solid 0.2rem rgb(90, 90, 90);
+    border: solid 0.2rem $calculator-title;
     border-radius: 0.2rem;
 }
 
 .data-rate {
-    background: rgb(214, 133, 133);
+    background: $flare-output-dark;
     font-family: 'Roboto Thin', sans-serif;
     text-align: center;
     margin: 0.3rem 0.2rem;
     padding: 0.3rem;
-    border: solid 0.3rem rgb(80, 80, 80);
+    border: solid 0.3rem $calculator-border-light;
     border-radius: 0.2rem;
 }
 
@@ -79,14 +81,18 @@
     cursor: pointer;
 }
 
-.edit-button {
-    background: rgb(223, 210, 135);
+.button {
     margin: 2rem 0.2rem;
     padding: 0.3rem 0.4rem;
-    border: solid 0.2rem rgb(70, 70, 70);
+    border: solid 0.2rem $calculator-border;
     border-radius: 0.3rem;
     opacity: 0.8;
     transition: 0.3s;
+}
+
+.edit-button {
+    composes: button;
+    background: $edit-button;
 }
 
 .edit-button:hover {
@@ -94,17 +100,12 @@
     cursor: pointer;
 }
 
-.close-button {
-    background: rgb(185, 90, 90);
-    margin: 2rem 0.2rem;
-    padding: 0.3rem 0.4rem;
-    border: solid 0.2rem rgb(70, 70, 70);
-    border-radius: 0.3rem;
-    opacity: 0.8;
-    transition: 0.3s;
+.delete-button {
+    composes: button;
+    background: $delete-button;
 }
 
-.close-button:hover {
+.delete-button:hover {
     opacity: 1;
     cursor: pointer;
 }

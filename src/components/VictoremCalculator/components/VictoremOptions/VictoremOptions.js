@@ -11,7 +11,7 @@ const VictoremOptions = ({
 }) => (
     <fieldset className={styles.root}>
     <legend className={styles.legend}>Options</legend>
-        <div className={styles.container}>
+        <div className={styles.center}>
             <div className={styles.left}>
                 <input
                     type="radio"

@@ -96,7 +96,7 @@ class DVRCamera extends Component {
     hoverContents = () => (
         <div>
             <button type='button' className={styles.editButton} onClick={this.openModal}><img src={edit}></img></button>
-            <button type='button' className={styles.closeButton} onClick={this.deleteCamera}><img src={remove}></img></button>
+            <button type='button' className={styles.deleteButton} onClick={this.deleteCamera}><img src={remove}></img></button>
         </div>
     );
 

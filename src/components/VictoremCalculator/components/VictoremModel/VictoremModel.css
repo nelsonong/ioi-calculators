@@ -1,18 +1,5 @@
+@import '../../../../styles/victorem.css';
+
 .root {
-    background: rgb(253, 241, 245);
-    text-align: left;
-    margin: 0.5rem 0 0.5rem 0;
-    padding: 0.4rem 0.8rem 0.6rem 0.8rem;
-    border: 0.2em groove rgb(199, 199, 199);
-}
-
-.legend {
-    padding: 0 0.3rem;
-}
-
-.select {
-	font-size: 1.1rem;
-    padding: 0.1rem 0rem;
-    min-width: 3.8rem;
-	margin: 0.2rem;
+    composes: victorem-fieldset;
 }

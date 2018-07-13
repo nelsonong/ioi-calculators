@@ -1,22 +1,15 @@
-.root {
-    background: rgb(253, 241, 245);
-    text-align: left;
-    margin: 0.5rem 0 0.5rem 0;
-    padding: 0.4rem 0.8rem 0.6rem 0.8rem;
-    border: 0.2em groove rgb(199, 199, 199);
-}
+@import '../../../../styles/victorem.css';
 
-.legend {
-    padding: 0 0.3rem;
+.root {
+    composes: victorem-fieldset;
 }
 
 .label {
-    margin: 0.8rem auto;
+    composes: label;
     display: inline;
 }
 
 .select {
-	font-size: 1.1rem;
+    composes: select;
     margin: 0.2rem 0.9rem 0.2rem 0.5rem;
-    padding: 0.1rem 0.2rem;
 }

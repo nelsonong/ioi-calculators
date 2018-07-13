@@ -1,0 +1,22 @@
+@import './colors.css';
+@import './calculator.css';
+
+.flare-calculator {
+    composes: calculator;
+    background: $flare-background;
+    background: linear-gradient(to bottom right, $flare-background, $flare-background-light);
+}
+
+.flare-calculator {
+    cursor: move;
+}
+
+.flare-fieldset {
+    composes: fieldset;
+    background: $flare-fieldset;
+}
+
+.flare-input {
+    composes: input;
+    background: $flare-output;
+}

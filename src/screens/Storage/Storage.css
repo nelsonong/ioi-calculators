@@ -1,103 +1,33 @@
+@import '../../styles/colors.css';
+@import '../../styles/container.css';
+
 .root {
-  background-color: rgb(236, 236, 236);
-  margin: 2rem auto 0rem auto;
-  text-align: center;
-  width: fit-content;
-  min-width: 90rem;
-  min-height: 50rem;
-  max-width: 90rem;
-  border: solid rgb(61, 61, 61);
-  border-width: medium;
-  border-radius: 0.2rem;
-}
-
-.title {
-  background: rgb(61, 61, 61);
-  color: white;
-  font-size: 2.2rem;
-  font-weight: 700;
-  padding: 1.4rem;
-}
-
-.buttonsContainer {
-    background: repeating-linear-gradient(
-        45deg,
-        rgb(238, 238, 238),
-        rgb(238, 238, 238) 1rem,
-        rgb(230, 230, 230) 1rem,
-        rgb(230, 230, 230) 2rem
-    );
-	display: flex;
-	justify-content: space-between;
-	padding: 2rem 3rem;
-	border-bottom: solid rgb(61, 61, 61);
-	border-width: medium;
-}
-
-.left {
-	display: inline-block;
-	text-align: left;
-}
-
-.right {
-	display: inline-block;
-	text-align: right;
+	composes: container;
 }
 
 .add-button {
-  background: rgb(114, 114, 114);
-  font-size: 1.4rem;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 700;
-  color: white;
-  text-align: center;
-  width: 11rem;
-  height: 3.4rem;
-  display: inline-block;
-  margin: 0rem 0.6rem;
-  border-width: medium;
-  border-radius: 0.3rem;
-  border-color: rgb(94, 94, 94);
+	composes: button;
+	background: $dvr-button;
 }
 
 .add-button:hover {
-  background: rgb(126, 126, 126);
+	background: $dvr-button-light;
 }
 
 .import-button {
-	background: rgb(134, 134, 134);
-	font-size: 1.4rem;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 700;
-	color: white;
-	text-align: center;
-	width: 11rem;
-	height: 3.4rem;
-	margin: 0rem 0.6rem;
-	border-width: medium;
-	border-radius: 0.3rem;
-	border-color: rgb(94, 94, 94);
+	composes: button;
+	background: $import-button;
 }
 
 .import-button:hover {
-	background: rgb(141, 141, 141);
+	background: $import-button-light;
 }
 
 .export-button {
-	background: rgb(78, 78, 78);
-	font-size: 1.4rem;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 700;
-	color: white;
-	text-align: center;
-	width: 11rem;
-	height: 3.4rem;
-	margin: 0rem 0.6rem;
-	border-width: medium;
-	border-radius: 0.3rem;
-	border-color: rgb(94, 94, 94);
+	composes: button;
+	background: $export-button;
 }
 
 .export-button:hover {
-	background: rgb(99, 99, 99);
+	background: $export-button-light;
 }

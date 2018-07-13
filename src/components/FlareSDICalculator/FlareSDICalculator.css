@@ -1,18 +1,5 @@
-.root {
-    background: rgb(253, 222, 214);
-    background: linear-gradient(to bottom right, rgb(253, 222, 214), rgb(253, 235, 214));
-    font-family: 'Roboto Thin', sans-serif;
-    font-weight: 100;
-    display: inline-block;
-    margin: 2.5rem 0.7rem 2.5rem 0.7rem;
-    padding: 0rem 1.1rem 0.7rem 1.1rem;
-    text-align: center;
-    width: 24rem;
-    border: solid rgb(90, 90, 90);
-    border-width: thick;
-    border-radius: 0.5rem;
-}
+@import '../../styles/flare.css';
 
-.root:hover {
-    cursor: move;
+.root {
+    composes: flare-calculator;
 }

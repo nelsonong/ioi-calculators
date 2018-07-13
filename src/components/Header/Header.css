@@ -1,5 +1,7 @@
+@import '../../styles/colors.css';
+
 .header {
-    background: rgb(66, 66, 66);
+    background: $header;
 }
 
 .container {
@@ -29,7 +31,6 @@
 }
 
 .button {
-    background: rgb(66, 66, 66);
     color: white;
     font-size: 1.4rem;
     font-weight: 500;
@@ -43,12 +44,12 @@
 }
 
 .is-active {
-    background: #505050;
+    background: $header-button;
     outline: none;
     border-top: 0rem;
     border-bottom: 0rem;
-    border-left: solid rgb(54, 54, 54) 0.4rem;
-    border-right: solid rgb(54, 54, 54) 0.4rem ;
+    border-left: solid $header-button-border 0.4rem;
+    border-right: solid $header-button-border 0.4rem ;
 }
 
 .is-active:active, .is-active:focus {
