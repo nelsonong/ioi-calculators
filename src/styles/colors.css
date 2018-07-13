@@ -13,6 +13,8 @@ $import-button: rgb(134, 134, 134);
 $import-button-light: rgb(141, 141, 141);
 $export-button: rgb(78, 78, 78);
 $export-button-light: rgb(99, 99, 99);
+$clear-button: rgb(250, 250, 250);
+$clear-button-light: rgb(235, 235, 235);
 
 /* Common button colors */
 $button-border: rgb(94, 94, 94);

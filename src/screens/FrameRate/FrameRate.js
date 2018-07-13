@@ -58,6 +58,11 @@ class FrameRate extends Component {
         this.setState(() => ({ calculatorEntries }));
     }
 
+    // Clear calculators
+    clearCalculators = () => {
+        this.setState(() => ({ calculatorEntries: [] }));
+    }
+
     onSortEnd = ({ oldIndex, newIndex }) => {
         this.setState({
             calculatorEntries: arrayMove(this.state.calculatorEntries, oldIndex, newIndex),
@@ -73,15 +78,18 @@ class FrameRate extends Component {
                     Frame Rate Calculators
                 </div>
                 <div className={styles.buttonsContainer}>
-                    <div className={styles.left}>
+                    <div>
                         <button type='button' className={styles.flareButton} onClick={() => this.addCalculator('flare-cl')}>+ FLARE CL</button>
                         <button type='button' className={styles.flareButton} onClick={() => this.addCalculator('flare-cx')}>+ FLARE CX</button>
                         <button type='button' className={styles.flareButton} onClick={() => this.addCalculator('flare-sdi')}>+ FLARE SDI</button>
                         <button type='button' className={styles.victoremButton} onClick={() => this.addCalculator('victorem')}>+ VICTOREM</button>
                     </div>
-                    <div className={styles.right}>
+                    <div>
                         <button type='button' className={styles.importButton}>IMPORT</button>
                         <button type='button' className={styles.exportButton}>EXPORT</button>
+                    </div>
+                    <div>
+                        <button type='button' className={styles.clearButton} onClick={this.clearCalculators}>CLEAR</button>
                     </div>
                 </div>
                 {instructionBox}

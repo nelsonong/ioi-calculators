@@ -41,3 +41,14 @@
 .export-button:hover {
 	background: $export-button-light;
 }
+
+.clear-button {
+	composes: button;
+	background: $clear-button;
+	color: black;
+	width: 8rem;
+}
+
+.clear-button:hover {
+	background: $clear-button-light;
+}

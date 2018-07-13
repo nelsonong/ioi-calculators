@@ -44,6 +44,11 @@ class Storage extends Component {
         this.setState(() => ({ calculatorEntries }));
     }
 
+    // Clear calculators
+    clearCalculators = () => {
+        this.setState(() => ({ calculatorEntries: [] }));
+    }
+
     onSortEnd = ({ oldIndex, newIndex }) => {
         this.setState({
             calculatorEntries: arrayMove(this.state.calculatorEntries, oldIndex, newIndex),
@@ -59,12 +64,16 @@ class Storage extends Component {
                     Storage Calculators
                 </div>
                 <div className={styles.buttonsContainer}>
-                    <div className={styles.left}>
+                    <div>
                         <button type='button' className={styles.addButton} onClick={() => this.addCalculator()}>+ DVR</button>
                     </div>
-                    <div className={styles.right}>
+                    <div className={styles.spacer}></div>
+                    <div>
                         <button type='button' className={styles.importButton}>IMPORT</button>
                         <button type='button' className={styles.exportButton}>EXPORT</button>
+                    </div>
+                    <div>
+                        <button type='button' className={styles.clearButton} onClick={this.clearCalculators}>CLEAR</button>
                     </div>
                 </div>
                 {instructionBox}
