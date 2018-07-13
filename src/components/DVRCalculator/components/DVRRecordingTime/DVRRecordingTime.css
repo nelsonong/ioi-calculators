@@ -1,20 +1,9 @@
+@import '../../../../styles/dvr.css';
+
 .root {
-    background: rgb(224, 224, 224);
-    margin: 0px 1px;
-    text-align: left;
+    composes: dvr-fieldset;
 }
 
 .input {
-    background: rgb(90, 82, 82);
-    font-size: 12px;
-    font-weight: 700;
-    color: white;
-    text-align: center;
-    width: 60%;
-    height: 22px;
-    display: block;
-    margin: 8px auto;
-    border-width: thick;
-    border: solid rgb(131, 131, 131);
-    border-radius: 5px;
+    composes: dvr-input;
 }

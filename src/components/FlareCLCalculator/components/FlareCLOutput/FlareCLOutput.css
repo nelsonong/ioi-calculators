@@ -1,20 +1,9 @@
+@import '../../../../styles/flare.css';
+
 .root {
-    background: rgb(253, 238, 214);
-    text-align: left;
-    margin: 5px 0 5px 0;
+    composes: flare-fieldset;
 }
 
 .input {
-    background: rgb(199, 100, 100);
-    font-size: 12px;
-    font-weight: 700;
-    color: white;
-    text-align: center;
-    width: 75%;
-    height: 22px;
-    display: block;
-    margin: 8px auto;
-    border-width: thick;
-    border: solid rgb(131, 131, 131);
-    border-radius: 5px;
+    composes: flare-input;
 }

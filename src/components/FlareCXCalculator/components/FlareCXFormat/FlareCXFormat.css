@@ -1,52 +1,36 @@
+@import '../../../../styles/flare.css';
+
 .root {
-    background: rgb(253, 238, 214);
-    text-align: left;
-    margin: 5px 0 5px 0;
+    composes: flare-fieldset;
 }
 
-.left {
-    width: 49%;
-    display: inline-block;
-}
-
-.right {
-    width: 51%;
-    display: inline-block;
-}
-
-.select {
-    font-size: 11px;
-    padding: 1px 0px;
-    margin: 1px 0px;
-    min-width: 38px;
-    display: inline;
-}
+@mixin add-left-right 49%, 51%;
 
 /* ----- Left side ----- */
-.left .labels {
-    width: 50%;
-    display: inline-block;
-}
-
-.left .selects {
-    width: 50%;
-    display: inline-block;
-}
-
-.left .label {
-    margin: 8px 5px 8px 0px;
+.left {
+    .labels {
+        width: 50%;
+        display: inline-block;
+    }
+    .selects {
+        width: 50%;
+        display: inline-block;
+    }
+    .label {
+        margin: 0.8rem 0.5rem 0.8rem 0rem;
+    }
 }
 
 /* ----- Right side ----- */
-.right .selects {
-    display: inline-block;
-}
-
-.right .labels {
-    display: inline-block;
-}
-
-.right .label {
-    margin: 8px 4px 8px 0px;
-    display: inline;
+.right {
+    .selects {
+        display: inline-block;
+    }
+    .labels {
+        display: inline-block;
+    }
+    .label {
+        margin: 0.8rem 0.4rem 0.8rem 0rem;
+        display: inline;
+    }
 }

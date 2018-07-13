@@ -10,11 +10,12 @@ const VictoremOptions = ({
     handleChange
 }) => (
     <fieldset className={styles.root}>
-    <legend>Options</legend>
-        <div className={styles.container}>
+    <legend className={styles.legend}>Options</legend>
+        <div className={styles.center}>
             <div className={styles.left}>
                 <input
                     type="radio"
+                    className={styles.radio}
                     name='cameraOption'
                     value={OPTION.NONE}
                     checked={cameraOption === OPTION.NONE}
@@ -24,17 +25,7 @@ const VictoremOptions = ({
                 <br />
                 <input
                     type="radio"
-                    name='cameraOption'
-                    value={OPTION.BIN_VERTICAL}
-                    checked={cameraOption === OPTION.BIN_VERTICAL}
-                    disabled={!supportsVerticalBinning}
-                    onChange={handleChange}
-                />
-                <div className={styles.label}>Vertical Bin</div>
-            </div>
-            <div className={styles.right}>
-                <input
-                    type="radio"
+                    className={styles.radio}
                     name='cameraOption'
                     value={OPTION.SUBSAMPLING}
                     checked={cameraOption === OPTION.SUBSAMPLING}
@@ -42,9 +33,22 @@ const VictoremOptions = ({
                     onChange={handleChange}
                 />
                 <div className={styles.label}>Sub-Sample</div>
+            </div>
+            <div className={styles.right}>
+                <input
+                    type="radio"
+                    className={styles.radio}
+                    name='cameraOption'
+                    value={OPTION.BIN_VERTICAL}
+                    checked={cameraOption === OPTION.BIN_VERTICAL}
+                    disabled={!supportsVerticalBinning}
+                    onChange={handleChange}
+                />
+                <div className={styles.label}>Vertical Bin</div>
                 <br />
                 <input
                     type="radio"
+                    className={styles.radio}
                     name='cameraOption'
                     value={OPTION.BIN_2X2}
                     checked={cameraOption === OPTION.BIN_2X2}

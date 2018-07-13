@@ -7,7 +7,7 @@ const VictoremFormat = ({ formats, handleChange }) => {
     const bitDepthOptions = BIT_DEPTHS.map((bitDepth, i) => <option key={i} value={bitDepth}>{bitDepth}</option>);
     return (
         <fieldset className={styles.root}>
-        <legend>Output Format</legend>
+        <legend className={styles.legend}>Output Format</legend>
             <div className={styles.label}>Link:</div>
             <select className={styles.select} name='format' onChange={handleChange}>
                 {formatOptions}

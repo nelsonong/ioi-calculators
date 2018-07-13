@@ -1,16 +1,15 @@
+@import '../../../../styles/victorem.css';
+
 .root {
-    background: rgb(253, 241, 245);
-    text-align: left;
-    margin: 5px 0 5px 0;
+    composes: victorem-fieldset;
 }
 
 .label {
-    margin: 8px auto;
+    composes: label;
     display: inline;
 }
 
 .select {
-	font-size: 11px;
-    margin: 2px 9px 2px 5px;
-    padding: 1px 2px;
+    composes: select;
+    margin: 0.2rem 0.9rem 0.2rem 0.5rem;
 }

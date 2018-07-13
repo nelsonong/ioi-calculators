@@ -1,57 +1,43 @@
-.root {
-	background-color: rgb(236, 236, 236);
-	margin: 20px auto 0px auto;
-	text-align: center;
-	width: fit-content;
-	min-width: 900px;
-	min-height: 500px;
-	max-width: 900px;
-	border: solid rgb(61, 61, 61);
-	border-width: medium;
-	border-radius: 2px;
-}
+@import '../../styles/colors.css';
+@import '../../styles/container.css';
 
-.title {
-	background: rgb(61, 61, 61);
-	color: white;
-	font-size: 22px;
-	font-weight: 700;
-	margin: 0px 0px 28px 0px;
-	padding: 14px;
+.root {
+	composes: container;
 }
 
 .flare-button {
-	background: rgb(199, 100, 100);
-	font-size: 14px;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 700;
-	color: white;
-	text-align: center;
-	width: 110px;
-	height: 34px;
-	display: inline-block;
-	margin: 0px 6px;
-	border-width: medium;
-	border-radius: 3px;
-	border-color: rgb(94, 94, 94);
+	composes: button;
+	background: $flare-button;
+}
+
+.flare-button:hover {
+	background: $flare-button-light;
 }
 
 .victorem-button {
-	background: rgb(187, 94, 130);
-	font-size: 14px;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 700;
-	color: white;
-	text-align: center;
-	width: 130px;
-	height: 34px;
-	display: inline-block;
-	margin: 0px 6px;
-	border-width: medium;
-	border-radius: 3px;
-	border-color: rgb(94, 94, 94);
+	composes: button;
+	background: $victorem-button;
+	margin-left: 1rem;
 }
 
-.list {
-	margin: 0rem;
+.victorem-button:hover {
+	background: $victorem-button-light;
+}
+
+.import-button {
+	composes: button;
+	background: $import-button;
+}
+
+.import-button:hover {
+	background: $import-button-light;
+}
+
+.export-button {
+	composes: button;
+	background: $export-button;
+}
+
+.export-button:hover {
+	background: $export-button-light;
 }

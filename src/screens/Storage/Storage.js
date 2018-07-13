@@ -58,10 +58,16 @@ class Storage extends Component {
                 <div className={styles.title}>
                     Storage Calculators
                 </div>
-                <div>
-                    <button type='button' className={styles.addButton} onClick={() => this.addCalculator()}>+ DVR</button>
-                    {instructionBox}
+                <div className={styles.buttonsContainer}>
+                    <div className={styles.left}>
+                        <button type='button' className={styles.addButton} onClick={() => this.addCalculator()}>+ DVR</button>
+                    </div>
+                    <div className={styles.right}>
+                        <button type='button' className={styles.importButton}>IMPORT</button>
+                        <button type='button' className={styles.exportButton}>EXPORT</button>
+                    </div>
                 </div>
+                {instructionBox}
                 <CalculatorList calculatorEntries={this.state.calculatorEntries} axis='xy' onSortEnd={this.onSortEnd} />
             </div>
         );

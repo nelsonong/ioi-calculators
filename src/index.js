@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'typeface-roboto';
+import 'normalize-css/normalize.css';
 import './index.css';
 import AppRouter from './routers/AppRouter';
 

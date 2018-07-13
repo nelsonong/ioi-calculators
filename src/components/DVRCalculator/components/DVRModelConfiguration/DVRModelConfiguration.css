@@ -1,14 +1,5 @@
-.root {
-    margin: 0px 0px 2px 0px;
-}
+@import '../../../../styles/dvr.css';
 
 .root {
-    background: rgb(224, 224, 224);
-    margin: 0px 1px;
-    text-align: left;
-}
-
-.select {
-    margin-right: 8px;
-    padding: 2px 0px;
+    composes: dvr-fieldset;
 }

@@ -1,11 +1,13 @@
+@import '../../styles/colors.css';
+
 .header {
-    background: rgb(66, 66, 66);
+    background: $header;
 }
 
 .container {
     margin: 0 auto;
-    padding: 0 10px;
-    max-width: 800px;
+    padding: 0 1rem;
+    max-width: 80rem;
 }
 
 .content {
@@ -14,26 +16,42 @@
     justify-content: space-between;
 }
 
-.text {
+.logo {
     color: white;
     text-decoration: none;
-    margin: 14px;
+    margin: 1.4rem;
+}
+
+.logo:active, .logo:focus {
+    outline: none;
+}
+
+.logo:hover {
+    opacity: .9;
 }
 
 .button {
-    background: rgb(66, 66, 66);
     color: white;
-    font-size: 14px;
+    font-size: 1.4rem;
     font-weight: 500;
-    padding: 26px 18px;
-    height: 80px;
+    padding: 2.6rem 1.8rem;
+    height: 8rem;
     text-decoration: none;
 }
 
+.button:hover {
+    opacity: .85;
+}
+
 .is-active {
-    background: #505050;
-    border-top: 0px;
-    border-bottom: 0px;
-    border-left: solid rgb(54, 54, 54) 4px;
-    border-right: solid rgb(54, 54, 54) 4px ;
+    background: $header-button;
+    outline: none;
+    border-top: 0rem;
+    border-bottom: 0rem;
+    border-left: solid $header-button-border 0.4rem;
+    border-right: solid $header-button-border 0.4rem ;
+}
+
+.is-active:active, .is-active:focus {
+    outline: none;
 }

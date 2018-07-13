@@ -6,7 +6,7 @@ const VictoremModel = ({ handleChangeModel }) => {
     const modelOptions = MODELS.ALL.map((model, i) => <option key={i}>{model}</option>);
     return (
         <fieldset className={styles.root}>
-        <legend>Model</legend>
+        <legend className={styles.legend}>Model</legend>
             <select className={styles.select} name='model' onChange={handleChangeModel}>
                 {modelOptions}
             </select>

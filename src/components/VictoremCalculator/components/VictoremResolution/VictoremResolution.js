@@ -19,13 +19,13 @@ const VictoremResolution = ({
     });
     return (
         <fieldset className={styles.root}>
-        <legend>Resolution</legend>
-            <div className={styles.labels}>
+        <legend className={styles.legend}>Resolution</legend>
+            <div className={styles.left}>
                 <div className={styles.label}>Presets:</div>
                 <div className={styles.label}>W x H:</div>
             </div>
-            <div className={styles.controls}>
-                <select className={styles.presets} value={resolutionPreset} disabled={subSamplingSelected} onChange={handleChangePreset}>
+            <div className={styles.right}>
+                <select className={styles.select} value={resolutionPreset} disabled={subSamplingSelected} onChange={handleChangePreset}>
                     {resolutionPresetOptions}
                 </select>
                 <br />

@@ -15,8 +15,17 @@ module.exports = {
         }, {
             test: /\.css$/,
             use: [
-                'style-loader?sourceMap',
-                'css-loader?modules&camelCase&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
+                'style-loader',
+                {
+                    loader: 'css-loader',
+                    options: {
+                        modules: true,
+                        camelCase: true,
+                        importLoaders: 1,
+                        localIdentName: '[path][name]__[local]--[hash:base64:5]'
+                    }
+                },
+                'postcss-loader'
             ]
         }, {
             test: /\.(woff|woff2|eot|ttf|svg|png)$/,

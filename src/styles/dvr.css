@@ -1,0 +1,23 @@
+@import './colors.css';
+@import './calculator.css';
+
+.dvr-calculator {
+    composes: calculator;
+    background: $dvr-background;
+    background: linear-gradient(to bottom right, $dvr-background, $dvr-background-light);
+    width: 38rem;
+}
+
+.dvr-fieldset {
+    background: $dvr-fieldset;
+    text-align: left;
+    margin: 0rem 0.1rem;
+    padding: 0.4rem 0.8rem 0.6rem 0.8rem;
+    border: 0.2em groove $calculator-border-dark;
+}
+
+.dvr-input {
+    composes: input;
+    background: $dvr-output;
+    width: 60%;
+}

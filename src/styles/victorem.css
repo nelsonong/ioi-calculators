@@ -1,0 +1,22 @@
+@import './colors.css';
+@import './calculator.css';
+
+.victorem-calculator {
+    composes: calculator;
+    background: $victorem-background;
+    background: linear-gradient(to bottom right, $victorem-background, $victorem-background-light);
+}
+
+.victorem-calculator:hover {
+    cursor: move;
+}
+
+.victorem-fieldset {
+    composes: fieldset;
+    background: $victorem-fieldset;
+}
+
+.victorem-input {
+    composes: input;
+    background: $victorem-output;
+}

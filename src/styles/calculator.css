@@ -1,0 +1,81 @@
+@import './colors.css';
+
+.calculator {
+    font-family: 'Roboto Thin', sans-serif;
+    font-weight: 100;
+    display: inline-block;
+    margin: 2.5rem 0.7rem 2.5rem 0.7rem;
+    padding: 0rem 1.1rem 0.7rem 1.1rem;
+    text-align: center;
+    width: 24rem;
+    border: solid $calculator-border;
+    border-width: thick;
+    border-radius: 0.5rem;
+}
+
+.fieldset {
+    text-align: left;
+    margin: 0.5rem 0 0.5rem 0;
+    padding: 0.4rem 0.8rem 0.6rem 0.8rem;
+    border: 0.2em groove $calculator-border-dark;
+}
+
+.legend {
+    padding: 0 0.3rem;
+}
+
+.select {
+    font-size: 1.1rem;
+    padding: 0.1rem 0rem;
+    margin: 0.2rem;
+    min-width: 3.8rem;
+}
+
+.checkbox {
+    margin: 0.2rem;
+}
+
+.radio {
+    margin: 0.2rem;
+}
+
+.text {
+    display: inline;
+    margin: auto 0.3rem;
+}
+
+.label {
+    margin: 0.8rem auto;
+}
+
+.wxh {
+    width: 40%;
+	font-size: 1.1rem;
+	margin: 0.2rem;
+    padding: 0.1rem 0.2rem;
+}
+
+.input {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    width: 75%;
+    height: 2.2rem;
+    display: block;
+    margin: 0.8rem auto;
+    border-width: thick;
+    border: solid $calculator-info;
+    border-radius: 0.5rem;
+}
+
+@define-mixin add-left-right $left: 50%, $right: 50% {
+    .left {
+        width: $left;
+        display: inline-block;
+    }
+    .right {
+        width: $right;
+        display: inline-block;
+    }
+}

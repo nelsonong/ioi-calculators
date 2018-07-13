@@ -1,10 +1,5 @@
-.root {
-    background: rgb(253, 238, 214);
-    text-align: left;
-    margin: 5px 0 5px 0;
-}
+@import '../../../../styles/flare.css';
 
-.text {
-    display: inline;
-    margin: auto 3px;
+.root {
+    composes: flare-fieldset;
 }

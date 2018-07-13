@@ -1,0 +1,66 @@
+@import './colors.css';
+
+.container {
+	background-color: $container-background;
+	margin: 2rem auto 0rem auto;
+	text-align: center;
+	width: fit-content;
+	width: 90rem;
+	min-height: 50rem;
+	max-width: 90rem;
+	border: solid $container-border;
+	border-width: medium;
+	border-radius: 0.2rem;
+}
+
+.title {
+	background: $container-title;
+	color: white;
+	font-size: 2.2rem;
+	font-weight: 700;
+	padding: 1.4rem;
+}
+
+.buttons-container {
+    background: repeating-linear-gradient(
+        45deg,
+        $buttons-container-light,
+        $buttons-container-light 1rem,
+        $buttons-container-dark 1rem,
+        $buttons-container-dark 2rem
+    );
+	display: flex;
+	justify-content: space-between;
+	padding: 2rem 3rem;
+	border-bottom: solid $container-border;
+	border-width: medium;
+}
+
+.left {
+	display: inline-block;
+	text-align: left;
+}
+
+.right {
+	display: inline-block;
+	text-align: right;
+}
+
+.button {
+	font-size: 1.3rem;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+	color: white;
+	text-align: center;
+	width: 10rem;
+	height: 3.2rem;
+	display: inline-block;
+	margin: 0rem 0.1rem;
+	border-width: medium;
+	border-radius: 0.3rem;
+	border-color: $button-border;
+}
+
+.list {
+	margin: 0px;
+}

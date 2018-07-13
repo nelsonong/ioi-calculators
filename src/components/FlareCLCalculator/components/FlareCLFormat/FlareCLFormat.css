@@ -1,11 +1,5 @@
-.root {
-    background: rgb(253, 238, 214);
-    text-align: left;
-    margin: 5px 0 5px 0;
-}
+@import '../../../../styles/flare.css';
 
-.select {
-    font-size: 11px;
-    padding: 1px 0px;
-    margin: 1px;
+.root {
+    composes: flare-fieldset;
 }

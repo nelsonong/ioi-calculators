@@ -1,18 +1,16 @@
+
+@import '../../../../styles/colors.css';
+@import '../../../../styles/container.css';
+
 .root {
-    background-color: rgb(236, 236, 236);
+    composes: container;
     position: absolute;
     outline: none;
-    margin: 20px auto 0px auto;
-    text-align: center;
-    width: 500px;
-    min-height: 500px;
-    border: solid rgb(61, 61, 61);
-    border-width: medium;
-    border-radius: 2px;
+    width: 50rem;
 }
 
 .overlay {
-    background-color: rgba(0, 0, 0, 0.35);
+    background-color: $modal-overlay;
     position: fixed;
     display: flex;
     justify-content: center;
@@ -25,33 +23,30 @@
 
 /* Title bar */
 .title {
-    background: rgb(61, 61, 61);
-    color: white;
-    font-size: 22px;
-    font-weight: 700;
-    padding: 12px;
+    composes: title;
+    padding: 1.2rem;
     display: flex;
     justify-content: space-between;
 }
 
 .left-spacer {
-    margin-left: 10px;
-    width: 32px;
+    margin-left: 1rem;
+    width: 3.2rem;
 }
 
 .text {
-    padding: 5px 1px 1px 1px;
+    padding: 0.5rem 0.1rem 0.1rem 0.1rem;
 }
 
 .close-button {
     background: transparent;
     color: white;
-    font-size: 24px;
+    font-size: 2.4rem;
     font-weight: 700;
-    margin-right: 5px;
+    margin-right: 0.5rem;
     border: none;
 }
 
 .close-button:hover {
-    color: bisque;
+    color: $flare-background;
 }

@@ -6,9 +6,9 @@ const DVRModel = ({ handleChangeModel, configurations, handleChangeConfiguration
     const modelOptions = MODELS.map((model, i) => <option key={i}>{model}</option>);
     const configOptions = configurations.map((configuration, i) => <option key={i}>{configuration}</option>);
     return (
-        <div className={styles.root}>
+        <div>
             <fieldset className={styles.root}>
-            <legend>Model / Configuration</legend>
+            <legend className={styles.legend}>Model / Configuration</legend>
                 <select className={styles.select} name='model' onChange={handleChangeModel}>
                     {modelOptions}
                 </select>

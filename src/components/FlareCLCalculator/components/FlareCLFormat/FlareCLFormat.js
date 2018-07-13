@@ -5,7 +5,7 @@ const FlareCLFormat = ({ formats, handleChange }) => {
     const formatOptions = formats.map((format, i) => <option key={i}>{format}</option>);
     return (
         <fieldset className={styles.root}>
-        <legend>Camera Link Format</legend>
+        <legend className={styles.legend}>Camera Link Format</legend>
         <select className={styles.select} name='format' onChange={handleChange}>
             {formatOptions}
         </select>

@@ -5,7 +5,7 @@ const DVRCameras = ({ cameras }) => {
     const cameraComponents = cameras.map(camera => camera.camera);
     return (
         <fieldset className={styles.root}>
-        <legend>Cameras</legend>
+        <legend className={styles.legend}>Cameras</legend>
             <div className={styles.container}>
                 {cameraComponents}
             </div>
