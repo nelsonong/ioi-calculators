@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { VictoremModel, VictoremModelInfo, VictoremFormat, VictoremResolution, VictoremOptions, VictoremFrameRate } from './components';
-import { MODEL, SENSOR, FORMAT, FORMATS, OPTION, RESOLUTION, MAX_RESOLUTIONS } from './constants';
+import { MODEL, SENSOR, FORMAT, FORMATS, OPTION, RESOLUTION } from './constants';
 import { getFormats } from './utils/victorem-format';
 import { calculateFrameRate } from './utils/victorem-frame-rate';
 import { minWidth, maxWidth, minHeight, maxHeight } from './utils/victorem-resolution';
@@ -11,20 +11,18 @@ import CalculatorTopBar from '../CalculatorTopBar';
 class VictoremCalculator extends Component {
     state = {
         model: MODEL.Type51B163MCX,                             // Camera model
-        sensor: SENSOR[MODEL.Type51B163MCX],                // Camera's sensor
-        maxWidth: MAX_RESOLUTIONS[MODEL.Type51B163MCX][0],   // Max width of camera
-        maxHeight: MAX_RESOLUTIONS[MODEL.Type51B163MCX][1],  // Max height of camera
+        sensor: SENSOR[MODEL.Type51B163MCX],                    // Camera's sensor
         format: FORMAT.CXP2x1,                                  // Current format selected
         formats: FORMATS.CXX,                                   // Formats supported by camera
-        bitDepth: 8,                                                // Bit depth
+        bitDepth: 8,                                            // Bit depth
         resolutionPreset: RESOLUTION.MAXIMUM,                   // Resolution preset selected
-        width: 2464,                                                // Width
-        height: 2056,                                               // Height
+        width: 2464,                                            // Width
+        height: 2056,                                           // Height
         cameraOption: OPTION.NONE,                              // Camera options [none, sub-sample, vertical bin, 2x2 bin]
-        frameRate: '46.66 FPS [2464 x 2056]',                       // Maximum frame-rate
-        supports2x2Binning: true,                                   // 2x2 binning supported by camera
-        supportsSubSampling: true,                                  // Sub-sampling supported by camera
-        supportsVerticalBinning: true                               // Vertical binning supported by camera
+        frameRate: '46.66 FPS [2464 x 2056]',                   // Maximum frame-rate
+        supports2x2Binning: true,                               // 2x2 binning supported by camera
+        supportsSubSampling: true,                              // Sub-sampling supported by camera
+        supportsVerticalBinning: true                           // Vertical binning supported by camera
     };
 
     // General change handler (requires input element to have name attribute)
@@ -43,8 +41,6 @@ class VictoremCalculator extends Component {
         this.setState(() => ({
             model: model,
             sensor: SENSOR[model],
-            maxWidth: MAX_RESOLUTIONS[model][0],
-            maxHeight: MAX_RESOLUTIONS[model][1],
             format: FORMAT.CXP2x1,
             formats: getFormats(model),
             supports2x2Binning: supports2x2Binning(model),
@@ -113,13 +109,8 @@ class VictoremCalculator extends Component {
                 id={this.props.id}
             />
             <VictoremModel
-                model={this.state.model}
-                handleChangeModel={this.handleChangeModel}
-            />
-            <VictoremModelInfo
                 sensor={this.state.sensor}
-                maxWidth={this.state.maxWidth}
-                maxHeight={this.state.maxHeight}
+                handleChangeModel={this.handleChangeModel}
             />
             <VictoremFormat
                 formats={this.state.formats}

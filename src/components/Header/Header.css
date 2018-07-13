@@ -7,7 +7,7 @@
 .container {
     margin: 0 auto;
     padding: 0 1rem;
-    max-width: 80rem;
+    max-width: 84rem;
 }
 
 .content {
@@ -37,6 +37,8 @@
     padding: 2.6rem 1.8rem;
     height: 8rem;
     text-decoration: none;
+    border-left: solid $header 0.4rem;
+    border-right: solid $header 0.4rem ;
 }
 
 .button:hover {

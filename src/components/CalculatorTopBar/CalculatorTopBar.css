@@ -20,4 +20,9 @@
 	float: right;
 	padding-left: 2rem;
 	border: none;
+	outline: none;
+}
+
+.close-button:hover {
+	color: grey;
 }

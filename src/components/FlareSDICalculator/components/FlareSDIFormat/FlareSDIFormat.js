@@ -9,14 +9,13 @@ const FlareSDIFormat = ({ sdiInterface, sdiInterfaces, link, links, handleChange
         <legend className={styles.legend}>SDI Format</legend>
             <div className={styles.left}>
                 <div className={styles.label}>Interface:</div>
-                <div className={styles.label}>Links:</div>
-            </div>
-            <div className={styles.right}>
-                <select className={styles.control} name='sdiInterface' value={sdiInterface} onChange={handleChange}>
+                <select className={styles.select} name='sdiInterface' value={sdiInterface} onChange={handleChange}>
                     {sdiInterfaceOptions}
                 </select>
-                <br />
-                <select className={styles.control} name='link' value={link} onChange={handleChange}>
+            </div>
+            <div className={styles.right}>
+                <div className={styles.label}>Links:</div>
+                <select className={styles.select} name='link' value={link} onChange={handleChange}>
                     {linkOptions}
                 </select>
             </div>

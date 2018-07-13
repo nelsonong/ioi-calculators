@@ -1,16 +1,16 @@
 import { MODEL } from './models';
 
 export const SENSOR = {
-    [MODEL.Type51B163MCX]: '250LL',
-    [MODEL.Type51B163CCX]: '250LQ',
-    [MODEL.Type32B216MCX]: '252LL',
-    [MODEL.Type32B216CCX]: '252LQ',
-    [MODEL.Type120B68MCX]: '252LL',
-    [MODEL.Type120B68CCX]: '252LQ',
-    [MODEL.Type89B93MCX]: '255LL',
-    [MODEL.Type89B93CCX]: '255LQ',
-    [MODEL.Type16B276MCX]: '273LL',
-    [MODEL.Type16B276CCX]: '273LQ',
-    [MODEL.Type4B523MCX]: '287LL',
-    [MODEL.Type4B523CCX]: '287LQ'
+    [MODEL.Type51B163MCX]: 'Sony IMX250',
+    [MODEL.Type51B163CCX]: 'Sony IMX250',
+    [MODEL.Type32B216MCX]: 'Sony IMX252',
+    [MODEL.Type32B216CCX]: 'Sony IMX252',
+    [MODEL.Type120B68MCX]: 'Sony IMX252',
+    [MODEL.Type120B68CCX]: 'Sony IMX252',
+    [MODEL.Type89B93MCX]: 'Sony IMX255',
+    [MODEL.Type89B93CCX]: 'Sony IMX255',
+    [MODEL.Type16B276MCX]: 'Sony IMX273',
+    [MODEL.Type16B276CCX]: 'Sony IMX273',
+    [MODEL.Type4B523MCX]: 'Sony IMX287',
+    [MODEL.Type4B523CCX]: 'Sony IMX287'
 };

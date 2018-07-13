@@ -138,11 +138,6 @@ class FlareCLCalculator extends Component {
                 mode={this.state.mode}
                 handleChangeModel={this.handleChangeModel}
             />
-            <FlareCLHardwareVersion
-                model={this.state.model}
-                hwversion={this.state.hwversion}
-                handleChange={this.handleChange}
-            />
             <FlareCLFormat
                 formats={this.state.formats}
                 mode={this.state.mode}

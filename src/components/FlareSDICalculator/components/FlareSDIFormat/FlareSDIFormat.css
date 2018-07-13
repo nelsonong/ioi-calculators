@@ -4,11 +4,9 @@
     composes: flare-sdi-fieldset;
 }
 
-@mixin add-left-right 26%, 74%;
+@mixin add-left-right 60%, 40%;
 
-.control {
-    composes: select;
-    padding: 0.1rem 0rem;
-    margin: 0.1rem;
-    min-width: 3.8rem;
+.label {
+    display: inline-block;
+    margin: 0 0.3em;
 }
