@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './FlareCLOutput.css';
+import styles from './VictoremOutput.css';
 
-const FlareCLOutput = ({ frameRate, dataRate }) => {
+const VictoremOutput = ({ frameRate, dataRate }) => {
     const outputText = `${frameRate} FPS / ${dataRate} MB/s`;
     return (
         <fieldset className={styles.root}>
@@ -9,6 +9,6 @@ const FlareCLOutput = ({ frameRate, dataRate }) => {
             <input type='text' className={styles.input} disabled={true} value={outputText} />
         </fieldset>
     );
-};
+}
 
-export default FlareCLOutput;
+export default VictoremOutput;

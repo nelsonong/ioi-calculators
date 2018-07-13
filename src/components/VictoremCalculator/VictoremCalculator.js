@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { VictoremModel, VictoremModelInfo, VictoremFormat, VictoremResolution, VictoremOptions, VictoremFrameRate } from './components';
+import { VictoremModel, VictoremFormat, VictoremResolution, VictoremOptions, VictoremOutput } from './components';
 import { MODEL, SENSOR, FORMAT, FORMATS, OPTION, RESOLUTION } from './constants';
-import { getFormats } from './utils/victorem-format';
-import { calculateFrameRate } from './utils/victorem-frame-rate';
-import { minWidth, maxWidth, minHeight, maxHeight } from './utils/victorem-resolution';
-import { supports2x2Binning, supportsSubSampling, supportsVerticalBinning } from './utils/victorem-support';
+import { getFormats } from './utils/getFormats';
+import { calculateFrameRate } from './utils/calculateFrameRate';
+import { calculateDataRate } from './utils/calculateDataRate';
+import { minWidth, maxWidth, minHeight, maxHeight } from './utils/resolution';
+import { supports2x2Binning, supportsSubSampling, supportsVerticalBinning } from './utils/support';
 import styles from './VictoremCalculator.css';
 import CalculatorTopBar from '../CalculatorTopBar';
 
@@ -19,7 +20,8 @@ class VictoremCalculator extends Component {
         width: 2464,                                            // Width
         height: 2056,                                           // Height
         cameraOption: OPTION.NONE,                              // Camera options [none, sub-sample, vertical bin, 2x2 bin]
-        frameRate: '46.66 FPS [2464 x 2056]',                   // Maximum frame-rate
+        frameRate: 46.66,                                       // Maximum frame-rate
+        dataRate: 225.43,                                       // Data-rate
         supports2x2Binning: true,                               // 2x2 binning supported by camera
         supportsSubSampling: true,                              // Sub-sampling supported by camera
         supportsVerticalBinning: true                           // Vertical binning supported by camera
@@ -32,7 +34,7 @@ class VictoremCalculator extends Component {
         this.setState(() => ({ [name]: value }));
 
         this.updateMinMaxResolution();
-        this.updateFrameRate();
+        this.updateOutput();
     }
 
     // Reset all fields with appropriate values on model change
@@ -50,7 +52,7 @@ class VictoremCalculator extends Component {
         }));
 
         this.updateMinMaxResolution();
-        this.updateFrameRate();
+        this.updateOutput();
     }
 
     // Change resolution preset
@@ -64,7 +66,7 @@ class VictoremCalculator extends Component {
             this.setState(() => ({ resolutionPreset: preset, width: Number(width), height: Number(height) }));
         }
 
-        this.updateFrameRate();
+        this.updateOutput();
     }
 
     // Change resolution and set preset to 'Custom'
@@ -72,7 +74,7 @@ class VictoremCalculator extends Component {
         let { name, value } = e.target;
         this.setState(() => ({ resolutionPreset: RESOLUTION.CUSTOM, [name]: Number(value) }));
 
-        this.updateFrameRate();
+        this.updateOutput();
     }
 
     // Update minimum/maximum resolution
@@ -93,11 +95,13 @@ class VictoremCalculator extends Component {
         });
     }
 
-    // Update frame-rate
-    updateFrameRate = () => {
-        this.setState((prevState) => ({
-            frameRate: calculateFrameRate({...prevState})
-        }));
+    // Update output
+    updateOutput = () => {
+        this.setState((prevState) => {
+            const frameRate = calculateFrameRate({ ...prevState });
+            const dataRate = calculateDataRate({ ...prevState, frameRate });
+            return { frameRate, dataRate };
+        });
     }
 
     render = () => (
@@ -131,8 +135,9 @@ class VictoremCalculator extends Component {
                 supportsVerticalBinning={this.state.supportsVerticalBinning}
                 handleChange={this.handleChange}
             />
-            <VictoremFrameRate
+            <VictoremOutput
                 frameRate={this.state.frameRate}
+                dataRate={this.state.dataRate}
             />
         </div>
     );

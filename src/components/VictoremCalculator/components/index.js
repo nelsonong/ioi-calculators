@@ -1,5 +1,5 @@
-export { VictoremFormat } from './VictoremFormat';
-export { VictoremFrameRate } from './VictoremFrameRate';
 export { VictoremModel } from './VictoremModel';
-export { VictoremOptions } from './VictoremOptions';
+export { VictoremFormat } from './VictoremFormat';
 export { VictoremResolution } from './VictoremResolution';
+export { VictoremOptions } from './VictoremOptions';
+export { VictoremOutput } from './VictoremOutput';
