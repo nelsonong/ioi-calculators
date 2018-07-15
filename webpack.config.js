@@ -1,40 +1,69 @@
 const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-module.exports = {
-    entry: './src/index.js',
-    output: {
-        path: path.join(__dirname, 'public'),
-        filename: 'bundle.js'
-    },
-    mode: 'development',
-    module: {
-        rules: [{
-            test: /\.js$/,
-            exclude: /node_modules/,
-            loader: 'babel-loader'
-        }, {
-            test: /\.css$/,
-            use: [
-                'style-loader',
-                {
-                    loader: 'css-loader',
-                    options: {
-                        modules: true,
-                        camelCase: true,
-                        importLoaders: 1,
-                        localIdentName: '[path][name]__[local]--[hash:base64:5]'
-                    }
-                },
-                'postcss-loader'
-            ]
-        }, {
-            test: /\.(woff|woff2|eot|ttf|svg|png)$/,
-            loader: 'file-loader'
-        }]
-    },
-    devtool: 'cheap-module-eval-source-map',
-    devServer: {
-        contentBase: path.join(__dirname, 'public'),
-        historyApiFallback: true
-    }
+module.exports = (env) => {
+    const isProduction = (env === 'production');
+    const CSSExtract = new ExtractTextPlugin('styles.css');
+
+    return {
+        entry: './src/index.js',
+        output: {
+            path: path.join(__dirname, 'public', 'dist'),
+            filename: 'bundle.js'
+        },
+        mode: 'development',
+        module: {
+            rules: [{
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'babel-loader'
+            }, {
+                test: /\.css$/,
+                use: CSSExtract.extract({
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                modules: true,
+                                camelCase: true,
+                                importLoaders: 1,
+                                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                                sourceMap: true
+                            }
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                sourceMap: true
+                            }
+                        }
+                    ]
+                })
+            }, {
+                test: /\.(jpe?g|png|ico)$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]',
+                    outputPath: 'images/',
+                    publicPath: path.join('dist', 'images')
+                }
+            }, {
+                test: /\.(woff|woff2|eot|ttf|svg)$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]',
+                    outputPath: 'fonts'
+                }
+            }]
+        },
+        plugins: [
+            CSSExtract
+        ],
+        devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
+        devServer: {
+            contentBase: path.join(__dirname, 'public'),
+            historyApiFallback: true,
+            publicPath: 'dist'
+        }
+    };
 };

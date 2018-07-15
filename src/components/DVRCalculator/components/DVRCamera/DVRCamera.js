@@ -4,9 +4,9 @@ import FlareCLCalculator from '../../../FlareCLCalculator';
 import FlareCXCalculator from '../../../FlareCXCalculator';
 import FlareSDICalculator from '../../../FlareSDICalculator';
 import { LINK } from '../../constants';
-import plus from './images/plus.png';
-import edit from './images/edit.png';
-import remove from './images/remove.png';
+import plus from '../../../../images/plus.png';
+import edit from '../../../../images/edit.png';
+import remove from '../../../../images/remove.png';
 import styles from './DVRCamera.css';
 
 class DVRCamera extends Component {

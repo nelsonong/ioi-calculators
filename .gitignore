@@ -60,5 +60,8 @@ typings/
 # next.js build output
 .next
 
-# vscode
+# Visual Studio Code configuration
 .vscode/
+
+# Local production build files
+public/dist
