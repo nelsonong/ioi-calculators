@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './VictoremOutput.css';
 
-const VictoremOutput = ({ frameRate, dataRate }) => {
-    const outputText = `${frameRate} FPS / ${dataRate} MB/s`;
+const VictoremOutput = ({ frameRate, dataRate, error }) => {
+    const outputText = error ? 'N/A' : `${frameRate} FPS / ${dataRate} MB/s`;
     return (
         <fieldset className={styles.root}>
         <legend className={styles.legend}>Output</legend>

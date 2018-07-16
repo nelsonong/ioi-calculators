@@ -4,7 +4,7 @@ import { FlareCXModel, FlareCXFormat, FlareCXResolution, FlareCXOptions, FlareCX
 import { MODEL, FORMATS, LINK_SPEEDS, RESOLUTION } from './constants';
 import { calculateFrameRate } from './utils/calculateFrameRate';
 import { calculateDataRate } from './utils/calculateDataRate';
-import { minWidth, maxWidth, minHeight, maxHeight } from './utils/resolution';
+import { calculateMinWidth, calculateMaxWidth, calculateMinHeight, calculateMaxHeight, calculateWidthMultiple, calculateHeightMultiple } from './utils/resolution';
 import styles from './FlareCXCalculator.css';
 
 class FlareCXCalculator extends Component {
@@ -16,10 +16,14 @@ class FlareCXCalculator extends Component {
         linkSpeed: LINK_SPEEDS.CXP3,            // Link speed (CoaXPress)
         resolutionPreset: RESOLUTION.MAXIMUM,   // Resolution preset
         width: 2048,                            // Resolution - width
+        widthStep: 8,                           // Acceptable width multiple
         height: 1088,                           // Resolution - height
+        heightStep: 2,                          // Acceptable height multiple
+        resolutionTooltip: '',                  // Warning if incorrect resolution multiple
         subSampling: false,                     // Sub-sampling enabled
         frameRate: 132.72,                      // Maximum frame-rate
         dataRate: 282.03,                       // Data-rate (in MB/s)
+        error: false,                           // Error occured with an input
         mode: this.props.mode                   // Mode (Base or Full if in DVR calculator)
     };
 
@@ -39,6 +43,7 @@ class FlareCXCalculator extends Component {
     handleChangeModel = (e) => {
         const model = e.target.value;
 
+        // Update formats
         let formats;
         if (model.startsWith('48M')) {
             formats = FORMATS.CX48m;
@@ -47,8 +52,12 @@ class FlareCXCalculator extends Component {
         } else {
             formats = FORMATS.CX2_4m;
         }
+
+        // Update resolution multiples
+        const widthStep = calculateWidthMultiple(model);
+        const heightStep = calculateHeightMultiple(model);
         
-        this.setState(() => ({ model, formats }));
+        this.setState(() => ({ model, formats, widthStep, heightStep }));
         this.updateMinMaxResolution();
         this.updateOutput();
     }
@@ -69,10 +78,29 @@ class FlareCXCalculator extends Component {
         this.updateOutput();
     }
 
-    // Change resolution and set preset to 'Custom'
-    handleChangeResolution = (e) => {
-        const { name, value } = e.target;
-        this.setState(() => ({ resolutionPreset: RESOLUTION.CUSTOM, [name]: Number(value) }));
+    // Change width and set preset to 'Custom'
+    handleChangeWidth = (e) => {
+        const { value } = e.target;
+        const width = Number(value);
+
+        // Validate resolution
+        const resolutionTooltip = this.validateResolution(width, this.state.height)
+        const error = resolutionTooltip !== '';
+
+        this.setState(() => ({ resolutionPreset: RESOLUTION.CUSTOM, width, resolutionTooltip, error }));
+        this.updateOutput();
+    }
+
+    // Change height and set preset to 'Custom'
+    handleChangeHeight = (e) => {
+        const { value } = e.target;
+        const height = Number(value);
+
+        // Validate resolution
+        const resolutionTooltip = this.validateResolution(this.state.width, height)
+        const error = resolutionTooltip !== '';
+
+        this.setState(() => ({ resolutionPreset: RESOLUTION.CUSTOM, height, resolutionTooltip, error }));
         this.updateOutput();
     }
 
@@ -81,13 +109,13 @@ class FlareCXCalculator extends Component {
         this.setState(({ resolutionPreset, model }) => {
             if (resolutionPreset === RESOLUTION.MINIMUM) {
                 return {
-                    width: minWidth(model),
-                    height: minHeight(model)
+                    width: calculateMinWidth(model),
+                    height: calculateMinHeight(model)
                 };
             } else if (resolutionPreset === RESOLUTION.MAXIMUM) {
                 return {
-                    width: maxWidth(model),
-                    height: maxHeight(model)
+                    width: calculateMaxWidth(model),
+                    height: calculateMaxHeight(model)
                 }
             };
         });
@@ -100,6 +128,36 @@ class FlareCXCalculator extends Component {
             const dataRate = calculateDataRate({ ...prevState, frameRate });
             return { frameRate, dataRate };
         });
+    }
+
+    validateResolution = (width, height) => {
+        const { model } = this.state;
+        
+        // Validate max width
+        const maxWidth = calculateMaxWidth(model);
+        let withinBounds = width <= maxWidth;
+        if (!withinBounds)
+            return `Maximum width is ${maxWidth}px.`;
+
+        // Validate max height
+        const maxHeight = calculateMaxHeight(model);
+        withinBounds = height <= maxHeight;
+        if (!withinBounds)
+            return `Maximum height is ${maxHeight}px.`;
+        
+        // Validate width
+        const widthStep = calculateWidthMultiple(model);
+        let correctMultiple = (width % widthStep) === 0;
+        if (!correctMultiple)
+            return `Width must be a multiple of ${widthStep}.`;
+
+        // Validate height
+        const heightStep = calculateHeightMultiple(model);
+        correctMultiple = (height % heightStep) === 0;
+        if (!correctMultiple)
+            return `Height must be a multiple of ${heightStep}.`;
+        
+        return '';
     }
 
     render = () => (
@@ -122,9 +180,13 @@ class FlareCXCalculator extends Component {
             <FlareCXResolution
                 resolutionPreset={this.state.resolutionPreset}
                 width={this.state.width}
+                widthStep={this.state.widthStep}
                 height={this.state.height}
+                heightStep={this.state.heightStep}
+                resolutionTooltip={this.state.resolutionTooltip}
                 handleChangePreset={this.handleChangePreset}
-                handleChangeResolution={this.handleChangeResolution}
+                handleChangeWidth={this.handleChangeWidth}
+                handleChangeHeight={this.handleChangeHeight}
             />
             <FlareCXOptions
                 model={this.state.model}
@@ -134,6 +196,7 @@ class FlareCXCalculator extends Component {
             <FlareCXOutput
                 frameRate={this.state.frameRate}
                 dataRate={this.state.dataRate}
+                error={this.state.error}
             />
         </div>
     );

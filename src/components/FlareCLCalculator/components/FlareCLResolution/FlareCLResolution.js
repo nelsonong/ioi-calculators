@@ -5,9 +5,13 @@ import styles from './FlareCLResolution.css';
 const FlareCLResolution = ({
     resolutionPreset,
     width,
+    widthStep,
     height,
+    heightStep,
+    resolutionTooltip,
     handleChangePreset,
-    handleChangeResolution
+    handleChangeWidth,
+    handleChangeHeight
 }) => {
     const resolutionPresetOptions = RESOLUTIONS.map((preset, i) => {
         if (!NAN_RESOLUTIONS.includes(preset)) {
@@ -27,9 +31,15 @@ const FlareCLResolution = ({
                     {resolutionPresetOptions}
                 </select>
                 <br />
-                <input type="number" className={styles.wxh} name='width' value={width} onChange={handleChangeResolution} />
-                <input type="number" className={styles.wxh} name='height' value={height} onChange={handleChangeResolution} />
+                <input type="number" className={styles.wxh} name='width' step={widthStep} value={width} onChange={handleChangeWidth} />
+                <input type="number" className={styles.wxh} name='height' step={heightStep} value={height} onChange={handleChangeHeight} />
             </div>
+            {
+                resolutionTooltip !== '' &&
+                <div className={styles.tooltip}>
+                    {resolutionTooltip}
+                </div>
+            }
         </fieldset>
     );
 };

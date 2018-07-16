@@ -1,8 +1,8 @@
 import { MODEL, FORMAT, COLOR_MODELS } from '../constants';
 
-const minWidth = (model, format) => 2 * widthMultiple(model, format);
+const calculateMinWidth = (model, format) => 2 * widthMultiple(model, format);
 
-const maxWidth = (model, format) => {
+const calculateMaxWidth = (model, format) => {
     switch (model) {
 
         // Camera Link models
@@ -30,13 +30,13 @@ const maxWidth = (model, format) => {
     }
 };
 
-const minHeight = (model) => {
+const calculateMinHeight = (model) => {
     if (COLOR_MODELS.includes(model)) return 4;
     if (model.startsWith('12M')) return 4;
     return 2;
 };
 
-const maxHeight = (model) => {
+const calculateMaxHeight = (model) => {
     switch (model) {
         case MODEL.Type2M360MCL:
         case MODEL.Type2M360CCL:
@@ -60,16 +60,16 @@ const maxHeight = (model) => {
     }
 };
 
-const widthMultiple = (model, format) => {
+const calculateWidthMultiple = (format) => {
     if (format === FORMAT.Output3x8) return 12;
     if (format === FORMAT.Output10x8) return 10;
     if (format === FORMAT.Output20x8) return 10;
     return 8;
 };
 
-const heightMultiple = (model) => {
+const calculateHeightMultiple = (model) => {
     if (COLOR_MODELS.includes(model)) return 4;
     return 2;
 };
 
-export { minWidth, maxWidth, minHeight, maxHeight, widthMultiple, heightMultiple };
+export { calculateMinWidth, calculateMaxWidth, calculateMinHeight, calculateMaxHeight, calculateWidthMultiple, calculateHeightMultiple };

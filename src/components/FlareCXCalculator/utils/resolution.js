@@ -1,11 +1,11 @@
 import { MODEL, COLOR_MODELS } from '../constants';
 
-const minWidth = (model) => {
+const calculateMinWidth = (model) => {
     if (model.startsWith('12M')) return 64;
     return 16;
 };
 
-const maxWidth = (model) => {
+const calculateMaxWidth = (model) => {
     switch (model) {
         case MODEL.Type2M280MCX:
         case MODEL.Type2M280CCX:
@@ -30,13 +30,13 @@ const maxWidth = (model) => {
     }
 };
 
-const minHeight = (model) => {
+const calculateMinHeight = (model) => {
     if (model.startsWith('12M')) return 8;
     if (COLOR_MODELS.includes(model)) return 4;
     return 2;
 };
 
-const maxHeight = (model) => {
+const calculateMaxHeight = (model) => {
     switch (model) {
         case MODEL.Type2M280MCX:
         case MODEL.Type2M280CCX:
@@ -63,16 +63,23 @@ const maxHeight = (model) => {
     }
 };
 
-const widthMultiple = (model) => {
+const calculateWidthMultiple = (model) => {
     if (model.startsWith('48M')) return 16;
     if (model.startsWith('12M')) return 64;
     return 8;
 };
 
-const heightMultiple = (model) => {
+const calculateHeightMultiple = (model) => {
     if (model.startsWith('12M')) return 4;
     if (COLOR_MODELS.includes(model)) return 4;
     return 2;
 };
 
-export { minWidth, maxWidth, minHeight, maxHeight, widthMultiple, heightMultiple };
+export {
+    calculateMinWidth,
+    calculateMaxWidth,
+    calculateMinHeight,
+    calculateMaxHeight,
+    calculateWidthMultiple,
+    calculateHeightMultiple
+};

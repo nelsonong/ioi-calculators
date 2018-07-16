@@ -1,17 +1,18 @@
 import { MODELS, FORMAT, OPTION } from '../constants';
 
-const minWidth = (model) => {
+const calculateMinWidth = (model) => {
     if (MODELS.TYPE_287.includes(model)) return 8;
     //    if (isSdi2k(model)) return 2048;
     //    if (isSdi4k(model)) return 4096;
     return 16;
 };
 
-const maxWidth = (parentState) => {
-
-    // Get parameters from parent state
-    let { model, format, bitDepth, cameraOption } = parentState;
-
+const calculateMaxWidth = ({
+    model,
+    format,
+    bitDepth,
+    cameraOption
+}) => {
     const linkSpeed = Number(format.slice(-1));
     const linkCount = Number(format.slice(0, 1));
     const binv = (cameraOption === OPTION.BIN_VERTICAL);
@@ -84,17 +85,18 @@ const maxWidth = (parentState) => {
     return 0;
 };
 
-const minHeight = (model) => {
+const calculateMinHeight = (model) => {
     //    if (isSdi2k(model)) return 1080;
     //    if (isSdi4k(model)) return 2160;
     return 4;
 };
 
-const maxHeight = (parentState) => {
-
-    // Get parameters from parent state
-    let { model, format, bitDepth, cameraOption } = parentState;
-
+const calculateMaxHeight = ({
+    model,
+    format,
+    bitDepth,
+    cameraOption
+}) => {
     const linkSpeed = Number(format.slice(-1));
     const linkCount = Number(format.slice(0, 1));
     const binv = (cameraOption === OPTION.BIN_VERTICAL);
@@ -176,4 +178,19 @@ const maxHeight = (parentState) => {
     return 0;
 };
 
-export { minWidth, maxWidth, minHeight,  maxHeight };
+const calculateWidthMultiple = (model) => {
+    return calculateMinWidth(model);
+};
+
+const calculateHeightMultiple = (model) => {
+    return calculateMinHeight(model);
+};
+
+export {
+    calculateMinWidth,
+    calculateMaxWidth,
+    calculateMinHeight,
+    calculateMaxHeight,
+    calculateWidthMultiple,
+    calculateHeightMultiple
+};

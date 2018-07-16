@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './FlareCLOutput.css';
 
-const FlareCLOutput = ({ frameRate, dataRate }) => {
-    const outputText = `${frameRate} FPS / ${dataRate} MB/s`;
+const FlareCLOutput = ({ frameRate, dataRate, error }) => {
+    const outputText = error ? 'N/A' : `${frameRate} FPS / ${dataRate} MB/s`;
     return (
         <fieldset className={styles.root}>
         <legend className={styles.legend}>Output</legend>
