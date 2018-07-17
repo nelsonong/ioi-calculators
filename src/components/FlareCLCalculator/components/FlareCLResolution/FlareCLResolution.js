@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { updateCLResolutionPreset, updateCLWidth, updateCLHeight } from '../../../../actions/flareCLActions';
 import { NAN_RESOLUTIONS, RESOLUTIONS } from '../../constants';
 import styles from './FlareCLResolution.css';
 
@@ -9,7 +11,7 @@ const FlareCLResolution = ({
     height,
     heightStep,
     resolutionTooltip,
-    handleChangePreset,
+    handleChangeResolutionPreset,
     handleChangeWidth,
     handleChangeHeight
 }) => {
@@ -27,12 +29,12 @@ const FlareCLResolution = ({
                 <div className={styles.label}>W x H:</div>
             </div>
             <div className={styles.right}>
-                <select className={styles.select} value={resolutionPreset} onChange={handleChangePreset}>
+                <select className={styles.select} value={resolutionPreset} onChange={handleChangeResolutionPreset}>
                     {resolutionPresetOptions}
                 </select>
                 <br />
-                <input type="number" className={styles.wxh} name='width' step={widthStep} value={width} onChange={handleChangeWidth} />
-                <input type="number" className={styles.wxh} name='height' step={heightStep} value={height} onChange={handleChangeHeight} />
+                <input type="number" className={styles.wxh} step={widthStep} value={width} onChange={handleChangeWidth} />
+                <input type="number" className={styles.wxh} step={heightStep} value={height} onChange={handleChangeHeight} />
             </div>
             {
                 resolutionTooltip !== '' &&
@@ -44,4 +46,44 @@ const FlareCLResolution = ({
     );
 };
 
-export default FlareCLResolution;
+const mapStateToProps = (state, ownProps) => {
+    const { id } = ownProps;
+    const calculatorState = state.get(id);
+    const {
+        resolutionPreset,
+        width,
+        widthStep,
+        height,
+        heightStep,
+        resolutionTooltip
+    } = calculatorState;
+    
+    return {
+        resolutionPreset,
+        width,
+        widthStep,
+        height,
+        heightStep,
+        resolutionTooltip
+    }
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    const { id } = ownProps;
+    return {
+        handleChangeResolutionPreset: (e) => {
+            const resolutionPreset = e.target.value;
+            dispatch(updateCLResolutionPreset(id, resolutionPreset));
+        },
+        handleChangeWidth: (e) => {
+            const width = Number(e.target.value);
+            dispatch(updateCLWidth(id, width));
+        },
+        handleChangeHeight: (e) => {
+            const height = Number(e.target.value);
+            dispatch(updateCLHeight(id, height));
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(FlareCLResolution);

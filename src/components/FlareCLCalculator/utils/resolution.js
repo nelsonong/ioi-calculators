@@ -1,6 +1,6 @@
 import { MODEL, FORMAT, COLOR_MODELS } from '../constants';
 
-const calculateMinWidth = (model, format) => 2 * widthMultiple(model, format);
+const calculateMinWidth = (model, format) => 2 * calculateWidthStep(model, format);
 
 const calculateMaxWidth = (model, format) => {
     switch (model) {
@@ -60,16 +60,16 @@ const calculateMaxHeight = (model) => {
     }
 };
 
-const calculateWidthMultiple = (format) => {
+const calculateWidthStep = (model, format) => {
     if (format === FORMAT.Output3x8) return 12;
     if (format === FORMAT.Output10x8) return 10;
     if (format === FORMAT.Output20x8) return 10;
     return 8;
 };
 
-const calculateHeightMultiple = (model) => {
+const calculateHeightStep = (model) => {
     if (COLOR_MODELS.includes(model)) return 4;
     return 2;
 };
 
-export { calculateMinWidth, calculateMaxWidth, calculateMinHeight, calculateMaxHeight, calculateWidthMultiple, calculateHeightMultiple };
+export { calculateMinWidth, calculateMaxWidth, calculateMinHeight, calculateMaxHeight, calculateWidthStep, calculateHeightStep };
