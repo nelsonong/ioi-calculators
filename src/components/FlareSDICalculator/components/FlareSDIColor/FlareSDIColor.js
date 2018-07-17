@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import  { updateSDIColor } from '../../../../actions/flareSDIActions';
+import  { updateColor } from '../../../../actions/flareSDIActions';
 import styles from './FlareSDIColor.css';
 
 const FlareSDIColor = ({
@@ -35,7 +35,7 @@ const mapStateToProps = (state, { id }) => {
 const mapDispatchToProps = (dispatch, { id }) => ({
     handleChange: (e) => {
         const color = e.target.value;
-        dispatch(updateSDIColor(id, color));
+        dispatch(updateColor(id, color));
     }
 });
 

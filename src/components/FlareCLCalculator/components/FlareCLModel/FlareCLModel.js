@@ -1,7 +1,7 @@
 import React from 'react';
 import { MODELS } from '../../constants';
 import { connect } from 'react-redux';
-import { updateCLModel } from '../../../../actions/flareCLActions';
+import { updateModel } from '../../../../actions/flareCLActions';
 import styles from './FlareCLModel.css';
 
 const FlareCLModel = ({ handleChange }) => {
@@ -16,11 +16,10 @@ const FlareCLModel = ({ handleChange }) => {
     );
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch, { id }) => ({
     handleChange: (e) => {
-        const { id } = ownProps;
         const model = e.target.value;
-        dispatch(updateCLModel(id, model));
+        dispatch(updateModel(id, model));
     }
 });
 

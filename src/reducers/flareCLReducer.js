@@ -3,13 +3,13 @@ import * as resolution from '../components/FlareCLCalculator/utils/resolution';
 import { calculateFrameRate } from '../components/FlareCLCalculator/utils/calculateFrameRate';
 import { calculateDataRate } from '../components/FlareCLCalculator/utils/calculateDataRate';
 import {
-    UPDATE_CL_MODEL,
-    UPDATE_CL_FORMAT,
-    UPDATE_CL_RESOLUTION_PRESET,
-    UPDATE_CL_WIDTH,
-    UPDATE_CL_HEIGHT,
-    UPDATE_CL_SUB_SAMPLING,
-    UPDATE_CL_SLOW_MODE
+    UPDATE_FLARE_CL_MODEL,
+    UPDATE_FLARE_CL_FORMAT,
+    UPDATE_FLARE_CL_RESOLUTION_PRESET,
+    UPDATE_FLARE_CL_WIDTH,
+    UPDATE_FLARE_CL_HEIGHT,
+    UPDATE_FLARE_CL_SUB_SAMPLING,
+    UPDATE_FLARE_CL_SLOW_MODE
 } from '../actions/flareCLActions';
 
 const flareCLReducer = (state = new Map(), action) => {
@@ -17,7 +17,7 @@ const flareCLReducer = (state = new Map(), action) => {
     let calculators = new Map(state);
     let calculatorState = calculators.get(id);
     switch (action.type) {
-        case UPDATE_CL_MODEL:
+        case UPDATE_FLARE_CL_MODEL:
             const { model } = action;
 
             // Update hardware version
@@ -39,7 +39,7 @@ const flareCLReducer = (state = new Map(), action) => {
             calculatorState = updateOutput(calculatorState);
             break;
 
-        case UPDATE_CL_FORMAT:
+        case UPDATE_FLARE_CL_FORMAT:
             const { format } = action;
             calculatorState = Object.assign({}, calculatorState, {
                 format
@@ -48,7 +48,7 @@ const flareCLReducer = (state = new Map(), action) => {
             calculatorState = updateOutput(calculatorState);
             break;
 
-        case UPDATE_CL_RESOLUTION_PRESET: {
+        case UPDATE_FLARE_CL_RESOLUTION_PRESET: {
             const { resolutionPreset } = action;
             switch (resolutionPreset) {
                 case RESOLUTION.CUSTOM:
@@ -77,7 +77,7 @@ const flareCLReducer = (state = new Map(), action) => {
             break;
         }
 
-        case UPDATE_CL_WIDTH: {
+        case UPDATE_FLARE_CL_WIDTH: {
             const { width } = action;
             const resolutionPreset = RESOLUTION.CUSTOM;
 
@@ -96,7 +96,7 @@ const flareCLReducer = (state = new Map(), action) => {
             break;
         }
         
-        case UPDATE_CL_HEIGHT: {
+        case UPDATE_FLARE_CL_HEIGHT: {
             const { height } = action;
             const resolutionPreset = RESOLUTION.CUSTOM;
 
@@ -115,7 +115,7 @@ const flareCLReducer = (state = new Map(), action) => {
             break;
         }
 
-        case UPDATE_CL_SUB_SAMPLING:
+        case UPDATE_FLARE_CL_SUB_SAMPLING:
             const { subSampling } = action;
             calculatorState = Object.assign({}, calculatorState, {
                     subSampling
@@ -124,7 +124,7 @@ const flareCLReducer = (state = new Map(), action) => {
             calculatorState = updateOutput(calculatorState);
             break;
 
-        case UPDATE_CL_SLOW_MODE:
+        case UPDATE_FLARE_CL_SLOW_MODE:
             const { slowMode } = action;
             calculatorState = Object.assign({}, calculatorState, {
                 slowMode

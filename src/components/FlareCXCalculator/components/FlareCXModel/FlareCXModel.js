@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateCXModel } from '../../../../actions/flareCXActions';
+import { updateModel } from '../../../../actions/flareCXActions';
 import { MODELS } from '../../constants';
 import styles from './FlareCXModel.css';
 
@@ -16,11 +16,10 @@ const FlareCXModel = ({ handleChange }) => {
     );
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch, { id }) => ({
     handleChange: (e) => {
-        const { id } = ownProps;
         const model = e.target.value;
-        dispatch(updateCXModel(id, model));
+        dispatch(updateModel(id, model));
     }
 });
 

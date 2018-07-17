@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateCXBitDepth, updateCXLinkCount, updateCXLinkSpeed } from '../../../../actions/flareCXActions';
+import { updateBitDepth, updateLinkCount, updateLinkSpeed } from '../../../../actions/flareCXActions';
 import { MODE } from '../../constants';
 import styles from './FlareCXFormat.css';
 
@@ -59,8 +59,7 @@ const FlareCXFormat = ({
     );
 };
 
-const mapStateToProps = (state, ownProps) => {
-    const { id } = ownProps;
+const mapStateToProps = (state, { id }) => {
     const calculatorState = state.get(id);
     const {
         formats,
@@ -70,25 +69,22 @@ const mapStateToProps = (state, ownProps) => {
     return {
         formats,
         mode
-    }
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    const { id } = ownProps;
-    return {
-        handleChangeBitDepth: (e) => {
-            const bitDepth = Number(e.target.value);
-            dispatch(updateCXBitDepth(id, bitDepth));
-        },
-        handleChangeLinkCount: (e) => {
-            const linkCount = Number(e.target.value);
-            dispatch(updateCXLinkCount(id, linkCount));
-        },
-        handleChangeLinkSpeed: (e) => {
-            const linkSpeed = e.target.value;
-            dispatch(updateCXLinkSpeed(id, linkSpeed));
-        }
     };
 };
+
+const mapDispatchToProps = (dispatch, { id }) => ({
+    handleChangeBitDepth: (e) => {
+        const bitDepth = Number(e.target.value);
+        dispatch(updateBitDepth(id, bitDepth));
+    },
+    handleChangeLinkCount: (e) => {
+        const linkCount = Number(e.target.value);
+        dispatch(updateLinkCount(id, linkCount));
+    },
+    handleChangeLinkSpeed: (e) => {
+        const linkSpeed = e.target.value;
+        dispatch(updateLinkSpeed(id, linkSpeed));
+    }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(FlareCXFormat);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import  { updateSDIFrameRate } from '../../../../actions/flareSDIActions';
+import  { updateFrameRate } from '../../../../actions/flareSDIActions';
 import styles from './FlareSDIFrameRate.css';
 
 const FlareSDIFrameRate = ({
@@ -35,7 +35,7 @@ const mapStateToProps = (state, { id }) => {
 const mapDispatchToProps = (dispatch, { id }) => ({
     handleChange: (e) => {
         const frameRate = Number(e.target.value);
-        dispatch(updateSDIFrameRate(id, frameRate));
+        dispatch(updateFrameRate(id, frameRate));
     }
 });
 

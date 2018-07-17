@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import  { updateSDIResolution } from '../../../../actions/flareSDIActions';
+import  { updateResolution } from '../../../../actions/flareSDIActions';
 import styles from './FlareSDIResolution.css';
 
 const FlareSDIResolution = ({
@@ -35,7 +35,7 @@ const mapStateToProps = (state, { id }) => {
 const mapDispatchToProps = (dispatch, { id }) => ({
     handleChange: (e) => {
         const resolution = e.target.value;
-        dispatch(updateSDIResolution(id, resolution));
+        dispatch(updateResolution(id, resolution));
     }
 });
 

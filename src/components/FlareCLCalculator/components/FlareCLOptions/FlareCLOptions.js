@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateCLSubSampling, updateCLSlowMode } from '../../../../actions/flareCLActions';
+import { updateSubSampling, updateSlowMode } from '../../../../actions/flareCLActions';
 import { SLOW_MODE_FORMATS } from '../../constants';
 import styles from './FlareCLOptions.css';
 
@@ -24,8 +24,7 @@ const FlareCLOptions = ({
     );
 };
 
-const mapStateToProps = (state, ownProps) => {
-    const { id } = ownProps;
+const mapStateToProps = (state, { id }) => {
     const calculatorState = state.get(id);
     const {
         model,
@@ -35,22 +34,18 @@ const mapStateToProps = (state, ownProps) => {
     return {
         model,
         format
-    }
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    const { id } = ownProps;
-    return {
-        handleChangeSubSampling: (e) => {
-            const subSampling = e.target.checked;
-            dispatch(updateCLSubSampling(id, subSampling));
-        },
-        handleChangeSlowMode: (e) => {
-            const { id } = ownProps;
-            const slowMode = e.target.checked;
-            dispatch(updateCLSlowMode(id, slowMode));
-        }
     };
 };
+
+const mapDispatchToProps = (dispatch, { id }) => ({
+    handleChangeSubSampling: (e) => {
+        const subSampling = e.target.checked;
+        dispatch(updateSubSampling(id, subSampling));
+    },
+    handleChangeSlowMode: (e) => {
+        const slowMode = e.target.checked;
+        dispatch(updateSlowMode(id, slowMode));
+    }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(FlareCLOptions);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import  { initializeSDIDVRState } from '../../actions/flareSDIActions';
+import  { initializeDVRState } from '../../actions/flareSDIActions';
 import CalculatorTopBar from '../CalculatorTopBar';
 import { FlareSDIModel, FlareSDIFormat, FlareSDIColor, FlareSDIResolution, FlareSDIFrameRate, FlareSDIOutput } from './components';
 import styles from './FlareSDICalculator.css';
@@ -27,7 +27,7 @@ class FlareSDICalculator extends Component {
 const mapDispatchToProps = (dispatch, { id, inDVR, mode }) => ({
     handleInitialize: () => {
         console.log(id, inDVR, mode);
-        dispatch(initializeSDIDVRState(id, inDVR, mode));
+        dispatch(initializeDVRState(id, inDVR, mode));
     }
 });
 

@@ -1,9 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateCLHardwareVersion } from '../../../../actions/flareCLActions';
+import { updateHardwareVersion } from '../../../../actions/flareCLActions';
 import styles from './FlareCLHardwareVersion.css';
 
-const FlareCLHardwareVersion = ({ model, hwversion, handleChange }) => {
+const FlareCLHardwareVersion = ({
+    model,
+    hwversion,
+    handleChange
+}) => {
     const disabled = !model.startsWith('12M');
     return (
         <fieldset className={styles.root}>
@@ -16,8 +20,7 @@ const FlareCLHardwareVersion = ({ model, hwversion, handleChange }) => {
     );
 };
 
-const mapStateToProps = (state, ownProps) => {
-    const { id } = ownProps;
+const mapStateToProps = (state, { id }) => {
     const calculatorState = state.get(id);
     const {
             model,
@@ -29,14 +32,13 @@ const mapStateToProps = (state, ownProps) => {
         model,
         hwversion,
         handleChange
-    }
+    };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch, { id }) => ({
     handleChange: (e) => {
-        const { id } = ownProps;
         const hwversion = e.target.value;
-        dispatch(updateCLHardwareVersion(id, hwversion));
+        dispatch(updateHardwareVersion(id, hwversion));
     }
 });
 

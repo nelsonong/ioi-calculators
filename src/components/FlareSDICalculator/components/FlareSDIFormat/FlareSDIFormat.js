@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateSDIInterface, updateSDILink } from '../../../../actions/flareSDIActions';
+import { updateInterface, updateLink } from '../../../../actions/flareSDIActions';
 import styles from './FlareSDIFormat.css';
 
 const FlareSDIFormat = ({
@@ -32,8 +32,7 @@ const FlareSDIFormat = ({
     );
 };
 
-const mapStateToProps = (state, ownProps) => {
-    const { id } = ownProps;
+const mapStateToProps = (state, { id }) => {
     const calculatorState = state.get(id);
     const {
         sdiInterface,
@@ -50,18 +49,15 @@ const mapStateToProps = (state, ownProps) => {
     };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    const { id } = ownProps;
-    return {
-        handleChangeInterface: (e) => {
-            const sdiInterface = e.target.value;
-            dispatch(updateSDIInterface(id, sdiInterface));
-        },
-        handleChangeLink: (e) => {
-            const link = Number(e.target.value);
-            dispatch(updateSDILink(id, link));
-        }
-    };
-};
+const mapDispatchToProps = (dispatch, { id }) => ({
+    handleChangeInterface: (e) => {
+        const sdiInterface = e.target.value;
+        dispatch(updateInterface(id, sdiInterface));
+    },
+    handleChangeLink: (e) => {
+        const link = Number(e.target.value);
+        dispatch(updateLink(id, link));
+    }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(FlareSDIFormat);

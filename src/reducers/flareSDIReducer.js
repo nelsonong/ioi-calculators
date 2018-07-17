@@ -2,13 +2,13 @@ import { MODEL, MODELS, INTERFACE, LINKS, MODE, SDI_TREE } from '../components/F
 import { splitResolution } from '../components/FlareSDICalculator/utils/splitResolution';
 import { calculateDataRate } from '../components/FlareSDICalculator/utils/calculateDataRate';
 import {
-    INITIALIZE_SDI_DVR_STATE,
-    UPDATE_SDI_MODEL,
-    UPDATE_SDI_INTERFACE,
-    UPDATE_SDI_RESOLUTION,
-    UPDATE_SDI_COLOR,
-    UPDATE_SDI_FRAME_RATE,
-    UPDATE_SDI_LINK
+    INITIALIZE_FLARE_SDI_DVR_STATE,
+    UPDATE_FLARE_SDI_MODEL,
+    UPDATE_FLARE_SDI_INTERFACE,
+    UPDATE_FLARE_SDI_RESOLUTION,
+    UPDATE_FLARE_SDI_COLOR,
+    UPDATE_FLARE_SDI_FRAME_RATE,
+    UPDATE_FLARE_SDI_LINK
 } from '../actions/flareSDIActions';
 
 const flareSDIReducer = (state = new Map(), action) => {
@@ -16,7 +16,7 @@ const flareSDIReducer = (state = new Map(), action) => {
     let calculators = new Map(state);
     let calculatorState = calculators.get(id);
     switch (action.type) {
-        case INITIALIZE_SDI_DVR_STATE: {
+        case INITIALIZE_FLARE_SDI_DVR_STATE: {
             const { inDVR, mode } = action;
             let models = MODELS;
             let links = LINKS[models[0]];
@@ -45,7 +45,7 @@ const flareSDIReducer = (state = new Map(), action) => {
             });
         }
 
-        case UPDATE_SDI_MODEL: {
+        case UPDATE_FLARE_SDI_MODEL: {
             const { model } = action.model ? action : calculatorState;
             let { link, links, mode, inDVR } = calculatorState;
             let sdiInterfaces = Object.keys(SDI_TREE[model]);
@@ -70,7 +70,7 @@ const flareSDIReducer = (state = new Map(), action) => {
             });
         }
     
-        case UPDATE_SDI_INTERFACE: {
+        case UPDATE_FLARE_SDI_INTERFACE: {
             const { sdiInterface } = action.sdiInterface ? action : calculatorState;
             const { model, inDVR } = calculatorState;
             const resolutions = Object.keys(SDI_TREE[model][sdiInterface]);
@@ -102,7 +102,7 @@ const flareSDIReducer = (state = new Map(), action) => {
             }
         }
     
-        case UPDATE_SDI_RESOLUTION: {
+        case UPDATE_FLARE_SDI_RESOLUTION: {
             const { resolution } = action.resolution ? action : calculatorState;
             const { model, sdiInterface } = calculatorState;
             const colors = Object.keys(SDI_TREE[model][sdiInterface][resolution]);
@@ -117,7 +117,7 @@ const flareSDIReducer = (state = new Map(), action) => {
             });
         }
     
-        case UPDATE_SDI_COLOR: {
+        case UPDATE_FLARE_SDI_COLOR: {
             const { color } = action.color ? action : calculatorState;
             const { model, sdiInterface, resolution } = calculatorState;
             const frameRates = SDI_TREE[model][sdiInterface][resolution][color];
@@ -129,7 +129,7 @@ const flareSDIReducer = (state = new Map(), action) => {
             });
         }
     
-        case UPDATE_SDI_FRAME_RATE: {
+        case UPDATE_FLARE_SDI_FRAME_RATE: {
             const { frameRate } = action.frameRate ? action : calculatorState;
             calculatorState = Object.assign({}, calculatorState, {
                 frameRate
@@ -138,7 +138,7 @@ const flareSDIReducer = (state = new Map(), action) => {
             break;
         }
 
-        case UPDATE_SDI_LINK: {
+        case UPDATE_FLARE_SDI_LINK: {
             const { link } = action.link ? action : calculatorState;
             calculatorState = Object.assign({}, calculatorState, {
                 link

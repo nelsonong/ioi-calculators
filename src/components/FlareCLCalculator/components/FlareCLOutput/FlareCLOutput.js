@@ -16,8 +16,7 @@ const FlareCLOutput = ({
     );
 };
 
-const mapStateToProps = (state, ownProps) => {
-    const { id } = ownProps;
+const mapStateToProps = (state, { id }) => {
     const calculatorState = state.get(id);
     const {
         frameRate,
@@ -29,7 +28,7 @@ const mapStateToProps = (state, ownProps) => {
         frameRate,
         dataRate,
         error
-    }
+    };
 };
 
 export default connect(mapStateToProps)(FlareCLOutput);

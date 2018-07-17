@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateCXResolutionPreset, updateCXWidth, updateCXHeight } from '../../../../actions/flareCXActions';
+import { updateResolutionPreset, updateWidth, updateHeight } from '../../../../actions/flareCXActions';
 import { NAN_RESOLUTIONS, RESOLUTIONS } from '../../constants';
 import styles from './FlareCXResolution.css';
 
@@ -46,8 +46,7 @@ const FlareCXResolution = ({
     );
 };
 
-const mapStateToProps = (state, ownProps) => {
-    const { id } = ownProps;
+const mapStateToProps = (state, { id }) => {
     const calculatorState = state.get(id);
     const {
         resolutionPreset,
@@ -65,25 +64,22 @@ const mapStateToProps = (state, ownProps) => {
         height,
         heightStep,
         resolutionTooltip
-    }
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    const { id } = ownProps;
-    return {
-        handleChangeResolutionPreset: (e) => {
-            const resolutionPreset = e.target.value;
-            dispatch(updateCXResolutionPreset(id, resolutionPreset));
-        },
-        handleChangeWidth: (e) => {
-            const width = Number(e.target.value);
-            dispatch(updateCXWidth(id, width));
-        },
-        handleChangeHeight: (e) => {
-            const height = Number(e.target.value);
-            dispatch(updateCXHeight(id, height));
-        }
     };
 };
+
+const mapDispatchToProps = (dispatch, { id }) => ({
+    handleChangeResolutionPreset: (e) => {
+        const resolutionPreset = e.target.value;
+        dispatch(updateResolutionPreset(id, resolutionPreset));
+    },
+    handleChangeWidth: (e) => {
+        const width = Number(e.target.value);
+        dispatch(updateWidth(id, width));
+    },
+    handleChangeHeight: (e) => {
+        const height = Number(e.target.value);
+        dispatch(updateHeight(id, height));
+    }
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(FlareCXResolution);

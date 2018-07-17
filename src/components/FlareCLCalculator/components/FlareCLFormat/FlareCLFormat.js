@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateCLFormat } from '../../../../actions/flareCLActions';
+import { updateFormat } from '../../../../actions/flareCLActions';
 import styles from './FlareCLFormat.css';
 
 const FlareCLFormat = ({ formats, handleChange }) => {
@@ -15,8 +15,7 @@ const FlareCLFormat = ({ formats, handleChange }) => {
     );
 };
 
-const mapStateToProps = (state, ownProps) => {
-    const { id } = ownProps;
+const mapStateToProps = (state, { id }) => {
     const calculatorState = state.get(id);
     const {
         formats
@@ -24,14 +23,13 @@ const mapStateToProps = (state, ownProps) => {
     
     return {
         formats
-    }
+    };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch, { id }) => ({
     handleChange: (e) => {
-        const { id } = ownProps;
         const format = e.target.value;
-        dispatch(updateCLFormat(id, format));
+        dispatch(updateFormat(id, format));
     }
 });
 

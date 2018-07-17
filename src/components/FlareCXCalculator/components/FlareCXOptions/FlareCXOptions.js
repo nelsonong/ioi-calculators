@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateCXSubSampling } from '../../../../actions/flareCXActions';
+import { updateSubSampling } from '../../../../actions/flareCXActions';
 import styles from './FlareCXOptions.css';
 
 const FlareCXOptions = ({ model, handleChange }) => {
@@ -14,8 +14,7 @@ const FlareCXOptions = ({ model, handleChange }) => {
     );
 };
 
-const mapStateToProps = (state, ownProps) => {
-    const { id } = ownProps;
+const mapStateToProps = (state, { id }) => {
     const calculatorState = state.get(id);
     const {
         model
@@ -23,14 +22,13 @@ const mapStateToProps = (state, ownProps) => {
     
     return {
         model
-    }
+    };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch, { id }) => ({
     handleChange: (e) => {
-        const { id } = ownProps;
         const subSampling = e.target.checked;
-        dispatch(updateCXSubSampling(id, subSampling));
+        dispatch(updateSubSampling(id, subSampling));
     }
 });
 

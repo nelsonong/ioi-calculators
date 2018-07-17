@@ -3,14 +3,14 @@ import * as resolution from '../components/FlareCXCalculator/utils/resolution';
 import { calculateFrameRate } from '../components/FlareCXCalculator/utils/calculateFrameRate';
 import { calculateDataRate } from '../components/FlareCXCalculator/utils/calculateDataRate';
 import {
-    UPDATE_CX_MODEL,
-    UPDATE_CX_BIT_DEPTH,
-    UPDATE_CX_LINK_COUNT,
-    UPDATE_CX_LINK_SPEED,
-    UPDATE_CX_RESOLUTION_PRESET,
-    UPDATE_CX_WIDTH,
-    UPDATE_CX_HEIGHT,
-    UPDATE_CX_SUB_SAMPLING
+    UPDATE_FLARE_CX_MODEL,
+    UPDATE_FLARE_CX_BIT_DEPTH,
+    UPDATE_FLARE_CX_LINK_COUNT,
+    UPDATE_FLARE_CX_LINK_SPEED,
+    UPDATE_FLARE_CX_RESOLUTION_PRESET,
+    UPDATE_FLARE_CX_WIDTH,
+    UPDATE_FLARE_CX_HEIGHT,
+    UPDATE_FLARE_CX_SUB_SAMPLING
 } from '../actions/flareCXActions';
 
 const flareCXReducer = (state = new Map(), action) => {
@@ -18,7 +18,7 @@ const flareCXReducer = (state = new Map(), action) => {
     let calculators = new Map(state);
     let calculatorState = calculators.get(id);
     switch (action.type) {
-        case UPDATE_CX_MODEL:
+        case UPDATE_FLARE_CX_MODEL:
             const { model } = action;
             console.log(model);
 
@@ -41,7 +41,7 @@ const flareCXReducer = (state = new Map(), action) => {
             calculatorState = updateOutput(calculatorState);
             break;
 
-        case UPDATE_CX_BIT_DEPTH:
+        case UPDATE_FLARE_CX_BIT_DEPTH:
             const { bitDepth } = action;
             calculatorState = Object.assign({}, calculatorState, {
                 bitDepth
@@ -50,7 +50,7 @@ const flareCXReducer = (state = new Map(), action) => {
             calculatorState = updateOutput(calculatorState);
             break;
 
-        case UPDATE_CX_LINK_COUNT:
+        case UPDATE_FLARE_CX_LINK_COUNT:
             const { linkCount } = action;
             calculatorState = Object.assign({}, calculatorState, {
                 linkCount
@@ -59,7 +59,7 @@ const flareCXReducer = (state = new Map(), action) => {
             calculatorState = updateOutput(calculatorState);
             break;
 
-        case UPDATE_CX_LINK_SPEED:
+        case UPDATE_FLARE_CX_LINK_SPEED:
             const { linkSpeed } = action;
             calculatorState = Object.assign({}, calculatorState, {
                 linkSpeed
@@ -68,7 +68,7 @@ const flareCXReducer = (state = new Map(), action) => {
             calculatorState = updateOutput(calculatorState);
             break;
 
-        case UPDATE_CX_RESOLUTION_PRESET: {
+        case UPDATE_FLARE_CX_RESOLUTION_PRESET: {
             const { resolutionPreset } = action;
             switch (resolutionPreset) {
                 case RESOLUTION.CUSTOM:
@@ -97,7 +97,7 @@ const flareCXReducer = (state = new Map(), action) => {
             break;
         }
 
-        case UPDATE_CX_WIDTH: {
+        case UPDATE_FLARE_CX_WIDTH: {
             const { width } = action;
             const resolutionPreset = RESOLUTION.CUSTOM;
 
@@ -116,7 +116,7 @@ const flareCXReducer = (state = new Map(), action) => {
             break;
         }
         
-        case UPDATE_CX_HEIGHT: {
+        case UPDATE_FLARE_CX_HEIGHT: {
             const { height } = action;
             const resolutionPreset = RESOLUTION.CUSTOM;
 
@@ -135,7 +135,7 @@ const flareCXReducer = (state = new Map(), action) => {
             break;
         }
 
-        case UPDATE_CX_SUB_SAMPLING:
+        case UPDATE_FLARE_CX_SUB_SAMPLING:
             const { subSampling } = action;
             calculatorState = Object.assign({}, calculatorState, {
                     subSampling

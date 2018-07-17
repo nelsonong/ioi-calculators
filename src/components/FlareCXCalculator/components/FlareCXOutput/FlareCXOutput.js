@@ -2,7 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styles from './FlareCXOutput.css';
 
-const FlareCXOutput = ({ frameRate, dataRate, error }) => {
+const FlareCXOutput = ({
+    frameRate,
+    dataRate,
+    error
+}) => {
     const outputText = error ? 'N/A' : `${frameRate} FPS / ${dataRate} MB/s`;
     return (
         <fieldset className={styles.root}>
@@ -12,8 +16,7 @@ const FlareCXOutput = ({ frameRate, dataRate, error }) => {
     );
 };
 
-const mapStateToProps = (state, ownProps) => {
-    const { id } = ownProps;
+const mapStateToProps = (state, { id }) => {
     const calculatorState = state.get(id);
     const {
         frameRate,
@@ -25,7 +28,7 @@ const mapStateToProps = (state, ownProps) => {
         frameRate,
         dataRate,
         error
-    }
+    };
 };
 
 export default connect(mapStateToProps)(FlareCXOutput);
