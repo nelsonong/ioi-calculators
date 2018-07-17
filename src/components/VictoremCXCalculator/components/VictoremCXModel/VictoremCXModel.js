@@ -1,8 +1,8 @@
 import React from 'react';
 import { MODELS } from '../../constants';
-import styles from './VictoremModel.css';
+import styles from './VictoremCXModel.css';
 
-const VictoremModel = ({ sensor, handleChangeModel }) => {
+const VictoremCXModel = ({ sensor, handleChangeModel }) => {
     const modelOptions = MODELS.ALL.map((model, i) => <option key={i}>{model}</option>);
     return (
         <fieldset className={styles.root}>
@@ -19,4 +19,4 @@ const VictoremModel = ({ sensor, handleChangeModel }) => {
     );
 };
 
-export default VictoremModel;
+export default VictoremCXModel;

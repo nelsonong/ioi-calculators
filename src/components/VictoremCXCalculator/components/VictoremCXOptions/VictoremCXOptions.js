@@ -1,8 +1,8 @@
 import React from 'react';
 import { OPTION } from '../../constants';
-import styles from './VictoremOptions.css';
+import styles from './VictoremCXOptions.css';
 
-const VictoremOptions = ({
+const VictoremCXOptions = ({
     cameraOption,
     supports2x2Binning,
     supportsSubSampling,
@@ -61,4 +61,4 @@ const VictoremOptions = ({
     </fieldset>
 );
 
-export default VictoremOptions;
+export default VictoremCXOptions;

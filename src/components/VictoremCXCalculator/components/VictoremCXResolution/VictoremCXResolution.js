@@ -1,8 +1,8 @@
 import React from 'react';
 import { RESOLUTIONS, NAN_RESOLUTIONS, OPTION } from '../../constants';
-import styles from './VictoremResolution.css';
+import styles from './VictoremCXResolution.css';
 
-const VictoremResolution = ({
+const VictoremCXResolution = ({
     resolutionPreset,
     width,
     widthStep,
@@ -48,4 +48,4 @@ const VictoremResolution = ({
     );
 };
 
-export default VictoremResolution;
+export default VictoremCXResolution;

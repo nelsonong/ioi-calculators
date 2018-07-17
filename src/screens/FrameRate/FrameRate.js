@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import FlareCLCalculator from '../../components/FlareCLCalculator';
 import FlareCXCalculator from '../../components/FlareCXCalculator';
 import FlareSDICalculator from '../../components/FlareSDICalculator';
-import VictoremCalculator from '../../components/VictoremCalculator';
+import VictoremCXCalculator from '../../components/VictoremCXCalculator';
 import InstructionBox from '../../components/InstructionBox';
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 import uuid from 'uuid';
@@ -20,7 +20,7 @@ const Calculator = SortableElement(({ id, calculatorState }) => {
         case 'flare-sdi':
             return <FlareSDICalculator id={id} />
         case 'victorem':
-            return <VictoremCalculator id={id} />
+            return <VictoremCXCalculator id={id} />
     }
 });
 
@@ -67,7 +67,7 @@ class FrameRate extends Component {
                         <div className={styles.buttonSpacer}></div>
                         <div className={styles.buttonContainer}>
                         <div className={styles.buttonContainerText}>VICTOREM</div>
-                            <button type='button' className={styles.victoremButton} onClick={() => this.handleAdd('victorem')}>+ CX</button>
+                            <button type='button' className={styles.victoremButton} onClick={() => this.handleAdd('victorem-cx')}>+ CX</button>
                         </div>
                     </div>
                     <div>
@@ -93,9 +93,9 @@ const mapDispatchToProps = (dispatch) => ({
         const id = uuid();
         dispatch(addCalculator(id, cameraType));
     },
-    handleMove: (oldIndex, newIndex) => {
-        dispatch(moveCalculator(oldIndex, newIndex))
-    },
+    handleMove: (oldIndex, newIndex) =>
+        dispatch(moveCalculator(oldIndex, newIndex)),
+
     handleClear: () => dispatch(clearCalculators())
 });
 

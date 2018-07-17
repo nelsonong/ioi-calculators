@@ -1,8 +1,8 @@
 import React from 'react';
 import { BIT_DEPTHS } from '../../constants';
-import styles from './VictoremFormat.css';
+import styles from './VictoremCXFormat.css';
 
-const VictoremFormat = ({ formats, handleChange }) => {
+const VictoremCXFormat = ({ formats, handleChange }) => {
     const formatOptions = formats.map((format, i) => <option key={i}>{format}</option>);
     const bitDepthOptions = BIT_DEPTHS.map((bitDepth, i) => <option key={i} value={bitDepth}>{bitDepth}</option>);
     return (
@@ -21,4 +21,4 @@ const VictoremFormat = ({ formats, handleChange }) => {
     );
 };
 
-export default VictoremFormat;
+export default VictoremCXFormat;

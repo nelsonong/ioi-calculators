@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { VictoremModel, VictoremFormat, VictoremResolution, VictoremOptions, VictoremOutput } from './components';
+import CalculatorTopBar from '../CalculatorTopBar';
+import { VictoremCXModel, VictoremCXFormat, VictoremCXResolution, VictoremCXOptions, VictoremCXOutput } from './components';
 import { MODEL, SENSOR, FORMAT, FORMATS, OPTION, RESOLUTION } from './constants';
 import { getFormats } from './utils/getFormats';
 import { calculateFrameRate } from './utils/calculateFrameRate';
 import { calculateDataRate } from './utils/calculateDataRate';
 import { calculateMinWidth, calculateMaxWidth, calculateMinHeight, calculateMaxHeight, calculateWidthMultiple, calculateHeightMultiple} from './utils/resolution';
 import { supports2x2Binning, supportsSubSampling, supportsVerticalBinning } from './utils/support';
-import styles from './VictoremCalculator.css';
-import CalculatorTopBar from '../CalculatorTopBar';
+import styles from './VictoremCXCalculator.css';
 
-class VictoremCalculator extends Component {
+class VictoremCXCalculator extends Component {
     state = {
         model: MODEL.Type51B163MCX,             // Camera model
         sensor: SENSOR[MODEL.Type51B163MCX],    // Camera's sensor
@@ -162,19 +162,19 @@ class VictoremCalculator extends Component {
         <div className={styles.root}>
             <CalculatorTopBar
                 inModal={false}
-                type={'Victorem'}
+                type={'Victorem CX'}
                 deleteCalculator={this.props.deleteCalculator}
                 id={this.props.id}
             />
-            <VictoremModel
+            <VictoremCXModel
                 sensor={this.state.sensor}
                 handleChangeModel={this.handleChangeModel}
             />
-            <VictoremFormat
+            <VictoremCXFormat
                 formats={this.state.formats}
                 handleChange={this.handleChange}
             />
-            <VictoremResolution
+            <VictoremCXResolution
                 resolutionPreset={this.state.resolutionPreset}
                 width={this.state.width}
                 widthStep={this.state.widthStep}
@@ -187,14 +187,14 @@ class VictoremCalculator extends Component {
                 handleChangeWidth={this.handleChangeWidth}
                 handleChangeHeight={this.handleChangeHeight}
             />
-            <VictoremOptions
+            <VictoremCXOptions
                 cameraOption={this.state.cameraOption}
                 supports2x2Binning={this.state.supports2x2Binning}
                 supportsSubSampling={this.state.supportsSubSampling}
                 supportsVerticalBinning={this.state.supportsVerticalBinning}
                 handleChange={this.handleChange}
             />
-            <VictoremOutput
+            <VictoremCXOutput
                 frameRate={this.state.frameRate}
                 dataRate={this.state.dataRate}
                 error={this.state.error}
@@ -203,4 +203,4 @@ class VictoremCalculator extends Component {
     );
 }
 
-export default VictoremCalculator;
+export default VictoremCXCalculator;

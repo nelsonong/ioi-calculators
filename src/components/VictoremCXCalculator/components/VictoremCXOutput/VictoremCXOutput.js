@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './VictoremOutput.css';
+import styles from './VictoremCXOutput.css';
 
-const VictoremOutput = ({ frameRate, dataRate, error }) => {
+const VictoremCXOutput = ({ frameRate, dataRate, error }) => {
     const outputText = error ? 'N/A' : `${frameRate} FPS / ${dataRate} MB/s`;
     return (
         <fieldset className={styles.root}>
@@ -11,4 +11,4 @@ const VictoremOutput = ({ frameRate, dataRate, error }) => {
     );
 }
 
-export default VictoremOutput;
+export default VictoremCXOutput;
