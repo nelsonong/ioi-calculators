@@ -1,7 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styles from './VictoremCXOutput.css';
 
-const VictoremCXOutput = ({ frameRate, dataRate, error }) => {
+const VictoremCXOutput = ({
+    frameRate,
+    dataRate,
+    error
+}) => {
     const outputText = error ? 'N/A' : `${frameRate} FPS / ${dataRate} MB/s`;
     return (
         <fieldset className={styles.root}>
@@ -11,4 +16,19 @@ const VictoremCXOutput = ({ frameRate, dataRate, error }) => {
     );
 }
 
-export default VictoremCXOutput;
+const mapStateToProps = (state, { id }) => {
+    const calculatorState = state.get(id);
+    const {
+        frameRate,
+        dataRate,
+        error
+    } = calculatorState;
+    
+    return {
+        frameRate,
+        dataRate,
+        error
+    };
+};
+
+export default connect(mapStateToProps)(VictoremCXOutput);

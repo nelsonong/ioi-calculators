@@ -6,7 +6,7 @@ export { COLOR } from './colors';
 export { MODE } from './modes';
 export { SDI_TREE } from './sdi-tree';
 
-export const sdiDefaultState = {
+export const flareSDIDefaultState = {
 	cameraType: 'flare-sdi',
     model: '',
     models: [],

@@ -1,24 +1,56 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { updateFormat, updateBitDepth } from '../../../../actions/victoremCXActions';
 import { BIT_DEPTHS } from '../../constants';
 import styles from './VictoremCXFormat.css';
 
-const VictoremCXFormat = ({ formats, handleChange }) => {
+const VictoremCXFormat = ({
+    formats,
+    handleChangeFormat,
+    handleChangeBitDepth
+}) => {
     const formatOptions = formats.map((format, i) => <option key={i}>{format}</option>);
     const bitDepthOptions = BIT_DEPTHS.map((bitDepth, i) => <option key={i} value={bitDepth}>{bitDepth}</option>);
     return (
         <fieldset className={styles.root}>
         <legend className={styles.legend}>Output Format</legend>
             <div className={styles.label}>Link:</div>
-            <select className={styles.select} name='format' onChange={handleChange}>
+            <select className={styles.select} name='format' onChange={handleChangeFormat}>
                 {formatOptions}
             </select>
 
             <div className={styles.label}>Bit Depth:</div>
-            <select className={styles.select} name='bitDepth' onChange={handleChange}>
+            <select className={styles.select} name='bitDepth' onChange={handleChangeBitDepth}>
                 {bitDepthOptions}
             </select>
         </fieldset>
     );
 };
 
-export default VictoremCXFormat;
+const mapStateToProps = (state, ownProps) => {
+    const { id } = ownProps;
+    const calculatorState = state.get(id);
+    const {
+        formats
+    } = calculatorState;
+    
+    return {
+        formats
+    };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    const { id } = ownProps;
+    return {
+        handleChangeFormat: (e) => {
+            const format = e.target.value;
+            dispatch(updateFormat(id, format));
+        },
+        handleChangeBitDepth: (e) => {
+            const bitDepth = Number(e.target.value);
+            dispatch(updateBitDepth(id, bitDepth));
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(VictoremCXFormat);

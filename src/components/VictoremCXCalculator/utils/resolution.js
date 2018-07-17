@@ -1,4 +1,4 @@
-import { MODELS, FORMAT, OPTION } from '../constants';
+import { MODELS, FORMAT, CAMERA_OPTION } from '../constants';
 
 const calculateMinWidth = (model) => {
     if (MODELS.TYPE_287.includes(model)) return 8;
@@ -15,10 +15,10 @@ const calculateMaxWidth = ({
 }) => {
     const linkSpeed = Number(format.slice(-1));
     const linkCount = Number(format.slice(0, 1));
-    const binv = (cameraOption === OPTION.BIN_VERTICAL);
-    const bin2 = (cameraOption === OPTION.BIN_2X2);
+    const binv = (cameraOption === CAMERA_OPTION.BIN_VERTICAL);
+    const bin2 = (cameraOption === CAMERA_OPTION.BIN_2X2);
     const bin0 = !binv && !bin2;
-    const subSampling = (cameraOption === OPTION.SUBSAMPLING);
+    const subSampling = (cameraOption === CAMERA_OPTION.SUBSAMPLING);
 
     if (MODELS.TYPE_250.includes(model)) {
         if (subSampling) {
@@ -73,7 +73,7 @@ const calculateMaxWidth = ({
         return 1456;
     } else if (MODELS.TYPE_287.includes(model)) {
         if (subSampling) return 0;
-        if (cameraOption !== OPTION.NONE) return 0;
+        if (cameraOption !== CAMERA_OPTION.NONE) return 0;
         if (linkCount === 2) return 0;
         if (linkSpeed === 5 || linkSpeed === 6) return 0;
         return 728;
@@ -99,10 +99,10 @@ const calculateMaxHeight = ({
 }) => {
     const linkSpeed = Number(format.slice(-1));
     const linkCount = Number(format.slice(0, 1));
-    const binv = (cameraOption === OPTION.BIN_VERTICAL);
-    const bin2 = (cameraOption === OPTION.BIN_2X2);
+    const binv = (cameraOption === CAMERA_OPTION.BIN_VERTICAL);
+    const bin2 = (cameraOption === CAMERA_OPTION.BIN_2X2);
     const bin0 = !binv && !bin2;
-    const subSampling = (cameraOption === OPTION.SUBSAMPLING);
+    const subSampling = (cameraOption === CAMERA_OPTION.SUBSAMPLING);
 
     if (MODELS.TYPE_250.includes(model)) {
         if (subSampling) {
@@ -166,7 +166,7 @@ const calculateMaxHeight = ({
         return 1088;
     } else if (MODELS.TYPE_287.includes(model)) {
         if (subSampling) return 0;
-        if (cameraOption !== OPTION.NONE) return 0;
+        if (cameraOption !== CAMERA_OPTION.NONE) return 0;
         if (linkCount === 2) return 0;
         if (linkSpeed === 5 || linkSpeed === 6) return 0;
         return 544;
@@ -178,11 +178,11 @@ const calculateMaxHeight = ({
     return 0;
 };
 
-const calculateWidthMultiple = (model) => {
+const calculateWidthStep = (model) => {
     return calculateMinWidth(model);
 };
 
-const calculateHeightMultiple = (model) => {
+const calculateHeightStep = (model) => {
     return calculateMinHeight(model);
 };
 
@@ -191,6 +191,6 @@ export {
     calculateMaxWidth,
     calculateMinHeight,
     calculateMaxHeight,
-    calculateWidthMultiple,
-    calculateHeightMultiple
+    calculateWidthStep,
+    calculateHeightStep
 };

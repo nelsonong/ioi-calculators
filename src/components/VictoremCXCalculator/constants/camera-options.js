@@ -1,4 +1,4 @@
-export const OPTION = {
+export const CAMERA_OPTION = {
     NONE: 0,
     SUBSAMPLING: 1,
     BIN_VERTICAL: 2,

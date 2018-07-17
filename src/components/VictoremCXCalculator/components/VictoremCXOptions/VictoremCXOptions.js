@@ -1,5 +1,7 @@
 import React from 'react';
-import { OPTION } from '../../constants';
+import { connect } from 'react-redux';
+import { updateCameraOption } from '../../../../actions/victoremCXActions';
+import { CAMERA_OPTION } from '../../constants';
 import styles from './VictoremCXOptions.css';
 
 const VictoremCXOptions = ({
@@ -16,9 +18,9 @@ const VictoremCXOptions = ({
                 <input
                     type="radio"
                     className={styles.radio}
-                    name='cameraOption'
-                    value={OPTION.NONE}
-                    checked={cameraOption === OPTION.NONE}
+                    name='none'
+                    value={CAMERA_OPTION.NONE}
+                    checked={cameraOption === CAMERA_OPTION.NONE}
                     onChange={handleChange}
                 />
                 <div className={styles.label}>None</div>
@@ -26,9 +28,9 @@ const VictoremCXOptions = ({
                 <input
                     type="radio"
                     className={styles.radio}
-                    name='cameraOption'
-                    value={OPTION.SUBSAMPLING}
-                    checked={cameraOption === OPTION.SUBSAMPLING}
+                    name='subSampling'
+                    value={CAMERA_OPTION.SUBSAMPLING}
+                    checked={cameraOption === CAMERA_OPTION.SUBSAMPLING}
                     disabled={!supportsSubSampling}
                     onChange={handleChange}
                 />
@@ -38,9 +40,9 @@ const VictoremCXOptions = ({
                 <input
                     type="radio"
                     className={styles.radio}
-                    name='cameraOption'
-                    value={OPTION.BIN_VERTICAL}
-                    checked={cameraOption === OPTION.BIN_VERTICAL}
+                    name='binv'
+                    value={CAMERA_OPTION.BIN_VERTICAL}
+                    checked={cameraOption === CAMERA_OPTION.BIN_VERTICAL}
                     disabled={!supportsVerticalBinning}
                     onChange={handleChange}
                 />
@@ -49,9 +51,9 @@ const VictoremCXOptions = ({
                 <input
                     type="radio"
                     className={styles.radio}
-                    name='cameraOption'
-                    value={OPTION.BIN_2X2}
-                    checked={cameraOption === OPTION.BIN_2X2}
+                    name='bin2x2'
+                    value={CAMERA_OPTION.BIN_2X2}
+                    checked={cameraOption === CAMERA_OPTION.BIN_2X2}
                     disabled={!supports2x2Binning}
                     onChange={handleChange}
                 />
@@ -61,4 +63,28 @@ const VictoremCXOptions = ({
     </fieldset>
 );
 
-export default VictoremCXOptions;
+const mapStateToProps = (state, { id }) => {
+    const calculatorState = state.get(id);
+    const {
+        cameraOption,
+        supports2x2Binning,
+        supportsSubSampling,
+        supportsVerticalBinning
+    } = calculatorState;
+    
+    return {
+        cameraOption,
+        supports2x2Binning,
+        supportsSubSampling,
+        supportsVerticalBinning
+    };
+};
+
+const mapDispatchToProps = (dispatch, { id }) => ({
+    handleChange: (e) => {
+        const cameraOption = Number(e.target.value);
+        dispatch(updateCameraOption(id, cameraOption));
+    }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(VictoremCXOptions);

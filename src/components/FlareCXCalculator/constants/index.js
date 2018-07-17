@@ -3,7 +3,7 @@ import { LINK_SPEEDS, FORMATS } from './formats';
 import { RESOLUTION, RESOLUTIONS, NAN_RESOLUTIONS } from './resolutions';
 import { MODE } from './modes';
 
-export const cxDefaultState = {
+export const flareCXDefaultState = {
 	cameraType: 'flare-cx',					// Camera type
     model: MODEL.Type2M280MCX,              // Camera model
     formats: FORMATS.CX2_4m,                // Current formats (changes based on model)

@@ -1,5 +1,7 @@
 import React from 'react';
-import { RESOLUTIONS, NAN_RESOLUTIONS, OPTION } from '../../constants';
+import { connect } from 'react-redux';
+import { updateResolutionPreset, updateWidth, updateHeight } from '../../../../actions/victoremCXActions';
+import { RESOLUTIONS, NAN_RESOLUTIONS, CAMERA_OPTION } from '../../constants';
 import styles from './VictoremCXResolution.css';
 
 const VictoremCXResolution = ({
@@ -12,11 +14,11 @@ const VictoremCXResolution = ({
     maxHeight,
     resolutionTooltip,
     cameraOption,
-    handleChangePreset,
+    handleChangeResolutionPreset,
     handleChangeWidth,
     handleChangeHeight
 }) => {
-    const subSamplingSelected = (cameraOption === OPTION.SUBSAMPLING);
+    const subSamplingSelected = (cameraOption === CAMERA_OPTION.SUBSAMPLING);
     const resolutionPresetOptions = RESOLUTIONS.map((preset, i) => {
         if (!NAN_RESOLUTIONS.includes(preset)) {
             preset = `${preset[0]}x${preset[1]}`;
@@ -31,7 +33,7 @@ const VictoremCXResolution = ({
                 <div className={styles.label}>W x H:</div>
             </div>
             <div className={styles.right}>
-                <select className={styles.select} value={resolutionPreset} disabled={subSamplingSelected} onChange={handleChangePreset}>
+                <select className={styles.select} value={resolutionPreset} disabled={subSamplingSelected} onChange={handleChangeResolutionPreset}>
                     {resolutionPresetOptions}
                 </select>
                 <br />
@@ -48,4 +50,46 @@ const VictoremCXResolution = ({
     );
 };
 
-export default VictoremCXResolution;
+const mapStateToProps = (state, { id }) => {
+    const calculatorState = state.get(id);
+    const {
+        resolutionPreset,
+        width,
+        widthStep,
+        maxWidth,
+        height,
+        heightStep,
+        maxHeight,
+        resolutionTooltip,
+        cameraOption
+    } = calculatorState;
+    
+    return {
+        resolutionPreset,
+        width,
+        widthStep,
+        maxWidth,
+        height,
+        heightStep,
+        maxHeight,
+        resolutionTooltip,
+        cameraOption
+    };
+};
+
+const mapDispatchToProps = (dispatch, { id }) => ({
+    handleChangeResolutionPreset: (e) => {
+        const resolutionPreset = e.target.value;
+        dispatch(updateResolutionPreset(id, resolutionPreset));
+    },
+    handleChangeWidth: (e) => {
+        const width = Number(e.target.value);
+        dispatch(updateWidth(id, width));
+    },
+    handleChangeHeight: (e) => {
+        const height = Number(e.target.value);
+        dispatch(updateHeight(id, height));
+    }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(VictoremCXResolution);

@@ -1,4 +1,4 @@
-import { MODELS, OPTION } from '../constants';
+import { MODELS, CAMERA_OPTION } from '../constants';
 
 export const calculateFrameRate = (parentState) => {
     
@@ -6,9 +6,9 @@ export const calculateFrameRate = (parentState) => {
     let { model, format, bitDepth, width, height, cameraOption } = parentState;
     const linkSpeed = Number(format.slice(-1));
     const linkCount = Number(format.slice(0, 1));
-    const subSampling = (cameraOption === OPTION.SUBSAMPLING);
-    const binv = (cameraOption === OPTION.BIN_VERTICAL);
-    const bin2 = (cameraOption === OPTION.BIN_2X2);
+    const subSampling = (cameraOption === CAMERA_OPTION.SUBSAMPLING);
+    const binv = (cameraOption === CAMERA_OPTION.BIN_VERTICAL);
+    const bin2 = (cameraOption === CAMERA_OPTION.BIN_2X2);
 
     // Determine HMAX and minimum vertical blanking
     let { hmax, minVertBlank } = getHMaxAndMinVertBlank(model, bitDepth, linkSpeed, linkCount, subSampling, binv, bin2);

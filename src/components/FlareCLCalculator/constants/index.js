@@ -3,7 +3,7 @@ import { FORMAT, DUAL_FORMATS, FORMATS, SLOW_MODE_FORMATS } from './formats';
 import { RESOLUTION, RESOLUTIONS, NAN_RESOLUTIONS } from './resolutions';
 import { MODE } from './modes';
 
-export const clDefaultState = {
+export const flareCLDefaultState = {
 	cameraType: 'flare-cl',					// Camera type
 	model: MODEL.Type2M360MCL,              // Camera model
 	hwversion: 1,                           // Hardware version

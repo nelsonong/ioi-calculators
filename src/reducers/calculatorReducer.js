@@ -1,6 +1,7 @@
-import { clDefaultState } from '../components/FlareCLCalculator/constants';
-import { cxDefaultState } from '../components/FlareCXCalculator/constants';
-import { sdiDefaultState } from '../components/FlareSDICalculator/constants';
+import { flareCLDefaultState } from '../components/FlareCLCalculator/constants';
+import { flareCXDefaultState } from '../components/FlareCXCalculator/constants';
+import { flareSDIDefaultState } from '../components/FlareSDICalculator/constants';
+import { victoremCXDefaultState } from '../components/VictoremCXCalculator/constants';
 import {
     ADD_CALCULATOR,
     DELETE_CALCULATOR,
@@ -17,7 +18,7 @@ const calculatorsReducer = (state = new Map(), action) => {
                     state = new Map(state);
                     state.set(
                         id,
-                        clDefaultState
+                        flareCLDefaultState
                     );
                     break;
 
@@ -25,7 +26,7 @@ const calculatorsReducer = (state = new Map(), action) => {
                     state = new Map(state);
                     state.set(
                         id,
-                        cxDefaultState
+                        flareCXDefaultState
                     );
                     break;
 
@@ -33,7 +34,15 @@ const calculatorsReducer = (state = new Map(), action) => {
                     state = new Map(state);
                     state.set(
                         id,
-                        sdiDefaultState
+                        flareSDIDefaultState
+                    );
+                    break;
+
+                case 'victorem-cx':
+                    state = new Map(state);
+                    state.set(
+                        id,
+                        victoremCXDefaultState
                     );
                     break;
 
