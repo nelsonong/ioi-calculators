@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styles from './FlareCXOutput.css';
 
 const FlareCXOutput = ({ frameRate, dataRate, error }) => {
@@ -11,4 +12,20 @@ const FlareCXOutput = ({ frameRate, dataRate, error }) => {
     );
 };
 
-export default FlareCXOutput;
+const mapStateToProps = (state, ownProps) => {
+    const { id } = ownProps;
+    const calculatorState = state.get(id);
+    const {
+        frameRate,
+        dataRate,
+        error
+    } = calculatorState;
+    
+    return {
+        frameRate,
+        dataRate,
+        error
+    }
+};
+
+export default connect(mapStateToProps)(FlareCXOutput);

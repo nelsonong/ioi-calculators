@@ -1,4 +1,5 @@
 import { clDefaultState } from '../components/FlareCLCalculator/constants';
+import { cxDefaultState } from '../components/FlareCXCalculator/constants';
 import {
     ADD_CALCULATOR,
     DELETE_CALCULATOR,
@@ -15,9 +16,20 @@ const calculatorsReducer = (state = new Map(), { type, id, cameraType }) => {
                         id,
                         clDefaultState
                     );
+                    break;
+
+                case 'flare-cx':
+                    state = new Map(state);
+                    state.set(
+                        id,
+                        cxDefaultState
+                    );
+                    break;
+
                 default:
                     return state;
             }
+            return state;
 
         case DELETE_CALCULATOR:
             state = new Map(state);

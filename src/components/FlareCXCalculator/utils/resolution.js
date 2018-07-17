@@ -63,13 +63,13 @@ const calculateMaxHeight = (model) => {
     }
 };
 
-const calculateWidthMultiple = (model) => {
+const calculateWidthStep = (model) => {
     if (model.startsWith('48M')) return 16;
     if (model.startsWith('12M')) return 64;
     return 8;
 };
 
-const calculateHeightMultiple = (model) => {
+const calculateHeightStep = (model) => {
     if (model.startsWith('12M')) return 4;
     if (COLOR_MODELS.includes(model)) return 4;
     return 2;
@@ -80,6 +80,6 @@ export {
     calculateMaxWidth,
     calculateMinHeight,
     calculateMaxHeight,
-    calculateWidthMultiple,
-    calculateHeightMultiple
+    calculateWidthStep,
+    calculateHeightStep
 };
