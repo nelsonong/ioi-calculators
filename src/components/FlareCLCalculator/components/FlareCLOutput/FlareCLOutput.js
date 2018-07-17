@@ -1,8 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styles from './FlareCLOutput.css';
 
-const FlareCLOutput = ({ frameRate, dataRate }) => {
-    const outputText = `${frameRate} FPS / ${dataRate} MB/s`;
+const FlareCLOutput = ({
+    frameRate,
+    dataRate,
+    error
+}) => {
+    const outputText = error ? 'N/A' : `${frameRate} FPS / ${dataRate} MB/s`;
     return (
         <fieldset className={styles.root}>
         <legend className={styles.legend}>Output</legend>
@@ -11,4 +16,20 @@ const FlareCLOutput = ({ frameRate, dataRate }) => {
     );
 };
 
-export default FlareCLOutput;
+const mapStateToProps = (state, ownProps) => {
+    const { id } = ownProps;
+    const calculatorState = state.get(id);
+    const {
+        frameRate,
+        dataRate,
+        error
+    } = calculatorState;
+    
+    return {
+        frameRate,
+        dataRate,
+        error
+    }
+};
+
+export default connect(mapStateToProps)(FlareCLOutput);

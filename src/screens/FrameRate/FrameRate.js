@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import FlareCLCalculator from '../../components/FlareCLCalculator';
 import FlareCXCalculator from '../../components/FlareCXCalculator';
 import FlareSDICalculator from '../../components/FlareSDICalculator';
@@ -7,17 +8,31 @@ import InstructionBox from '../../components/InstructionBox';
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 import uuid from 'uuid';
 import styles from './FrameRate.css';
+import { addCalculator, clearCalculators } from '../../actions/calculatorActions';
 
-const Calculator = SortableElement(({ calculator }) => calculator);
+const Calculator = SortableElement(({ id, calculatorState }) => {
+    const cameraType = calculatorState.cameraType;
+    switch (cameraType) {
+        case 'flare-cl':
+            return <FlareCLCalculator id={id} />;
+        case 'flare-cx':
+            return <FlareCXCalculator id={id} />
+        case 'flare-sdi':
+            return <FlareSDICalculator id={id} />
+        case 'victorem':
+            return <VictoremCalculator id={id} />
+    }
+});
 
 const CalculatorList = SortableContainer(({ calculatorEntries }) => {
   return (
     <div className={styles.list}>
-      {calculatorEntries.map((calculatorEntry, i) => (
+      {calculatorEntries.map((entry, i) => (
         <Calculator
-            key={`item-${calculatorEntry.id}`}
+            key={`item-${entry.id}`}
             index={i}
-            calculator={calculatorEntry.calculator}
+            id={entry.id}
+            calculatorState={entry.calculatorState}
          />
       ))}
     </div>
@@ -26,43 +41,6 @@ const CalculatorList = SortableContainer(({ calculatorEntries }) => {
 
 
 class FrameRate extends Component {
-    state = {
-        calculatorEntries: []
-    };
-
-    // Add calculator
-    addCalculator = (type) => {
-        const key = uuid();
-        let calculator;
-        switch (type) {
-            case 'flare-cl':
-                calculator = <FlareCLCalculator key={key} id={key} deleteCalculator={this.deleteCalculator} />;
-                break;
-            case 'flare-cx':
-                calculator = <FlareCXCalculator key={key} id={key} deleteCalculator={this.deleteCalculator} />
-                break;
-            case 'flare-sdi':
-                calculator = <FlareSDICalculator key={key} id={key} deleteCalculator={this.deleteCalculator} />
-                break;
-            case 'victorem':
-                calculator = <VictoremCalculator key={key} id={key} deleteCalculator={this.deleteCalculator} />
-        }
-
-        const calculatorEntries = this.state.calculatorEntries.concat({ id: key, calculator });
-        this.setState(() => ({ calculatorEntries }));
-    }
-
-    // Remove calculator
-    deleteCalculator = (id) => {
-        const calculatorEntries = this.state.calculatorEntries.filter(calculator => calculator.id !== id);
-        this.setState(() => ({ calculatorEntries }));
-    }
-
-    // Clear calculators
-    clearCalculators = () => {
-        this.setState(() => ({ calculatorEntries: [] }));
-    }
-
     onSortEnd = ({ oldIndex, newIndex }) => {
         this.setState({
             calculatorEntries: arrayMove(this.state.calculatorEntries, oldIndex, newIndex),
@@ -70,8 +48,13 @@ class FrameRate extends Component {
     };
 
     render = () => {
+        const calculatorEntries = Array.from(this.props.calculators, ([id, calculatorState]) => ({
+            id,
+            calculatorState
+        }));
+
         const text = 'Please select a button above to add a calculator.';
-        const instructionBox = (this.state.calculatorEntries.length === 0) ? <InstructionBox text={text} /> : '';
+        const instructionBox = (calculatorEntries.length === 0) ? <InstructionBox text={text} /> : '';
         return (
             <div className={styles.root}>
                 <div className={styles.title}>
@@ -81,28 +64,40 @@ class FrameRate extends Component {
                     <div>
                         <div className={styles.buttonContainer}>
                             <div className={styles.buttonContainerText}>FLARE</div>
-                            <button type='button' className={styles.flareClButton} onClick={() => this.addCalculator('flare-cl')}>+ CL</button>
-                            <button type='button' className={styles.flareCxButton} onClick={() => this.addCalculator('flare-cx')}>+ CX</button>
-                            <button type='button' className={styles.flareSdiButton} onClick={() => this.addCalculator('flare-sdi')}>+ SDI</button>
+                            <button type='button' className={styles.flareClButton} onClick={() => this.props.handleAdd('flare-cl')}>+ CL</button>
+                            <button type='button' className={styles.flareCxButton} onClick={() => this.props.handleAdd('flare-cx')}>+ CX</button>
+                            <button type='button' className={styles.flareSdiButton} onClick={() => this.props.handleAdd('flare-sdi')}>+ SDI</button>
                         </div>
                         <div className={styles.buttonSpacer}></div>
                         <div className={styles.buttonContainer}>
                         <div className={styles.buttonContainerText}>VICTOREM</div>
-                            <button type='button' className={styles.victoremButton} onClick={() => this.addCalculator('victorem')}>+ CX</button>
+                            <button type='button' className={styles.victoremButton} onClick={() => this.handleAdd('victorem')}>+ CX</button>
                         </div>
                     </div>
                     <div>
                         <button type='button' className={styles.importButton}>IMPORT</button>
                         <button type='button' className={styles.exportButton}>EXPORT</button>
                         <div className={styles.buttonSpacer}></div>
-                        <button type='button' className={styles.clearButton} onClick={this.clearCalculators}>CLEAR</button>
+                        <button type='button' className={styles.clearButton} onClick={this.props.handleClear}>CLEAR</button>
                     </div>
                 </div>
                 {instructionBox}
-                <CalculatorList calculatorEntries={this.state.calculatorEntries} axis='xy' onSortEnd={this.onSortEnd} />
+                <CalculatorList calculatorEntries={calculatorEntries} axis='xy' onSortEnd={this.onSortEnd} />
             </div>
         );
     }
 }
 
-export default FrameRate;
+const mapStateToProps = (state) => ({
+    calculators: state
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    handleAdd: (cameraType) => {
+        const id = uuid();
+        dispatch(addCalculator(id, cameraType));
+    },
+    handleClear: () => dispatch(clearCalculators())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FrameRate);
