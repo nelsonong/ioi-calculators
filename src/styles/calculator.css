@@ -24,6 +24,17 @@
     padding: 0 0.3rem;
 }
 
+@define-mixin add-left-right $left: 50%, $right: 50% {
+    .left {
+        width: $left;
+        display: inline-block;
+    }
+    .right {
+        width: $right;
+        display: inline-block;
+    }
+}
+
 .select {
     font-size: 1.1rem;
     padding: 0.1rem 0rem;
@@ -69,13 +80,24 @@
     border-radius: 0.5rem;
 }
 
-@define-mixin add-left-right $left: 50%, $right: 50% {
-    .left {
-        width: $left;
-        display: inline-block;
+@keyframes fadeIn {
+    from {
+        opacity: 0;
     }
-    .right {
-        width: $right;
-        display: inline-block;
-    }
+}
+
+.tooltip {
+    background: rgb(196, 107, 107);
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    font-style: italic;
+    text-align: center;
+    width: 90%;
+    height: 1.6rem;
+    margin: 0.3rem auto;
+    padding-top: 0.4rem;
+    border: 0.2rem solid $calculator-info;
+    border-radius: 0.3rem;
+    animation: fadeIn 0.1s ease-in-out;
 }

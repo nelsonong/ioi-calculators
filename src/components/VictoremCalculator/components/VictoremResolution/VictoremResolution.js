@@ -5,10 +5,16 @@ import styles from './VictoremResolution.css';
 const VictoremResolution = ({
     resolutionPreset,
     width,
+    widthStep,
+    maxWidth,
     height,
+    heightStep,
+    maxHeight,
+    resolutionTooltip,
     cameraOption,
     handleChangePreset,
-    handleChangeResolution
+    handleChangeWidth,
+    handleChangeHeight
 }) => {
     const subSamplingSelected = (cameraOption === OPTION.SUBSAMPLING);
     const resolutionPresetOptions = RESOLUTIONS.map((preset, i) => {
@@ -29,9 +35,15 @@ const VictoremResolution = ({
                     {resolutionPresetOptions}
                 </select>
                 <br />
-                <input type="number" className={styles.wxh} name='width' value={width} min='1' max='9999' disabled={subSamplingSelected} onChange={handleChangeResolution} />
-                <input type="number" className={styles.wxh} name='height' value={height} min='1' max='9999' disabled={subSamplingSelected} onChange={handleChangeResolution} />
+                <input type="number" className={styles.wxh} name='width' step={widthStep} value={width} min='16' max={maxWidth} disabled={subSamplingSelected} onChange={handleChangeWidth} />
+                <input type="number" className={styles.wxh} name='height' step={heightStep} value={height} min='4' max={maxHeight} disabled={subSamplingSelected} onChange={handleChangeHeight} />
             </div>
+            {
+                resolutionTooltip !== '' &&
+                <div className={styles.tooltip}>
+                    {resolutionTooltip}
+                </div>
+            }
         </fieldset>
     );
 };
