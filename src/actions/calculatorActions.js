@@ -1,10 +1,12 @@
 const ADD_CALCULATOR = 'ADD_CALCULATOR';
 const DELETE_CALCULATOR = 'DELETE_CALCULATOR';
+const MOVE_CALCULATOR = 'MOVE_CALCULATOR';
 const CLEAR_CALCULATORS = 'CLEAR_CALCULATORS';
 
 const calculatorActionTypes = [
     ADD_CALCULATOR,
     DELETE_CALCULATOR,
+    MOVE_CALCULATOR,
     CLEAR_CALCULATORS
 ];
 
@@ -16,6 +18,12 @@ export const addCalculator = (id, cameraType) => {
         cameraType
     };
 };
+
+export const moveCalculator = (oldIndex, newIndex) => ({
+    type: MOVE_CALCULATOR,
+    oldIndex,
+    newIndex
+});
 
 export const deleteCalculator = (id) => ({
     type: DELETE_CALCULATOR,
@@ -30,6 +38,7 @@ export const clearCalculators = () => ({
 export {
     ADD_CALCULATOR,
     DELETE_CALCULATOR,
+    MOVE_CALCULATOR,
     CLEAR_CALCULATORS,
     calculatorActionTypes
 };

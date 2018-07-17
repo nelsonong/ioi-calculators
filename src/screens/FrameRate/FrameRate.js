@@ -8,7 +8,7 @@ import InstructionBox from '../../components/InstructionBox';
 import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
 import uuid from 'uuid';
 import styles from './FrameRate.css';
-import { addCalculator, clearCalculators } from '../../actions/calculatorActions';
+import { addCalculator, moveCalculator, clearCalculators } from '../../actions/calculatorActions';
 
 const Calculator = SortableElement(({ id, calculatorState }) => {
     const cameraType = calculatorState.cameraType;
@@ -41,11 +41,7 @@ const CalculatorList = SortableContainer(({ calculatorEntries }) => {
 
 
 class FrameRate extends Component {
-    onSortEnd = ({ oldIndex, newIndex }) => {
-        this.setState({
-            calculatorEntries: arrayMove(this.state.calculatorEntries, oldIndex, newIndex),
-        });
-    };
+    onSortEnd = ({ oldIndex, newIndex }) => this.props.handleMove(oldIndex, newIndex);
 
     render = () => {
         const calculatorEntries = Array.from(this.props.calculators, ([id, calculatorState]) => ({
@@ -96,6 +92,9 @@ const mapDispatchToProps = (dispatch) => ({
     handleAdd: (cameraType) => {
         const id = uuid();
         dispatch(addCalculator(id, cameraType));
+    },
+    handleMove: (oldIndex, newIndex) => {
+        dispatch(moveCalculator(oldIndex, newIndex))
     },
     handleClear: () => dispatch(clearCalculators())
 });
