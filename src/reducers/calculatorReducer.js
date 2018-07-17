@@ -1,5 +1,6 @@
 import { clDefaultState } from '../components/FlareCLCalculator/constants';
 import { cxDefaultState } from '../components/FlareCXCalculator/constants';
+import { sdiDefaultState } from '../components/FlareSDICalculator/constants';
 import {
     ADD_CALCULATOR,
     DELETE_CALCULATOR,
@@ -9,7 +10,7 @@ import {
 
 const calculatorsReducer = (state = new Map(), action) => {
     switch (action.type) {
-        case ADD_CALCULATOR:
+        case ADD_CALCULATOR: {
             const { id, cameraType } = action;
             switch (cameraType) {
                 case 'flare-cl':
@@ -28,10 +29,19 @@ const calculatorsReducer = (state = new Map(), action) => {
                     );
                     break;
 
+                case 'flare-sdi':
+                    state = new Map(state);
+                    state.set(
+                        id,
+                        sdiDefaultState
+                    );
+                    break;
+
                 default:
                     return state;
             }
             return state;
+        }
 
         case MOVE_CALCULATOR:
             const { oldIndex, newIndex } = action;
@@ -48,11 +58,12 @@ const calculatorsReducer = (state = new Map(), action) => {
             state = new Map(stateArray.map(i => [ i[0], i[1] ]));
             return state;
 
-        case DELETE_CALCULATOR:
+        case DELETE_CALCULATOR: {
             const { id } = action;
             state = new Map(state);
             state.delete(id);
             return state;
+        }
 
         case CLEAR_CALCULATORS:
             state = new Map(state);

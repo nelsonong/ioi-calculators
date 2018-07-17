@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { updateSDIModel } from '../../../../actions/flareSDIActions';
 import styles from './FlareSDIModel.css';
 
 const FlareSDIModel = ({ models, handleChange }) => {
@@ -13,4 +15,24 @@ const FlareSDIModel = ({ models, handleChange }) => {
     );
 };
 
-export default FlareSDIModel;
+const mapStateToProps = (state, ownProps) => {
+    const { id } = ownProps;
+    const calculatorState = state.get(id);
+    const {
+        models
+    } = calculatorState;
+    
+    return {
+        models
+    };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    handleChange: (e) => {
+        const { id } = ownProps;
+        const model = e.target.value;
+        dispatch(updateSDIModel(id, model));
+    }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FlareSDIModel);

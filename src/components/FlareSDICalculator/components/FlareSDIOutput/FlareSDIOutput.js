@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styles from './FlareSDIOutput.css';
 
 const FlareSDIOutput = ({ frameRate, dataRate }) => {
@@ -11,4 +12,17 @@ const FlareSDIOutput = ({ frameRate, dataRate }) => {
     );
 };
 
-export default FlareSDIOutput;
+const mapStateToProps = (state, { id }) => {
+    const calculatorState = state.get(id);
+    const {
+        frameRate,
+        dataRate
+    } = calculatorState;
+    
+    return {
+        frameRate,
+        dataRate
+    };
+};
+
+export default connect(mapStateToProps)(FlareSDIOutput);

@@ -1,7 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import  { updateSDIResolution } from '../../../../actions/flareSDIActions';
 import styles from './FlareSDIResolution.css';
 
-const FlareSDIResolution = ({ resolution, resolutions, handleChange }) => {
+const FlareSDIResolution = ({
+    resolution,
+    resolutions,
+    handleChange
+}) => {
     const resolutionOptions = resolutions.map((resolution, i) => <option key={i} value={resolution}>{resolution}</option>);
     return (
         <fieldset className={styles.root}>
@@ -13,4 +19,24 @@ const FlareSDIResolution = ({ resolution, resolutions, handleChange }) => {
     );
 };
 
-export default FlareSDIResolution;
+const mapStateToProps = (state, { id }) => {
+    const calculatorState = state.get(id);
+    const {
+        resolution,
+        resolutions
+    } = calculatorState;
+    
+    return {
+        resolution,
+        resolutions
+    };
+};
+
+const mapDispatchToProps = (dispatch, { id }) => ({
+    handleChange: (e) => {
+        const resolution = e.target.value;
+        dispatch(updateSDIResolution(id, resolution));
+    }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FlareSDIResolution);
