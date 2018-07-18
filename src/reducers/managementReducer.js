@@ -3,14 +3,15 @@ import { flareCXDefaultState } from '../components/FlareCXCalculator/constants';
 import { flareSDIDefaultState } from '../components/FlareSDICalculator/constants';
 import { victoremCXDefaultState } from '../components/VictoremCXCalculator/constants';
 import { victoremSDIDefaultState } from '../components/VictoremSDICalculator/constants';
+import { dvrDefaultState } from '../components/DVRCalculator/constants';
 import {
     ADD_CALCULATOR,
     DELETE_CALCULATOR,
     MOVE_CALCULATOR,
     CLEAR_CALCULATORS
-} from '../actions/calculatorActions';
+} from '../actions/managementActions';
 
-const calculatorsReducer = (state = new Map(), action) => {
+const managementReducer = (state = new Map(), action) => {
     switch (action.type) {
         case ADD_CALCULATOR: {
             const { id, cameraType } = action;
@@ -55,6 +56,14 @@ const calculatorsReducer = (state = new Map(), action) => {
                     );
                     break;
 
+                case 'dvr':
+                    state = new Map(state);
+                    state.set(
+                        id,
+                        dvrDefaultState
+                    );
+                    break;
+
                 default:
                     return state;
             }
@@ -93,4 +102,4 @@ const calculatorsReducer = (state = new Map(), action) => {
     }
 }
 
-export default calculatorsReducer;
+export default managementReducer;

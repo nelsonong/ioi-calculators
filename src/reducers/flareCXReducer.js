@@ -20,7 +20,6 @@ const flareCXReducer = (state = new Map(), action) => {
     switch (action.type) {
         case UPDATE_FLARE_CX_MODEL:
             const { model } = action;
-            console.log(model);
 
             // Update formats
             let formats;
@@ -198,19 +197,6 @@ const updateOutput = (calculatorState) => {
         dataRate
     });
 };
-
-const filterFormats = (formats, mode) => {
-    switch (mode) {
-        case MODE.BASE:
-            return formats.filter(clFormat => clFormat.startsWith('Base'));
-        case MODE.FULL:
-            return formats.filter(clFormat => !clFormat.startsWith('Base'));
-        case MODE.DUAL_FULL:
-            return formats.filter(clFormat => (clFormat.startsWith('80') || clFormat.startsWith('Dual')));
-        default:
-            throw new Error('Mode not found.');
-    }
-}
 
 const validateResolution = (width, height, calculatorState) => {
     const {

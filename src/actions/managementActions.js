@@ -3,7 +3,7 @@ const DELETE_CALCULATOR = 'DELETE_CALCULATOR';
 const MOVE_CALCULATOR = 'MOVE_CALCULATOR';
 const CLEAR_CALCULATORS = 'CLEAR_CALCULATORS';
 
-const calculatorActionTypes = [
+const managementActionTypes = [
     ADD_CALCULATOR,
     DELETE_CALCULATOR,
     MOVE_CALCULATOR,
@@ -11,27 +11,31 @@ const calculatorActionTypes = [
 ];
 
 // Action generators
-export const addCalculator = (id, cameraType) => {
+export const addCalculator = (id, cameraType, storage = false) => {
     return {
         type: ADD_CALCULATOR,
         id,
-        cameraType
+        cameraType,
+        storage
     };
 };
 
-export const moveCalculator = (oldIndex, newIndex) => ({
+export const moveCalculator = (oldIndex, newIndex, storage = false) => ({
     type: MOVE_CALCULATOR,
     oldIndex,
-    newIndex
+    newIndex,
+    storage
 });
 
-export const deleteCalculator = (id) => ({
+export const deleteCalculator = (id, storage = false) => ({
     type: DELETE_CALCULATOR,
-    id
+    id,
+    storage
 });
 
-export const clearCalculators = () => ({
-    type: CLEAR_CALCULATORS
+export const clearCalculators = (storage = false) => ({
+    type: CLEAR_CALCULATORS,
+    storage
 });
 
 // Action types
@@ -40,5 +44,5 @@ export {
     DELETE_CALCULATOR,
     MOVE_CALCULATOR,
     CLEAR_CALCULATORS,
-    calculatorActionTypes
+    managementActionTypes
 };

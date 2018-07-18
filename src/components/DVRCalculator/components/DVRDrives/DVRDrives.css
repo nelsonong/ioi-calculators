@@ -9,17 +9,21 @@
     margin-right: 0.5rem;
 }
 
-.drive, .amount {
+.raid, .drive, .amount {
     display: inline-block;
     margin-right: 0.8rem;
 }
 
-.total-capacity {
+.center {
+    text-align: center;
+}
+
+.display {
     text-align: center;
     font-size: 1.1rem;
     font-weight: 700;
-    margin-left: 2rem;
-    width: 20%;
+    margin: 0.8rem auto;
+    width: 30%;
     border: solid $calculator-info;
     border-radius: 0.2rem;
 }

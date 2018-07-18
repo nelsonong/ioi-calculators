@@ -1,10 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { deleteCalculator } from '../../actions/managementActions';
 import styles from './CalculatorTopBar.css';
 
-const CalculatorTopBar = ({ inModal, type, deleteCalculator, id }) => {
-    const text = !inModal ? `${type} Calculator` : `${type} Camera`;
-    const button = !inModal ? (
-        <button className={styles.closeButton} type='button' onClick={() => deleteCalculator(id)}>
+const CalculatorTopBar = ({
+    type,
+    inDVR,
+    handleDelete
+}) => {
+    const text = !inDVR ? `${type} Calculator` : `${type} Camera`;
+    const button = !inDVR ? (
+        <button className={styles.closeButton} type='button' onClick={handleDelete}>
             ✖
         </button>
     ) : '';
@@ -17,4 +23,15 @@ const CalculatorTopBar = ({ inModal, type, deleteCalculator, id }) => {
     );
 };
 
-export default CalculatorTopBar;
+const mapStateToProps = (state, { type, inDVR }) => ({
+    type,
+    inDVR
+});
+
+const mapDispatchToProps = (dispatch, { id, storage }) => {
+    return {
+        handleDelete: () => dispatch(deleteCalculator(id, !!storage))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CalculatorTopBar);

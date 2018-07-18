@@ -1,5 +1,5 @@
 export const MODE = {
-    SINGLE: 'BASE',
-    DUAL: 'FULL',
-    QUAD: 'DUAL_FULL'
+    SINGLE: 'SINGLE',
+    DUAL: 'DUAL',
+    QUAD: 'QUAD'
 };

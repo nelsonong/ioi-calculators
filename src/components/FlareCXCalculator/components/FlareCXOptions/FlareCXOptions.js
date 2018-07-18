@@ -14,8 +14,10 @@ const FlareCXOptions = ({ model, handleChange }) => {
     );
 };
 
-const mapStateToProps = (state, { id }) => {
-    const calculatorState = state.get(id);
+const mapStateToProps = (state, { id, dvrId }) => {
+    const calculatorState = (dvrId !== undefined) ?
+        state.storageCalculators.get(dvrId).cameras.get(id) :
+        state.frameRateCalculators.get(id);
     const {
         model
     } = calculatorState;
@@ -25,10 +27,10 @@ const mapStateToProps = (state, { id }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch, { id }) => ({
+const mapDispatchToProps = (dispatch, { id, dvrId }) => ({
     handleChange: (e) => {
         const subSampling = e.target.checked;
-        dispatch(updateSubSampling(id, subSampling));
+        dispatch(updateSubSampling(id, subSampling, dvrId));
     }
 });
 

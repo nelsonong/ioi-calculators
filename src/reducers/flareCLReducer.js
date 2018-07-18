@@ -13,10 +13,11 @@ import {
 } from '../actions/flareCLActions';
 
 const flareCLReducer = (state = new Map(), action) => {
-    const id = action.id;
+    const { id, type } = action;
     let calculators = new Map(state);
-    let calculatorState = calculators.get(id);
-    switch (action.type) {
+    let calculatorState = state.get(id);
+
+    switch (type) {
         case UPDATE_FLARE_CL_MODEL:
             const { model } = action;
 

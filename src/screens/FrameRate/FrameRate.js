@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { addCalculator, moveCalculator, clearCalculators } from '../../actions/managementActions';
 import FlareCLCalculator from '../../components/FlareCLCalculator';
 import FlareCXCalculator from '../../components/FlareCXCalculator';
 import FlareSDICalculator from '../../components/FlareSDICalculator';
@@ -9,7 +10,6 @@ import InstructionBox from '../../components/InstructionBox';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import uuid from 'uuid';
 import styles from './FrameRate.css';
-import { addCalculator, moveCalculator, clearCalculators } from '../../actions/calculatorActions';
 
 const Calculator = SortableElement(({ id, calculatorState }) => {
     const cameraType = calculatorState.cameraType;
@@ -88,8 +88,8 @@ class FrameRate extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    calculators: state
+const mapStateToProps = ({ frameRateCalculators }) => ({
+    calculators: frameRateCalculators
 });
 
 const mapDispatchToProps = (dispatch) => ({

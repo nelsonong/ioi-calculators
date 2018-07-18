@@ -19,8 +19,10 @@ const FlareSDIColor = ({
     );
 };
 
-const mapStateToProps = (state, { id }) => {
-    const calculatorState = state.get(id);
+const mapStateToProps = (state, { id, dvrId }) => {
+    const calculatorState = (dvrId !== undefined) ?
+        state.storageCalculators.get(dvrId).cameras.get(id) :
+        state.frameRateCalculators.get(id);
     const {
         color,
         colors
@@ -32,10 +34,10 @@ const mapStateToProps = (state, { id }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch, { id }) => ({
+const mapDispatchToProps = (dispatch, { id, dvrId }) => ({
     handleChange: (e) => {
         const color = e.target.value;
-        dispatch(updateColor(id, color));
+        dispatch(updateColor(id, color, dvrId));
     }
 });
 

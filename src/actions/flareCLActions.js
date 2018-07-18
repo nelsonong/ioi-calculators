@@ -17,52 +17,60 @@ const flareCLActionTypes = [
 ];
 
 // Action generators
-export const updateModel = (id, model) => ({
+export const updateModel = (id, model, dvrId) => ({
     type: UPDATE_FLARE_CL_MODEL,
     id,
-    model
+    model,
+    dvrId
 });
 
-export const updateHardwareVersion = (id, hwversion) => ({
+export const updateHardwareVersion = (id, hwversion, dvrId) => ({
     type: UPDATE_FLARE_CL_HW_VERSION,
     id,
-    hwversion: Number(hwversion)
+    hwversion: Number(hwversion),
+    dvrId
 });
 
-export const updateFormat = (id, format) => ({
+export const updateFormat = (id, format, dvrId) => ({
     type: UPDATE_FLARE_CL_FORMAT,
     id,
-    format
+    format,
+    dvrId
 });
 
-export const updateResolutionPreset = (id, resolutionPreset) => ({
+export const updateResolutionPreset = (id, resolutionPreset, dvrId) => ({
     type: UPDATE_FLARE_CL_RESOLUTION_PRESET,
     id,
-    resolutionPreset
+    resolutionPreset,
+    dvrId
 });
 
-export const updateWidth = (id, width) => ({
+export const updateWidth = (id, width, dvrId) => ({
     type: UPDATE_FLARE_CL_WIDTH,
     id,
-    width: width
+    width: width,
+    dvrId
 });
 
-export const updateHeight = (id, height) => ({
+export const updateHeight = (id, height, dvrId) => ({
     type: UPDATE_FLARE_CL_HEIGHT,
     id,
-    height: height
+    height: height,
+    dvrId
 });
 
-export const updateSubSampling = (id, sumSampling) => ({
+export const updateSubSampling = (id, sumSampling, dvrId) => ({
     type: UPDATE_FLARE_CL_SUB_SAMPLING,
     id,
-    sumSampling
+    sumSampling,
+    dvrId
 });
 
-export const updateSlowMode = (id, slowMode) => ({
+export const updateSlowMode = (id, slowMode, dvrId) => ({
     type: UPDATE_FLARE_CL_SLOW_MODE,
     id,
-    slowMode
+    slowMode,
+    dvrId
 });
 
 // Action types

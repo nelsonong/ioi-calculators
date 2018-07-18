@@ -1,5 +1,5 @@
-
 @import '../../../../styles/colors.css';
+@import '../../../../styles/buttons.css';
 @import '../../../../styles/container.css';
 
 .root {
@@ -49,4 +49,15 @@
 
 .close-button:hover {
     color: $mini-background;
+}
+
+.save-button {
+    composes: button;
+    background: lightgreen;
+    font-size: 1.4rem;
+    margin: 0rem 0rem 2.4rem 0rem;
+}
+
+.save-button:hover {
+    background: palegreen;
 }

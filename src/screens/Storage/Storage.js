@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addCalculator, moveCalculator, clearCalculators } from '../../actions/managementActions';
 import DVRCalculator from '../../components/DVRCalculator';
 import InstructionBox from '../../components/InstructionBox';
-import { SortableContainer, SortableElement, arrayMove } from 'react-sortable-hoc';
+import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import uuid from 'uuid';
 import styles from './Storage.css';
 
-const Calculator = SortableElement(({ calculator }) => calculator);
+const Calculator = SortableElement(({ id }) => (
+    <DVRCalculator id={id} />
+));
 
 const CalculatorList = SortableContainer(({ calculatorEntries }) => {
   return (
     <div className={styles.list}>
-      {calculatorEntries.map((calculatorEntry, i) => (
+      {calculatorEntries.map((entry, i) => (
         <Calculator
-            key={`item-${calculatorEntry.id}`}
+            key={`item-${entry.id}`}
             index={i}
-            calculator={calculatorEntry.calculator}
+            id={entry.id}
          />
       ))}
     </div>
@@ -22,42 +26,16 @@ const CalculatorList = SortableContainer(({ calculatorEntries }) => {
 });
 
 class Storage extends Component {
-    state = {
-        calculatorEntries: []
-    };
-
-    // Add calculator
-    addCalculator = (type) => {
-        let calculatorEntries = this.state.calculatorEntries;
-        const key = uuid();
-        calculatorEntries = calculatorEntries.concat({
-            id: key,
-            calculator: <DVRCalculator key={key} id={key} deleteCalculator={this.deleteCalculator} />
-        });
-        this.setState(() => ({ calculatorEntries }));
-    }
-
-    // Remove calculator
-    deleteCalculator = (id) => {
-        let calculatorEntries = this.state.calculatorEntries;
-        calculatorEntries = calculatorEntries.filter(calculator => calculator.id !== id);
-        this.setState(() => ({ calculatorEntries }));
-    }
-
-    // Clear calculators
-    clearCalculators = () => {
-        this.setState(() => ({ calculatorEntries: [] }));
-    }
-
-    onSortEnd = ({ oldIndex, newIndex }) => {
-        this.setState({
-            calculatorEntries: arrayMove(this.state.calculatorEntries, oldIndex, newIndex),
-        });
-    };
+    onSortEnd = ({ oldIndex, newIndex }) => this.props.handleMove(oldIndex, newIndex);
 
     render = () => {
+        const calculatorEntries = Array.from(this.props.calculators, ([id, calculatorState]) => ({
+            id,
+            calculatorState
+        }));
+
         const text = 'Please click the button above to add a calculator.';
-        const instructionBox = (this.state.calculatorEntries.length === 0) ? <InstructionBox text={text} /> : '';
+        const instructionBox = (calculatorEntries.length === 0) ? <InstructionBox text={text} /> : '';
         return (
             <div className={styles.root}>
                 <div className={styles.title}>
@@ -65,7 +43,7 @@ class Storage extends Component {
                 </div>
                 <div className={styles.buttonsContainer}>
                     <div>
-                        <button type='button' className={styles.addButton} onClick={() => this.addCalculator()}>+ DVR</button>
+                        <button type='button' className={styles.addButton} onClick={() => this.props.handleAdd('dvr')}>+ DVR</button>
                     </div>
                     <div className={styles.spacer}></div>
                     <div>
@@ -73,14 +51,29 @@ class Storage extends Component {
                         <button type='button' className={styles.exportButton}>EXPORT</button>
                     </div>
                     <div>
-                        <button type='button' className={styles.clearButton} onClick={this.clearCalculators}>CLEAR</button>
+                        <button type='button' className={styles.clearButton} onClick={this.props.handleClear}>CLEAR</button>
                     </div>
                 </div>
                 {instructionBox}
-                <CalculatorList calculatorEntries={this.state.calculatorEntries} axis='xy' onSortEnd={this.onSortEnd} />
+                <CalculatorList calculatorEntries={calculatorEntries} axis='xy' onSortEnd={this.onSortEnd} />
             </div>
         );
     }
 }
 
-export default Storage;
+const mapStateToProps = ({ storageCalculators }) => ({
+    calculators: storageCalculators
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    handleAdd: (cameraType) => {
+        const id = uuid();
+        dispatch(addCalculator(id, cameraType, true));
+    },
+    handleMove: (oldIndex, newIndex) =>
+        dispatch(moveCalculator(oldIndex, newIndex, true)),
+
+    handleClear: () => dispatch(clearCalculators(true))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Storage);

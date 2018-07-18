@@ -13,20 +13,20 @@ class FlareSDICalculator extends Component {
 
     render = () => (
         <div className={styles.root}>
-            <CalculatorTopBar type={'Flare SDI'} id={this.props.id} />
-            <FlareSDIModel id={this.props.id} />
-            <FlareSDIInterface id={this.props.id} />
-            <FlareSDIResolution id={this.props.id} />
-            <FlareSDIColor id={this.props.id} />
-            <FlareSDIFrameRate id={this.props.id} />
-            <FlareSDIOutput id={this.props.id} />
+            <CalculatorTopBar type={'Flare SDI'} id={this.props.id} dvrId={this.props.dvrId} />
+            <FlareSDIModel id={this.props.id} dvrId={this.props.dvrId} />
+            <FlareSDIInterface id={this.props.id} dvrId={this.props.dvrId} />
+            <FlareSDIResolution id={this.props.id} dvrId={this.props.dvrId} />
+            <FlareSDIColor id={this.props.id} dvrId={this.props.dvrId} />
+            <FlareSDIFrameRate id={this.props.id} dvrId={this.props.dvrId} />
+            <FlareSDIOutput id={this.props.id} dvrId={this.props.dvrId} />
         </div>
     );
 }
 
-const mapDispatchToProps = (dispatch, { id, inDVR, mode }) => ({
+const mapDispatchToProps = (dispatch, { id, dvrId, mode }) => ({
     handleInitialize: () => {
-        dispatch(initializeDVRState(id, inDVR, mode));
+        dispatch(initializeDVRState(id, dvrId, mode));
     }
 });
 

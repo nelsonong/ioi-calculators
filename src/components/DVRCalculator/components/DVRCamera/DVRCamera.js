@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { pushDataRate, deleteDataRate, revertCameraState } from '../../../../actions/dvrActions';
 import { DVRCameraModal } from '../DVRCameraModal';
-import FlareCLCalculator from '../../../FlareCLCalculator';
-import FlareCXCalculator from '../../../FlareCXCalculator';
-import FlareSDICalculator from '../../../FlareSDICalculator';
-import { LINK } from '../../constants';
 import plus from '../../../../images/plus.png';
 import edit from '../../../../images/edit.png';
 import remove from '../../../../images/remove.png';
@@ -12,83 +10,57 @@ import styles from './DVRCamera.css';
 class DVRCamera extends Component {
     state = {
         modal: null,
-        cameraRef: React.createRef(),
-        model: '',
-        format: '',
-        resolution: '',
+        added: false,
         isHovered: false,
-        modalIsOpen: true,
-        modal: '',
-        format: '',
-        resolution: '',
-        dataRate: 0,
-        mode: this.props.mode,
-        link: this.props.link
+        modalIsOpen: false,
+        cachedCameraState: this.props.cameraState
     };
 
     addCamera = () => {
-        const { cameraRef, mode, link } = this.state;
-        let camera;
-        switch (link) {
-            case LINK.CL:
-                camera = <FlareCLCalculator ref={cameraRef} mode={mode} />;
-                break;
-            case LINK.CX:
-                camera = <FlareCXCalculator ref={cameraRef} mode={mode} />;
-                break;
-            case LINK.SDI:
-                camera = <FlareSDICalculator ref={cameraRef} mode={mode} />;
-        }
-        const modal = (
-            <DVRCameraModal
-                isOpen={this.state.modalIsOpen}
-                camera={camera}
-                closeModal={this.closeModal}
-            />
-        );
-        this.setState(() => ({ added: true, modalIsOpen: true, modal }));
-    }
-
-    openModal = () => {
-        this.setState(() => ({ modalIsOpen: true }));
-    }
-
-    closeModal = () => {
-        const calculatorState = this.state.cameraRef.current.state;
-        const { model, format, width, height, dataRate } = calculatorState;
-        const resolution = `${width}x${height}`;
-
-        this.setState(() => ({ model, format, resolution, dataRate, modalIsOpen: false, isHovered: false }));
-        this.props.pushDataRate(this.props.id, dataRate);
+        this.openModal();
     }
 
     deleteCamera = () => {
-        this.setState(() => ({ added: false, modalIsOpen: true, modal: null }));
-        this.props.deleteDataRate(this.props.id);
+        this.setState(() => ({ added: false, modal: null }));
+        this.props.handleDeleteDataRate();
     }
 
-    openHoverOverlay = () => {
-        this.setState(() => ({ isHovered: true }));
+    openModal = () => this.setState(() => ({ modalIsOpen: true }));
+
+    closeModal = () => {
+        this.setState(() => ({ modalIsOpen: false, isHovered: false }));
+        this.props.handleRevertCameraState(this.state.cachedCameraState);
     }
 
-    closeHoverOverlay = () => {
-        this.setState(() => ({ isHovered: false }));
+    saveAndCloseModal = () => {
+        this.setState(() => ({
+            modalIsOpen: false,
+            added: true,
+            isHovered: false,
+            cachedCameraState: this.props.cameraState
+        }));
+        
+        this.props.handlePushDataRate(this.props.cameraState.dataRate);
     }
 
-    startContents = () => (
+    openHoverOverlay = () => this.setState(() => ({ isHovered: true }));
+
+    closeHoverOverlay = () => this.setState(() => ({ isHovered: false }));
+
+    defaultContents = () => (
         <button type='button' className={styles.addButton} onClick={this.addCamera}><img src={plus}></img></button>
     );
 
     infoContents = () => (
         <div>
             <div className={styles.info}>
-                {this.state.model}
+                {this.props.cameraState.model}
             </div>
             <div className={styles.info}>
-                {this.state.resolution}
+                {this.props.cameraState.width}x{this.props.cameraState.height}
             </div>
             <div className={styles.dataRate}>
-                {(this.state.dataRate / 1024).toFixed(2)} GB/s
+                {(this.props.cameraState.dataRate / 1024).toFixed(2)} GB/s
             </div>
         </div>
     );
@@ -101,15 +73,8 @@ class DVRCamera extends Component {
     );
 
     render = () => {
-        if (this.state.added && this.state.modalIsOpen) {
-            return (
-                <div>
-                    {this.state.modal}
-                </div>
-            );
-        }
         
-        let contents = this.startContents();
+        let contents = this.defaultContents();
         let className = styles.root;
         if (this.state.added) {
             contents = this.state.isHovered ? this.hoverContents() : this.infoContents();
@@ -122,9 +87,46 @@ class DVRCamera extends Component {
                     {this.props.mode}
                 </div>
                 {contents}
+                {
+                    this.state.modalIsOpen &&
+                    <DVRCameraModal
+                        modalIsOpen={this.state.modalIsOpen}
+                        cameraState={this.props.cameraState}
+                        id={this.props.id}
+                        dvrId={this.props.dvrId}
+                        link={this.props.link}
+                        mode={this.props.mode}
+                        closeModal={this.closeModal}
+                        saveAndCloseModal={this.saveAndCloseModal}
+                    />
+                }
             </div>
         );
     }
 }
 
-export default DVRCamera;
+const mapStateToProps = (state, { id, dvrId, link, mode }) => {
+    const cameraState = state.storageCalculators.get(dvrId).cameras.get(id);
+    return {
+        id,
+        dvrId,
+        cameraState,
+        link,
+        mode
+    };
+};
+
+const mapDispatchToProps = (dispatch, { id, dvrId }) => ({
+    handlePushDataRate: (dataRate) => {
+        dataRate = Number(dataRate);
+        dispatch(pushDataRate(dvrId, id, dataRate));
+    },
+    handleDeleteDataRate: () => {
+        dispatch(deleteDataRate(dvrId, id));
+    },
+    handleRevertCameraState: (cameraState) => {
+        dispatch(revertCameraState(dvrId, id, cameraState));
+    },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(DVRCamera);

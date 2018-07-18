@@ -16,8 +16,10 @@ const FlareCXOutput = ({
     );
 };
 
-const mapStateToProps = (state, { id }) => {
-    const calculatorState = state.get(id);
+const mapStateToProps = (state, { id, dvrId }) => {
+    const calculatorState = (dvrId !== undefined) ?
+        state.storageCalculators.get(dvrId).cameras.get(id) :
+        state.frameRateCalculators.get(id);
     const {
         frameRate,
         dataRate,

@@ -19,52 +19,60 @@ const flareCXActionTypes = [
 ];
 
 // Action generators
-export const updateModel = (id, model) => ({
+export const updateModel = (id, model, dvrId) => ({
     type: UPDATE_FLARE_CX_MODEL,
     id,
-    model
+    model,
+    dvrId
 });
 
-export const updateBitDepth = (id, bitDepth) => ({
+export const updateBitDepth = (id, bitDepth, dvrId) => ({
     type: UPDATE_FLARE_CX_BIT_DEPTH,
     id,
-    bitDepth
+    bitDepth,
+    dvrId
 });
 
-export const updateLinkCount = (id, linkCount) => ({
+export const updateLinkCount = (id, linkCount, dvrId) => ({
     type: UPDATE_FLARE_CX_LINK_COUNT,
     id,
-    linkCount
+    linkCount,
+    dvrId
 });
 
-export const updateLinkSpeed = (id, linkSpeed) => ({
+export const updateLinkSpeed = (id, linkSpeed, dvrId) => ({
     type: UPDATE_FLARE_CX_LINK_SPEED,
     id,
-    linkSpeed
+    linkSpeed,
+    dvrId
 });
 
-export const updateResolutionPreset = (id, resolutionPreset) => ({
+export const updateResolutionPreset = (id, resolutionPreset, dvrId) => ({
     type: UPDATE_FLARE_CX_RESOLUTION_PRESET,
     id,
-    resolutionPreset
+    resolutionPreset,
+    dvrId
 });
 
-export const updateWidth = (id, width) => ({
+export const updateWidth = (id, width, dvrId) => ({
     type: UPDATE_FLARE_CX_WIDTH,
     id,
-    width: width
+    width: width,
+    dvrId
 });
 
-export const updateHeight = (id, height) => ({
+export const updateHeight = (id, height, dvrId) => ({
     type: UPDATE_FLARE_CX_HEIGHT,
     id,
-    height: height
+    height: height,
+    dvrId
 });
 
-export const updateSubSampling = (id, sumSampling) => ({
+export const updateSubSampling = (id, sumSampling, dvrId) => ({
     type: UPDATE_FLARE_CX_SUB_SAMPLING,
     id,
-    sumSampling
+    sumSampling,
+    dvrId
 });
 
 // Action types

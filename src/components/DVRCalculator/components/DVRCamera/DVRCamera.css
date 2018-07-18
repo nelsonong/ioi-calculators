@@ -81,6 +81,10 @@
     cursor: pointer;
 }
 
+.add-button:focus {
+    outline: none;
+}
+
 .button {
     margin: 2rem 0.2rem;
     padding: 0.3rem 0.4rem;

@@ -6,6 +6,7 @@ import styles from './FlareCXFormat.css';
 
 const renderLinkCountOptions = (formats, mode) => {
     if (!mode) {
+        console.log(mode, 1);
         return formats.LinkCounts.map((linkCount, i) => <option key={i} value={linkCount}>{linkCount}</option>);
     } else {
         let linkCount;
@@ -25,6 +26,9 @@ const renderLinkCountOptions = (formats, mode) => {
 
 const FlareCXFormat = ({
     formats,
+    bitDepth,
+    linkCount,
+    linkSpeed,
     mode,
     handleChangeBitDepth,
     handleChangeLinkCount,
@@ -41,17 +45,17 @@ const FlareCXFormat = ({
                 <div className={styles.label}>Links:</div>
             </div>
             <div className={styles.selects}>
-                <select className={styles.select} name='bitDepth' onChange={handleChangeBitDepth}>
+                <select className={styles.select} value={bitDepth} onChange={handleChangeBitDepth}>
                     {bitDepthOptions}
                 </select>
-                <select className={styles.select} name='linkCount' onChange={handleChangeLinkCount}>
+                <select className={styles.select} value={linkCount} onChange={handleChangeLinkCount}>
                     {renderLinkCountOptions(formats, mode)}
                 </select>
             </div>
         </div>
         <div className={styles.right}>
             <div className={styles.label}>Speed:</div>
-            <select className={styles.select} name='linkSpeed' onChange={handleChangeLinkSpeed}>
+            <select className={styles.select} value={linkSpeed} onChange={handleChangeLinkSpeed}>
                 {linkSpeedOptions}
             </select>
         </div>
@@ -59,31 +63,39 @@ const FlareCXFormat = ({
     );
 };
 
-const mapStateToProps = (state, { id }) => {
-    const calculatorState = state.get(id);
+const mapStateToProps = (state, { id, dvrId }) => {
+    const calculatorState = (dvrId !== undefined) ?
+        state.storageCalculators.get(dvrId).cameras.get(id) :
+        state.frameRateCalculators.get(id);
     const {
         formats,
+        bitDepth,
+        linkCount,
+        linkSpeed,
         mode
     } = calculatorState;
     
     return {
         formats,
+        bitDepth,
+        linkCount,
+        linkSpeed,
         mode
     };
 };
 
-const mapDispatchToProps = (dispatch, { id }) => ({
+const mapDispatchToProps = (dispatch, { id, dvrId }) => ({
     handleChangeBitDepth: (e) => {
         const bitDepth = Number(e.target.value);
-        dispatch(updateBitDepth(id, bitDepth));
+        dispatch(updateBitDepth(id, bitDepth, dvrId));
     },
     handleChangeLinkCount: (e) => {
         const linkCount = Number(e.target.value);
-        dispatch(updateLinkCount(id, linkCount));
+        dispatch(updateLinkCount(id, linkCount, dvrId));
     },
     handleChangeLinkSpeed: (e) => {
         const linkSpeed = e.target.value;
-        dispatch(updateLinkSpeed(id, linkSpeed));
+        dispatch(updateLinkSpeed(id, linkSpeed, dvrId));
     }
 });
 

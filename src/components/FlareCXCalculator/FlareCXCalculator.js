@@ -5,12 +5,12 @@ import styles from './FlareCXCalculator.css';
 
 const FlareCXCalculator = (props) => (
     <div className={styles.root}>
-        <CalculatorTopBar type={'Flare CX'} id={props.id} />
-        <FlareCXModel id={props.id} />
-        <FlareCXFormat id={props.id} />
-        <FlareCXResolution id={props.id} />
-        <FlareCXOptions id={props.id} />
-        <FlareCXOutput id={props.id} />
+        <CalculatorTopBar type={'Flare CX'} id={props.id} dvrId={props.dvrId} />
+        <FlareCXModel id={props.id} dvrId={props.dvrId} />
+        <FlareCXFormat id={props.id} dvrId={props.dvrId} />
+        <FlareCXResolution id={props.id} dvrId={props.dvrId} />
+        <FlareCXOptions id={props.id} dvrId={props.dvrId} />
+        <FlareCXOutput id={props.id} dvrId={props.dvrId} />
     </div>
 );
 

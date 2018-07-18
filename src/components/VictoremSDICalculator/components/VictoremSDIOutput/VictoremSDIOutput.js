@@ -12,8 +12,8 @@ const VictoremSDIOutput = ({ frameRate, dataRate }) => {
     );
 };
 
-const mapStateToProps = (state, { id }) => {
-    const calculatorState = state.get(id);
+const mapStateToProps = ({ frameRateCalculators }, { id }) => {
+    const calculatorState = frameRateCalculators.get(id);
     const {
         frameRate,
         dataRate

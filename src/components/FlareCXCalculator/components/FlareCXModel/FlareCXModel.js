@@ -4,23 +4,36 @@ import { updateModel } from '../../../../actions/flareCXActions';
 import { MODELS } from '../../constants';
 import styles from './FlareCXModel.css';
 
-const FlareCXModel = ({ handleChange }) => {
+const FlareCXModel = ({ model, handleChange }) => {
     const modelOptions = MODELS.map((model, i) => <option key={i} value={model}>{model}</option>);
     return (
         <fieldset className={styles.root}>
         <legend className={styles.legend}>Model</legend>
-            <select className={styles.select} name='model' onChange={handleChange}>
+            <select className={styles.select} value={model} onChange={handleChange}>
                 {modelOptions}
             </select>
         </fieldset>
     );
 };
 
-const mapDispatchToProps = (dispatch, { id }) => ({
+const mapStateToProps = (state, { id, dvrId }) => {
+    const calculatorState = (dvrId !== undefined) ?
+        state.storageCalculators.get(dvrId).cameras.get(id) :
+        state.frameRateCalculators.get(id);
+    const {
+        model
+    } = calculatorState;
+    
+    return {
+        model
+    };
+};
+
+const mapDispatchToProps = (dispatch, { id, dvrId }) => ({
     handleChange: (e) => {
         const model = e.target.value;
-        dispatch(updateModel(id, model));
+        dispatch(updateModel(id, model, dvrId));
     }
 });
 
-export default connect(null, mapDispatchToProps)(FlareCXModel);
+export default connect(mapStateToProps, mapDispatchToProps)(FlareCXModel);

@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styles from './DVRRecordingTime.css';
 
 const DVRRecordingTime = ({ recordingTime }) => (
@@ -8,4 +9,12 @@ const DVRRecordingTime = ({ recordingTime }) => (
     </fieldset>
 );
 
-export default DVRRecordingTime;
+const mapStateToProps = ({ storageCalculators }, { id }) => {
+    const calculatorState = storageCalculators.get(id);
+    const { recordingTime } = calculatorState;
+    return {
+        recordingTime
+    };
+};
+
+export default connect(mapStateToProps)(DVRRecordingTime);

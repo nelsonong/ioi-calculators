@@ -27,9 +27,9 @@ const VictoremCXFormat = ({
     );
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = ({ frameRateCalculators }, ownProps) => {
     const { id } = ownProps;
-    const calculatorState = state.get(id);
+    const calculatorState = frameRateCalculators.get(id);
     const {
         formats
     } = calculatorState;

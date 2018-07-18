@@ -1,3 +1,5 @@
+@import './colors.css';
+
 .buttons-container {
     background: repeating-linear-gradient(
         45deg,

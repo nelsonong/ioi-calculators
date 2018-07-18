@@ -3,33 +3,41 @@ import { connect } from 'react-redux';
 import { updateFormat } from '../../../../actions/flareCLActions';
 import styles from './FlareCLFormat.css';
 
-const FlareCLFormat = ({ formats, handleChange }) => {
+const FlareCLFormat = ({
+    format,
+    formats,
+    handleChange
+}) => {
     const formatOptions = formats.map((format, i) => <option key={i}>{format}</option>);
     return (
         <fieldset className={styles.root}>
         <legend className={styles.legend}>Camera Link Format</legend>
-        <select className={styles.select} name='format' onChange={handleChange}>
+        <select className={styles.select} value={format} onChange={handleChange}>
             {formatOptions}
         </select>
         </fieldset>
     );
 };
 
-const mapStateToProps = (state, { id }) => {
-    const calculatorState = state.get(id);
+const mapStateToProps = (state, { id, dvrId }) => {
+    const calculatorState = (dvrId !== undefined) ?
+        state.storageCalculators.get(dvrId).cameras.get(id) :
+        state.frameRateCalculators.get(id);
     const {
+        format,
         formats
     } = calculatorState;
     
     return {
+        format,
         formats
     };
 };
 
-const mapDispatchToProps = (dispatch, { id }) => ({
+const mapDispatchToProps = (dispatch, { id, dvrId }) => ({
     handleChange: (e) => {
         const format = e.target.value;
-        dispatch(updateFormat(id, format));
+        dispatch(updateFormat(id, format, dvrId));
     }
 });
 
