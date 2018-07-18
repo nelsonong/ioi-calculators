@@ -1,9 +1,9 @@
-@import '../../../../styles/victorem.css';
+@import '../../../../styles/victorem-cx.css';
 
 .root {
-    composes: victorem-fieldset;
+    composes: victorem-cx-fieldset;
 }
 
 .input {
-    composes: victorem-input;
+    composes: victorem-cx-input;
 }

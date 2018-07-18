@@ -1,0 +1,22 @@
+@import './colors.css';
+@import './calculator.css';
+
+.victorem-sdi-calculator {
+    composes: calculator;
+    background: $victorem-sdi-background;
+    background: linear-gradient(to bottom right, $victorem-sdi-background, $victorem-sdi-background-light);
+}
+
+.victorem-sdi-calculator:hover {
+    cursor: move;
+}
+
+.victorem-sdi-fieldset {
+    composes: fieldset;
+    background: $victorem-sdi-fieldset;
+}
+
+.victorem-sdi-input {
+    composes: input;
+    background: $victorem-sdi-output;
+}

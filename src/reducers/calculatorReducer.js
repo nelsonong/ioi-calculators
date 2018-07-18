@@ -2,6 +2,7 @@ import { flareCLDefaultState } from '../components/FlareCLCalculator/constants';
 import { flareCXDefaultState } from '../components/FlareCXCalculator/constants';
 import { flareSDIDefaultState } from '../components/FlareSDICalculator/constants';
 import { victoremCXDefaultState } from '../components/VictoremCXCalculator/constants';
+import { victoremSDIDefaultState } from '../components/VictoremSDICalculator/constants';
 import {
     ADD_CALCULATOR,
     DELETE_CALCULATOR,
@@ -43,6 +44,14 @@ const calculatorsReducer = (state = new Map(), action) => {
                     state.set(
                         id,
                         victoremCXDefaultState
+                    );
+                    break;
+
+                case 'victorem-sdi':
+                    state = new Map(state);
+                    state.set(
+                        id,
+                        victoremSDIDefaultState
                     );
                     break;
 

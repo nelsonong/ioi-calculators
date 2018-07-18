@@ -3,11 +3,13 @@ import { flareCLActionTypes } from '../actions/flareCLActions';
 import { flareCXActionTypes } from '../actions/flareCXActions';
 import { flareSDIActionTypes } from '../actions/flareSDIActions';
 import { victoremCXActionTypes } from '../actions/victoremCXActions';
+import { victoremSDIActionTypes } from '../actions/victoremSDIActions';
 import calculatorReducer from '../reducers/calculatorReducer';
 import flareCLReducer from '../reducers/flareCLReducer';
 import flareCXReducer from '../reducers/flareCXReducer';
 import flareSDIReducer from '../reducers/flareSDIReducer';
 import victoremCXReducer from '../reducers/victoremCXReducer';
+import victoremSDIReducer from '../reducers/victoremSDIReducer';
 
 const rootReducer = (state = new Map(), action) => {
     if (calculatorActionTypes.includes(action.type)) {
@@ -20,6 +22,8 @@ const rootReducer = (state = new Map(), action) => {
         return flareSDIReducer(state, action);
     } else if (victoremCXActionTypes.includes(action.type)) {
         return victoremCXReducer(state, action);
+    } else if (victoremSDIActionTypes.includes(action.type)) {
+        return victoremSDIReducer(state, action);
     }
     return state;
 }

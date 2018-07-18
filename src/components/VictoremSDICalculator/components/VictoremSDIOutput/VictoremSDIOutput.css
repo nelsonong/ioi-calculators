@@ -1,0 +1,9 @@
+@import '../../../../styles/victorem-sdi.css';
+
+.root {
+    composes: victorem-sdi-fieldset;
+}
+
+.input {
+    composes: victorem-sdi-input;
+}

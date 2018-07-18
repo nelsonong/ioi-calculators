@@ -1,0 +1,12 @@
+@import '../../../../styles/victorem-sdi.css';
+
+.root {
+    composes: victorem-sdi-fieldset;
+}
+
+@mixin add-left-right 60%, 40%;
+
+.label {
+    display: inline-block;
+    margin: 0 0.3em;
+}

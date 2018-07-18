@@ -1,0 +1,16 @@
+import { INTERFACE } from './interfaces';
+
+export const LINK = {
+    SINGLE: 1,
+    DUAL: 2,
+    QUAD: 4
+};
+
+export const LINKS = {
+    [INTERFACE.HD_SDI]: [ LINK.SINGLE, LINK.DUAL, LINK.QUAD ],
+    [INTERFACE.S_3G_SDI]: [ LINK.SINGLE, LINK.DUAL, LINK.QUAD ],
+    [INTERFACE.D_3G_SDI]: [ LINK.SINGLE, LINK.DUAL ],
+    [INTERFACE.Q_3G_SDI]: [ LINK.SINGLE ],
+    [INTERFACE.S_6G_SDI]: [ LINK.SINGLE ],
+    [INTERFACE.S_12G_SDI]: [ LINK.SINGLE ]
+};

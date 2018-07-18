@@ -1,7 +1,6 @@
 const INITIALIZE_FLARE_SDI_DVR_STATE = 'INITIALIZE_FLARE_SDI_DVR_STATE';
 const UPDATE_FLARE_SDI_MODEL = 'UPDATE_FLARE_SDI_MODEL';
 const UPDATE_FLARE_SDI_INTERFACE = 'UPDATE_FLARE_SDI_INTERFACE';
-const UPDATE_FLARE_SDI_LINK = 'UPDATE_FLARE_SDI_LINK';
 const UPDATE_FLARE_SDI_RESOLUTION = 'UPDATE_FLARE_SDI_RESOLUTION';
 const UPDATE_FLARE_SDI_COLOR = 'UPDATE_FLARE_SDI_COLOR';
 const UPDATE_FLARE_SDI_FRAME_RATE = 'UPDATE_FLARE_SDI_FRAME_RATE';
@@ -12,8 +11,7 @@ const flareSDIActionTypes = [
     UPDATE_FLARE_SDI_INTERFACE,
     UPDATE_FLARE_SDI_RESOLUTION,
     UPDATE_FLARE_SDI_COLOR,
-    UPDATE_FLARE_SDI_FRAME_RATE,
-    UPDATE_FLARE_SDI_LINK
+    UPDATE_FLARE_SDI_FRAME_RATE
 ];
 
 // Action generators
@@ -34,12 +32,6 @@ export const updateInterface = (id, sdiInterface) => ({
     type: UPDATE_FLARE_SDI_INTERFACE,
     id,
     sdiInterface
-});
-
-export const updateLink = (id, link) => ({
-    type: UPDATE_FLARE_SDI_LINK,
-    id,
-    link
 });
 
 export const updateResolution = (id, resolution) => ({
@@ -68,6 +60,5 @@ export {
     UPDATE_FLARE_SDI_RESOLUTION,
     UPDATE_FLARE_SDI_COLOR,
     UPDATE_FLARE_SDI_FRAME_RATE,
-    UPDATE_FLARE_SDI_LINK,
     flareSDIActionTypes
 };

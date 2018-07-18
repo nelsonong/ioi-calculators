@@ -4,6 +4,7 @@ import FlareCLCalculator from '../../components/FlareCLCalculator';
 import FlareCXCalculator from '../../components/FlareCXCalculator';
 import FlareSDICalculator from '../../components/FlareSDICalculator';
 import VictoremCXCalculator from '../../components/VictoremCXCalculator';
+import VictoremSDICalculator from '../../components/VictoremSDICalculator';
 import InstructionBox from '../../components/InstructionBox';
 import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import uuid from 'uuid';
@@ -21,6 +22,8 @@ const Calculator = SortableElement(({ id, calculatorState }) => {
             return <FlareSDICalculator id={id} />
         case 'victorem-cx':
             return <VictoremCXCalculator id={id} />
+        case 'victorem-sdi':
+            return <VictoremSDICalculator id={id} />
     }
 });
 
@@ -67,7 +70,8 @@ class FrameRate extends Component {
                         <div className={styles.buttonSpacer}></div>
                         <div className={styles.buttonContainer}>
                         <div className={styles.buttonContainerText}>VICTOREM</div>
-                            <button type='button' className={styles.victoremButton} onClick={() => this.props.handleAdd('victorem-cx')}>+ CX</button>
+                            <button type='button' className={styles.victoremCxButton} onClick={() => this.props.handleAdd('victorem-cx')}>+ CX</button>
+                            <button type='button' className={styles.victoremSdiButton} onClick={() => this.props.handleAdd('victorem-sdi')}>+ SDI</button>
                         </div>
                     </div>
                     <div>

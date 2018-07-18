@@ -1,7 +1,7 @@
-@import '../../../../styles/victorem.css';
+@import '../../../../styles/victorem-cx.css';
 
 .root {
-    composes: victorem-fieldset;
+    composes: victorem-cx-fieldset;
 }
 
 @mixin add-left-right 45%, 55%;

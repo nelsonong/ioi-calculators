@@ -1,5 +1,5 @@
-@import '../../styles/victorem.css';
+@import '../../styles/victorem-cx.css';
 
 .root {
-    composes: victorem-calculator;
+    composes: victorem-cx-calculator;
 }

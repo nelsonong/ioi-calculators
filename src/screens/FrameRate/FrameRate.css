@@ -35,14 +35,24 @@
 	background: $flare-sdi-button-light;
 }
 
-.victorem-button {
+.victorem-cx-button {
 	composes: sub-button;
-	background: $victorem-button;
+	background: $victorem-cx-button;
 	@mixin left-divider;
 }
 
-.victorem-button:hover {
-	background: $victorem-button-light;
+.victorem-cx-button:hover {
+	background: $victorem-cx-button-light;
+}
+
+.victorem-sdi-button {
+	composes: sub-button;
+	background: $victorem-sdi-button;
+	@mixin left-divider;
+}
+
+.victorem-sdi-button:hover {
+	background: $victorem-sdi-button-light;
 }
 
 .import-button {

@@ -56,13 +56,21 @@ $mini-background-dark: rgb(252, 230, 224);
 $mini-fieldset: rgb(253, 238, 214);
 $mini-output: rgb(214, 133, 133);
 
-/* Victorem color scheme */
-$victorem-background: rgb(255, 227, 239);
-$victorem-background-light: rgb(252, 233, 241);
-$victorem-fieldset: rgb(253, 241, 245);
-$victorem-output: rgb(187, 94, 177);
-$victorem-button: rgb(187, 94, 177);
-$victorem-button-light: rgb(204, 114, 180);
+/* Victorem CX color scheme */
+$victorem-cx-background: rgb(255, 227, 239);
+$victorem-cx-background-light: rgb(252, 233, 241);
+$victorem-cx-fieldset: rgb(253, 241, 245);
+$victorem-cx-output: rgb(187, 94, 177);
+$victorem-cx-button: rgb(187, 94, 177);
+$victorem-cx-button-light: rgb(204, 114, 180);
+
+/* Victorem SDI color scheme */
+$victorem-sdi-background: rgb(255, 227, 239);
+$victorem-sdi-background-light: rgb(252, 233, 241);
+$victorem-sdi-fieldset: rgb(253, 241, 245);
+$victorem-sdi-output: rgb(187, 94, 177);
+$victorem-sdi-button: rgb(187, 94, 177);
+$victorem-sdi-button-light: rgb(204, 114, 180);
 
 /* DVR color scheme */
 $dvr-background: rgb(201, 201, 201);
