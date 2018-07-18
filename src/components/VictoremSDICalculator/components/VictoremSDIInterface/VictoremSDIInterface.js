@@ -1,19 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { updateInterface } from '../../../../actions/victoremSDIActions';
-import styles from './VictoremSDIFormat.css';
+import styles from './VictoremSDIInterface.css';
 
-const VictoremSDIFormat = ({
+const VictoremSDIInterface = ({
     sdiInterface,
     sdiInterfaces,
-    handleChangeInterface
+    handleChange
 }) => {
     const sdiInterfaceOptions = sdiInterfaces.map((sdiInterface, i) => <option key={i} value={sdiInterface}>{sdiInterface}</option>);
     return (
         <fieldset className={styles.root}>
-        <legend className={styles.legend}>SDI Format</legend>
-            <div className={styles.label}>Interface:</div>
-            <select className={styles.select} name='sdiInterface' value={sdiInterface} onChange={handleChangeInterface}>
+        <legend className={styles.legend}>Interface</legend>
+            <select className={styles.select} name='sdiInterface' value={sdiInterface} onChange={handleChange}>
                 {sdiInterfaceOptions}
             </select>
         </fieldset>
@@ -34,10 +33,10 @@ const mapStateToProps = (state, { id }) => {
 };
 
 const mapDispatchToProps = (dispatch, { id }) => ({
-    handleChangeInterface: (e) => {
+    handleChange: (e) => {
         const sdiInterface = e.target.value;
         dispatch(updateInterface(id, sdiInterface));
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(VictoremSDIFormat);
+export default connect(mapStateToProps, mapDispatchToProps)(VictoremSDIInterface);

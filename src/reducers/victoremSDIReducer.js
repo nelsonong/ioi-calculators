@@ -7,8 +7,7 @@ import {
     UPDATE_VICTOREM_SDI_INTERFACE,
     UPDATE_VICTOREM_SDI_RESOLUTION,
     UPDATE_VICTOREM_SDI_COLOR,
-    UPDATE_VICTOREM_SDI_FRAME_RATE,
-    UPDATE_VICTOREM_SDI_LINK
+    UPDATE_VICTOREM_SDI_FRAME_RATE
 } from '../actions/victoremSDIActions';
 
 const victoremSDIReducer = (state = new Map(), action) => {
@@ -44,7 +43,6 @@ const victoremSDIReducer = (state = new Map(), action) => {
             const { model } = action.model ? action : calculatorState;
             let { mode, inDVR } = calculatorState;
             let sdiInterfaces = Object.keys(SDI_TREE[model]);
-            let sdiInterface = sdiInterfaces[0];
             if (inDVR) {
                 if (model === MODEL.Type4KSDIMini) {
                     const { HD_SDI, S_3G_SDI, D_3G_SDI, Q_3G_SDI, S_6G_SDI, S_12G_SDI } = INTERFACE;
@@ -60,11 +58,11 @@ const victoremSDIReducer = (state = new Map(), action) => {
                         case MODE.QUAD:
                             sdiInterfaces = [ Q_3G_SDI ];
                     }
-                    sdiInterface = sdiInterfaces[0];
                 } else if (model === MODEL.Type2KSDIMini) {
                     sdiInterfaces = [ HD_SDI, S_3G_SDI, S_6G_SDI, S_12G_SDI ];
                 }
             }
+            const sdiInterface = sdiInterfaces[0];
 
             calculatorState = Object.assign({}, calculatorState, {
                 model,

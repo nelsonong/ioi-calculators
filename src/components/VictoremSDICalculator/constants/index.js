@@ -1,6 +1,5 @@
 export { MODEL, MODELS, COLOR_MODELS } from './models';
 export { INTERFACE } from './interfaces';
-export { LINK, LINKS } from './links';
 export { RESOLUTION } from './resolutions';
 export { COLOR } from './colors';
 export { MODE } from './modes';
@@ -10,8 +9,6 @@ export const victoremSDIDefaultState = {
 	cameraType: 'victorem-sdi',
     model: '',
     models: [],
-    link: '',
-    links: [],
     sdiInterface: '',
     sdiInterfaces: [],
     width: 0,

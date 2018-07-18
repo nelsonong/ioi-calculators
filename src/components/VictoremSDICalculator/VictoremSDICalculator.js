@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import  { initializeDVRState } from '../../actions/victoremSDIActions';
 import CalculatorTopBar from '../CalculatorTopBar';
-import { VictoremSDIModel, VictoremSDIFormat, VictoremSDIColor, VictoremSDIResolution, VictoremSDIFrameRate, VictoremSDIOutput } from './components';
+import { VictoremSDIModel, VictoremSDIInterface, VictoremSDIColor, VictoremSDIResolution, VictoremSDIFrameRate, VictoremSDIOutput } from './components';
 import styles from './VictoremSDICalculator.css';
 
 class VictoremSDICalculator extends Component {
@@ -13,9 +13,9 @@ class VictoremSDICalculator extends Component {
 
     render = () => (
         <div className={styles.root}>
-            <CalculatorTopBar type={'Flare SDI'} id={this.props.id} />
+            <CalculatorTopBar type={'Victorem SDI'} id={this.props.id} />
             <VictoremSDIModel id={this.props.id} />
-            <VictoremSDIFormat id={this.props.id} />
+            <VictoremSDIInterface id={this.props.id} />
             <VictoremSDIResolution id={this.props.id} />
             <VictoremSDIColor id={this.props.id} />
             <VictoremSDIFrameRate id={this.props.id} />
