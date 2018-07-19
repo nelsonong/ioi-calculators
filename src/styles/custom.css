@@ -1,0 +1,22 @@
+@import './colors.css';
+@import './calculator.css';
+
+.custom-cl-calculator {
+    composes: calculator;
+    background: $custom-background;
+    background: linear-gradient(to bottom right, $custom-background, $custom-background-light);
+}
+
+.custom-cl-calculator {
+    cursor: move;
+}
+
+.custom-cl-fieldset {
+    composes: fieldset;
+    background: $custom-fieldset;
+}
+
+.custom-cl-input {
+    composes: input;
+    background: $custom-output;
+}

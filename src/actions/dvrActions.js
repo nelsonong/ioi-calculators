@@ -4,6 +4,7 @@ const UPDATE_DVR_CONFIGURATION = 'UPDATE_DVR_CONFIGURATION';
 const PUSH_DVR_DATA_RATE = 'PUSH_DATA_RATE';
 const DELETE_DVR_DATA_RATE = 'DELETE_DATA_RATE';
 const REVERT_DVR_CAMERA_STATE = 'REVERT_DVR_CAMERA_STATE';
+const TOGGLE_DVR_CUSTOM_MODE = 'TOGGLE_DVR_CUSTOM_MODE';
 const UPDATE_DVR_RAID = 'UPDATE_DVR_RAID';
 const UPDATE_DVR_DRIVE_MODEL = 'UPDATE_DVR_DRIVE_MODEL';
 const UPDATE_DVR_DRIVE_AMOUNT = 'UPDATE_DVR_DRIVE_AMOUNT';
@@ -15,6 +16,7 @@ const dvrActionTypes = [
     PUSH_DVR_DATA_RATE,
     DELETE_DVR_DATA_RATE,
     REVERT_DVR_CAMERA_STATE,
+    TOGGLE_DVR_CUSTOM_MODE,
     UPDATE_DVR_RAID,
     UPDATE_DVR_DRIVE_MODEL,
     UPDATE_DVR_DRIVE_AMOUNT
@@ -58,6 +60,12 @@ export const revertCameraState = (id, cameraId, cameraState) => ({
     cameraState
 });
 
+export const toggleCustomMode = (id, cameraId) => ({
+    type: TOGGLE_DVR_CUSTOM_MODE,
+    id,
+    cameraId
+});
+
 export const updateRaid = (id, raid) => ({
     type: UPDATE_DVR_RAID,
     id,
@@ -84,6 +92,7 @@ export {
     PUSH_DVR_DATA_RATE,
     DELETE_DVR_DATA_RATE,
     REVERT_DVR_CAMERA_STATE,
+    TOGGLE_DVR_CUSTOM_MODE,
     UPDATE_DVR_RAID,
     UPDATE_DVR_DRIVE_MODEL,
     UPDATE_DVR_DRIVE_AMOUNT,

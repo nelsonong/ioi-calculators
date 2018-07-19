@@ -48,38 +48,45 @@ class DVRCamera extends Component {
 
     closeHoverOverlay = () => this.setState(() => ({ isHovered: false }));
 
-    defaultContents = () => (
-        <button type='button' className={styles.addButton} onClick={this.addCamera}><img src={plus}></img></button>
-    );
+    renderContents = () => {
+        let contents = (
+            <button type='button' className={styles.addButton} onClick={this.addCamera}><img src={plus}></img></button>
+        );
 
-    infoContents = () => (
-        <div>
-            <div className={styles.info}>
-                {this.props.cameraState.model}
-            </div>
-            <div className={styles.info}>
-                {this.props.cameraState.width}x{this.props.cameraState.height}
-            </div>
-            <div className={styles.dataRate}>
-                {(this.props.cameraState.dataRate / 1024).toFixed(2)} GB/s
-            </div>
-        </div>
-    );
+        if (this.state.added) {
+            contents = this.state.isHovered ? (
+                <div>
+                    <button type='button' className={styles.editButton} onClick={this.openModal}><img src={edit}></img></button>
+                    <button type='button' className={styles.deleteButton} onClick={this.deleteCamera}><img src={remove}></img></button>
+                </div>
+            ) : (
+                this.infoContents()
+            );
+        }
+        return contents;
+    }
 
-    hoverContents = () => (
-        <div>
-            <button type='button' className={styles.editButton} onClick={this.openModal}><img src={edit}></img></button>
-            <button type='button' className={styles.deleteButton} onClick={this.deleteCamera}><img src={remove}></img></button>
-        </div>
-    );
+    infoContents = () => {
+        const { model, width, height, dataRate } = this.props.cameraState;
+        return (
+            <div>
+                {
+                    model &&
+                    <div className={styles.info}>
+                        {model}
+                    </div>
+                }
+                <div className={styles.info}>
+                    {this.props.cameraState.width}x{this.props.cameraState.height}
+                </div>
+                <div className={styles.dataRate}>
+                    {(this.props.cameraState.dataRate / 1024).toFixed(2)} GB/s
+                </div>
+            </div>
+        );
+    }
 
     render = () => {
-        
-        let contents = this.defaultContents();
-        if (this.state.added) {
-            contents = this.state.isHovered ? this.hoverContents() : this.infoContents();
-        }
-
         const root = cx(styles.root, {
             [styles.added]: !!this.state.added
         });
@@ -88,7 +95,7 @@ class DVRCamera extends Component {
                 <div className={styles.title}>
                     {this.props.mode}
                 </div>
-                {contents}
+                {this.renderContents()}
                 {
                     this.state.modalIsOpen &&
                     <DVRCameraModal

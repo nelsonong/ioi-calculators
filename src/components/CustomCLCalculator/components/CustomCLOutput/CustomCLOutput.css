@@ -1,0 +1,9 @@
+@import '../../../../styles/custom.css';
+
+.root {
+    composes: custom-cl-fieldset;
+}
+
+.input {
+    composes: custom-cl-input;
+}

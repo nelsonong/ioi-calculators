@@ -3,10 +3,11 @@ import { MODEL, CL_CONFIGS, CLPLUS_CONFIGS, CX_CONFIGS, CXPLUS_CONFIGS, SDI_CONF
 import {
     INITIALIZE_DVR_STATE,
     UPDATE_DVR_MODEL,
+    UPDATE_DVR_CONFIGURATION,
     PUSH_DVR_DATA_RATE,
     DELETE_DVR_DATA_RATE,
     REVERT_DVR_CAMERA_STATE,
-    UPDATE_DVR_CONFIGURATION,
+    TOGGLE_DVR_CUSTOM_MODE,
     UPDATE_DVR_RAID,
     UPDATE_DVR_DRIVE_MODEL,
     UPDATE_DVR_DRIVE_AMOUNT
@@ -15,6 +16,7 @@ import { DVRCamera } from '../components/DVRCalculator/components/DVRCamera';
 import { flareCLDefaultState } from '..//components/FlareCLCalculator/constants';
 import { flareCXDefaultState } from '../components/FlareCXCalculator/constants';
 import { flareSDIDefaultState } from '../components/FlareSDICalculator/constants';
+import { customCLDefaultState } from '..//components/CustomCLCalculator/constants';
 import uuid from 'uuid';
 import { Map } from 'core-js';
 
@@ -123,6 +125,21 @@ const dvrReducer = (state = new Map(), action) => {
             break;
         }
 
+        case TOGGLE_DVR_CUSTOM_MODE: {
+            const { cameraId } = action;
+            let { link, cameras } = calculatorState;
+            let cameraState = cameras.get(cameraId);
+            const { mode, cameraType } = cameraState;
+            const custom = (cameraType.startsWith('custom'));
+            cameraState = generateCameraState(calculatorState, id, cameraId, link, mode, !custom);
+            cameras = new Map(cameras);
+            cameras.set(cameraId, cameraState);
+            calculatorState = Object.assign({}, calculatorState, {
+                cameras
+            });
+            break;
+        }
+
         case UPDATE_DVR_RAID:
             const { raid } = action;
             let { driveAmount, driveAmounts, driveCapacity } = calculatorState;
@@ -193,27 +210,7 @@ const reloadCameras = (calculatorState, dvrId) => {
     const modes = MODES[configuration];
     modes.forEach(mode => {
         const id = uuid();
-        let cameraState;
-        switch (link) {
-            case LINK.CL:
-                cameraState = flareCLDefaultState;
-                break;
-
-            case LINK.CX:
-                cameraState = flareCXDefaultState;
-                break;
-
-            case LINK.SDI:
-                cameraState = flareSDIDefaultState;
-        }
-
-        cameraState = Object.assign({}, cameraState, {
-            dvrId,
-            id,
-            inDVR: true,
-            mode
-        });
-
+        const cameraState = generateCameraState(calculatorState, dvrId, id, link, mode);
         cameraContainers.push(
             <DVRCamera
                 key={id}
@@ -224,7 +221,6 @@ const reloadCameras = (calculatorState, dvrId) => {
                 mode={mode}
             />
         );
-        
         cameras.set(id, cameraState);
     });
 
@@ -235,6 +231,28 @@ const reloadCameras = (calculatorState, dvrId) => {
         totalDataRate: 0
     });
 };
+
+const generateCameraState = (calculatorState, dvrId, id, link, mode, custom = false) => {
+    let cameraState;
+    switch (link) {
+        case LINK.CL:
+            cameraState = custom ? customCLDefaultState : flareCLDefaultState;
+            break;
+
+        case LINK.CX:
+            cameraState = flareCXDefaultState;
+            break;
+
+        case LINK.SDI:
+            cameraState = flareSDIDefaultState;
+    }
+
+    return Object.assign({}, cameraState, {
+        dvrId,
+        id,
+        mode
+    });
+}
 
 const updateTotalDataRate = (calculatorState) => {
     const { dataRates } = calculatorState;

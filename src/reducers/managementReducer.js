@@ -1,6 +1,7 @@
 import { flareCLDefaultState } from '../components/FlareCLCalculator/constants';
 import { flareCXDefaultState } from '../components/FlareCXCalculator/constants';
 import { flareSDIDefaultState } from '../components/FlareSDICalculator/constants';
+import { customCLDefaultState } from '../components/CustomCLCalculator/constants';
 import { victoremCXDefaultState } from '../components/VictoremCXCalculator/constants';
 import { victoremSDIDefaultState } from '../components/VictoremSDICalculator/constants';
 import { dvrDefaultState } from '../components/DVRCalculator/constants';
@@ -37,6 +38,15 @@ const managementReducer = (state = new Map(), action) => {
                     state.set(
                         id,
                         flareSDIDefaultState
+                    );
+                    break;
+
+                
+                case 'custom-cl':
+                    state = new Map(state);
+                    state.set(
+                        id,
+                        customCLDefaultState
                     );
                     break;
 

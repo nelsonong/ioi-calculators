@@ -50,6 +50,12 @@ $flare-sdi-output: rgb(201, 110, 146);
 $flare-sdi-button: rgb(201, 110, 146);
 $flare-sdi-button-light: rgb(219, 127, 163);
 
+/* Custom color scheme */
+$custom-background: silver;
+$custom-background-light: lightgrey;
+$custom-fieldset: gainsboro;
+$custom-output: slategrey;
+
 /* Mini calculator color scheme */
 $mini-background: rgb(253, 222, 214);
 $mini-background-dark: rgb(252, 230, 224);

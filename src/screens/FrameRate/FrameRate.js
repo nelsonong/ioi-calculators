@@ -4,6 +4,7 @@ import { addCalculator, moveCalculator, clearCalculators } from '../../actions/m
 import FlareCLCalculator from '../../components/FlareCLCalculator';
 import FlareCXCalculator from '../../components/FlareCXCalculator';
 import FlareSDICalculator from '../../components/FlareSDICalculator';
+import CustomCLCalculator from '../../components/CustomCLCalculator';
 import VictoremCXCalculator from '../../components/VictoremCXCalculator';
 import VictoremSDICalculator from '../../components/VictoremSDICalculator';
 import InstructionBox from '../../components/InstructionBox';
@@ -20,6 +21,8 @@ const Calculator = SortableElement(({ id, calculatorState }) => {
             return <FlareCXCalculator id={id} />
         case 'flare-sdi':
             return <FlareSDICalculator id={id} />
+        case 'custom-cl':
+            return <CustomCLCalculator id={id} />
         case 'victorem-cx':
             return <VictoremCXCalculator id={id} />
         case 'victorem-sdi':
@@ -66,6 +69,7 @@ class FrameRate extends Component {
                             <button type='button' className={styles.flareClButton} onClick={() => this.props.handleAdd('flare-cl')}>+ CL</button>
                             <button type='button' className={styles.flareCxButton} onClick={() => this.props.handleAdd('flare-cx')}>+ CX</button>
                             <button type='button' className={styles.flareSdiButton} onClick={() => this.props.handleAdd('flare-sdi')}>+ SDI</button>
+                            <button type='button' className={styles.flareClButton} onClick={() => this.props.handleAdd('custom-cl')}>+ C</button>
                         </div>
                         <div className={styles.buttonSpacer}></div>
                         <div className={styles.buttonContainer}>
