@@ -1,7 +1,7 @@
 @import '../../../../styles/custom.css';
 
 .root {
-    composes: custom-cl-fieldset;
+    composes: custom-fieldset;
 }
 
 @mixin add-left-right 22%, 78%;

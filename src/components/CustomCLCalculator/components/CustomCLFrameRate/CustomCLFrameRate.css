@@ -1,11 +1,11 @@
 @import '../../../../styles/custom.css';
 
 .root {
-    composes: custom-cl-fieldset;
+    composes: custom-fieldset;
 }
 
 .display {
     width: 25%;
     margin: 0.1rem 0.2rem;
-    padding: 0.1rem 0rem;
+    padding: 0.1rem 0.3rem;
 }

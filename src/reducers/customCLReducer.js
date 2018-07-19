@@ -103,7 +103,6 @@ const updateOutput = (calculatorState) => {
 };
 
 const filterFormats = (formats, mode) => {
-    console.log(formats, mode);
     switch (mode) {
         case MODE.BASE:
             return formats.filter(clFormat => clFormat.startsWith('Base'));

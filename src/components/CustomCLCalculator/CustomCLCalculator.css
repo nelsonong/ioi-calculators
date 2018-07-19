@@ -1,5 +1,5 @@
 @import '../../styles/custom.css';
 
 .root {
-    composes: custom-cl-calculator;
+    composes: custom-calculator;
 }
