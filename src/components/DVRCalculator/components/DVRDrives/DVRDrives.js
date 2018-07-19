@@ -8,7 +8,6 @@ const DVRDrives = ({
     raid,
     driveModel,
     driveAmount,
-    totalCapacity,
     driveAmounts,
     handleChangeDriveModel,
     handleChangeDriveAmount,
@@ -17,7 +16,6 @@ const DVRDrives = ({
     const raidOptions = [ 0, 1, 5 ].map((raid, i) => <option key={i}>{raid}</option>);
     const driveModelOptions = DRIVES.map((driveModel, i) => <option key={i}>{driveModel}</option>);
     const driveAmountOptions = driveAmounts.map((amount, i) => <option key={i} value={amount}>{amount}</option>)
-    const totalCapacityText = `${totalCapacity} GB`;
     return (
         <fieldset className={styles.root}>
         <legend className={styles.legend}>Drives</legend>
@@ -45,9 +43,6 @@ const DVRDrives = ({
                     {driveAmountOptions}
                 </select>
             </div>
-            <div className={styles.center}>
-                <input type='text' className={styles.display} disabled value={totalCapacityText} />
-            </div>
         </fieldset>
     );
 };
@@ -58,15 +53,13 @@ const mapStateToProps = ({ storageCalculators }, { id }) => {
         raid,
         driveModel,
         driveAmount,
-        driveAmounts,
-        totalCapacity
+        driveAmounts
     } = calculatorState;
     return {
         raid,
         driveModel,
         driveAmount,
-        driveAmounts,
-        totalCapacity
+        driveAmounts
     };
 };
 

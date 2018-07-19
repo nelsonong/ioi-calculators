@@ -79,12 +79,12 @@ $victorem-sdi-button: rgb(187, 94, 177);
 $victorem-sdi-button-light: rgb(204, 114, 180);
 
 /* DVR color scheme */
-$dvr-background: rgb(201, 201, 201);
-$dvr-background-light: rgb(190, 190, 190);
-$dvr-fieldset: rgb(224, 224, 224);
+$dvr-background: rgb(216, 204, 195);
+$dvr-background-light: rgb(247, 240, 234);
+$dvr-fieldset: rgb(247, 242, 237);
 $dvr-output: rgb(90, 82, 82);
-$dvr-button: rgb(114, 114, 114);
-$dvr-button-light: rgb(126, 126, 126);
+$dvr-button: rgb(90, 82, 82);
+$dvr-button-light: rgb(117, 105, 105);
 $edit-button: rgb(223, 210, 135);
 $delete-button: rgb(185, 90, 90);
 

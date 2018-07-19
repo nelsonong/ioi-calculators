@@ -14,6 +14,10 @@
 	border-bottom-right-radius: 0.5rem;
 }
 
+.storage-root {
+	width: 60%;
+}
+
 .close-button {
 	background: transparent;
 	position: absolute;
@@ -25,4 +29,8 @@
 
 .close-button:hover {
 	color: grey;
+}
+
+.storage-close-button {
+	padding-left: 5.2rem;
 }

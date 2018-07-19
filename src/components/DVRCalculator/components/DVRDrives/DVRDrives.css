@@ -13,17 +13,3 @@
     display: inline-block;
     margin-right: 0.8rem;
 }
-
-.center {
-    text-align: center;
-}
-
-.display {
-    text-align: center;
-    font-size: 1.1rem;
-    font-weight: 700;
-    margin: 0.8rem auto;
-    width: 30%;
-    border: solid $calculator-info;
-    border-radius: 0.2rem;
-}
