@@ -1,3 +1,4 @@
+const INITIALIZE_FLARE_CX_DVR_STATE = 'INITIALIZE_FLARE_CX_DVR_STATE';
 const UPDATE_FLARE_CX_MODEL = 'UPDATE_FLARE_CX_MODEL';
 const UPDATE_FLARE_CX_BIT_DEPTH = 'UPDATE_FLARE_CX_BIT_DEPTH';
 const UPDATE_FLARE_CX_LINK_COUNT = 'UPDATE_FLARE_CX_LINK_COUNT';
@@ -8,6 +9,7 @@ const UPDATE_FLARE_CX_HEIGHT = 'UPDATE_FLARE_CX_HEIGHT';
 const UPDATE_FLARE_CX_SUB_SAMPLING = 'UPDATE_FLARE_CX_SUB_SAMPLING';
 
 const flareCXActionTypes = [
+    INITIALIZE_FLARE_CX_DVR_STATE,
     UPDATE_FLARE_CX_MODEL,
     UPDATE_FLARE_CX_BIT_DEPTH,
     UPDATE_FLARE_CX_LINK_COUNT,
@@ -19,6 +21,13 @@ const flareCXActionTypes = [
 ];
 
 // Action generators
+export const initializeDVRState = (id, dvrId, mode) => ({
+    type: INITIALIZE_FLARE_CX_DVR_STATE,
+    id,
+    dvrId,
+    mode
+});
+
 export const updateModel = (id, model, dvrId) => ({
     type: UPDATE_FLARE_CX_MODEL,
     id,
@@ -77,6 +86,7 @@ export const updateSubSampling = (id, sumSampling, dvrId) => ({
 
 // Action types
 export {
+    INITIALIZE_FLARE_CX_DVR_STATE,
     UPDATE_FLARE_CX_MODEL,
     UPDATE_FLARE_CX_BIT_DEPTH,
     UPDATE_FLARE_CX_LINK_COUNT,

@@ -3,6 +3,7 @@ import * as resolution from '../components/FlareCXCalculator/utils/resolution';
 import { calculateFrameRate } from '../components/FlareCXCalculator/utils/calculateFrameRate';
 import { calculateDataRate } from '../components/FlareCXCalculator/utils/calculateDataRate';
 import {
+    INITIALIZE_FLARE_CX_DVR_STATE,
     UPDATE_FLARE_CX_MODEL,
     UPDATE_FLARE_CX_BIT_DEPTH,
     UPDATE_FLARE_CX_LINK_COUNT,
@@ -18,6 +19,10 @@ const flareCXReducer = (state = new Map(), action) => {
     let calculators = new Map(state);
     let calculatorState = calculators.get(id);
     switch (action.type) {
+        case INITIALIZE_FLARE_CX_DVR_STATE: {
+            break;
+        }
+
         case UPDATE_FLARE_CX_MODEL:
             const { model } = action;
 

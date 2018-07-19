@@ -7,10 +7,6 @@
     background: linear-gradient(to bottom right, $flare-cl-background, $flare-cl-background-light);
 }
 
-.flare-cl-calculator {
-    cursor: move;
-}
-
 .flare-cl-fieldset {
     composes: fieldset;
     background: $flare-cl-fieldset;

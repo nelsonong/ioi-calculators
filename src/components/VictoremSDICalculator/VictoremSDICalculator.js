@@ -24,9 +24,9 @@ class VictoremSDICalculator extends Component {
     );
 }
 
-const mapDispatchToProps = (dispatch, { id, inDVR, mode }) => ({
+const mapDispatchToProps = (dispatch, { id, mode }) => ({
     handleInitialize: () => {
-        dispatch(initializeDVRState(id, inDVR, mode));
+        dispatch(initializeDVRState(id, mode));
     }
 });
 

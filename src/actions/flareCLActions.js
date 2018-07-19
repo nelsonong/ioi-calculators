@@ -1,3 +1,4 @@
+const INITIALIZE_FLARE_CL_DVR_STATE = 'INITIALIZE_FLARE_CL_DVR_STATE';
 const UPDATE_FLARE_CL_MODEL = 'UPDATE_FLARE_CL_MODEL';
 const UPDATE_FLARE_CL_FORMAT = 'UPDATE_FLARE_CL_FORMAT';
 const UPDATE_FLARE_CL_RESOLUTION_PRESET = 'UPDATE_FLARE_CL_RESOLUTION_PRESET';
@@ -7,6 +8,7 @@ const UPDATE_FLARE_CL_SUB_SAMPLING = 'UPDATE_FLARE_CL_SUB_SAMPLING';
 const UPDATE_FLARE_CL_SLOW_MODE = 'UPDATE_FLARE_CL_SLOW_MODE';
 
 const flareCLActionTypes = [
+    INITIALIZE_FLARE_CL_DVR_STATE,
     UPDATE_FLARE_CL_MODEL,
     UPDATE_FLARE_CL_FORMAT,
     UPDATE_FLARE_CL_RESOLUTION_PRESET,
@@ -17,6 +19,13 @@ const flareCLActionTypes = [
 ];
 
 // Action generators
+export const initializeDVRState = (id, dvrId, mode) => ({
+    type: INITIALIZE_FLARE_CL_DVR_STATE,
+    id,
+    dvrId,
+    mode
+});
+
 export const updateModel = (id, model, dvrId) => ({
     type: UPDATE_FLARE_CL_MODEL,
     id,
@@ -75,6 +84,7 @@ export const updateSlowMode = (id, slowMode, dvrId) => ({
 
 // Action types
 export {
+    INITIALIZE_FLARE_CL_DVR_STATE,
     UPDATE_FLARE_CL_MODEL,
     UPDATE_FLARE_CL_FORMAT,
     UPDATE_FLARE_CL_RESOLUTION_PRESET,

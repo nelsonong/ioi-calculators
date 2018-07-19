@@ -8,6 +8,7 @@ const CalculatorTopBar = ({
     inDVR,
     handleDelete
 }) => {
+    console.log(inDVR);
     const text = !inDVR ? `${type} Calculator` : `${type} Camera`;
     const button = !inDVR ? (
         <button className={styles.closeButton} type='button' onClick={handleDelete}>
@@ -23,9 +24,9 @@ const CalculatorTopBar = ({
     );
 };
 
-const mapStateToProps = (state, { type, inDVR }) => ({
+const mapStateToProps = (state, { type, dvrId }) => ({
     type,
-    inDVR
+    inDVR: !!dvrId
 });
 
 const mapDispatchToProps = (dispatch, { id, storage }) => {

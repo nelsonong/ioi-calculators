@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { pushDataRate, deleteDataRate, revertCameraState } from '../../../../actions/dvrActions';
 import { DVRCameraModal } from '../DVRCameraModal';
+import cx from 'classnames';
 import plus from '../../../../images/plus.png';
 import edit from '../../../../images/edit.png';
 import remove from '../../../../images/remove.png';
@@ -75,14 +76,15 @@ class DVRCamera extends Component {
     render = () => {
         
         let contents = this.defaultContents();
-        let className = styles.root;
         if (this.state.added) {
             contents = this.state.isHovered ? this.hoverContents() : this.infoContents();
-            className += ' ' + styles.added;
         }
 
+        const root = cx(styles.root, {
+            [styles.added]: !!this.state.added
+        });
         return (
-            <div className={className} onMouseEnter={this.openHoverOverlay} onMouseLeave={this.closeHoverOverlay}>
+            <div className={root} onMouseEnter={this.openHoverOverlay} onMouseLeave={this.closeHoverOverlay}>
                 <div className={styles.title}>
                     {this.props.mode}
                 </div>

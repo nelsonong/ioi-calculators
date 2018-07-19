@@ -20,7 +20,6 @@ export const flareCLDefaultState = {
 	frameRate: 70.95,                       // Maximum frame-rate
 	dataRate: 150.77,                       // Data-rate (in MB/s)
 	error: false,                           // Error occured with an input
-	mode: false      			            // Mode (Base or Full if in DVR calculator)
 };
 
 export {

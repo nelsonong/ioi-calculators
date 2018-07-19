@@ -19,7 +19,5 @@ export const victoremSDIDefaultState = {
     colors: [],
     frameRate: '',
     frameRates: [],
-    dataRate: 0,
-    mode: false,
-    inDVR: false
+    dataRate: 0
 };

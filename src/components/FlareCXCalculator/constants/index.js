@@ -20,7 +20,6 @@ export const flareCXDefaultState = {
     frameRate: 132.72,                      // Maximum frame-rate
     dataRate: 282.03,                       // Data-rate (in MB/s)
     error: false,                           // Error occured with an input
-    mode: false                   			// Mode (Base or Full if in DVR calculator)
 };
 
 export {

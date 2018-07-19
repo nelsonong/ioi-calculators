@@ -1,17 +1,44 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import  { initializeDVRState } from '../../actions/flareCLActions';
 import CalculatorTopBar from '../CalculatorTopBar';
 import { FlareCLModel, FlareCLFormat, FlareCLResolution, FlareCLOptions, FlareCLOutput } from './components';
+import cx from 'classnames';
 import styles from './FlareCLCalculator.css';
 
-const FlareCLCalculator = (props) => (
-    <div className={styles.root}>
-        <CalculatorTopBar type={'Flare CL'} id={props.id} dvrId={props.dvrId} />
-        <FlareCLModel id={props.id} dvrId={props.dvrId} />
-        <FlareCLFormat id={props.id} dvrId={props.dvrId} />
-        <FlareCLResolution id={props.id} dvrId={props.dvrId} />
-        <FlareCLOptions id={props.id} dvrId={props.dvrId} />
-        <FlareCLOutput id={props.id} dvrId={props.dvrId} />
-    </div>
-);
+class FlareCLCalculator extends Component {
+    constructor(props) {
+        super(props);
+        props.handleInitialize();
+    }
 
-export default FlareCLCalculator;
+    render = () =>  {
+        const root = cx(styles.root, {
+            [styles.draggable]: !!!this.props.mode
+        });
+        return (
+            <div className={root}>
+                <CalculatorTopBar type={'Flare CL'} id={this.props.id} dvrId={this.props.dvrId} />
+                <FlareCLModel id={this.props.id} dvrId={this.props.dvrId} />
+                <FlareCLFormat id={this.props.id} dvrId={this.props.dvrId} />
+                <FlareCLResolution id={this.props.id} dvrId={this.props.dvrId} />
+                <FlareCLOptions id={this.props.id} dvrId={this.props.dvrId} />
+                <FlareCLOutput id={this.props.id} dvrId={this.props.dvrId} />
+            </div>
+        );
+    }
+}
+
+const mapStateToProps = (state, { id, dvrId, mode }) => ({
+    id,
+    dvrId,
+    mode
+});
+
+const mapDispatchToProps = (dispatch, { id, dvrId, mode }) => ({
+    handleInitialize: () => {
+        dispatch(initializeDVRState(id, dvrId, mode));
+    }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FlareCLCalculator);

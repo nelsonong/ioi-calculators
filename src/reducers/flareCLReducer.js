@@ -3,6 +3,7 @@ import * as resolution from '../components/FlareCLCalculator/utils/resolution';
 import { calculateFrameRate } from '../components/FlareCLCalculator/utils/calculateFrameRate';
 import { calculateDataRate } from '../components/FlareCLCalculator/utils/calculateDataRate';
 import {
+    INITIALIZE_FLARE_CL_DVR_STATE,
     UPDATE_FLARE_CL_MODEL,
     UPDATE_FLARE_CL_FORMAT,
     UPDATE_FLARE_CL_RESOLUTION_PRESET,
@@ -18,6 +19,22 @@ const flareCLReducer = (state = new Map(), action) => {
     let calculatorState = state.get(id);
 
     switch (type) {
+        case INITIALIZE_FLARE_CL_DVR_STATE: {
+            const { model, mode } = calculatorState;
+            
+            let formats = model.startsWith('12M') ? FORMATS.CL12m : FORMATS.CL2_4m;
+            if (!!mode) {
+                formats = filterFormats(formats, mode);
+            }
+    
+            calculatorState = Object.assign({}, calculatorState, {
+                formats
+            });
+            calculatorState = updateResolution(calculatorState);
+            calculatorState = updateOutput(calculatorState);
+            break;
+        }
+
         case UPDATE_FLARE_CL_MODEL:
             const { model } = action;
 
@@ -28,7 +45,7 @@ const flareCLReducer = (state = new Map(), action) => {
             // Update formats
             let formats = model.startsWith('12M') ? FORMATS.CL12m : FORMATS.CL2_4m;
             const { mode } = calculatorState;
-            formats = mode ? filterFormats(formats, mode) : formats;
+            formats = !!mode ? filterFormats(formats, mode) : formats;
 
             calculatorState = Object.assign({}, calculatorState, {
                 model,

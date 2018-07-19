@@ -16,9 +16,9 @@ const flareSDIReducer = (state = new Map(), action) => {
     let calculatorState = calculators.get(id);
     switch (action.type) {
         case INITIALIZE_FLARE_SDI_DVR_STATE: {
-            const { inDVR, mode } = action;
+            const { mode } = action;
             let models = MODELS;
-            if (inDVR) {
+            if (!!mode) {
                 switch (mode) {
                     case MODE.SINGLE:
                         models = [ MODEL.Type2KSDI ];
@@ -41,9 +41,9 @@ const flareSDIReducer = (state = new Map(), action) => {
 
         case UPDATE_FLARE_SDI_MODEL: {
             const { model } = action.model ? action : calculatorState;
-            let { mode, inDVR } = calculatorState;
+            const { mode } = calculatorState;
             let sdiInterfaces = Object.keys(SDI_TREE[model]);
-            if (inDVR) {
+            if (!!mode) {
                 if (model === MODEL.Type4KSDIMini) {
                     const { HD_SDI, Q_HD_SDI, S_3G_SDI, S_3G_SDI_B, D_3G_SDI, Q_3G_SDI } = INTERFACE;
                     switch (mode) {
@@ -69,7 +69,7 @@ const flareSDIReducer = (state = new Map(), action) => {
     
         case UPDATE_FLARE_SDI_INTERFACE: {
             const { sdiInterface } = action.sdiInterface ? action : calculatorState;
-            const { model, inDVR } = calculatorState;
+            const { model } = calculatorState;
             const resolutions = Object.keys(SDI_TREE[model][sdiInterface]);
             const resolution = resolutions[0];
             const [ width, height ] = splitResolution(resolution);

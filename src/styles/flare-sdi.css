@@ -7,10 +7,6 @@
     background: linear-gradient(to bottom right, $flare-sdi-background, $flare-sdi-background-light);
 }
 
-.flare-sdi-calculator {
-    cursor: move;
-}
-
 .flare-sdi-fieldset {
     composes: fieldset;
     background: $flare-sdi-fieldset;
