@@ -44,7 +44,7 @@ $flare-cx-button-light: rgb(216, 118, 118);
 
 /* Flare SDI color scheme */
 $flare-sdi-background: rgb(255, 229, 229);
-$flare-sdi-background-light: rgb(255, 243, 243);
+$flare-sdi-background-light: rgb(255, 244, 244);
 $flare-sdi-fieldset: rgb(255, 247, 247);
 $flare-sdi-output: rgb(201, 110, 146);
 $flare-sdi-button: rgb(201, 110, 146);
@@ -73,12 +73,12 @@ $victorem-cx-button: rgb(187, 94, 177);
 $victorem-cx-button-light: rgb(204, 114, 180);
 
 /* Victorem SDI color scheme */
-$victorem-sdi-background: rgb(255, 227, 239);
-$victorem-sdi-background-light: rgb(252, 233, 241);
-$victorem-sdi-fieldset: rgb(253, 241, 245);
-$victorem-sdi-output: rgb(187, 94, 177);
-$victorem-sdi-button: rgb(187, 94, 177);
-$victorem-sdi-button-light: rgb(204, 114, 180);
+$victorem-sdi-background: rgb(252, 227, 255);
+$victorem-sdi-background-light: rgb(251, 242, 255);
+$victorem-sdi-fieldset: rgb(251, 242, 255);
+$victorem-sdi-output: rgb(160, 102, 186);
+$victorem-sdi-button: rgb(160, 102, 186);
+$victorem-sdi-button-light: rgb(177, 118, 204);
 
 /* DVR color scheme */
 $dvr-background: rgb(216, 204, 195);
