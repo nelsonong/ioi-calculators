@@ -6,9 +6,10 @@ import styles from './CustomCLFormat.css';
 
 const CustomCLFormat = ({
     format,
+    formats,
     handleChange
 }) => {
-    const formatOptions = FORMATS.map((format, i) => <option key={i}>{format}</option>);
+    const formatOptions = formats.map((format, i) => <option key={i}>{format}</option>);
     return (
         <fieldset className={styles.root}>
         <legend className={styles.legend}>Camera Link Format</legend>
@@ -23,8 +24,14 @@ const mapStateToProps = (state, { id, dvrId }) => {
     const calculatorState = (dvrId !== undefined) ?
         state.storageCalculators.get(dvrId).cameras.get(id) :
         state.frameRateCalculators.get(id);
-    const { format } = calculatorState;
-    return { format };
+    const {
+        format,
+        formats
+    } = calculatorState;
+    return {
+        format,
+        formats
+    };
 };
 
 const mapDispatchToProps = (dispatch, { id, dvrId }) => ({

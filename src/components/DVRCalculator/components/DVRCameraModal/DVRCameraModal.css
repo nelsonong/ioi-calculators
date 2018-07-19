@@ -49,18 +49,22 @@
 }
 
 .close-button:hover {
-    color: $mini-background;
+    color: lightgrey;
+}
+
+.close-button:focus {
+    outline: none;
 }
 
 .custom-button {
     composes: button;
-    background: lightblue;
+    background: $custom-button;
     font-size: 1.4rem;
     margin: 0rem 0.4rem 2.4rem 0.4rem;
 }
 
 .custom-button:hover {
-    background: paleblue;
+    background: $custom-button-light;
 }
 
 .flare-cl-button {
@@ -76,11 +80,11 @@
 
 .save-button {
     composes: button;
-    background: lightgreen;
+    background: $save-button;
     font-size: 1.4rem;
     margin: 0rem 0.4rem 2.4rem 0.4rem;
 }
 
 .save-button:hover {
-    background: palegreen;
+    background: $save-button-light;
 }

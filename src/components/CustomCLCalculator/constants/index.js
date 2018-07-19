@@ -5,6 +5,7 @@ import { MODE } from './modes';
 export const customCLDefaultState = {
 	cameraType: 'custom-cl',			// Camera type
 	format: FORMAT.Output1x8,           // Link format (Camera Link)
+	formats: [],
 	resolutionPreset: '1920x1080',		// Resolution preset
 	width: 1920,                        // Resolution - width
 	height: 1080,                       // Resolution - height

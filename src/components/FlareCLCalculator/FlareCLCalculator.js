@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import  { initializeDVRState } from '../../actions/flareCLActions';
+import { initializeDVRState } from '../../actions/flareCLActions';
 import CalculatorTopBar from '../CalculatorTopBar';
 import { FlareCLModel, FlareCLFormat, FlareCLResolution, FlareCLOptions, FlareCLOutput } from './components';
 import cx from 'classnames';

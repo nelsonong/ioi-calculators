@@ -16,13 +16,12 @@ const customCLReducer = (state = new Map(), action) => {
 
     switch (type) {
         case INITIALIZE_CUSTOM_CL_DVR_STATE: {
-            const { mode, model } = action;
+            const { mode } = action;
             const formats = filterFormats(FORMATS, mode);
 
             calculatorState = Object.assign({}, calculatorState, {
                 formats
             });
-            calculatorState = updateResolution(calculatorState);
             calculatorState = updateOutput(calculatorState);
             break;
         }
@@ -104,6 +103,7 @@ const updateOutput = (calculatorState) => {
 };
 
 const filterFormats = (formats, mode) => {
+    console.log(formats, mode);
     switch (mode) {
         case MODE.BASE:
             return formats.filter(clFormat => clFormat.startsWith('Base'));
