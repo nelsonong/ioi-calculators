@@ -17,6 +17,7 @@ import { flareCLDefaultState } from '..//components/FlareCLCalculator/constants'
 import { flareCXDefaultState } from '../components/FlareCXCalculator/constants';
 import { flareSDIDefaultState } from '../components/FlareSDICalculator/constants';
 import { customCLDefaultState } from '..//components/CustomCLCalculator/constants';
+import { customCXDefaultState } from '..//components/CustomCXCalculator/constants';
 import uuid from 'uuid';
 import { Map } from 'core-js';
 
@@ -240,7 +241,7 @@ const generateCameraState = (calculatorState, dvrId, id, link, mode, custom = fa
             break;
 
         case LINK.CX:
-            cameraState = flareCXDefaultState;
+            cameraState = custom ? customCXDefaultState : flareCXDefaultState;
             break;
 
         case LINK.SDI:

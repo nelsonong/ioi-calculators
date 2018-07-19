@@ -7,6 +7,7 @@ import FlareCLCalculator from '../../../FlareCLCalculator';
 import FlareCXCalculator from '../../../FlareCXCalculator';
 import FlareSDICalculator from '../../../FlareSDICalculator';
 import CustomCLCalculator from '../../../CustomCLCalculator';
+import CustomCXCalculator from '../../../CustomCXCalculator';
 import styles from './DVRCameraModal.css';
 
 Modal.setAppElement('#root');
@@ -46,6 +47,14 @@ class DVRCameraModal extends Component {
                         mode={this.props.mode}
                     />
                 );
+            case 'custom-cx':
+                return (
+                    <CustomCXCalculator
+                        id={this.props.id}
+                        dvrId={this.props.dvrId}
+                        mode={this.props.mode}
+                    />
+                );
         }
     }
 
@@ -54,7 +63,13 @@ class DVRCameraModal extends Component {
             case 'custom-cl':
                 return (
                     <button type='button' className={styles.flareClButton} onClick={this.props.handleToggleCustomMode}>
-                        FLARE
+                        FLARE CL
+                    </button>
+                );
+            case 'custom-cx':
+                return (
+                    <button type='button' className={styles.flareCxButton} onClick={this.props.handleToggleCustomMode}>
+                        FLARE CX
                     </button>
                 );
             default:
