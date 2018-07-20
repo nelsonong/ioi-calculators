@@ -60,7 +60,7 @@ const calculateMaxHeight = (model) => {
     }
 };
 
-const calculateWidthStep = (model, format) => {
+const calculateWidthStep = (format) => {
     if (format === FORMAT.Output3x8) return 12;
     if (format === FORMAT.Output10x8) return 10;
     if (format === FORMAT.Output20x8) return 10;

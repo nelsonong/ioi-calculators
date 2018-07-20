@@ -30,7 +30,7 @@ const flareCLReducer = (state = new Map(), action) => {
             calculatorState = Object.assign({}, calculatorState, {
                 formats
             });
-            calculatorState = updateResolution(calculatorState);
+            calculatorState = updateResolutionProperties(calculatorState);
             calculatorState = updateOutput(calculatorState);
             break;
         }
@@ -53,7 +53,7 @@ const flareCLReducer = (state = new Map(), action) => {
                 formats
             });
 
-            calculatorState = updateResolution(calculatorState);
+            calculatorState = updateResolutionProperties(calculatorState);
             calculatorState = updateOutput(calculatorState);
             break;
 
@@ -62,73 +62,68 @@ const flareCLReducer = (state = new Map(), action) => {
             calculatorState = Object.assign({}, calculatorState, {
                 format
             });
-            calculatorState = updateResolution(calculatorState);
+            calculatorState = updateResolutionProperties(calculatorState);
             calculatorState = updateOutput(calculatorState);
             break;
 
         case UPDATE_FLARE_CL_RESOLUTION_PRESET: {
             const { resolutionPreset } = action;
+            calculatorState = Object.assign({}, calculatorState, {
+                resolutionPreset
+            });
             switch (resolutionPreset) {
                 case RESOLUTION.CUSTOM:
-                    calculatorState = Object.assign({}, calculatorState, {
-                        resolutionPreset
-                    });
                     break;
 
                 case RESOLUTION.MINIMUM:
                 case RESOLUTION.MAXIMUM:
-                    calculatorState = Object.assign({}, calculatorState, {
-                        resolutionPreset
-                    });
-                    calculatorState = updateResolution(calculatorState);
+                    calculatorState = updateResolutionProperties(calculatorState);
                     break;
 
                 default:
                     const [ width, height ] = resolutionPreset.split('x');
                     calculatorState = Object.assign({}, calculatorState, {
-                            resolutionPreset,
-                            width: Number(width),
-                            height: Number(height)
+                        width: Number(width),
+                        height: Number(height)
                     });
             }
+
+            // Validate and set resolution
+            const { width, height } = calculatorState;
+            calculatorState = updateResolution(width, height, calculatorState);
+
             calculatorState = updateOutput(calculatorState);
             break;
         }
 
         case UPDATE_FLARE_CL_WIDTH: {
             const { width } = action;
-            const resolutionPreset = RESOLUTION.CUSTOM;
 
-            // Validate resolution
-            const { height } = calculatorState;
-            const resolutionTooltip = validateResolution(width, height, calculatorState);
-            const error = resolutionTooltip !== '';
-
+            // Set custom preset
             calculatorState = Object.assign({}, calculatorState, {
-                width,
-                resolutionPreset,
-                resolutionTooltip,
-                error
+                resolutionPreset: RESOLUTION.CUSTOM
             });
+
+            // Validate and set resolution
+            const { height } = calculatorState;
+            calculatorState = updateResolution(width, height, calculatorState);
+            
             calculatorState = updateOutput(calculatorState);
             break;
         }
         
         case UPDATE_FLARE_CL_HEIGHT: {
             const { height } = action;
-            const resolutionPreset = RESOLUTION.CUSTOM;
 
-            // Validate resolution
-            const { width } = calculatorState;
-            const resolutionTooltip = validateResolution(width, height, calculatorState);
-            const error = resolutionTooltip !== '';
-
+            // Set custom preset
             calculatorState = Object.assign({}, calculatorState, {
-                    height,
-                    resolutionPreset,
-                    resolutionTooltip,
-                    error
+                resolutionPreset: RESOLUTION.CUSTOM
             });
+
+            // Validate and set resolution
+            const { width } = calculatorState;
+            calculatorState = updateResolution(width, height, calculatorState);
+
             calculatorState = updateOutput(calculatorState);
             break;
         }
@@ -138,7 +133,7 @@ const flareCLReducer = (state = new Map(), action) => {
             calculatorState = Object.assign({}, calculatorState, {
                     subSampling
             });
-            calculatorState = updateResolution(calculatorState);
+            calculatorState = updateResolutionProperties(calculatorState);
             calculatorState = updateOutput(calculatorState);
             break;
 
@@ -147,7 +142,7 @@ const flareCLReducer = (state = new Map(), action) => {
             calculatorState = Object.assign({}, calculatorState, {
                 slowMode
             });
-            calculatorState = updateResolution(calculatorState);
+            calculatorState = updateResolutionProperties(calculatorState);
             calculatorState = updateOutput(calculatorState);
             break;
             
@@ -158,14 +153,14 @@ const flareCLReducer = (state = new Map(), action) => {
     return calculators.set(id, calculatorState);
 };
 
-// Update resolution values
-const updateResolution = (calculatorState) => {
+// Update resolution properties
+const updateResolutionProperties = (calculatorState) => {
     const { resolutionPreset, model, format } = calculatorState;
 
     // Calculate updated resolution values
     const minWidth = resolution.calculateMinWidth(model, format);
     const maxWidth = resolution.calculateMaxWidth(model, format);
-    const widthStep = resolution.calculateWidthStep(model);
+    const widthStep = resolution.calculateWidthStep(format);
     const minHeight = resolution.calculateMinHeight(model, format);
     const maxHeight = resolution.calculateMaxHeight(model);
     const heightStep = resolution.calculateHeightStep(model);
@@ -219,7 +214,7 @@ const filterFormats = (formats, mode) => {
     }
 }
 
-const validateResolution = (width, height, calculatorState) => {
+const updateResolution = (width, height, calculatorState) => {
     const {
         maxWidth,
         maxHeight,
@@ -227,25 +222,34 @@ const validateResolution = (width, height, calculatorState) => {
         heightStep
     } = calculatorState;
     
+    let resolutionTooltip = '';
+
     // Validate max width
     if (width > maxWidth)
-        return `Maximum width is ${maxWidth}px.`;
+        resolutionTooltip = `Maximum width is ${maxWidth}px.`;
 
     // Validate max height
     if (height > maxHeight)
-        return `Maximum height is ${maxHeight}px.`;
+        resolutionTooltip = `Maximum height is ${maxHeight}px.`;
     
     // Validate width
     let correctMultiple = (width % widthStep) === 0;
     if (!correctMultiple)
-        return `Width must be a multiple of ${widthStep}.`;
+        resolutionTooltip = `Width must be a multiple of ${widthStep}.`;
 
     // Validate height
     correctMultiple = (height % heightStep) === 0;
     if (!correctMultiple)
-        return `Height must be a multiple of ${heightStep}.`;
+        resolutionTooltip = `Height must be a multiple of ${heightStep}.`;
+
+    const error = resolutionTooltip !== '';
     
-    return '';
+    return Object.assign({}, calculatorState, {
+        width,
+        height,
+        resolutionTooltip,
+        error
+    });
 }
 
 export default flareCLReducer;
