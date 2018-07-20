@@ -77,10 +77,10 @@ export const updateHeight = (id, height, dvrId) => ({
     dvrId
 });
 
-export const updateSubSampling = (id, sumSampling, dvrId) => ({
+export const updateSubSampling = (id, subSampling, dvrId) => ({
     type: UPDATE_FLARE_CX_SUB_SAMPLING,
     id,
-    sumSampling,
+    subSampling,
     dvrId
 });
 

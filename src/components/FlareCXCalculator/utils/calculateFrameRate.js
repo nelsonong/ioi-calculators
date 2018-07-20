@@ -1,5 +1,5 @@
 import { LINK_SPEEDS } from '../constants';
-import { widthMultiple, heightMultiple } from './resolution';
+import { calculateWidthStep, calculateHeightStep } from './resolution';
 
 const calculateFrameRate = ({
     model,
@@ -14,13 +14,13 @@ const calculateFrameRate = ({
     // Adjust width and height (if subsampling enabled)
     if (subSampling) {
         width /= 2;
-        let step = widthMultiple(model, format);
+        let step = calculateWidthStep(model, format);
         let clks = width / step;
         if (width % step) clks++;
         width = clks * step;
         
         height /= 2;
-        step = heightMultiple(model);
+        step = calculateHeightStep(model);
         let lines = height / step;
         if (height % step) lines++;
         height = lines * step;
