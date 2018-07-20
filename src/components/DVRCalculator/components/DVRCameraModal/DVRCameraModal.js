@@ -66,12 +66,17 @@ class DVRCameraModal extends Component {
                         FLARE CL
                     </button>
                 );
+
             case 'custom-cx':
                 return (
                     <button type='button' className={styles.flareCxButton} onClick={this.props.handleToggleCustomMode}>
                         FLARE CX
                     </button>
                 );
+
+            case 'flare-sdi':
+                return '';
+                
             default:
                 return (
                     <button type='button' className={styles.customButton} onClick={this.props.handleToggleCustomMode}>
