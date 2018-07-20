@@ -1,6 +1,11 @@
 
 import { MODEL, MODELS } from './models';
-import { CONFIG, CL_CONFIGS, CLPLUS_CONFIGS, CX_CONFIGS, CXPLUS_CONFIGS, SDI_CONFIGS } from './configurations';
+import {
+    CONFIG,
+    CL_CONFIGS, CLPLUS_CONFIGS, CLMAX_CONFIGS,
+    CX_CONFIGS, CXPLUS_CONFIGS, CXMAX_CONFIGS,
+    SDI_CONFIGS, SDIMAX_CONFIGS
+} from './configurations';
 import { DRIVES, DRIVE_CAPACITY } from './drives';
 import { LINK } from './links';
 import { MODE, MODES } from './modes';
@@ -28,9 +33,12 @@ export {
     CONFIG,
     CL_CONFIGS,
     CLPLUS_CONFIGS,
+    CLMAX_CONFIGS,
     CX_CONFIGS,
     CXPLUS_CONFIGS,
+    CXMAX_CONFIGS,
     SDI_CONFIGS,
+    SDIMAX_CONFIGS,
     DRIVES,
     DRIVE_CAPACITY,
     LINK,

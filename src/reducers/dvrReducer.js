@@ -1,5 +1,13 @@
 import React from 'react';
-import { MODEL, CL_CONFIGS, CLPLUS_CONFIGS, CX_CONFIGS, CXPLUS_CONFIGS, SDI_CONFIGS, DRIVE_CAPACITY, LINK, MODE, MODES } from '../components/DVRCalculator/constants';
+
+import {
+    MODEL,
+    CL_CONFIGS, CLPLUS_CONFIGS, CLMAX_CONFIGS,
+    CX_CONFIGS, CXPLUS_CONFIGS, CXMAX_CONFIGS,
+    SDI_CONFIGS, SDIMAX_CONFIGS,
+    DRIVE_CAPACITY, LINK, MODE, MODES
+} from '../components/DVRCalculator/constants';
+
 import {
     INITIALIZE_DVR_STATE,
     UPDATE_DVR_MODEL,
@@ -12,6 +20,7 @@ import {
     UPDATE_DVR_DRIVE_MODEL,
     UPDATE_DVR_DRIVE_AMOUNT
 } from '../actions/dvrActions';
+
 import { DVRCamera } from '../components/DVRCalculator/components/DVRCamera';
 import { flareCLDefaultState } from '..//components/FlareCLCalculator/constants';
 import { flareCXDefaultState } from '../components/FlareCXCalculator/constants';
@@ -19,7 +28,6 @@ import { flareSDIDefaultState } from '../components/FlareSDICalculator/constants
 import { customCLDefaultState } from '..//components/CustomCLCalculator/constants';
 import { customCXDefaultState } from '..//components/CustomCXCalculator/constants';
 import uuid from 'uuid';
-import { Map } from 'core-js';
 
 const dvrReducer = (state = new Map(), action) => {
     const id = action.id;
@@ -49,6 +57,11 @@ const dvrReducer = (state = new Map(), action) => {
                     configurations = CLPLUS_CONFIGS;
                     mode = MODE.BASE;
                     break;
+                case MODEL.CORE2CLMAX:
+                    link = LINK.CL;
+                    configurations = CLMAX_CONFIGS;
+                    mode = MODE.BASE;
+                    break;
                 case MODEL.CORE2CX:
                     link = LINK.CX;
                     configurations = CX_CONFIGS;
@@ -59,9 +72,19 @@ const dvrReducer = (state = new Map(), action) => {
                     configurations = CXPLUS_CONFIGS;
                     mode = MODE.SINGLE;
                     break;
+                case MODEL.CORE2CXMAX:
+                    link = LINK.CX;
+                    configurations = CXMAX_CONFIGS;
+                    mode = MODE.SINGLE;
+                    break;
                 case MODEL.CORE2SDI:
                     link = LINK.SDI;
                     configurations = SDI_CONFIGS;
+                    mode = MODE.SINGLE;
+                    break;
+                case MODEL.CORE2SDIMAX:
+                    link = LINK.SDI;
+                    configurations = SDIMAX_CONFIGS;
                     mode = MODE.SINGLE;
             }
             const configuration = configurations[0];
@@ -268,6 +291,7 @@ const updateTotalDataRate = (calculatorState) => {
 
 const updateRecordingTime = (calculatorState) => {
     let { raid, totalCapacity, totalDataRate } = calculatorState;
+    console.log(totalCapacity, totalDataRate);
     const seconds = totalCapacity / totalDataRate * 1024;   // Convert to MB/s
     switch (raid) {
         case 1:

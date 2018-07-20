@@ -30,6 +30,13 @@ export const CL_CONFIGS = [
 
 export const CLPLUS_CONFIGS = Object.values(CONFIG.CL);
 
+export const CLMAX_CONFIGS = [
+    CONFIG.CL.BASEx4,
+    CONFIG.CL.FULL_BASEx2,
+    CONFIG.CL.FULLx2,
+    CONFIG.CL.DUAL_FULL
+];
+
 // CoaXPress configurations
 export const CX_CONFIGS = [
     CONFIG.CX.SINGLEx4,
@@ -39,5 +46,13 @@ export const CX_CONFIGS = [
 
 export const CXPLUS_CONFIGS = Object.values(CONFIG.CX);
 
+export const CXMAX_CONFIGS = Object.values(CONFIG.CX);
+
 // SDI configurations
 export const SDI_CONFIGS = Object.values(CONFIG.SDI);
+
+export const SDIMAX_CONFIGS = [
+    CONFIG.SDI.SINGLEx4,
+    CONFIG.SDI.DUALx2,
+    CONFIG.SDI.QUAD
+];
