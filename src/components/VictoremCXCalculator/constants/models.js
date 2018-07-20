@@ -1,8 +1,4 @@
 export const MODEL = {
-//    Type24A164MCX: '24A164MCX',
-//    Type24A164CCX: '24A164CCX',
-//    Type205R26MCX: '205R26MCX',
-//    Type205R26CCX: '205R26CCX',
     Type51B163MCX: '51B163MCX',
     Type51B163CCX: '51B163CCX',
     Type32B216MCX: '32B216MCX',
@@ -25,9 +21,7 @@ export const MODELS = {
     ],
     TYPE_252: [
         MODEL.Type32B216MCX,
-        MODEL.Type32B216CCX,
-    //    MODEL.Type2KMSDIMINI,
-    //    MODEL.Type2KMSDIMINID
+        MODEL.Type32B216CCX
     ],
     TYPE_253: [
         MODEL.Type120B68MCX,
@@ -35,9 +29,7 @@ export const MODELS = {
     ],
     TYPE_255: [
         MODEL.Type89B93MCX,
-        MODEL.Type89B93CCX,
-    //    MODEL.Type4KMSDIMINI,
-    //    MODEL.Type4KMSDIMINID
+        MODEL.Type89B93CCX
     ],
     TYPE_273: [
         MODEL.Type16B276MCX,
@@ -55,10 +47,6 @@ export const MODELS = {
         MODEL.Type120B68MCX,
         MODEL.Type89B93MCX,
         MODEL.Type16B276MCX,
-        MODEL.Type4B523MCX,
-    //    MODEL.Type2KMSDIMINI,
-    //    MODEL.Type2KMSDIMINID,
-    //    MODEL.Type4KMSDIMINI,
-    //    MODEL.Type4KMSDIMINID
+        MODEL.Type4B523MCX
     ]
 };
