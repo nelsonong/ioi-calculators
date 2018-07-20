@@ -15,7 +15,7 @@ export const dvrDefaultState = {
     link: LINK.CL,
     configuration: CONFIG.CL.BASEx4,
     configurations: CL_CONFIGS,
-    cameras: new Map(),
+    cameras: null,
     cameraContainers: [],
     dataRates: [],
     totalDataRate: 0,

@@ -35,7 +35,7 @@ const dvrReducer = (state = new Map(), action) => {
     let calculatorState = calculators.get(id);
     switch (action.type) {
         case INITIALIZE_DVR_STATE:
-            calculatorState = reloadCameras(calculatorState, id);
+            calculatorState = loadCameras(calculatorState, id);
             calculatorState = updateRecordingTime(calculatorState);
             break;
 
@@ -120,6 +120,7 @@ const dvrReducer = (state = new Map(), action) => {
                 dataRates
             });
             
+            calculatorState = setCameraAdded(cameraId, calculatorState, true);
             calculatorState = updateTotalDataRate(calculatorState);
             calculatorState = updateRecordingTime(calculatorState);
             break;
@@ -133,6 +134,7 @@ const dvrReducer = (state = new Map(), action) => {
                 dataRates
             });
             
+            calculatorState = setCameraAdded(cameraId, calculatorState, false);
             calculatorState = updateTotalDataRate(calculatorState);
             calculatorState = updateRecordingTime(calculatorState);
             break;
@@ -225,6 +227,14 @@ const dvrReducer = (state = new Map(), action) => {
     return calculators.set(id, calculatorState);
 };
 
+const loadCameras = (calculatorState, dvrId) => {
+    const { cameras } = calculatorState;
+    if (!!!cameras) {
+        return reloadCameras(calculatorState, dvrId);
+    }
+    return calculatorState;
+};
+
 const reloadCameras = (calculatorState, dvrId) => {
     const { link, configuration } = calculatorState;
 
@@ -234,7 +244,7 @@ const reloadCameras = (calculatorState, dvrId) => {
     const modes = MODES[configuration];
     modes.forEach(mode => {
         const id = uuid();
-        const cameraState = generateCameraState(calculatorState, dvrId, id, link, mode);
+        const cameraState = generateCameraState(dvrId, id, link, mode);
         cameraContainers.push(
             <DVRCamera
                 key={id}
@@ -256,7 +266,19 @@ const reloadCameras = (calculatorState, dvrId) => {
     });
 };
 
-const generateCameraState = (calculatorState, dvrId, id, link, mode, custom = false) => {
+const setCameraAdded = (id, calculatorState, added) => {
+    const { cameras } = calculatorState;
+    let cameraState = cameras.get(id);
+    cameraState = Object.assign({}, cameraState, {
+        added
+    });
+    cameras.set(id, cameraState);
+    return Object.assign({}, calculatorState, {
+        cameras
+    });
+}
+
+const generateCameraState = (dvrId, id, link, mode, custom = false) => {
     let cameraState;
     switch (link) {
         case LINK.CL:

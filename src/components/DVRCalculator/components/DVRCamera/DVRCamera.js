@@ -11,7 +11,6 @@ import styles from './DVRCamera.css';
 class DVRCamera extends Component {
     state = {
         modal: null,
-        added: false,
         isHovered: false,
         modalIsOpen: false,
         cachedCameraState: this.props.cameraState
@@ -22,7 +21,7 @@ class DVRCamera extends Component {
     }
 
     deleteCamera = () => {
-        this.setState(() => ({ added: false, modal: null }));
+        this.setState(() => ({ modal: null }));
         this.props.handleDeleteDataRate();
     }
 
@@ -36,7 +35,6 @@ class DVRCamera extends Component {
     saveAndCloseModal = () => {
         this.setState(() => ({
             modalIsOpen: false,
-            added: true,
             isHovered: false,
             cachedCameraState: this.props.cameraState
         }));
@@ -53,7 +51,7 @@ class DVRCamera extends Component {
             <button type='button' className={styles.addButton} onClick={this.addCamera}><img src={plus}></img></button>
         );
 
-        if (this.state.added) {
+        if (this.props.added) {
             contents = this.state.isHovered ? (
                 <div>
                     <button type='button' className={styles.editButton} onClick={this.openModal}><img src={edit}></img></button>
@@ -67,7 +65,7 @@ class DVRCamera extends Component {
     }
 
     infoContents = () => {
-        const { model, width, height, dataRate } = this.props.cameraState;
+        const { model, width, height, dataRate } = this.props;
         return (
             <div>
                 {
@@ -77,10 +75,10 @@ class DVRCamera extends Component {
                     </div>
                 }
                 <div className={styles.info}>
-                    {this.props.cameraState.width}x{this.props.cameraState.height}
+                    {width}x{height}
                 </div>
                 <div className={styles.dataRate}>
-                    {(this.props.cameraState.dataRate / 1024).toFixed(2)} GB/s
+                    {(dataRate / 1024).toFixed(2)} GB/s
                 </div>
             </div>
         );
@@ -88,7 +86,7 @@ class DVRCamera extends Component {
 
     render = () => {
         const root = cx(styles.root, {
-            [styles.added]: !!this.state.added
+            [styles.added]: !!this.props.added
         });
         return (
             <div className={root} onMouseEnter={this.openHoverOverlay} onMouseLeave={this.closeHoverOverlay}>
@@ -114,14 +112,26 @@ class DVRCamera extends Component {
     }
 }
 
-const mapStateToProps = (state, { id, dvrId, link, mode }) => {
-    const cameraState = state.storageCalculators.get(dvrId).cameras.get(id);
+const mapStateToProps = ({ storageCalculators }, { id, dvrId, link, mode }) => {
+    const cameraState = storageCalculators.get(dvrId).cameras.get(id);
+    const {
+        model,
+        width,
+        height,
+        dataRate,
+        added
+    } = cameraState;
     return {
         id,
         dvrId,
-        cameraState,
         link,
-        mode
+        mode,
+        model,
+        width,
+        height,
+        dataRate,
+        added: !!added,
+        cameraState
     };
 };
 
