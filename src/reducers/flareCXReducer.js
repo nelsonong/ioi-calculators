@@ -23,7 +23,7 @@ const flareCXReducer = (state = new Map(), action) => {
             break;
         }
 
-        case UPDATE_FLARE_CX_MODEL:
+        case UPDATE_FLARE_CX_MODEL: {
             const { model } = action;
 
             // Update formats
@@ -35,15 +35,22 @@ const flareCXReducer = (state = new Map(), action) => {
             } else {
                 formats = FORMATS.CX2_4m;
             }
+            const bitDepth = formats.BitDepths[0];
+            const linkCount = formats.LinkCounts[0];
+            const linkSpeed = formats.LinkSpeeds[0];
 
             calculatorState = Object.assign({}, calculatorState, {
                 model,
-                formats
+                formats,
+                bitDepth,
+                linkCount,
+                linkSpeed
             });
 
             calculatorState = updateResolution(calculatorState);
             calculatorState = updateOutput(calculatorState);
             break;
+        }
 
         case UPDATE_FLARE_CX_BIT_DEPTH:
             const { bitDepth } = action;

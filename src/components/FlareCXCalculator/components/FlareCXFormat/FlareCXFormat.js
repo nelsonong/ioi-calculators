@@ -6,7 +6,6 @@ import styles from './FlareCXFormat.css';
 
 const renderLinkCountOptions = (formats, mode) => {
     if (!mode) {
-        console.log(mode, 1);
         return formats.LinkCounts.map((linkCount, i) => <option key={i} value={linkCount}>{linkCount}</option>);
     } else {
         let linkCount;

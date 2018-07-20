@@ -291,7 +291,6 @@ const updateTotalDataRate = (calculatorState) => {
 
 const updateRecordingTime = (calculatorState) => {
     let { raid, totalCapacity, totalDataRate } = calculatorState;
-    console.log(totalCapacity, totalDataRate);
     const seconds = totalCapacity / totalDataRate * 1024;   // Convert to MB/s
     switch (raid) {
         case 1:
