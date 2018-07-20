@@ -61,8 +61,8 @@ $custom-button-light: rgb(126, 143, 160);
 /* Mini calculator color scheme */
 $mini-background: rgb(253, 222, 214);
 $mini-background-dark: rgb(252, 230, 224);
-$mini-fieldset: rgb(253, 238, 214);
-$mini-output: rgb(214, 133, 133);
+$mini-fieldset: rgb(247, 244, 239);
+$mini-output: rgb(221, 148, 148);
 
 /* Victorem CX color scheme */
 $victorem-cx-background: rgb(255, 227, 239);
@@ -88,8 +88,8 @@ $dvr-output: rgb(90, 82, 82);
 $dvr-button: rgb(90, 82, 82);
 $dvr-button-light: rgb(117, 105, 105);
 
-$edit-button: rgb(223, 210, 135);
-$delete-button: rgb(185, 90, 90);
+$edit-button: rgb(247, 244, 239);
+$delete-button: rgb(221, 148, 148);
 
 /* Modal */
 $modal-overlay: rgba(0, 0, 0, 0.35);

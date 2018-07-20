@@ -1,5 +1,11 @@
 @import '../../../../styles/colors.css';
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+}
+
 .root {
     background: $mini-background;
     background: repeating-linear-gradient(
@@ -30,7 +36,6 @@
 }
 
 .added {
-    background: $mini-background;
     opacity: 1.0;
 }
 
@@ -97,6 +102,7 @@
 .edit-button {
     composes: button;
     background: $edit-button;
+    animation: fadeIn 0.2s ease-in-out;
 }
 
 .edit-button:hover {
@@ -107,6 +113,7 @@
 .delete-button {
     composes: button;
     background: $delete-button;
+    animation: fadeIn 0.2s ease-in-out;
 }
 
 .delete-button:hover {
