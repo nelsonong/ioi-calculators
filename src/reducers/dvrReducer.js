@@ -157,7 +157,7 @@ const dvrReducer = (state = new Map(), action) => {
             let cameraState = cameras.get(cameraId);
             const { mode, cameraType } = cameraState;
             const custom = (cameraType.startsWith('custom'));
-            cameraState = generateCameraState(calculatorState, id, cameraId, link, mode, !custom);
+            cameraState = generateCameraState(id, cameraId, link, mode, !custom);
             cameras = new Map(cameras);
             cameras.set(cameraId, cameraState);
             calculatorState = Object.assign({}, calculatorState, {
