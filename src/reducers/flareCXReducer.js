@@ -53,6 +53,7 @@ const flareCXReducer = (state = { order: [] }, action) => {
                 linkSpeed
             };
             calculatorState = updateResolutionConstraints(calculatorState);
+            calculatorState = updateResolution(calculatorState);
             calculatorState = updateOutput(calculatorState);
             break;
         }
@@ -64,7 +65,6 @@ const flareCXReducer = (state = { order: [] }, action) => {
                 ...calculatorState,
                 bitDepth
             };
-            calculatorState = updateResolutionConstraints(calculatorState);
             calculatorState = updateOutput(calculatorState);
             break;
 
@@ -75,7 +75,6 @@ const flareCXReducer = (state = { order: [] }, action) => {
                 ...calculatorState,
                 linkCount
             };
-            calculatorState = updateResolutionConstraints(calculatorState);
             calculatorState = updateOutput(calculatorState);
             break;
 
@@ -86,7 +85,6 @@ const flareCXReducer = (state = { order: [] }, action) => {
                 ...calculatorState,
                 linkSpeed
             };
-            calculatorState = updateResolutionConstraints(calculatorState);
             calculatorState = updateOutput(calculatorState);
             break;
 

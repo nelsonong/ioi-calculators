@@ -62,6 +62,7 @@ const flareCLReducer = (state = { order: [] }, action) => {
                 formats
             };
             calculatorState = updateResolutionConstraints(calculatorState);
+            calculatorState = updateResolution(calculatorState);
             calculatorState = updateOutput(calculatorState);
             break;
 
@@ -73,6 +74,7 @@ const flareCLReducer = (state = { order: [] }, action) => {
                 format
             };
             calculatorState = updateResolutionConstraints(calculatorState);
+            calculatorState = updateResolution(calculatorState);
             calculatorState = updateOutput(calculatorState);
             break;
 
