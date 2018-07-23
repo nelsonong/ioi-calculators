@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { pushDataRate, deleteDataRate, revertCameraState } from '../../../../actions/dvrActions';
 import { DVRCameraModal } from '../DVRCameraModal';
+import { MdAddCircle, MdCreate, MdClear } from 'react-icons/lib/md';
 import cx from 'classnames';
-import plus from '../../../../images/plus.png';
-import edit from '../../../../images/edit.png';
-import remove from '../../../../images/remove.png';
 import styles from './DVRCamera.css';
 
 class DVRCamera extends Component {
@@ -48,14 +46,20 @@ class DVRCamera extends Component {
 
     renderContents = () => {
         let contents = (
-            <button type='button' className={styles.addButton} onClick={this.addCamera}><img src={plus}></img></button>
+            <button type='button' className={styles.addButton} onClick={this.addCamera}>
+                <MdAddCircle size={40} />
+            </button>
         );
 
         if (this.props.added) {
             contents = this.state.isHovered ? (
                 <div>
-                    <button type='button' className={styles.editButton} onClick={this.openModal}><img src={edit}></img></button>
-                    <button type='button' className={styles.deleteButton} onClick={this.deleteCamera}><img src={remove}></img></button>
+                    <button type='button' className={styles.editButton} onClick={this.openModal}>
+                        <MdCreate size={18} />
+                    </button>
+                    <button type='button' className={styles.deleteButton} onClick={this.deleteCamera}>
+                        <MdClear size={18} />
+                    </button>
                 </div>
             ) : (
                 this.infoContents()

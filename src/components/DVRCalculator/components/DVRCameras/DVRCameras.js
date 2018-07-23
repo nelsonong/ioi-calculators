@@ -4,7 +4,6 @@ import { DVRCamera } from '../DVRCamera';
 import styles from './DVRCameras.css';
 
 const DVRCameras = ({ cameras }) => {
-    console.log(cameras);
     const cameraComponents = cameras.order.map(orderId => {
         const cameraState = cameras[orderId];
         const { cameraId, dvrId, link, mode } = cameraState;
