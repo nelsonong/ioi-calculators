@@ -32,11 +32,15 @@
 
 .root:hover {
     opacity: 1.0;
-    cursor: default;
+    cursor: pointer;
 }
 
 .added {
     opacity: 1.0;
+}
+
+.added:hover {
+    cursor: default;
 }
 
 .title {

@@ -46,9 +46,11 @@ class DVRCamera extends Component {
 
     renderContents = () => {
         let contents = (
-            <button type='button' className={styles.addButton} onClick={this.addCamera}>
-                <MdAddCircle size={40} />
-            </button>
+            <div onClick={this.addCamera}>
+                <button type='button' className={styles.addButton}>
+                    <MdAddCircle size={43} />
+                </button>
+            </div>
         );
 
         if (this.props.added) {
@@ -158,7 +160,7 @@ const mapDispatchToProps = (dispatch, {
     },
     handleRevertCameraState: (cameraState) => {
         dispatch(revertCameraState(dvrId, cameraId, cameraState));
-    },
+    }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DVRCamera);
