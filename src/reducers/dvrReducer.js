@@ -166,6 +166,7 @@ const dvrReducer = (state = { order: [] }, action) => {
 
             let { cameras } = calculatorState;
             cameras = { ...cameras };
+            cameraState.added = true;
             cameras[cameraId] = cameraState;
 
             calculatorState = {
