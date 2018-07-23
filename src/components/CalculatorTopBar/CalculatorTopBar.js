@@ -14,7 +14,7 @@ const CalculatorTopBar = ({
     const closeButton = cx(styles.closeButton, {
         [styles.storageCloseButton]: storage
     });
-    const button = !inDVR ? (
+    const button = (!inDVR || storage) ? (
         <button className={closeButton} type='button' onClick={handleDelete}>
             ✖
         </button>
@@ -37,17 +37,15 @@ const mapStateToProps = (state, {
     storage
 }) => ({
     type,
-    inDVR: !!!dvrId,
+    inDVR: !!dvrId,
     storage: !!storage
 });
 
 const mapDispatchToProps = (dispatch, {
     dvrId,
     storage
-}) => {
-    return {
-        handleDelete: () => dispatch(deleteCalculator(dvrId, !!storage))
-    }
-};
+}) => ({
+    handleDelete: () => dispatch(deleteCalculator(dvrId, !!storage))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(CalculatorTopBar);
