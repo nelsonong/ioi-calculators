@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {
     MODEL,
     CL_CONFIGS, CLPLUS_CONFIGS, CLMAX_CONFIGS,
@@ -21,7 +19,6 @@ import {
     UPDATE_DVR_DRIVE_AMOUNT
 } from '../actions/dvrActions';
 
-import { DVRCamera } from '../components/DVRCalculator/components/DVRCamera';
 import { flareCLDefaultState } from '..//components/FlareCLCalculator/constants';
 import { flareCXDefaultState } from '../components/FlareCXCalculator/constants';
 import { flareSDIDefaultState } from '../components/FlareSDICalculator/constants';
@@ -297,29 +294,21 @@ const reloadCameras = (calculatorState, dvrId) => {
     } = calculatorState;
 
     // Reset cameras / insert mode
-    let cameras = {};
-    let cameraContainers = [];
+    let cameras = { order: [] };
     const modes = MODES[configuration];
     modes.forEach(mode => {
         const cameraId = uuid();
         const cameraState = generateCameraState(dvrId, cameraId, link, mode);
-        cameraContainers.push(
-            <DVRCamera
-                key={cameraId}
-                cameraId={cameraId}
-                dvrId={dvrId}
-                cameraState={cameraState}
-                link={link}
-                mode={mode}
-            />
-        );
-        cameras[cameraId] = cameraState;
+        cameras = {
+            ...cameras,
+            [cameraId]: cameraState,
+            order: cameras.order.concat(cameraId)
+        };
     });
 
     return {
         ...calculatorState,
         cameras,
-        cameraContainers,
         dataRates: [],
         totalDataRate: 0
     };
@@ -333,7 +322,10 @@ const setCameraAdded = (cameraId, calculatorState, added) => {
         ...cameraState,
         added
     };
-    cameras[cameraId] = cameraState;
+    cameras = {
+        ...cameras,
+        [cameraId]: cameraState
+    };
 
     return {
         ...calculatorState,
@@ -371,6 +363,7 @@ const updateTotalDataRate = (calculatorState) => {
     for (let dataRate of dataRates) {
         totalDataRate += dataRate.value;
     }
+    totalDataRate = totalDataRate.toFixed(2);
 
     return {
         ...calculatorState,
