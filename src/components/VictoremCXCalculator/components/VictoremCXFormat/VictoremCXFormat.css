@@ -11,5 +11,4 @@
 
 .select {
     composes: select;
-    margin: 0.2rem 0.9rem 0.2rem 0.5rem;
 }

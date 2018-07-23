@@ -28,37 +28,26 @@ const CustomCXFormat = ({
     formats,
     bitDepth,
     linkCount,
-    linkSpeed,
     mode,
     handleChangeBitDepth,
-    handleChangeLinkCount,
-    handleChangeLinkSpeed
+    handleChangeLinkCount
 }) => {
     const bitDepthOptions = formats.BitDepths.map((bitDepth, i) => <option key={i} value={bitDepth}>{bitDepth}</option>);
-    const linkSpeedOptions = formats.LinkSpeeds.map((linkSpeed, i) => <option key={i} value={linkSpeed}>{linkSpeed}</option>);
     return (
         <fieldset className={styles.root}>
         <legend className={styles.legend}>CoaXPress Format</legend>
-        <div className={styles.left}>
-            <div className={styles.labels}>
+            <div className={styles.left}>
                 <div className={styles.label}>Bit Depth:</div>
-                <div className={styles.label}>Links:</div>
-            </div>
-            <div className={styles.selects}>
                 <select className={styles.select} value={bitDepth} onChange={handleChangeBitDepth}>
                     {bitDepthOptions}
                 </select>
+            </div>
+            <div className={styles.right}>
+                <div className={styles.label}>Links:</div>
                 <select className={styles.select} value={linkCount} onChange={handleChangeLinkCount}>
                     {renderLinkCountOptions(formats, mode)}
                 </select>
             </div>
-        </div>
-        <div className={styles.right}>
-            <div className={styles.label}>Speed:</div>
-            <select className={styles.select} value={linkSpeed} onChange={handleChangeLinkSpeed}>
-                {linkSpeedOptions}
-            </select>
-        </div>
         </fieldset>
     );
 };
@@ -72,7 +61,6 @@ const mapStateToProps = ({ storageCalculators }, {
         formats,
         bitDepth,
         linkCount,
-        linkSpeed,
         mode
     } = calculatorState;
     
@@ -80,7 +68,6 @@ const mapStateToProps = ({ storageCalculators }, {
         formats,
         bitDepth,
         linkCount,
-        linkSpeed,
         mode
     };
 };
@@ -93,10 +80,6 @@ const mapDispatchToProps = (dispatch, { cameraId, dvrId }) => ({
     handleChangeLinkCount: (e) => {
         const linkCount = Number(e.target.value);
         dispatch(updateLinkCount(cameraId, linkCount, dvrId));
-    },
-    handleChangeLinkSpeed: (e) => {
-        const linkSpeed = e.target.value;
-        dispatch(updateLinkSpeed(cameraId, linkSpeed, dvrId));
     }
 });
 

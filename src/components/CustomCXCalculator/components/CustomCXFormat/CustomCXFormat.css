@@ -4,33 +4,13 @@
     composes: custom-fieldset;
 }
 
-@mixin add-left-right 49%, 51%;
+@mixin add-left-right;
 
-/* ----- Left side ----- */
-.left {
-    .labels {
-        width: 50%;
-        display: inline-block;
-    }
-    .selects {
-        width: 50%;
-        display: inline-block;
-    }
-    .label {
-        margin: 0.8rem 0.5rem 0.8rem 0rem;
-    }
+.label {
+    composes: label;
+    display: inline;
 }
 
-/* ----- Right side ----- */
-.right {
-    .selects {
-        display: inline-block;
-    }
-    .labels {
-        display: inline-block;
-    }
-    .label {
-        margin: 0.8rem 0.4rem 0.8rem 0rem;
-        display: inline;
-    }
+.select {
+    composes: select;
 }
