@@ -13,21 +13,21 @@ class DVRCalculator extends Component {
     
     render = () => (
         <div className={styles.root}>
-            <CalculatorTopBar type={'DVR Storage'} id={this.props.id} storage={true} />
-            <DVRModelConfiguration id={this.props.id} />
-            <DVRCameras id={this.props.id} />
-            <DVRDrives id={this.props.id} />
-            <DVRRecordingTime id={this.props.id} />
+            <CalculatorTopBar type={'DVR Storage'} dvrId={this.props.dvrId} storage={true} />
+            <DVRModelConfiguration dvrId={this.props.dvrId} />
+            <DVRCameras dvrId={this.props.dvrId} />
+            <DVRDrives dvrId={this.props.dvrId} />
+            <DVRRecordingTime dvrId={this.props.dvrId} />
         </div>
     );
 }
 
-const mapStateToProps = (state, { id }) => ({
-    id
+const mapStateToProps = (state, { dvrId }) => ({
+    dvrId
 });
 
-const mapDispatchToProps = (dispatch, { id }) => ({
-    handleInitialize: () => dispatch(initializeState(id))
+const mapDispatchToProps = (dispatch, { dvrId }) => ({
+    handleInitialize: () => dispatch(initializeState(dvrId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DVRCalculator);

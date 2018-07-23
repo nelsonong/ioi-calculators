@@ -15,8 +15,8 @@ import customCXReducer from '../reducers/customCXReducer';
 import victoremCXReducer from '../reducers/victoremCXReducer';
 import victoremSDIReducer from '../reducers/victoremSDIReducer';
 
-const frameRateReducer = (state = new Map(), action) => {
-    if (!!action.dvrId && !!!action.processed) {
+const cameraReducer = (state = { order: [] }, action) => {
+    if (!!action.dvrId && !!!action.fromStorageReducer) {
         return state;
     }
 
@@ -40,4 +40,4 @@ const frameRateReducer = (state = new Map(), action) => {
     return state;
 }
 
-export default frameRateReducer;
+export default cameraReducer;

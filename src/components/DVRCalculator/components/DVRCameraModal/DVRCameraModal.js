@@ -18,7 +18,7 @@ class DVRCameraModal extends Component {
             case 'flare-cl':
                 return (
                     <FlareCLCalculator
-                        id={this.props.id}
+                        cameraId={this.props.cameraId}
                         dvrId={this.props.dvrId}
                         mode={this.props.mode}
                     />
@@ -26,7 +26,7 @@ class DVRCameraModal extends Component {
             case 'flare-cx':
                 return (
                     <FlareCXCalculator
-                        id={this.props.id}
+                        cameraId={this.props.cameraId}
                         dvrId={this.props.dvrId}
                         mode={this.props.mode}
                     />
@@ -34,7 +34,7 @@ class DVRCameraModal extends Component {
             case 'flare-sdi':
                 return (
                     <FlareSDICalculator
-                        id={this.props.id}
+                        cameraId={this.props.cameraId}
                         dvrId={this.props.dvrId}
                         mode={this.props.mode}
                     />
@@ -42,7 +42,7 @@ class DVRCameraModal extends Component {
             case 'custom-cl':
                 return (
                     <CustomCLCalculator
-                        id={this.props.id}
+                        cameraId={this.props.cameraId}
                         dvrId={this.props.dvrId}
                         mode={this.props.mode}
                     />
@@ -50,7 +50,7 @@ class DVRCameraModal extends Component {
             case 'custom-cx':
                 return (
                     <CustomCXCalculator
-                        id={this.props.id}
+                        cameraId={this.props.cameraId}
                         dvrId={this.props.dvrId}
                         mode={this.props.mode}
                     />
@@ -118,20 +118,21 @@ const mapStateToProps = ({
     frameRateCalculators
 }, {
     isOpen,
-    id,
+    cameraId,
     dvrId,
     cameraState,
     link,
     mode
 }) => {
-    const calculatorState = (!!dvrId) ? storageCalculators.get(dvrId).cameras.get(id) :
-                                        frameRateCalculators.get(id);
+    const calculatorState = !!dvrId
+        ? storageCalculators[dvrId].cameras[cameraId]
+        : frameRateCalculators[cameraId];
     const { cameraType } = calculatorState;
 
     return {
         cameraType,
         isOpen,
-        id,
+        cameraId,
         dvrId,
         cameraState,
         link,
@@ -139,8 +140,13 @@ const mapStateToProps = ({
     };
 };
 
-const mapDispatchToProps = (dispatch, { id, dvrId, closeModal, saveAndCloseModal }) => ({
-    handleToggleCustomMode: () => dispatch(toggleCustomMode(dvrId, id)),
+const mapDispatchToProps = (dispatch, {
+    cameraId,
+    dvrId,
+    closeModal,
+    saveAndCloseModal
+}) => ({
+    handleToggleCustomMode: () => dispatch(toggleCustomMode(dvrId, cameraId)),
     closeModal,
     saveAndCloseModal
 });

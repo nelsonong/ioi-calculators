@@ -19,65 +19,65 @@ const flareCLActionTypes = [
 ];
 
 // Action generators
-export const initializeDVRState = (id, dvrId, mode) => ({
+export const initializeDVRState = (cameraId, dvrId, mode) => ({
     type: INITIALIZE_FLARE_CL_DVR_STATE,
-    id,
+    cameraId,
     dvrId,
     mode
 });
 
-export const updateModel = (id, model, dvrId) => ({
+export const updateModel = (cameraId, model, dvrId) => ({
     type: UPDATE_FLARE_CL_MODEL,
-    id,
+    cameraId,
     model,
     dvrId
 });
 
-export const updateHardwareVersion = (id, hwversion, dvrId) => ({
+export const updateHardwareVersion = (cameraId, hwversion, dvrId) => ({
     type: UPDATE_FLARE_CL_HW_VERSION,
-    id,
+    cameraId,
     hwversion: Number(hwversion),
     dvrId
 });
 
-export const updateFormat = (id, format, dvrId) => ({
+export const updateFormat = (cameraId, format, dvrId) => ({
     type: UPDATE_FLARE_CL_FORMAT,
-    id,
+    cameraId,
     format,
     dvrId
 });
 
-export const updateResolutionPreset = (id, resolutionPreset, dvrId) => ({
+export const updateResolutionPreset = (cameraId, resolutionPreset, dvrId) => ({
     type: UPDATE_FLARE_CL_RESOLUTION_PRESET,
-    id,
+    cameraId,
     resolutionPreset,
     dvrId
 });
 
-export const updateWidth = (id, width, dvrId) => ({
+export const updateWidth = (cameraId, width, dvrId) => ({
     type: UPDATE_FLARE_CL_WIDTH,
-    id,
-    width: width,
+    cameraId,
+    width,
     dvrId
 });
 
-export const updateHeight = (id, height, dvrId) => ({
+export const updateHeight = (cameraId, height, dvrId) => ({
     type: UPDATE_FLARE_CL_HEIGHT,
-    id,
-    height: height,
+    cameraId,
+    height,
     dvrId
 });
 
-export const updateSubSampling = (id, subSampling, dvrId) => ({
+export const updateSubSampling = (cameraId, subSampling, dvrId) => ({
     type: UPDATE_FLARE_CL_SUB_SAMPLING,
-    id,
+    cameraId,
     subSampling,
     dvrId
 });
 
-export const updateSlowMode = (id, slowMode, dvrId) => ({
+export const updateSlowMode = (cameraId, slowMode, dvrId) => ({
     type: UPDATE_FLARE_CL_SLOW_MODE,
-    id,
+    cameraId,
     slowMode,
     dvrId
 });

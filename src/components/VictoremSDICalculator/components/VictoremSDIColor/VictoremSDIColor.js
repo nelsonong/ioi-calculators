@@ -19,8 +19,8 @@ const VictoremSDIColor = ({
     );
 };
 
-const mapStateToProps = ({ frameRateCalculators }, { id }) => {
-    const calculatorState = frameRateCalculators.get(id);
+const mapStateToProps = ({ frameRateCalculators }, { cameraId }) => {
+    const calculatorState = frameRateCalculators[cameraId];
     const {
         color,
         colors
@@ -32,10 +32,10 @@ const mapStateToProps = ({ frameRateCalculators }, { id }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch, { id }) => ({
+const mapDispatchToProps = (dispatch, { cameraId }) => ({
     handleChange: (e) => {
         const color = e.target.value;
-        dispatch(updateColor(id, color));
+        dispatch(updateColor(cameraId, color));
     }
 });
 

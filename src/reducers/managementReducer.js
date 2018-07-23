@@ -12,100 +12,85 @@ import {
     CLEAR_CALCULATORS
 } from '../actions/managementActions';
 
-const managementReducer = (state = new Map(), action) => {
+const managementReducer = (state = { order: [] }, action) => {
     switch (action.type) {
         case ADD_CALCULATOR: {
             const { id, cameraType } = action;
+            let defaultState;
             switch (cameraType) {
                 case 'flare-cl':
-                    state = new Map(state);
-                    state.set(
-                        id,
-                        flareCLDefaultState
-                    );
+                    defaultState = flareCLDefaultState;
                     break;
 
                 case 'flare-cx':
-                    state = new Map(state);
-                    state.set(
-                        id,
-                        flareCXDefaultState
-                    );
+                    defaultState = flareCXDefaultState;
                     break;
 
                 case 'flare-sdi':
-                    state = new Map(state);
-                    state.set(
-                        id,
-                        flareSDIDefaultState
-                    );
+                    defaultState = flareSDIDefaultState;
                     break;
-
                 
                 case 'custom-cl':
-                    state = new Map(state);
-                    state.set(
-                        id,
-                        customCLDefaultState
-                    );
+                    defaultState = customCLDefaultState;
                     break;
 
                 case 'victorem-cx':
-                    state = new Map(state);
-                    state.set(
-                        id,
-                        victoremCXDefaultState
-                    );
+                    defaultState = victoremCXDefaultState;
                     break;
 
                 case 'victorem-sdi':
-                    state = new Map(state);
-                    state.set(
-                        id,
-                        victoremSDIDefaultState
-                    );
+                    defaultState = victoremSDIDefaultState;
                     break;
 
                 case 'dvr':
-                    state = new Map(state);
-                    state.set(
-                        id,
-                        dvrDefaultState
-                    );
+                    defaultState = dvrDefaultState;
                     break;
 
                 default:
                     return state;
             }
-            return state;
+
+            return {
+                ...state,
+                [id]: defaultState,
+                order: state.order.concat(id)
+            };
         }
 
         case MOVE_CALCULATOR:
             const { oldIndex, newIndex } = action;
-
-            // Convert to array
-            let stateArray = Array.from(state);
+            let { order } = state;
 
             // Swap
-            const temp = stateArray[oldIndex];
-            stateArray[oldIndex] = stateArray[newIndex];
-            stateArray[newIndex] = temp;
+            const temp = order[oldIndex];
+            order[oldIndex] = order[newIndex];
+            order[newIndex] = temp;
 
-            // Convert back to map
-            state = new Map(stateArray.map(i => [ i[0], i[1] ]));
-            return state;
+            return {
+                ...state,
+                order
+            };
 
         case DELETE_CALCULATOR: {
             const { id } = action;
-            state = new Map(state);
-            state.delete(id);
+
+            // Remove property
+            state = { ...state };
+            delete state[id];
+
+            // Remove from ordered list
+            if (state.order.length > 0) {
+                state = {
+                    ...state,
+                    order: state.order.filter(orderId => orderId !== id)
+                };
+            }
+
             return state;
         }
 
         case CLEAR_CALCULATORS:
-            state = new Map(state);
-            state.clear();
-            return state;
+            return { order: [] };
 
         default:
             return state;

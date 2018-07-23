@@ -46,10 +46,13 @@ const FlareCLResolution = ({
     );
 };
 
-const mapStateToProps = (state, { id, dvrId }) => {
-    const calculatorState = (dvrId !== undefined) ?
-        state.storageCalculators.get(dvrId).cameras.get(id) :
-        state.frameRateCalculators.get(id);
+const mapStateToProps = (state, {
+    cameraId,
+    dvrId
+}) => {
+    const calculatorState = !!!dvrId
+        ? state.frameRateCalculators[cameraId]
+        : state.storageCalculators[dvrId].cameras[cameraId];
     const {
         resolutionPreset,
         width,
@@ -69,18 +72,21 @@ const mapStateToProps = (state, { id, dvrId }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch, { id, dvrId }) => ({
+const mapDispatchToProps = (dispatch, {
+    cameraId,
+    dvrId
+}) => ({
     handleChangeResolutionPreset: (e) => {
         const resolutionPreset = e.target.value;
-        dispatch(updateResolutionPreset(id, resolutionPreset, dvrId));
+        dispatch(updateResolutionPreset(cameraId, resolutionPreset, dvrId));
     },
     handleChangeWidth: (e) => {
         const width = Number(e.target.value);
-        dispatch(updateWidth(id, width, dvrId));
+        dispatch(updateWidth(cameraId, width, dvrId));
     },
     handleChangeHeight: (e) => {
         const height = Number(e.target.value);
-        dispatch(updateHeight(id, height, dvrId));
+        dispatch(updateHeight(cameraId, height, dvrId));
     }
 });
 

@@ -47,14 +47,15 @@ const DVRDrives = ({
     );
 };
 
-const mapStateToProps = ({ storageCalculators }, { id }) => {
-    const calculatorState = storageCalculators.get(id);
+const mapStateToProps = ({ storageCalculators }, { dvrId }) => {
+    const calculatorState = storageCalculators[dvrId];
     const {
         raid,
         driveModel,
         driveAmount,
         driveAmounts
     } = calculatorState;
+
     return {
         raid,
         driveModel,
@@ -63,18 +64,18 @@ const mapStateToProps = ({ storageCalculators }, { id }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch, { id }) => ({
+const mapDispatchToProps = (dispatch, { dvrId }) => ({
     handleChangeRaid: (e) => {
         const raid = Number(e.target.value);
-        dispatch(updateRaid(id, raid));
+        dispatch(updateRaid(dvrId, raid));
     },
     handleChangeDriveModel: (e) => {
         const driveModel = e.target.value;
-        dispatch(updateDriveModel(id, driveModel));
+        dispatch(updateDriveModel(dvrId, driveModel));
     },
     handleChangeDriveAmount: (e) => {
         const driveAmount = Number(e.target.value);
-        dispatch(updateDriveAmount(id, driveAmount));
+        dispatch(updateDriveAmount(dvrId, driveAmount));
     }
 });
 

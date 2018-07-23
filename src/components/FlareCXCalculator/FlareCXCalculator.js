@@ -18,26 +18,34 @@ class FlareCXCalculator extends Component {
         });
         return (
             <div className={root}>
-                <CalculatorTopBar type={'Flare CX'} id={this.props.id} dvrId={this.props.dvrId} />
-                <FlareCXModel id={this.props.id} dvrId={this.props.dvrId} />
-                <FlareCXFormat id={this.props.id} dvrId={this.props.dvrId} />
-                <FlareCXResolution id={this.props.id} dvrId={this.props.dvrId} />
-                <FlareCXOptions id={this.props.id} dvrId={this.props.dvrId} />
-                <FlareCXOutput id={this.props.id} dvrId={this.props.dvrId} />
+                <CalculatorTopBar type={'Flare CX'} cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+                <FlareCXModel cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+                <FlareCXFormat cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+                <FlareCXResolution cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+                <FlareCXOptions cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+                <FlareCXOutput cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
             </div>
         );
     }
 }
 
-const mapStateToProps = (state, { id, dvrId, mode }) => ({
-    id,
+const mapStateToProps = (state, {
+    cameraId,
+    dvrId,
+    mode
+}) => ({
+    cameraId,
     dvrId,
     mode
 });
 
-const mapDispatchToProps = (dispatch, { id, dvrId, mode }) => ({
+const mapDispatchToProps = (dispatch, {
+    cameraId,
+    dvrId,
+    mode
+}) => ({
     handleInitialize: () => {
-        dispatch(initializeDVRState(id, dvrId, mode));
+        dispatch(initializeDVRState(cameraId, dvrId, mode));
     }
 });
 

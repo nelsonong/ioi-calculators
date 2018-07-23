@@ -13,8 +13,8 @@ const DVRCameras = ({ cameraContainers }) => {
     );
 }
 
-const mapStateToProps = ({ storageCalculators }, { id }) => {
-    const calculatorState = storageCalculators.get(id);
+const mapStateToProps = ({ storageCalculators }, { dvrId }) => {
+    const calculatorState = storageCalculators[dvrId];
     const { cameraContainers } = calculatorState;
     return { cameraContainers };
 };

@@ -19,10 +19,13 @@ const FlareSDIFrameRate = ({
     );
 };
 
-const mapStateToProps = (state, { id, dvrId }) => {
-    const calculatorState = (dvrId !== undefined) ?
-        state.storageCalculators.get(dvrId).cameras.get(id) :
-        state.frameRateCalculators.get(id);
+const mapStateToProps = (state, {
+    cameraId,
+    dvrId
+}) => {
+    const calculatorState = !!!dvrId
+        ? state.frameRateCalculators[cameraId]
+        : state.storageCalculators[dvrId].cameras[cameraId];
     const {
         frameRate,
         frameRates
@@ -34,10 +37,13 @@ const mapStateToProps = (state, { id, dvrId }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch, { id, dvrId }) => ({
+const mapDispatchToProps = (dispatch, {
+    cameraId,
+    dvrId
+}) => ({
     handleChange: (e) => {
         const frameRate = Number(e.target.value);
-        dispatch(updateFrameRate(id, frameRate, dvrId));
+        dispatch(updateFrameRate(cameraId, frameRate, dvrId));
     }
 });
 

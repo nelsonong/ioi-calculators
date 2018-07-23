@@ -15,8 +15,8 @@ const VictoremSDIModel = ({ models, handleChange }) => {
     );
 };
 
-const mapStateToProps = ({ frameRateCalculators }, { id }) => {
-    const calculatorState = frameRateCalculators.get(id);
+const mapStateToProps = ({ frameRateCalculators }, { cameraId }) => {
+    const calculatorState = frameRateCalculators[cameraId];
     const {
         models
     } = calculatorState;
@@ -26,10 +26,10 @@ const mapStateToProps = ({ frameRateCalculators }, { id }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch, { id }) => ({
+const mapDispatchToProps = (dispatch, { cameraId }) => ({
     handleChange: (e) => {
         const model = e.target.value;
-        dispatch(updateModel(id, model));
+        dispatch(updateModel(cameraId, model));
     }
 });
 

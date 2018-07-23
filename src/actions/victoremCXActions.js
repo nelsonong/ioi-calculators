@@ -17,45 +17,45 @@ const victoremCXActionTypes = [
 ];
 
 // Action generators
-export const updateModel = (id, model) => ({
+export const updateModel = (cameraId, model) => ({
     type: UPDATE_VICTOREM_CX_MODEL,
-    id,
+    cameraId,
     model
 });
 
-export const updateFormat = (id, format) => ({
+export const updateFormat = (cameraId, format) => ({
     type: UPDATE_VICTOREM_CX_FORMAT,
-    id,
+    cameraId,
     format
 });
 
-export const updateBitDepth = (id, bitDepth) => ({
+export const updateBitDepth = (cameraId, bitDepth) => ({
     type: UPDATE_VICTOREM_CX_BIT_DEPTH,
-    id,
+    cameraId,
     bitDepth
 });
 
-export const updateResolutionPreset = (id, resolutionPreset) => ({
+export const updateResolutionPreset = (cameraId, resolutionPreset) => ({
     type: UPDATE_VICTOREM_CX_RESOLUTION_PRESET,
-    id,
+    cameraId,
     resolutionPreset
 });
 
-export const updateWidth = (id, width) => ({
+export const updateWidth = (cameraId, width) => ({
     type: UPDATE_VICTOREM_CX_WIDTH,
-    id,
-    width: width
+    cameraId,
+    width
 });
 
-export const updateHeight = (id, height) => ({
+export const updateHeight = (cameraId, height) => ({
     type: UPDATE_VICTOREM_CX_HEIGHT,
-    id,
-    height: height
+    cameraId,
+    height
 });
 
-export const updateCameraOption = (id, cameraOption) => ({
+export const updateCameraOption = (cameraId, cameraOption) => ({
     type: UPDATE_VICTOREM_CX_CAMERA_OPTION,
-    id,
+    cameraId,
     cameraOption
 });
 

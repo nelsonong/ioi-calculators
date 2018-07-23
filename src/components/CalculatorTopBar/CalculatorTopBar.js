@@ -31,15 +31,22 @@ const CalculatorTopBar = ({
     );
 };
 
-const mapStateToProps = (state, { type, dvrId, storage }) => ({
+const mapStateToProps = (state, {
     type,
-    inDVR: !!dvrId,
+    dvrId,
+    storage
+}) => ({
+    type,
+    inDVR: !!!dvrId,
     storage: !!storage
 });
 
-const mapDispatchToProps = (dispatch, { id, storage }) => {
+const mapDispatchToProps = (dispatch, {
+    dvrId,
+    storage
+}) => {
     return {
-        handleDelete: () => dispatch(deleteCalculator(id, !!storage))
+        handleDelete: () => dispatch(deleteCalculator(dvrId, !!storage))
     }
 };
 

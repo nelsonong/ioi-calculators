@@ -62,10 +62,13 @@ const FlareCXFormat = ({
     );
 };
 
-const mapStateToProps = (state, { id, dvrId }) => {
-    const calculatorState = (dvrId !== undefined) ?
-        state.storageCalculators.get(dvrId).cameras.get(id) :
-        state.frameRateCalculators.get(id);
+const mapStateToProps = (state, {
+    cameraId,
+    dvrId
+}) => {
+    const calculatorState = !!!dvrId
+        ? state.frameRateCalculators[cameraId]
+        : state.storageCalculators[dvrId].cameras[cameraId];
     const {
         formats,
         bitDepth,
@@ -83,18 +86,18 @@ const mapStateToProps = (state, { id, dvrId }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch, { id, dvrId }) => ({
+const mapDispatchToProps = (dispatch, { cameraId, dvrId }) => ({
     handleChangeBitDepth: (e) => {
         const bitDepth = Number(e.target.value);
-        dispatch(updateBitDepth(id, bitDepth, dvrId));
+        dispatch(updateBitDepth(cameraId, bitDepth, dvrId));
     },
     handleChangeLinkCount: (e) => {
         const linkCount = Number(e.target.value);
-        dispatch(updateLinkCount(id, linkCount, dvrId));
+        dispatch(updateLinkCount(cameraId, linkCount, dvrId));
     },
     handleChangeLinkSpeed: (e) => {
         const linkSpeed = e.target.value;
-        dispatch(updateLinkSpeed(id, linkSpeed, dvrId));
+        dispatch(updateLinkSpeed(cameraId, linkSpeed, dvrId));
     }
 });
 

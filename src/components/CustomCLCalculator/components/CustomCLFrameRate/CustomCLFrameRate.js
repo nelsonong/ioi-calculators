@@ -13,17 +13,19 @@ const CustomCLFrameRate = ({
     </fieldset>
 );
 
-const mapStateToProps = ({ storageCalculators, frameRateCalculators }, { id, dvrId }) => {
-    const calculatorState = (!!dvrId) ? storageCalculators.get(dvrId).cameras.get(id) :
-                                        frameRateCalculators.get(id);
+const mapStateToProps = ({ storageCalculators }, {
+    cameraId,
+    dvrId
+}) => {
+    const calculatorState = storageCalculators[dvrId].cameras[cameraId];
     const { frameRate } = calculatorState;
     return { frameRate };
 };
 
-const mapDispatchToProps = (dispatch, { id, dvrId }) => ({
+const mapDispatchToProps = (dispatch, { cameraId, dvrId }) => ({
     handleChange: (e) => {
         const frameRate = Number(e.target.value);
-        dispatch(updateFrameRate(id, frameRate, dvrId));
+        dispatch(updateFrameRate(cameraId, frameRate, dvrId));
     }
 });
 

@@ -63,8 +63,8 @@ const VictoremCXOptions = ({
     </fieldset>
 );
 
-const mapStateToProps = ({ frameRateCalculators }, { id }) => {
-    const calculatorState = frameRateCalculators.get(id);
+const mapStateToProps = ({ frameRateCalculators }, { cameraId }) => {
+    const calculatorState = frameRateCalculators[cameraId];
     const {
         cameraOption,
         supports2x2Binning,
@@ -80,10 +80,10 @@ const mapStateToProps = ({ frameRateCalculators }, { id }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch, { id }) => ({
+const mapDispatchToProps = (dispatch, { cameraId }) => ({
     handleChange: (e) => {
         const cameraOption = Number(e.target.value);
-        dispatch(updateCameraOption(id, cameraOption));
+        dispatch(updateCameraOption(cameraId, cameraOption));
     }
 });
 

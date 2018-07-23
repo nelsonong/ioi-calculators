@@ -23,64 +23,64 @@ const dvrActionTypes = [
 ];
 
 // Action generators
-export const initializeState = (id) => ({
+export const initializeState = (dvrId) => ({
     type: INITIALIZE_DVR_STATE,
-    id
+    dvrId
 });
 
-export const updateModel = (id, model) => ({
+export const updateModel = (dvrId, model) => ({
     type: UPDATE_DVR_MODEL,
-    id,
+    dvrId,
     model
 });
 
-export const updateConfiguration = (id, configuration) => ({
+export const updateConfiguration = (dvrId, configuration) => ({
     type: UPDATE_DVR_CONFIGURATION,
-    id,
+    dvrId,
     configuration
 });
 
-export const pushDataRate = (id, cameraId, dataRate) => ({
+export const pushDataRate = (dvrId, cameraId, dataRate) => ({
     type: PUSH_DVR_DATA_RATE,
-    id,
+    dvrId,
     cameraId,
     dataRate
 });
 
-export const deleteDataRate = (id, cameraId) => ({
+export const deleteDataRate = (dvrId, cameraId) => ({
     type: DELETE_DVR_DATA_RATE,
-    id,
+    dvrId,
     cameraId
 });
 
-export const revertCameraState = (id, cameraId, cameraState) => ({
+export const revertCameraState = (dvrId, cameraId, cameraState) => ({
     type: REVERT_DVR_CAMERA_STATE,
-    id,
+    dvrId,
     cameraId,
     cameraState
 });
 
-export const toggleCustomMode = (id, cameraId) => ({
+export const toggleCustomMode = (dvrId, cameraId) => ({
     type: TOGGLE_DVR_CUSTOM_MODE,
-    id,
+    dvrId,
     cameraId
 });
 
-export const updateRaid = (id, raid) => ({
+export const updateRaid = (dvrId, raid) => ({
     type: UPDATE_DVR_RAID,
-    id,
+    dvrId,
     raid
 });
 
-export const updateDriveModel = (id, driveModel) => ({
+export const updateDriveModel = (dvrId, driveModel) => ({
     type: UPDATE_DVR_DRIVE_MODEL,
-    id,
+    dvrId,
     driveModel
 });
 
-export const updateDriveAmount = (id, driveAmount) => ({
+export const updateDriveAmount = (dvrId, driveAmount) => ({
     type: UPDATE_DVR_DRIVE_AMOUNT,
-    id,
+    dvrId,
     driveAmount
 });
 

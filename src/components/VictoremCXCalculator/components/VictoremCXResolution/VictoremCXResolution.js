@@ -50,8 +50,8 @@ const VictoremCXResolution = ({
     );
 };
 
-const mapStateToProps = ({ frameRateCalculators }, { id }) => {
-    const calculatorState = frameRateCalculators.get(id);
+const mapStateToProps = ({ frameRateCalculators }, { cameraId }) => {
+    const calculatorState = frameRateCalculators[cameraId];
     const {
         resolutionPreset,
         width,
@@ -77,18 +77,18 @@ const mapStateToProps = ({ frameRateCalculators }, { id }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch, { id }) => ({
+const mapDispatchToProps = (dispatch, { cameraId }) => ({
     handleChangeResolutionPreset: (e) => {
         const resolutionPreset = e.target.value;
-        dispatch(updateResolutionPreset(id, resolutionPreset));
+        dispatch(updateResolutionPreset(cameraId, resolutionPreset));
     },
     handleChangeWidth: (e) => {
         const width = Number(e.target.value);
-        dispatch(updateWidth(id, width));
+        dispatch(updateWidth(cameraId, width));
     },
     handleChangeHeight: (e) => {
         const height = Number(e.target.value);
-        dispatch(updateHeight(id, height));
+        dispatch(updateHeight(cameraId, height));
     }
 });
 

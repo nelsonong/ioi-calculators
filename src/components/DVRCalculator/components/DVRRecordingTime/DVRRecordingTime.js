@@ -17,13 +17,14 @@ const DVRRecordingTime = ({
     </fieldset>
 );
 
-const mapStateToProps = ({ storageCalculators }, { id }) => {
-    const calculatorState = storageCalculators.get(id);
+const mapStateToProps = ({ storageCalculators }, { dvrId }) => {
+    const calculatorState = storageCalculators[dvrId];
     const {
         totalDataRate,
         totalCapacity,
         recordingTime
     } = calculatorState;
+    
     return {
         totalDataRate,
         totalCapacity,

@@ -99,7 +99,7 @@ class DVRCamera extends Component {
                     <DVRCameraModal
                         modalIsOpen={this.state.modalIsOpen}
                         cameraState={this.props.cameraState}
-                        id={this.props.id}
+                        cameraId={this.props.cameraId}
                         dvrId={this.props.dvrId}
                         link={this.props.link}
                         mode={this.props.mode}
@@ -112,8 +112,13 @@ class DVRCamera extends Component {
     }
 }
 
-const mapStateToProps = ({ storageCalculators }, { id, dvrId, link, mode }) => {
-    const cameraState = storageCalculators.get(dvrId).cameras.get(id);
+const mapStateToProps = ({ storageCalculators }, {
+    cameraId,
+    dvrId,
+    link,
+    mode
+}) => {
+    const cameraState = storageCalculators[dvrId].cameras[cameraId];
     const {
         model,
         width,
@@ -121,8 +126,9 @@ const mapStateToProps = ({ storageCalculators }, { id, dvrId, link, mode }) => {
         dataRate,
         added
     } = cameraState;
+    
     return {
-        id,
+        cameraId,
         dvrId,
         link,
         mode,
@@ -135,16 +141,19 @@ const mapStateToProps = ({ storageCalculators }, { id, dvrId, link, mode }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch, { id, dvrId }) => ({
+const mapDispatchToProps = (dispatch, {
+    cameraId,
+    dvrId
+}) => ({
     handlePushDataRate: (dataRate) => {
         dataRate = Number(dataRate);
-        dispatch(pushDataRate(dvrId, id, dataRate));
+        dispatch(pushDataRate(dvrId, cameraId, dataRate));
     },
     handleDeleteDataRate: () => {
-        dispatch(deleteDataRate(dvrId, id));
+        dispatch(deleteDataRate(dvrId, cameraId));
     },
     handleRevertCameraState: (cameraState) => {
-        dispatch(revertCameraState(dvrId, id, cameraState));
+        dispatch(revertCameraState(dvrId, cameraId, cameraState));
     },
 });
 

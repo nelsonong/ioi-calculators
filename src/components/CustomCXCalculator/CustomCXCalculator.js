@@ -14,24 +14,32 @@ class CustomCXCalculator extends Component {
 
     render = () => (
         <div className={styles.root}>
-            <CalculatorTopBar type={'Custom CX'} id={this.props.id} dvrId={this.props.dvrId} />
-            <CustomCXFormat id={this.props.id} dvrId={this.props.dvrId} />
-            <CustomCXResolution id={this.props.id} dvrId={this.props.dvrId} />
-            <CustomCXFrameRate id={this.props.id} dvrId={this.props.dvrId} />
-            <CustomCXOutput id={this.props.id} dvrId={this.props.dvrId} />
+            <CalculatorTopBar type={'Custom CX'} cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+            <CustomCXFormat cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+            <CustomCXResolution cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+            <CustomCXFrameRate cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+            <CustomCXOutput cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
         </div>
     );
 }
 
-const mapStateToProps = (state, { id, dvrId, mode }) => ({
-    id,
+const mapStateToProps = (state, {
+    cameraId,
+    dvrId,
+    mode
+}) => ({
+    cameraId,
     dvrId,
     mode
 });
 
-const mapDispatchToProps = (dispatch, { id, dvrId, mode }) => ({
+const mapDispatchToProps = (dispatch, {
+    cameraId,
+    dvrId,
+    mode
+}) => ({
     handleInitialize: () => {
-        dispatch(initializeDVRState(id, dvrId, mode));
+        dispatch(initializeDVRState(cameraId, dvrId, mode));
     }
 });
 

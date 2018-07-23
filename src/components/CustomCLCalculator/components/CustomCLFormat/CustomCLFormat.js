@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { updateFormat } from '../../../../actions/customCLActions';
-import { FORMATS } from '../../constants';
 import styles from './CustomCLFormat.css';
 
 const CustomCLFormat = ({
@@ -20,24 +19,26 @@ const CustomCLFormat = ({
     );
 };
 
-const mapStateToProps = (state, { id, dvrId }) => {
-    const calculatorState = (dvrId !== undefined) ?
-        state.storageCalculators.get(dvrId).cameras.get(id) :
-        state.frameRateCalculators.get(id);
+const mapStateToProps = ({ storageCalculators }, {
+    cameraId,
+    dvrId
+}) => {
+    const calculatorState = storageCalculators[dvrId].cameras[cameraId];
     const {
         format,
         formats
     } = calculatorState;
+    
     return {
         format,
         formats
     };
 };
 
-const mapDispatchToProps = (dispatch, { id, dvrId }) => ({
+const mapDispatchToProps = (dispatch, { cameraId, dvrId }) => ({
     handleChange: (e) => {
         const format = e.target.value;
-        dispatch(updateFormat(id, format, dvrId));
+        dispatch(updateFormat(cameraId, format, dvrId));
     }
 });
 

@@ -15,40 +15,40 @@ const victoremSDIActionTypes = [
 ];
 
 // Action generators
-export const initializeDVRState = (id, inDVR, mode) => ({
+export const initializeDVRState = (cameraId, inDVR, mode) => ({
     type: INITIALIZE_VICTOREM_SDI_DVR_STATE,
-    id,
+    cameraId,
     inDVR,
     mode
 });
 
-export const updateModel = (id, model) => ({
+export const updateModel = (cameraId, model) => ({
     type: UPDATE_VICTOREM_SDI_MODEL,
-    id,
+    cameraId,
     model
 });
 
-export const updateInterface = (id, sdiInterface) => ({
+export const updateInterface = (cameraId, sdiInterface) => ({
     type: UPDATE_VICTOREM_SDI_INTERFACE,
-    id,
+    cameraId,
     sdiInterface
 });
 
-export const updateResolution = (id, resolution) => ({
+export const updateResolution = (cameraId, resolution) => ({
     type: UPDATE_VICTOREM_SDI_RESOLUTION,
-    id,
+    cameraId,
     resolution
 });
 
-export const updateColor = (id, color) => ({
+export const updateColor = (cameraId, color) => ({
     type: UPDATE_VICTOREM_SDI_COLOR,
-    id,
+    cameraId,
     color
 });
 
-export const updateFrameRate = (id, frameRate) => ({
+export const updateFrameRate = (cameraId, frameRate) => ({
     type: UPDATE_VICTOREM_SDI_FRAME_RATE,
-    id,
+    cameraId,
     frameRate
 });
 

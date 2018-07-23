@@ -29,13 +29,18 @@ import { customCLDefaultState } from '..//components/CustomCLCalculator/constant
 import { customCXDefaultState } from '..//components/CustomCXCalculator/constants';
 import uuid from 'uuid';
 
-const dvrReducer = (state = new Map(), action) => {
-    const id = action.id;
-    let calculators = new Map(state);
-    let calculatorState = calculators.get(id);
-    switch (action.type) {
+const dvrReducer = (state = { order: [] }, action) => {
+    const {
+        dvrId,
+        type
+    } = action;
+
+    let calculators = { ...state };
+    let calculatorState = calculators[dvrId];
+
+    switch (type) {
         case INITIALIZE_DVR_STATE:
-            calculatorState = loadCameras(calculatorState, id);
+            calculatorState = loadCameras(calculatorState, dvrId);
             calculatorState = updateRecordingTime(calculatorState);
             break;
 
@@ -89,37 +94,50 @@ const dvrReducer = (state = new Map(), action) => {
             }
             const configuration = configurations[0];
 
-            calculatorState = Object.assign({}, calculatorState, {
+            calculatorState = {
+                ...calculatorState,
                 model,
                 link,
                 configuration,
                 configurations,
                 mode
-            });
-
-            calculatorState = reloadCameras(calculatorState, id);
+            };
+            calculatorState = reloadCameras(calculatorState, dvrId);
             calculatorState = updateRecordingTime(calculatorState);
             break;
 
         case UPDATE_DVR_CONFIGURATION: {
             const { configuration } = action;
-            calculatorState = Object.assign({}, calculatorState, {
+
+            calculatorState = {
+                ...calculatorState,
                 configuration
-            });
-            calculatorState = reloadCameras(calculatorState, id);
+            };
+            calculatorState = reloadCameras(calculatorState, dvrId);
             calculatorState = updateRecordingTime(calculatorState);
             break;
         }
 
         case PUSH_DVR_DATA_RATE: {
-            const { cameraId, dataRate } = action;
+            const {
+                cameraId,
+                dataRate
+            } = action;
+
+            // Filter out existing data rate
             let { dataRates } = calculatorState;
             dataRates = dataRates.filter(dataRate => dataRate.cameraId !== cameraId);
-            dataRates.push({ cameraId, value: dataRate });
-            calculatorState = Object.assign({}, calculatorState, {
-                dataRates
+
+            // Push new data rate
+            dataRates.push({
+                cameraId,
+                value: dataRate
             });
-            
+
+            calculatorState = {
+                ...calculatorState,
+                dataRates
+            };
             calculatorState = setCameraAdded(cameraId, calculatorState, true);
             calculatorState = updateTotalDataRate(calculatorState);
             calculatorState = updateRecordingTime(calculatorState);
@@ -128,12 +146,15 @@ const dvrReducer = (state = new Map(), action) => {
 
         case DELETE_DVR_DATA_RATE: {
             const { cameraId } = action;
+
+            // Filter out data rate
             let { dataRates } = calculatorState;
             dataRates = dataRates.filter(dataRate => dataRate.cameraId !== cameraId);
-            calculatorState = Object.assign({}, calculatorState, {
+
+            calculatorState = {
+                ...calculatorState,
                 dataRates
-            });
-            
+            };
             calculatorState = setCameraAdded(cameraId, calculatorState, false);
             calculatorState = updateTotalDataRate(calculatorState);
             calculatorState = updateRecordingTime(calculatorState);
@@ -141,34 +162,57 @@ const dvrReducer = (state = new Map(), action) => {
         }
 
         case REVERT_DVR_CAMERA_STATE: {
-            const { cameraId, cameraState } = action;
+            const {
+                cameraId,
+                cameraState
+            } = action;
+
             let { cameras } = calculatorState;
-            cameras = new Map(cameras);
-            cameras.set(cameraId, cameraState);
-            calculatorState = Object.assign({}, calculatorState, {
+            cameras = { ...cameras };
+            cameras[cameraId] = cameraState;
+
+            calculatorState = {
+                ...calculatorState,
                 cameras
-            });
+            };
             break;
         }
 
         case TOGGLE_DVR_CUSTOM_MODE: {
             const { cameraId } = action;
-            let { link, cameras } = calculatorState;
-            let cameraState = cameras.get(cameraId);
+
+            // Get existing camera properties
+            let {
+                link,
+                cameras
+            } = calculatorState;
+
+            // Generate new camera with properties
+            let cameraState = cameras[cameraId];
             const { mode, cameraType } = cameraState;
             const custom = (cameraType.startsWith('custom'));
-            cameraState = generateCameraState(id, cameraId, link, mode, !custom);
-            cameras = new Map(cameras);
-            cameras.set(cameraId, cameraState);
-            calculatorState = Object.assign({}, calculatorState, {
+            cameraState = generateCameraState(dvrId, cameraId, link, mode, !custom);
+
+            // Replace existing camera
+            cameras = { ...cameras };
+            cameras[cameraId] = cameraState;
+
+            calculatorState = {
+                ...calculatorState,
                 cameras
-            });
+            };
             break;
         }
 
         case UPDATE_DVR_RAID:
             const { raid } = action;
-            let { driveAmount, driveAmounts, driveCapacity } = calculatorState;
+
+            let {
+                driveAmount,
+                driveAmounts,
+                driveCapacity
+            } = calculatorState;
+
             switch (raid) {
                 case 0:
                     driveAmount = 1;
@@ -184,38 +228,47 @@ const dvrReducer = (state = new Map(), action) => {
                     driveAmount = 3;
                     driveAmounts = [ 3, 6 ];
             }
+
             const totalCapacity = driveAmount * driveCapacity;
-            calculatorState = Object.assign({}, calculatorState, {
+
+            calculatorState = {
+                ...calculatorState,
                 raid,
                 driveAmount,
                 driveAmounts,
                 totalCapacity
-            });
+            };
             calculatorState = updateRecordingTime(calculatorState);
             break;
 
         case UPDATE_DVR_DRIVE_MODEL: {
             const { driveModel } = action;
+
             const { driveAmount } = calculatorState;
             const driveCapacity = DRIVE_CAPACITY[driveModel];
             const totalCapacity = driveCapacity * driveAmount;
-            calculatorState = Object.assign({}, calculatorState, {
+
+            calculatorState = {
+                ...calculatorState,
                 driveModel,
                 driveCapacity,
                 totalCapacity
-            });
+            };
             calculatorState = updateRecordingTime(calculatorState);
             break;
         }
 
         case UPDATE_DVR_DRIVE_AMOUNT: {
             const { driveAmount } = action;
+
             const { driveCapacity } = calculatorState;
             const totalCapacity = driveAmount * driveCapacity;
-            calculatorState = Object.assign({}, calculatorState, {
+
+            calculatorState = {
+                ...calculatorState,
                 driveAmount,
                 totalCapacity
-            });
+            };
             calculatorState = updateRecordingTime(calculatorState);
             break;
         }
@@ -224,11 +277,13 @@ const dvrReducer = (state = new Map(), action) => {
             return state;
     }
     
-    return calculators.set(id, calculatorState);
+    calculators[dvrId] = calculatorState;
+    return calculators;
 };
 
 const loadCameras = (calculatorState, dvrId) => {
     const { cameras } = calculatorState;
+
     if (!!!cameras) {
         return reloadCameras(calculatorState, dvrId);
     }
@@ -236,49 +291,57 @@ const loadCameras = (calculatorState, dvrId) => {
 };
 
 const reloadCameras = (calculatorState, dvrId) => {
-    const { link, configuration } = calculatorState;
+    const {
+        link,
+        configuration
+    } = calculatorState;
 
     // Reset cameras / insert mode
-    let cameras = new Map();
+    let cameras = {};
     let cameraContainers = [];
     const modes = MODES[configuration];
     modes.forEach(mode => {
-        const id = uuid();
-        const cameraState = generateCameraState(dvrId, id, link, mode);
+        const cameraId = uuid();
+        const cameraState = generateCameraState(dvrId, cameraId, link, mode);
         cameraContainers.push(
             <DVRCamera
-                key={id}
-                id={id}
+                key={cameraId}
+                cameraId={cameraId}
                 dvrId={dvrId}
                 cameraState={cameraState}
                 link={link}
                 mode={mode}
             />
         );
-        cameras.set(id, cameraState);
+        cameras[cameraId] = cameraState;
     });
 
-    return Object.assign({}, calculatorState, {
+    return {
+        ...calculatorState,
         cameras,
         cameraContainers,
         dataRates: [],
         totalDataRate: 0
-    });
+    };
 };
 
-const setCameraAdded = (id, calculatorState, added) => {
-    const { cameras } = calculatorState;
-    let cameraState = cameras.get(id);
-    cameraState = Object.assign({}, cameraState, {
+const setCameraAdded = (cameraId, calculatorState, added) => {
+    let { cameras } = calculatorState;
+
+    let cameraState = cameras[cameraId];
+    cameraState = {
+        ...cameraState,
         added
-    });
-    cameras.set(id, cameraState);
-    return Object.assign({}, calculatorState, {
+    };
+    cameras[cameraId] = cameraState;
+
+    return {
+        ...calculatorState,
         cameras
-    });
+    };
 }
 
-const generateCameraState = (dvrId, id, link, mode, custom = false) => {
+const generateCameraState = (dvrId, cameraId, link, mode, custom = false) => {
     let cameraState;
     switch (link) {
         case LINK.CL:
@@ -293,27 +356,32 @@ const generateCameraState = (dvrId, id, link, mode, custom = false) => {
             cameraState = flareSDIDefaultState;
     }
 
-    return Object.assign({}, cameraState, {
+    return {
+        ...cameraState,
         dvrId,
-        id,
+        cameraId,
         mode
-    });
+    };
 }
 
 const updateTotalDataRate = (calculatorState) => {
     const { dataRates } = calculatorState;
+
     let totalDataRate = 0;
     for (let dataRate of dataRates) {
         totalDataRate += dataRate.value;
     }
-    return Object.assign({}, calculatorState, {
+
+    return {
+        ...calculatorState,
         totalDataRate
-    });
+    };
 }
 
 const updateRecordingTime = (calculatorState) => {
     let { raid, totalCapacity, totalDataRate } = calculatorState;
-    const seconds = totalCapacity / totalDataRate * 1024;   // Convert to MB/s
+
+    const seconds = totalCapacity / totalDataRate * 1024;
     switch (raid) {
         case 1:
             totalCapacity /= 2;
@@ -321,11 +389,13 @@ const updateRecordingTime = (calculatorState) => {
         case 5:
             totalCapacity /= 3;
     }
+
     let recordingTime = isFinite(seconds) ? secondsTohhmmss(seconds) : 'N/A';
     
-    return Object.assign({}, calculatorState, {
+    return {
+        ...calculatorState,
         recordingTime
-    });
+    };
 };
 
 const secondsTohhmmss = (totalSeconds) => {
@@ -339,7 +409,7 @@ const secondsTohhmmss = (totalSeconds) => {
     minutes = (minutes < 10) ? "0" + minutes : minutes;
     seconds = (seconds  < 10) ? "0" + seconds : seconds;
 
-    let result = `${hours}h ${minutes}m ${seconds}s`;
+    const result = `${hours}h ${minutes}m ${seconds}s`;
     return result;
 };
 

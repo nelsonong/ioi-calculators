@@ -8,7 +8,7 @@ import uuid from 'uuid';
 import styles from './Storage.css';
 
 const Calculator = SortableElement(({ id }) => (
-    <DVRCalculator id={id} />
+    <DVRCalculator dvrId={id} />
 ));
 
 const CalculatorList = SortableContainer(({ calculatorEntries }) => {
@@ -29,10 +29,13 @@ class Storage extends Component {
     onSortEnd = ({ oldIndex, newIndex }) => this.props.handleMove(oldIndex, newIndex);
 
     render = () => {
-        const calculatorEntries = Array.from(this.props.calculators, ([id, calculatorState]) => ({
-            id,
-            calculatorState
-        }));
+        const calculatorEntries = this.props.order.map(id => {
+            const calculatorState = this.props.calculators[id];
+            return {
+                id,
+                calculatorState
+            };
+        });
 
         const text = 'Please click the button above to add a calculator.';
         const instructionBox = (calculatorEntries.length === 0) ? <InstructionBox text={text} /> : '';
@@ -61,14 +64,18 @@ class Storage extends Component {
     }
 }
 
-const mapStateToProps = ({ storageCalculators }) => ({
-    calculators: storageCalculators
-});
+const mapStateToProps = ({ storageCalculators }) => {
+    const { order } = storageCalculators;
+    return {
+        calculators: storageCalculators,
+        order
+    };
+};
 
 const mapDispatchToProps = (dispatch) => ({
     handleAdd: (cameraType) => {
-        const id = uuid();
-        dispatch(addCalculator(id, cameraType, true));
+        const dvrId = uuid();
+        dispatch(addCalculator(dvrId, cameraType, true));
     },
     handleMove: (oldIndex, newIndex) =>
         dispatch(moveCalculator(oldIndex, newIndex, true)),

@@ -1,6 +1,6 @@
 import { createStore, combineReducers } from 'redux';
 import { loadState, saveState } from './localStorage';
-import frameRateReducer from '../reducers/frameRateReducer';
+import cameraReducer from '../reducers/cameraReducer';
 import storageReducer from '../reducers/storageReducer';
 
 const persistedState = loadState();
@@ -8,10 +8,9 @@ const persistedState = loadState();
 const configureStore = () => {
     const store = createStore(
         combineReducers({
-            frameRateCalculators: frameRateReducer,
+            frameRateCalculators: cameraReducer,
             storageCalculators: storageReducer
         }),
-        persistedState,
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     );
 

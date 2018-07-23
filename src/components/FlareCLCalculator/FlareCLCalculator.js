@@ -18,26 +18,34 @@ class FlareCLCalculator extends Component {
         });
         return (
             <div className={root}>
-                <CalculatorTopBar type={'Flare CL'} id={this.props.id} dvrId={this.props.dvrId} />
-                <FlareCLModel id={this.props.id} dvrId={this.props.dvrId} />
-                <FlareCLFormat id={this.props.id} dvrId={this.props.dvrId} />
-                <FlareCLResolution id={this.props.id} dvrId={this.props.dvrId} />
-                <FlareCLOptions id={this.props.id} dvrId={this.props.dvrId} />
-                <FlareCLOutput id={this.props.id} dvrId={this.props.dvrId} />
+                <CalculatorTopBar type={'Flare CL'} cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+                <FlareCLModel cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+                <FlareCLFormat cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+                <FlareCLResolution cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+                <FlareCLOptions cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+                <FlareCLOutput cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
             </div>
         );
     }
 }
 
-const mapStateToProps = (state, { id, dvrId, mode }) => ({
-    id,
+const mapStateToProps = (state, {
+    cameraId,
+    dvrId,
+    mode
+}) => ({
+    cameraId,
     dvrId,
     mode
 });
 
-const mapDispatchToProps = (dispatch, { id, dvrId, mode }) => ({
+const mapDispatchToProps = (dispatch, {
+    cameraId,
+    dvrId,
+    mode
+}) => ({
     handleInitialize: () => {
-        dispatch(initializeDVRState(id, dvrId, mode));
+        dispatch(initializeDVRState(cameraId, dvrId, mode));
     }
 });
 

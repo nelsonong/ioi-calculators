@@ -5,12 +5,12 @@ import styles from './VictoremCXCalculator.css';
 
 const VictoremCXCalculator = (props) => (
     <div className={styles.root}>
-        <CalculatorTopBar type={'Victorem CX'} id={props.id} />
-        <VictoremCXModel id={props.id} />
-        <VictoremCXFormat id={props.id} />
-        <VictoremCXResolution id={props.id} />
-        <VictoremCXOptions id={props.id} />
-        <VictoremCXOutput id={props.id} />
+        <CalculatorTopBar type={'Victorem CX'} cameraId={props.cameraId} />
+        <VictoremCXModel cameraId={props.cameraId} />
+        <VictoremCXFormat cameraId={props.cameraId} />
+        <VictoremCXResolution cameraId={props.cameraId} />
+        <VictoremCXOptions cameraId={props.cameraId} />
+        <VictoremCXOutput cameraId={props.cameraId} />
     </div>
 );
 

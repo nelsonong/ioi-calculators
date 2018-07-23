@@ -15,15 +15,15 @@ const Calculator = SortableElement(({ id, calculatorState }) => {
     const cameraType = calculatorState.cameraType;
     switch (cameraType) {
         case 'flare-cl':
-            return <FlareCLCalculator id={id} />;
+            return <FlareCLCalculator cameraId={id} />;
         case 'flare-cx':
-            return <FlareCXCalculator id={id} />
+            return <FlareCXCalculator cameraId={id} />
         case 'flare-sdi':
-            return <FlareSDICalculator id={id} />
+            return <FlareSDICalculator cameraId={id} />
         case 'victorem-cx':
-            return <VictoremCXCalculator id={id} />
+            return <VictoremCXCalculator cameraId={id} />
         case 'victorem-sdi':
-            return <VictoremSDICalculator id={id} />
+            return <VictoremSDICalculator cameraId={id} />
     }
 });
 
@@ -47,10 +47,13 @@ class FrameRate extends Component {
     onSortEnd = ({ oldIndex, newIndex }) => this.props.handleMove(oldIndex, newIndex);
 
     render = () => {
-        const calculatorEntries = Array.from(this.props.calculators, ([id, calculatorState]) => ({
-            id,
-            calculatorState
-        }));
+        const calculatorEntries = this.props.order.map(id => {
+            const calculatorState = this.props.calculators[id];
+            return {
+                id,
+                calculatorState
+            };
+        });
 
         const text = 'Please select a button above to add a calculator.';
         const instructionBox = (calculatorEntries.length === 0) ? <InstructionBox text={text} /> : '';
@@ -88,14 +91,18 @@ class FrameRate extends Component {
     }
 }
 
-const mapStateToProps = ({ frameRateCalculators }) => ({
-    calculators: frameRateCalculators
-});
+const mapStateToProps = ({ frameRateCalculators }) => {
+    const { order } = frameRateCalculators;
+    return {
+        calculators: frameRateCalculators,
+        order
+    };
+};
 
 const mapDispatchToProps = (dispatch) => ({
     handleAdd: (cameraType) => {
-        const id = uuid();
-        dispatch(addCalculator(id, cameraType));
+        const cameraId = uuid();
+        dispatch(addCalculator(cameraId, cameraType));
     },
     handleMove: (oldIndex, newIndex) =>
         dispatch(moveCalculator(oldIndex, newIndex)),

@@ -20,10 +20,13 @@ const FlareCLHardwareVersion = ({
     );
 };
 
-const mapStateToProps = (state, { id, dvrId }) => {
-    const calculatorState = (dvrId !== undefined) ?
-        state.storageCalculators.get(dvrId).cameras.get(id) :
-        state.frameRateCalculators.get(id);
+const mapStateToProps = (state, {
+    cameraId,
+    dvrId
+}) => {
+    const calculatorState = !!!dvrId
+        ? state.frameRateCalculators[cameraId]
+        : state.storageCalculators[dvrId].cameras[cameraId];
     const {
             model,
             hwversion,
@@ -37,10 +40,13 @@ const mapStateToProps = (state, { id, dvrId }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch, { id, dvrId }) => ({
+const mapDispatchToProps = (dispatch, {
+    cameraId,
+    dvrId
+}) => ({
     handleChange: (e) => {
         const hwversion = e.target.value;
-        dispatch(updateHardwareVersion(id, hwversion, dvrId));
+        dispatch(updateHardwareVersion(cameraId, hwversion, dvrId));
     }
 });
 

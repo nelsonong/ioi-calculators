@@ -15,51 +15,51 @@ const customCLActionTypes = [
 ];
 
 // Action generators
-export const initializeDVRState = (id, dvrId, mode) => ({
+export const initializeDVRState = (cameraId, dvrId, mode) => ({
     type: INITIALIZE_CUSTOM_CL_DVR_STATE,
-    id,
+    cameraId,
     dvrId,
     mode
 });
 
-export const updateModel = (id, model, dvrId) => ({
+export const updateModel = (cameraId, model, dvrId) => ({
     type: UPDATE_CUSTOM_CL_MODEL,
-    id,
+    cameraId,
     model,
     dvrId
 });
 
-export const updateFormat = (id, format, dvrId) => ({
+export const updateFormat = (cameraId, format, dvrId) => ({
     type: UPDATE_CUSTOM_CL_FORMAT,
-    id,
+    cameraId,
     format,
     dvrId
 });
 
-export const updateResolutionPreset = (id, resolutionPreset, dvrId) => ({
+export const updateResolutionPreset = (cameraId, resolutionPreset, dvrId) => ({
     type: UPDATE_CUSTOM_CL_RESOLUTION_PRESET,
-    id,
+    cameraId,
     resolutionPreset,
     dvrId
 });
 
-export const updateWidth = (id, width, dvrId) => ({
+export const updateWidth = (cameraId, dvrId) => ({
     type: UPDATE_CUSTOM_CL_WIDTH,
-    id,
-    width: width,
+    cameraId,
+    width,
     dvrId
 });
 
-export const updateHeight = (id, height, dvrId) => ({
+export const updateHeight = (cameraId, height, dvrId) => ({
     type: UPDATE_CUSTOM_CL_HEIGHT,
-    id,
-    height: height,
+    cameraId,
+    height,
     dvrId
 });
 
-export const updateFrameRate = (id, frameRate, dvrId) => ({
+export const updateFrameRate = (cameraId, frameRate, dvrId) => ({
     type: UPDATE_CUSTOM_CL_FRAME_RATE,
-    id,
+    cameraId,
     frameRate,
     dvrId
 });

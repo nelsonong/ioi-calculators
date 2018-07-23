@@ -27,9 +27,8 @@ const VictoremCXFormat = ({
     );
 };
 
-const mapStateToProps = ({ frameRateCalculators }, ownProps) => {
-    const { id } = ownProps;
-    const calculatorState = frameRateCalculators.get(id);
+const mapStateToProps = ({ frameRateCalculators }, { cameraId }) => {
+    const calculatorState = frameRateCalculators[cameraId];
     const {
         formats
     } = calculatorState;
@@ -39,16 +38,15 @@ const mapStateToProps = ({ frameRateCalculators }, ownProps) => {
     };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    const { id } = ownProps;
+const mapDispatchToProps = (dispatch, { cameraId }) => {
     return {
         handleChangeFormat: (e) => {
             const format = e.target.value;
-            dispatch(updateFormat(id, format));
+            dispatch(updateFormat(cameraId, format));
         },
         handleChangeBitDepth: (e) => {
             const bitDepth = Number(e.target.value);
-            dispatch(updateBitDepth(id, bitDepth));
+            dispatch(updateBitDepth(cameraId, bitDepth));
         }
     };
 };

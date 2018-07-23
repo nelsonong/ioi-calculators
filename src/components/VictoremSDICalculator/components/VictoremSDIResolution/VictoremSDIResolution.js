@@ -19,8 +19,8 @@ const VictoremSDIResolution = ({
     );
 };
 
-const mapStateToProps = ({ frameRateCalculators }, { id }) => {
-    const calculatorState = frameRateCalculators.get(id);
+const mapStateToProps = ({ frameRateCalculators }, { cameraId }) => {
+    const calculatorState = frameRateCalculators[cameraId];
     const {
         resolution,
         resolutions
@@ -32,10 +32,10 @@ const mapStateToProps = ({ frameRateCalculators }, { id }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch, { id }) => ({
+const mapDispatchToProps = (dispatch, { cameraId }) => ({
     handleChange: (e) => {
         const resolution = e.target.value;
-        dispatch(updateResolution(id, resolution));
+        dispatch(updateResolution(cameraId, resolution));
     }
 });
 

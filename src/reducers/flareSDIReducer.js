@@ -10,13 +10,20 @@ import {
     UPDATE_FLARE_SDI_FRAME_RATE
 } from '../actions/flareSDIActions';
 
-const flareSDIReducer = (state = new Map(), action) => {
-    const { id } = action;
-    let calculators = new Map(state);
-    let calculatorState = calculators.get(id);
-    switch (action.type) {
+const flareSDIReducer = (state = { order: [] }, action) => {
+    const {
+        cameraId,
+        type
+    } = action;
+
+    let calculators = { ...state };
+    let calculatorState = calculators[cameraId];
+
+    switch (type) {
         case INITIALIZE_FLARE_SDI_DVR_STATE: {
             const { mode } = action;
+
+            // Get models
             let models = MODELS;
             if (!!mode) {
                 switch (mode) {
@@ -33,19 +40,23 @@ const flareSDIReducer = (state = new Map(), action) => {
                 }
             }
             const model = models[0];
-            calculatorState = Object.assign({}, calculatorState, {
+
+            calculatorState = {
+                ...calculatorState,
                 model,
                 models
-            });
+            };
         }
 
         case UPDATE_FLARE_SDI_MODEL: {
             const { model } = action.model ? action : calculatorState;
-            const { mode } = calculatorState;
+
+            // Get interfaces
             let sdiInterfaces = Object.keys(SDI_TREE[model]);
+            const { mode } = calculatorState;
             if (!!mode) {
+                const { HD_SDI, Q_HD_SDI, S_3G_SDI, S_3G_SDI_B, D_3G_SDI, Q_3G_SDI } = INTERFACE;
                 if (model === MODEL.Type4KSDIMini) {
-                    const { HD_SDI, Q_HD_SDI, S_3G_SDI, S_3G_SDI_B, D_3G_SDI, Q_3G_SDI } = INTERFACE;
                     switch (mode) {
                         case MODE.DUAL:
                             sdiInterfaces = [ D_3G_SDI ];
@@ -60,60 +71,75 @@ const flareSDIReducer = (state = new Map(), action) => {
             }
             const sdiInterface = sdiInterfaces[0];
 
-            calculatorState = Object.assign({}, calculatorState, {
+            calculatorState = {
+                ...calculatorState,
                 model,
                 sdiInterface,
                 sdiInterfaces
-            });
+            };
         }
     
         case UPDATE_FLARE_SDI_INTERFACE: {
             const { sdiInterface } = action.sdiInterface ? action : calculatorState;
+
+            // Get resolutions
             const { model } = calculatorState;
             const resolutions = Object.keys(SDI_TREE[model][sdiInterface]);
             const resolution = resolutions[0];
             const [ width, height ] = splitResolution(resolution);
-            calculatorState = Object.assign({}, calculatorState, {
+
+            calculatorState = {
+                ...calculatorState,
                 sdiInterface,
                 width,
                 height,
                 resolution,
                 resolutions
-            });
+            };
         }
     
         case UPDATE_FLARE_SDI_RESOLUTION: {
             const { resolution } = action.resolution ? action : calculatorState;
+
+            // Get colors
             const { model, sdiInterface } = calculatorState;
             const colors = Object.keys(SDI_TREE[model][sdiInterface][resolution]);
             const color = colors[0];
             const [ width, height ] = splitResolution(resolution);
-            calculatorState = Object.assign({}, calculatorState, {
+
+            calculatorState = {
+                ...calculatorState,
                 resolution,
                 width,
                 height,
                 color,
                 colors
-            });
+            };
         }
     
         case UPDATE_FLARE_SDI_COLOR: {
             const { color } = action.color ? action : calculatorState;
+
+            // Get frame rates
             const { model, sdiInterface, resolution } = calculatorState;
             const frameRates = SDI_TREE[model][sdiInterface][resolution][color];
             const frameRate = frameRates[0];
-            calculatorState = Object.assign({}, calculatorState, {
+
+            calculatorState = {
+                ...calculatorState,
                 color,
                 frameRate,
                 frameRates
-            });
+            };
         }
     
         case UPDATE_FLARE_SDI_FRAME_RATE: {
             const { frameRate } = action.frameRate ? action : calculatorState;
-            calculatorState = Object.assign({}, calculatorState, {
+
+            calculatorState =  {
+                ...calculatorState,
                 frameRate
-            });
+            };
             calculatorState = updateDataRate(calculatorState);
             break;
         }
@@ -122,15 +148,18 @@ const flareSDIReducer = (state = new Map(), action) => {
             return state;
     }
 
-    return calculators.set(id, calculatorState);
+    calculators[cameraId] = calculatorState;
+    return calculators;
 };
 
 const updateDataRate = (calculatorState) => {
     const { width, height, color, frameRate } = calculatorState;
     const dataRate = calculateDataRate(frameRate, width, height, color);
-    return Object.assign({}, calculatorState, {
+
+    return {
+        ...calculatorState,
         dataRate
-    });
+    };
 }
 
 export default flareSDIReducer;

@@ -15,44 +15,44 @@ const flareSDIActionTypes = [
 ];
 
 // Action generators
-export const initializeDVRState = (id, dvrId, mode) => ({
+export const initializeDVRState = (cameraId, dvrId, mode) => ({
     type: INITIALIZE_FLARE_SDI_DVR_STATE,
-    id,
+    cameraId,
     dvrId,
     mode
 });
 
-export const updateModel = (id, model, dvrId) => ({
+export const updateModel = (cameraId, model, dvrId) => ({
     type: UPDATE_FLARE_SDI_MODEL,
-    id,
+    cameraId,
     model,
     dvrId
 });
 
-export const updateInterface = (id, sdiInterface, dvrId) => ({
+export const updateInterface = (cameraId, sdiInterface, dvrId) => ({
     type: UPDATE_FLARE_SDI_INTERFACE,
-    id,
+    cameraId,
     sdiInterface,
     dvrId
 });
 
-export const updateResolution = (id, resolution, dvrId) => ({
+export const updateResolution = (cameraId, resolution, dvrId) => ({
     type: UPDATE_FLARE_SDI_RESOLUTION,
-    id,
+    cameraId,
     resolution,
     dvrId
 });
 
-export const updateColor = (id, color, dvrId) => ({
+export const updateColor = (cameraId, color, dvrId) => ({
     type: UPDATE_FLARE_SDI_COLOR,
-    id,
+    cameraId,
     color,
     dvrId
 });
 
-export const updateFrameRate = (id, frameRate, dvrId) => ({
+export const updateFrameRate = (cameraId, frameRate, dvrId) => ({
     type: UPDATE_FLARE_SDI_FRAME_RATE,
-    id,
+    cameraId,
     frameRate,
     dvrId
 });

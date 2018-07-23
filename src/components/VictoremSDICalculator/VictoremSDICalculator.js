@@ -13,20 +13,23 @@ class VictoremSDICalculator extends Component {
 
     render = () => (
         <div className={styles.root}>
-            <CalculatorTopBar type={'Victorem SDI'} id={this.props.id} />
-            <VictoremSDIModel id={this.props.id} />
-            <VictoremSDIInterface id={this.props.id} />
-            <VictoremSDIResolution id={this.props.id} />
-            <VictoremSDIColor id={this.props.id} />
-            <VictoremSDIFrameRate id={this.props.id} />
-            <VictoremSDIOutput id={this.props.id} />
+            <CalculatorTopBar type={'Victorem SDI'} cameraId={this.props.cameraId} />
+            <VictoremSDIModel cameraId={this.props.cameraId} />
+            <VictoremSDIInterface cameraId={this.props.cameraId} />
+            <VictoremSDIResolution cameraId={this.props.cameraId} />
+            <VictoremSDIColor cameraId={this.props.cameraId} />
+            <VictoremSDIFrameRate cameraId={this.props.cameraId} />
+            <VictoremSDIOutput cameraId={this.props.cameraId} />
         </div>
     );
 }
 
-const mapDispatchToProps = (dispatch, { id, mode }) => ({
+const mapDispatchToProps = (dispatch, {
+    cameraId,
+    mode
+}) => ({
     handleInitialize: () => {
-        dispatch(initializeDVRState(id, mode));
+        dispatch(initializeDVRState(cameraId, mode));
     }
 });
 

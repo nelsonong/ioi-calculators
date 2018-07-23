@@ -9,47 +9,58 @@ import {
     UPDATE_CUSTOM_CL_FRAME_RATE
 } from '../actions/customCLActions';
 
-const customCLReducer = (state = new Map(), action) => {
-    const { id, type } = action;
-    let calculators = new Map(state);
-    let calculatorState = state.get(id);
+const customCLReducer = (state = { order: [] }, action) => {
+    const {
+        cameraId,
+        type
+    } = action;
+
+    let calculators = { ...state };
+    let calculatorState = calculators[cameraId];
 
     switch (type) {
         case INITIALIZE_CUSTOM_CL_DVR_STATE: {
             const { mode } = action;
+
             const formats = filterFormats(FORMATS, mode);
 
-            calculatorState = Object.assign({}, calculatorState, {
+            calculatorState = {
+                ...calculatorState,
                 formats
-            });
+            };
             calculatorState = updateOutput(calculatorState);
             break;
         }
 
         case UPDATE_CUSTOM_CL_FORMAT:
             const { format } = action;
-            calculatorState = Object.assign({}, calculatorState, {
+
+            calculatorState = {
+                ...calculatorState,
                 format
-            });
+            };
             calculatorState = updateOutput(calculatorState);
             break;
 
         case UPDATE_CUSTOM_CL_RESOLUTION_PRESET: {
             const { resolutionPreset } = action;
+
             switch (resolutionPreset) {
                 case RESOLUTION.CUSTOM:
-                    calculatorState = Object.assign({}, calculatorState, {
+                    calculatorState = {
+                        ...calculatorState,
                         resolutionPreset
-                    });
+                    };
                     break;
 
                 default:
                     const [ width, height ] = resolutionPreset.split('x');
-                    calculatorState = Object.assign({}, calculatorState, {
-                            resolutionPreset,
-                            width: Number(width),
-                            height: Number(height)
-                    });
+                    calculatorState = {
+                        ...calculatorState,
+                        resolutionPreset,
+                        width: Number(width),
+                        height: Number(height)
+                    };
             }
             calculatorState = updateOutput(calculatorState);
             break;
@@ -57,33 +68,35 @@ const customCLReducer = (state = new Map(), action) => {
 
         case UPDATE_CUSTOM_CL_WIDTH: {
             const { width } = action;
-            const resolutionPreset = RESOLUTION.CUSTOM;
 
-            calculatorState = Object.assign({}, calculatorState, {
+            calculatorState = {
+                ...calculatorState,
                 width,
-                resolutionPreset
-            });
+                resolutionPreset: RESOLUTION.CUSTOM
+            };
             calculatorState = updateOutput(calculatorState);
             break;
         }
         
         case UPDATE_CUSTOM_CL_HEIGHT: {
             const { height } = action;
-            const resolutionPreset = RESOLUTION.CUSTOM;
 
-            calculatorState = Object.assign({}, calculatorState, {
-                    height,
-                    resolutionPreset
-            });
+            calculatorState = {
+                ...calculatorState,
+                height,
+                resolutionPreset: RESOLUTION.CUSTOM
+            };
             calculatorState = updateOutput(calculatorState);
             break;
         }
 
         case UPDATE_CUSTOM_CL_FRAME_RATE:
             const { frameRate } = action;
-            calculatorState = Object.assign({}, calculatorState, {
+
+            calculatorState = {
+                ...calculatorState,
                 frameRate
-            });
+            };
             calculatorState = updateOutput(calculatorState);
             break;
             
@@ -91,15 +104,18 @@ const customCLReducer = (state = new Map(), action) => {
             return state;
     }
     
-    return calculators.set(id, calculatorState);
+    calculators[cameraId] = calculatorState;
+    return calculators;
 };
 
 // Update output
 const updateOutput = (calculatorState) => {
     const dataRate = calculateDataRate({ ...calculatorState });
-    return Object.assign({}, calculatorState, {
+
+    return {
+        ...calculatorState,
         dataRate
-    });
+    };
 };
 
 const filterFormats = (formats, mode) => {
@@ -113,6 +129,6 @@ const filterFormats = (formats, mode) => {
         default:
             throw new Error('Mode not found.');
     }
-}
+};
 
 export default customCLReducer;

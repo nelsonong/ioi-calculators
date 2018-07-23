@@ -21,16 +21,16 @@ const VictoremCXModel = ({ sensor, handleChange }) => {
     );
 };
 
-const mapStateToProps = ({ frameRateCalculators }, { id }) => {
-    const calculatorState = frameRateCalculators.get(id);
+const mapStateToProps = ({ frameRateCalculators }, { cameraId }) => {
+    const calculatorState = frameRateCalculators[cameraId];
     const { sensor } = calculatorState;
     return { sensor };
 };
 
-const mapDispatchToProps = (dispatch, { id }) => ({
+const mapDispatchToProps = (dispatch, { cameraId }) => ({
     handleChange: (e) => {
         const model = e.target.value;
-        dispatch(updateModel(id, model));
+        dispatch(updateModel(cameraId, model));
     }
 });
 

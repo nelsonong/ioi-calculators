@@ -18,26 +18,33 @@ class FlareSDICalculator extends Component {
         });
         return (
             <div className={root}>
-                <CalculatorTopBar type={'Flare SDI'} id={this.props.id} dvrId={this.props.dvrId} />
-                <FlareSDIModel id={this.props.id} dvrId={this.props.dvrId} />
-                <FlareSDIInterface id={this.props.id} dvrId={this.props.dvrId} />
-                <FlareSDIResolution id={this.props.id} dvrId={this.props.dvrId} />
-                <FlareSDIColor id={this.props.id} dvrId={this.props.dvrId} />
-                <FlareSDIFrameRate id={this.props.id} dvrId={this.props.dvrId} />
-                <FlareSDIOutput id={this.props.id} dvrId={this.props.dvrId} />
+                <CalculatorTopBar type={'Flare SDI'} cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+                <FlareSDIModel cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+                <FlareSDIInterface cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+                <FlareSDIResolution cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+                <FlareSDIColor cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+                <FlareSDIFrameRate cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+                <FlareSDIOutput cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
             </div>
         );
     }
 }
 
-const mapStateToProps = (state, { id, dvrId }) => ({
-    id,
+const mapStateToProps = (state, {
+    cameraId,
+    dvrId
+}) => ({
+    cameraId,
     dvrId
 });
 
-const mapDispatchToProps = (dispatch, { id, dvrId, mode }) => ({
+const mapDispatchToProps = (dispatch, {
+    cameraId,
+    dvrId,
+    mode
+}) => ({
     handleInitialize: () => {
-        dispatch(initializeDVRState(id, dvrId, mode));
+        dispatch(initializeDVRState(cameraId, dvrId, mode));
     }
 });
 

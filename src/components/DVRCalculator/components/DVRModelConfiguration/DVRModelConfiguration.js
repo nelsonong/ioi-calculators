@@ -26,22 +26,23 @@ const DVRModel = ({
     );
 };
 
-const mapStateToProps = ({ storageCalculators }, { id }) => {
-    const calculatorState = storageCalculators.get(id);
+const mapStateToProps = ({ storageCalculators }, { dvrId }) => {
+    const calculatorState = storageCalculators[dvrId];
     const { configurations } = calculatorState;
+    
     return {
         configurations
     };
 };
 
-const mapDispatchToProps = (dispatch, { id }) => ({
+const mapDispatchToProps = (dispatch, { dvrId }) => ({
     handleChangeModel: (e) => {
         const model = e.target.value;
-        dispatch(updateModel(id, model));
+        dispatch(updateModel(dvrId, model));
     },
     handleChangeConfiguration: (e) => {
         const configuration = e.target.value;
-        dispatch(updateConfiguration(id, configuration));
+        dispatch(updateConfiguration(dvrId, configuration));
     },
 });
 

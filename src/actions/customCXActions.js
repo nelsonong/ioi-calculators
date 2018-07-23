@@ -19,58 +19,58 @@ const customCXActionTypes = [
 ];
 
 // Action generators
-export const initializeDVRState = (id, dvrId, mode) => ({
+export const initializeDVRState = (cameraId, dvrId, mode) => ({
     type: INITIALIZE_CUSTOM_CX_DVR_STATE,
-    id,
+    cameraId,
     dvrId,
     mode
 });
 
-export const updateBitDepth = (id, bitDepth, dvrId) => ({
+export const updateBitDepth = (cameraId, bitDepth, dvrId) => ({
     type: UPDATE_CUSTOM_CX_BIT_DEPTH,
-    id,
+    cameraId,
     bitDepth,
     dvrId
 });
 
-export const updateLinkCount = (id, linkCount, dvrId) => ({
+export const updateLinkCount = (cameraId, linkCount, dvrId) => ({
     type: UPDATE_CUSTOM_CX_LINK_COUNT,
-    id,
+    cameraId,
     linkCount,
     dvrId
 });
 
-export const updateLinkSpeed = (id, linkSpeed, dvrId) => ({
+export const updateLinkSpeed = (cameraId, linkSpeed, dvrId) => ({
     type: UPDATE_CUSTOM_CX_LINK_SPEED,
-    id,
+    cameraId,
     linkSpeed,
     dvrId
 });
 
-export const updateResolutionPreset = (id, resolutionPreset, dvrId) => ({
+export const updateResolutionPreset = (cameraId, resolutionPreset, dvrId) => ({
     type: UPDATE_CUSTOM_CX_RESOLUTION_PRESET,
-    id,
+    cameraId,
     resolutionPreset,
     dvrId
 });
 
-export const updateWidth = (id, width, dvrId) => ({
+export const updateWidth = (cameraId, width, dvrId) => ({
     type: UPDATE_CUSTOM_CX_WIDTH,
-    id,
-    width: width,
+    cameraId,
+    width,
     dvrId
 });
 
-export const updateHeight = (id, height, dvrId) => ({
+export const updateHeight = (cameraId, height, dvrId) => ({
     type: UPDATE_CUSTOM_CX_HEIGHT,
-    id,
-    height: height,
+    cameraId,
+    height,
     dvrId
 });
 
-export const updateFrameRate = (id, frameRate, dvrId) => ({
+export const updateFrameRate = (cameraId, frameRate, dvrId) => ({
     type: UPDATE_CUSTOM_CX_FRAME_RATE,
-    id,
+    cameraId,
     frameRate,
     dvrId
 });

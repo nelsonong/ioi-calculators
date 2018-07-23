@@ -19,8 +19,8 @@ const VictoremSDIInterface = ({
     );
 };
 
-const mapStateToProps = ({ frameRateCalculators }, { id }) => {
-    const calculatorState = frameRateCalculators.get(id);
+const mapStateToProps = ({ frameRateCalculators }, { cameraId }) => {
+    const calculatorState = frameRateCalculators[cameraId];
     const {
         sdiInterface,
         sdiInterfaces
@@ -32,10 +32,10 @@ const mapStateToProps = ({ frameRateCalculators }, { id }) => {
     };
 };
 
-const mapDispatchToProps = (dispatch, { id }) => ({
+const mapDispatchToProps = (dispatch, { cameraId }) => ({
     handleChange: (e) => {
         const sdiInterface = e.target.value;
-        dispatch(updateInterface(id, sdiInterface));
+        dispatch(updateInterface(cameraId, sdiInterface));
     }
 });
 
