@@ -4,7 +4,6 @@ import {
     INITIALIZE_CUSTOM_CX_DVR_STATE,
     UPDATE_CUSTOM_CX_BIT_DEPTH,
     UPDATE_CUSTOM_CX_LINK_COUNT,
-    UPDATE_CUSTOM_CX_LINK_SPEED,
     UPDATE_CUSTOM_CX_RESOLUTION_PRESET,
     UPDATE_CUSTOM_CX_WIDTH,
     UPDATE_CUSTOM_CX_HEIGHT,
@@ -41,16 +40,6 @@ const customCXReducer = (state = { order: [] }, action) => {
             calculatorState = {
                 ...calculatorState,
                 linkCount
-            };
-            calculatorState = updateOutput(calculatorState);
-            break;
-
-        case UPDATE_CUSTOM_CX_LINK_SPEED:
-            const { linkSpeed } = action;
-
-            calculatorState = {
-                ...calculatorState,
-                linkSpeed
             };
             calculatorState = updateOutput(calculatorState);
             break;
