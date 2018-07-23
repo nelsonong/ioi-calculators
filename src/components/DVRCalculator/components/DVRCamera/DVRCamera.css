@@ -23,6 +23,7 @@
     width: 21%;
     height: 11rem;
     margin: 0.3rem;
+    padding: 0;
     border: solid $calculator-border;
     border-width: medium;
     border-radius: 0.5rem;
@@ -32,6 +33,10 @@
 
 .root:hover {
     opacity: 1.0;
+}
+
+.add-button-container {
+    height: 9rem;
     cursor: pointer;
 }
 

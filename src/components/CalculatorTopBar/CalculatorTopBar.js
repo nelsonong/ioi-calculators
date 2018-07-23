@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { deleteCalculator } from '../../actions/managementActions';
+import { MdClear } from 'react-icons/lib/md';
 import cx from 'classnames';
 import styles from './CalculatorTopBar.css';
 
@@ -10,12 +11,12 @@ const CalculatorTopBar = ({
     storage,
     handleDelete
 }) => {
-    const text = !inDVR ? `${type} Calculator` : `${type} Camera`;
+    const text = (!inDVR || storage) ? `${type} Calculator` : `${type} Camera`;
     const closeButton = cx(styles.closeButton, {
         [styles.storageCloseButton]: storage
     });
     const button = (!inDVR || storage) ? (
-        <button className={closeButton} type='button' onClick={handleDelete}>
+        <button type='button' className={closeButton} onClick={handleDelete}>
             ✖
         </button>
     ) : '';

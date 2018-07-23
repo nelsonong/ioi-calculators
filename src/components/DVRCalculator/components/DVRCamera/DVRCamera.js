@@ -46,7 +46,7 @@ class DVRCamera extends Component {
 
     renderContents = () => {
         let contents = (
-            <div onClick={this.addCamera}>
+            <div className={styles.addButtonContainer} onClick={this.addCamera}>
                 <button type='button' className={styles.addButton}>
                     <MdAddCircle size={43} />
                 </button>
