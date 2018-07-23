@@ -43,10 +43,17 @@ const mapStateToProps = (state, {
 });
 
 const mapDispatchToProps = (dispatch, {
+    cameraId,
     dvrId,
     storage
 }) => ({
-    handleDelete: () => dispatch(deleteCalculator(dvrId, !!storage))
+    handleDelete: () => {
+        if (!!dvrId) {
+            dispatch(deleteCalculator(dvrId, !!storage))
+        } else {
+            dispatch(deleteCalculator(cameraId, !!storage))
+        }
+    }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CalculatorTopBar);
