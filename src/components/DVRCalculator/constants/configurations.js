@@ -19,6 +19,9 @@ export const CONFIG = {
         QUAD: 'Quad-Link',
         SINGLE_IOx2: 'Single-Link x2 In/Out',
         DUAL_IO: 'Dual-Link In/Out'
+    },
+    GEV: {
+        DEFAULT: 'Default'
     }
 };
 
@@ -56,3 +59,6 @@ export const SDIMAX_CONFIGS = [
     CONFIG.SDI.DUALx2,
     CONFIG.SDI.QUAD
 ];
+
+// GEV configuration
+export const GEV_CONFIGS = [ CONFIG.GEV.DEFAULT ];

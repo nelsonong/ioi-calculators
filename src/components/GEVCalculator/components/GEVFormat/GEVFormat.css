@@ -1,0 +1,16 @@
+@import '../../../../styles/custom.css';
+
+.root {
+    composes: custom-fieldset;
+}
+
+@mixin add-left-right;
+
+.label {
+    composes: label;
+    display: inline;
+}
+
+.select {
+    composes: select;
+}

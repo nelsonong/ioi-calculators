@@ -2,7 +2,7 @@ import {
     MODEL,
     CL_CONFIGS, CLPLUS_CONFIGS, CLMAX_CONFIGS,
     CX_CONFIGS, CXPLUS_CONFIGS, CXMAX_CONFIGS,
-    SDI_CONFIGS, SDIMAX_CONFIGS,
+    SDI_CONFIGS, SDIMAX_CONFIGS, GEV_CONFIGS,
     DRIVE_CAPACITY, LINK, MODE, MODES
 } from '../components/DVRCalculator/constants';
 
@@ -24,6 +24,7 @@ import { flareCXDefaultState } from '../components/FlareCXCalculator/constants';
 import { flareSDIDefaultState } from '../components/FlareSDICalculator/constants';
 import { customCLDefaultState } from '..//components/CustomCLCalculator/constants';
 import { customCXDefaultState } from '..//components/CustomCXCalculator/constants';
+import { gevDefaultState } from '..//components/GEVCalculator/constants';
 import uuid from 'uuid';
 
 const dvrReducer = (state = { order: [] }, action) => {
@@ -88,6 +89,10 @@ const dvrReducer = (state = { order: [] }, action) => {
                     link = LINK.SDI;
                     configurations = SDIMAX_CONFIGS;
                     mode = MODE.SINGLE;
+                    break;
+                case MODEL.COREGEV:
+                    link = LINK.GEV;
+                    configurations = GEV_CONFIGS;
             }
             const configuration = configurations[0];
 
@@ -347,6 +352,10 @@ const generateCameraState = (dvrId, cameraId, link, mode, custom = false) => {
 
         case LINK.SDI:
             cameraState = flareSDIDefaultState;
+            break;
+
+        case LINK.GEV:
+            cameraState = gevDefaultState;
     }
 
     return {

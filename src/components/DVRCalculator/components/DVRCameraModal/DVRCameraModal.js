@@ -8,6 +8,7 @@ import FlareCXCalculator from '../../../FlareCXCalculator';
 import FlareSDICalculator from '../../../FlareSDICalculator';
 import CustomCLCalculator from '../../../CustomCLCalculator';
 import CustomCXCalculator from '../../../CustomCXCalculator';
+import GEVCalculator from '../../../GEVCalculator';
 import styles from './DVRCameraModal.css';
 
 Modal.setAppElement('#root');
@@ -23,6 +24,7 @@ class DVRCameraModal extends Component {
                         mode={this.props.mode}
                     />
                 );
+
             case 'flare-cx':
                 return (
                     <FlareCXCalculator
@@ -31,6 +33,7 @@ class DVRCameraModal extends Component {
                         mode={this.props.mode}
                     />
                 );
+
             case 'flare-sdi':
                 return (
                     <FlareSDICalculator
@@ -39,6 +42,7 @@ class DVRCameraModal extends Component {
                         mode={this.props.mode}
                     />
                 );
+
             case 'custom-cl':
                 return (
                     <CustomCLCalculator
@@ -47,12 +51,21 @@ class DVRCameraModal extends Component {
                         mode={this.props.mode}
                     />
                 );
+
             case 'custom-cx':
                 return (
                     <CustomCXCalculator
                         cameraId={this.props.cameraId}
                         dvrId={this.props.dvrId}
                         mode={this.props.mode}
+                    />
+                );
+
+            case 'gev':
+                return (
+                    <GEVCalculator
+                        cameraId={this.props.cameraId}
+                        dvrId={this.props.dvrId}
                     />
                 );
         }
@@ -75,6 +88,7 @@ class DVRCameraModal extends Component {
                 );
 
             case 'flare-sdi':
+            case 'gev':
                 return '';
                 
             default:

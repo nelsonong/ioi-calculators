@@ -9,7 +9,10 @@ export const MODE = {
     // CX/SDI
     SINGLE: 'SINGLE',
     DUAL: 'DUAL',
-    QUAD: 'QUAD'
+    QUAD: 'QUAD',
+
+    // GEV
+    GEV: 'GEV'
 };
 
 export const MODES = {
@@ -79,4 +82,8 @@ export const MODES = {
     [CONFIG.SDI.DUAL_IO]: [
         MODE.DUAL_FULL
     ],
+    [CONFIG.GEV.DEFAULT]: [
+        MODE.GEV,
+        MODE.GEV
+    ]
 };
