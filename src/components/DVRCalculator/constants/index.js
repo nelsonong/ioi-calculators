@@ -4,7 +4,8 @@ import {
     CONFIG,
     CL_CONFIGS, CLPLUS_CONFIGS, CLMAX_CONFIGS,
     CX_CONFIGS, CXPLUS_CONFIGS, CXMAX_CONFIGS,
-    SDI_CONFIGS, SDIMAX_CONFIGS, GEV_CONFIGS
+    SDI_CONFIGS, SDIMAX_CONFIGS,
+    GEV_CONFIGS, NTSC_CONFIGS
 } from './configurations';
 import { DRIVES, DRIVE_CAPACITY } from './drives';
 import { LINK } from './links';
@@ -40,6 +41,7 @@ export {
     SDI_CONFIGS,
     SDIMAX_CONFIGS,
     GEV_CONFIGS,
+    NTSC_CONFIGS,
     DRIVES,
     DRIVE_CAPACITY,
     LINK,

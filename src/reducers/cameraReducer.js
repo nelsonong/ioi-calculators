@@ -7,6 +7,7 @@ import { victoremSDIActionTypes } from '../actions/victoremSDIActions';
 import { customCLActionTypes } from '../actions/customCLActions';
 import { customCXActionTypes } from '../actions/customCXActions';
 import { gevActionTypes } from '../actions/gevActions';
+import { ntscActionTypes } from '../actions/ntscActions';
 import managementReducer from '../reducers/managementReducer';
 import flareCLReducer from '../reducers/flareCLReducer';
 import flareCXReducer from '../reducers/flareCXReducer';
@@ -16,6 +17,7 @@ import victoremSDIReducer from '../reducers/victoremSDIReducer';
 import customCLReducer from '../reducers/customCLReducer';
 import customCXReducer from '../reducers/customCXReducer';
 import gevReducer from '../reducers/gevReducer';
+import ntscReducer from '../reducers/ntscReducer';
 
 const cameraReducer = (state = { order: [] }, action) => {
     if (!!action.dvrId && !!!action.fromStorageReducer) {
@@ -40,6 +42,8 @@ const cameraReducer = (state = { order: [] }, action) => {
         return customCXReducer(state, action);
     } else if (gevActionTypes.includes(action.type)) {
         return gevReducer(state, action);
+    } else if (ntscActionTypes.includes(action.type)) {
+        return ntscReducer(state, action);
     }
     return state;
 }

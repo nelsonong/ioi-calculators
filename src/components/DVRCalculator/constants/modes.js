@@ -12,7 +12,10 @@ export const MODE = {
     QUAD: 'QUAD',
 
     // GEV
-    GEV: 'GEV'
+    GEV: 'GEV',
+
+    // NTSC
+    NTSC: 'NTSC'
 };
 
 export const MODES = {
@@ -85,5 +88,11 @@ export const MODES = {
     [CONFIG.GEV.DEFAULT]: [
         MODE.GEV,
         MODE.GEV
+    ],
+    [CONFIG.NTSC.DEFAULT]: [
+        MODE.NTSC,
+        MODE.NTSC,
+        MODE.NTSC,
+        MODE.NTSC
     ]
 };

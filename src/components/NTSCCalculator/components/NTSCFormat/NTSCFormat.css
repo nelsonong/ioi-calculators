@@ -1,0 +1,14 @@
+@import '../../../../styles/custom.css';
+
+.root {
+    composes: custom-fieldset;
+}
+
+.label {
+    composes: label;
+    display: inline;
+}
+
+.select {
+    composes: select;
+}

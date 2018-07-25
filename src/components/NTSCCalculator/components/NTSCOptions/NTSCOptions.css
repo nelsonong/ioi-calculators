@@ -1,0 +1,10 @@
+@import '../../../../styles/custom.css';
+
+.root {
+    composes: custom-fieldset;
+}
+
+.label {
+    display: inline;
+    margin: auto 0.3rem;
+}

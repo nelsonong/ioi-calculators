@@ -2,7 +2,8 @@ import {
     MODEL,
     CL_CONFIGS, CLPLUS_CONFIGS, CLMAX_CONFIGS,
     CX_CONFIGS, CXPLUS_CONFIGS, CXMAX_CONFIGS,
-    SDI_CONFIGS, SDIMAX_CONFIGS, GEV_CONFIGS,
+    SDI_CONFIGS, SDIMAX_CONFIGS,
+    GEV_CONFIGS, NTSC_CONFIGS,
     DRIVE_CAPACITY, LINK, MODE, MODES
 } from '../components/DVRCalculator/constants';
 
@@ -25,6 +26,7 @@ import { flareSDIDefaultState } from '../components/FlareSDICalculator/constants
 import { customCLDefaultState } from '..//components/CustomCLCalculator/constants';
 import { customCXDefaultState } from '..//components/CustomCXCalculator/constants';
 import { gevDefaultState } from '..//components/GEVCalculator/constants';
+import { ntscDefaultState } from '..//components/NTSCCalculator/constants';
 import uuid from 'uuid';
 
 const dvrReducer = (state = { order: [] }, action) => {
@@ -93,6 +95,10 @@ const dvrReducer = (state = { order: [] }, action) => {
                 case MODEL.COREGEV:
                     link = LINK.GEV;
                     configurations = GEV_CONFIGS;
+                    break;
+                case MODEL.CORENTSC:
+                    link = LINK.NTSC;
+                    configurations = NTSC_CONFIGS;
             }
             const configuration = configurations[0];
 
@@ -356,6 +362,10 @@ const generateCameraState = (dvrId, cameraId, link, mode, custom = false) => {
 
         case LINK.GEV:
             cameraState = gevDefaultState;
+            break;
+
+        case LINK.NTSC:
+            cameraState = ntscDefaultState;
     }
 
     return {

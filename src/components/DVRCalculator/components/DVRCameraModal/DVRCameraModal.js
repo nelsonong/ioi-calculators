@@ -9,6 +9,7 @@ import FlareSDICalculator from '../../../FlareSDICalculator';
 import CustomCLCalculator from '../../../CustomCLCalculator';
 import CustomCXCalculator from '../../../CustomCXCalculator';
 import GEVCalculator from '../../../GEVCalculator';
+import NTSCCalculator from '../../../NTSCCalculator';
 import styles from './DVRCameraModal.css';
 
 Modal.setAppElement('#root');
@@ -68,6 +69,14 @@ class DVRCameraModal extends Component {
                         dvrId={this.props.dvrId}
                     />
                 );
+
+            case 'ntsc':
+                return (
+                    <NTSCCalculator
+                        cameraId={this.props.cameraId}
+                        dvrId={this.props.dvrId}
+                    />
+                );
         }
     }
 
@@ -89,6 +98,7 @@ class DVRCameraModal extends Component {
 
             case 'flare-sdi':
             case 'gev':
+            case 'ntsc':
                 return '';
                 
             default:

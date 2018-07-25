@@ -21,7 +21,10 @@ export const CONFIG = {
         DUAL_IO: 'Dual-Link In/Out'
     },
     GEV: {
-        DEFAULT: 'Default'
+        DEFAULT: 'GEV x2'
+    },
+    NTSC: {
+        DEFAULT: 'NTSC x4'
     }
 };
 
@@ -62,3 +65,6 @@ export const SDIMAX_CONFIGS = [
 
 // GEV configuration
 export const GEV_CONFIGS = [ CONFIG.GEV.DEFAULT ];
+
+// NTSC configuration
+export const NTSC_CONFIGS = [ CONFIG.NTSC.DEFAULT ];
