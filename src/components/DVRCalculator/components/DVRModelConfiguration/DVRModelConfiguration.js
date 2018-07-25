@@ -5,6 +5,8 @@ import { MODELS } from '../../constants';
 import styles from './DVRModelConfiguration.css';
 
 const DVRModel = ({
+    model,
+    configuration,
     configurations,
     handleChangeModel,
     handleChangeConfiguration
@@ -15,10 +17,10 @@ const DVRModel = ({
         <div>
             <fieldset className={styles.root}>
             <legend className={styles.legend}>Model / Configuration</legend>
-                <select className={styles.select} name='model' onChange={handleChangeModel}>
+                <select className={styles.select} value={model} onChange={handleChangeModel}>
                     {modelOptions}
                 </select>
-                <select className={styles.select} name='configuration' onChange={handleChangeConfiguration}>
+                <select className={styles.select} value={configuration} onChange={handleChangeConfiguration}>
                     {configOptions}
                 </select>
             </fieldset>
@@ -28,9 +30,15 @@ const DVRModel = ({
 
 const mapStateToProps = ({ storageCalculators }, { dvrId }) => {
     const calculatorState = storageCalculators[dvrId];
-    const { configurations } = calculatorState;
+    const {
+        model,
+        configuration,
+        configurations
+    } = calculatorState;
     
     return {
+        model,
+        configuration,
         configurations
     };
 };
