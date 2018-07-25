@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import  { initializeDVRState } from '../../actions/NTSCActions';
+import  { initializeDVRState } from '../../actions/ntscActions';
 import CalculatorTopBar from '../CalculatorTopBar';
 import { NTSCInput, NTSCFormat, NTSCColor, NTSCOptions, NTSCOutput } from './components';
 import styles from './NTSCCalculator.css';

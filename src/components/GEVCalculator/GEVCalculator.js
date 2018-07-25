@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import  { initializeDVRState } from '../../actions/GEVActions';
+import  { initializeDVRState } from '../../actions/gevActions';
 import CalculatorTopBar from '../CalculatorTopBar';
 import { GEVFormat, GEVResolution, GEVFrameRate, GEVOutput } from './components';
 import styles from './GEVCalculator.css';

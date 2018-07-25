@@ -6,21 +6,23 @@ import { MdAddCircle, MdCreate, MdClear } from 'react-icons/lib/md';
 import cx from 'classnames';
 import styles from './DVRCamera.css';
 
+let cachedCameraState;
+
 class DVRCamera extends Component {
+    // FIXME: added prop not getting passed correctly from redux
     state = {
-        modal: null,
         isHovered: false,
         modalIsOpen: false,
-        cachedCameraState: this.props.cameraState
+        cachedCameraState: this.props.cameraState,
+        added: this.props.added
     };
 
-    addCamera = () => {
-        this.openModal();
-    }
-
     deleteCamera = () => {
-        this.setState(() => ({ modal: null }));
         this.props.handleDeleteDataRate();
+        this.setState(() => ({
+            cachedCameraState: this.props.cameraState,
+            added: false
+        }));
     }
 
     openModal = () => this.setState(() => ({ modalIsOpen: true }));
@@ -31,13 +33,13 @@ class DVRCamera extends Component {
     }
 
     saveAndCloseModal = () => {
+        this.props.handlePushDataRate(this.props.dataRate);
         this.setState(() => ({
             modalIsOpen: false,
             isHovered: false,
-            cachedCameraState: this.props.cameraState
+            cachedCameraState: this.props.cameraState,
+            added: true
         }));
-        
-        this.props.handlePushDataRate(this.props.cameraState.dataRate);
     }
 
     openHoverOverlay = () => this.setState(() => ({ isHovered: true }));
@@ -46,14 +48,14 @@ class DVRCamera extends Component {
 
     renderContents = () => {
         let contents = (
-            <div className={styles.addButtonContainer} onClick={this.addCamera}>
+            <div className={styles.addButtonContainer} onClick={this.openModal}>
                 <button type='button' className={styles.addButton}>
                     <MdAddCircle size={43} />
                 </button>
             </div>
         );
 
-        if (this.props.added) {
+        if (this.state.added) {
             contents = this.state.isHovered ? (
                 <div>
                     <button type='button' className={styles.editButton} onClick={this.openModal}>
