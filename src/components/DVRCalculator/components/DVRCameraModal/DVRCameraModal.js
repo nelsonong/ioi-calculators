@@ -129,6 +129,10 @@ class DVRCameraModal extends Component {
         return this.createButtons(['flare-cl']);
 
       case 'custom-cx':
+        if (this.props.mode === MODE.QUAD) {
+          return this.createButtons(['flare-cx']);
+        }
+
         return this.createButtons(['flare-cx', 'victorem-cx']);
 
       default:
