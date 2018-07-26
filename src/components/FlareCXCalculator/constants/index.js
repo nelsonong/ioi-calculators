@@ -5,7 +5,7 @@ import {
 } from './models';
 import {
   LINK_SPEEDS,
-  FORMATS,
+  MODEL_FORMAT,
 } from './formats';
 import {
   RESOLUTION,
@@ -18,10 +18,13 @@ export const flareCXDefaultState = {
   cameraType: 'flare-cx',
   model: MODEL.Type2M280MCX,
   models: MODELS,
-  formats: FORMATS.CX2_4m,
+  formats: MODEL_FORMAT.CX2_4m,
   bitDepth: 8,
+  bitDepths: MODEL_FORMAT.CX2_4m.bitDepths,
   linkCount: 1,
+  linkCounts: MODEL_FORMAT.CX2_4m.linkCounts,
   linkSpeed: LINK_SPEEDS.CXP3,
+  linkSpeeds: MODEL_FORMAT.CX2_4m.linkSpeeds,
   resolutionPreset: RESOLUTION.MAXIMUM,
   width: 2048,
   widthStep: 8,
@@ -39,7 +42,7 @@ export {
   MODELS,
   COLOR_MODELS,
   LINK_SPEEDS,
-  FORMATS,
+  MODEL_FORMAT,
   RESOLUTION,
   RESOLUTIONS,
   NAN_RESOLUTIONS,

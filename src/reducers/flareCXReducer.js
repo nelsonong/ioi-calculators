@@ -1,5 +1,5 @@
 import {
-  FORMATS,
+  MODEL_FORMAT,
   RESOLUTION,
   MODE,
 } from '../components/FlareCXCalculator/constants';
@@ -148,25 +148,55 @@ const flareCXReducer = (state = { order: [] }, action) => {
     case UPDATE_FLARE_CX_MODEL: {
       const { model } = action.model ? action : calculatorState;
 
-      // Get formats
-      let formats;
+      // Get model's format
+      let format;
       if (model.startsWith('48M')) {
-        formats = FORMATS.CX48m;
+        format = MODEL_FORMAT.CX48m;
       } else if (model.startsWith('12M')) {
-        formats = FORMATS.CX12m;
+        format = MODEL_FORMAT.CX12m;
       } else {
-        formats = FORMATS.CX2_4m;
+        format = MODEL_FORMAT.CX2_4m;
       }
-      const bitDepth = formats.BitDepths[0];
-      const linkCount = formats.LinkCounts[0];
-      const linkSpeed = formats.LinkSpeeds[0];
+
+      const {
+        bitDepths,
+        linkSpeeds,
+      } = format;
+
+      // Filter link counts
+      let { linkCounts } = format;
+      const { mode } = calculatorState;
+      if (mode) {
+        switch (mode) {
+          case MODE.SINGLE:
+            linkCounts = [1];
+            break;
+
+          case MODE.DUAL:
+            linkCounts = [2];
+            break;
+
+          case MODE.QUAD:
+            linkCounts = [4];
+            break;
+
+          default:
+            break;
+        }
+      }
+
+      const bitDepth = bitDepths[0];
+      const linkCount = linkCounts[0];
+      const linkSpeed = linkSpeeds[0];
       calculatorState = {
         ...calculatorState,
         model,
-        formats,
         bitDepth,
+        bitDepths,
         linkCount,
+        linkCounts,
         linkSpeed,
+        linkSpeeds,
       };
       calculatorState = updateResolutionConstraints(calculatorState);
       calculatorState = updateResolution(calculatorState);

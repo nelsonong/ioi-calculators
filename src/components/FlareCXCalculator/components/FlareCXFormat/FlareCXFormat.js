@@ -5,49 +5,27 @@ import {
   updateLinkCount,
   updateLinkSpeed,
 } from '../../../../actions/flareCXActions';
-import { MODE } from '../../constants';
 import styles from './FlareCXFormat.css';
 
-const renderLinkCountOptions = (formats, mode) => {
-  if (!mode) {
-    return formats.LinkCounts.map((linkCount, i) => (
-      <option key={i} value={linkCount}>{linkCount}</option>
-    ));
-  }
-
-  let linkCount;
-  switch (mode) {
-    case MODE.SINGLE:
-      linkCount = 1;
-      break;
-    case MODE.DUAL:
-      linkCount = 2;
-      break;
-    case MODE.QUAD:
-      linkCount = 4;
-      break;
-    default:
-      break;
-  }
-
-  return <option value={linkCount}>{linkCount}</option>;
-};
-
 const FlareCXFormat = ({
-  formats,
   bitDepth,
+  bitDepths,
   linkCount,
+  linkCounts,
   linkSpeed,
-  mode,
+  linkSpeeds,
   handleChangeBitDepth,
   handleChangeLinkCount,
   handleChangeLinkSpeed,
 }) => {
-  const bitDepthOptions = formats.BitDepths.map((bitDepthOption, i) => (
+  const bitDepthOptions = bitDepths.map((bitDepthOption, i) => (
     <option key={i} value={bitDepthOption}>{bitDepthOption}</option>
   ));
-  const linkSpeedOptions = formats.LinkSpeeds.map((linkSpeedOption, i) => (
+  const linkSpeedOptions = linkSpeeds.map((linkSpeedOption, i) => (
     <option key={i} value={linkSpeedOption}>{linkSpeedOption}</option>
+  ));
+  const linkCountOptions = linkCounts.map((linkCountOption, i) => (
+    <option key={i} value={linkCountOption}>{linkCountOption}</option>
   ));
   return (
     <fieldset className={styles.root}>
@@ -62,7 +40,7 @@ const FlareCXFormat = ({
           {bitDepthOptions}
         </select>
         <select className={styles.select} value={linkCount} onChange={handleChangeLinkCount}>
-          {renderLinkCountOptions(formats, mode)}
+          {linkCountOptions}
         </select>
       </div>
     </div>
@@ -84,18 +62,20 @@ const mapStateToProps = (state, {
     ? state.frameRateCalculators[cameraId]
     : state.storageCalculators[dvrId].cameras[cameraId];
   const {
-    formats,
     bitDepth,
+    bitDepths,
     linkCount,
+    linkCounts,
     linkSpeed,
-    mode,
+    linkSpeeds,
   } = calculatorState;
   return {
-    formats,
     bitDepth,
+    bitDepths,
     linkCount,
+    linkCounts,
     linkSpeed,
-    mode,
+    linkSpeeds,
   };
 };
 

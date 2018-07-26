@@ -5,27 +5,27 @@ export const LINK_SPEEDS = {
   CXP6: 'CXP-6',
 };
 
-export const FORMATS = {
+export const MODEL_FORMAT = {
   CX2_4m: {
-    BitDepths: [8, 10],
-    LinkCounts: [1, 2],
-    LinkSpeeds: [
+    bitDepths: [8, 10],
+    linkCounts: [1, 2],
+    linkSpeeds: [
       LINK_SPEEDS.CXP3,
     ],
   },
   CX12m: {
-    BitDepths: [8, 10],
-    LinkCounts: [1, 2, 4],
-    LinkSpeeds: [
+    bitDepths: [8, 10],
+    linkCounts: [1, 2, 4],
+    linkSpeeds: [
       LINK_SPEEDS.CXP3,
       LINK_SPEEDS.CXP5,
       LINK_SPEEDS.CXP6,
     ],
   },
   CX48m: {
-    BitDepths: [8, 10, 12],
-    LinkCounts: [1, 2, 4],
-    LinkSpeeds: [
+    bitDepths: [8, 10, 12],
+    linkCounts: [1, 2, 4],
+    linkSpeeds: [
       LINK_SPEEDS.CXP2,
       LINK_SPEEDS.CXP3,
       LINK_SPEEDS.CXP5,
