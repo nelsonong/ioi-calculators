@@ -5,6 +5,7 @@ import {
 
 export const gevDefaultState = {
   cameraType: 'gev',
+  model: 'Camera',
   bitDepths: [8, 10, 12, 14, 16],
   bitDepth: 8,
   resolutionPreset: '1920x1080',

@@ -34,6 +34,7 @@ const ntscReducer = (state = { order: [] }, action) => {
 
     case UPDATE_NTSC_INPUT: {
       const { input } = action;
+      const model = input;
       const format = INPUT_FORMAT[input];
       const color = INPUT_COLOR[input];
       const width = (format === FORMAT.Type480i) ? 640 : 768;
@@ -41,6 +42,7 @@ const ntscReducer = (state = { order: [] }, action) => {
       const frameRate = (format === FORMAT.Type480i) ? 59.94 : 50;
       calculatorState = {
         ...calculatorState,
+        model,
         input,
         format,
         color,

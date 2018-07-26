@@ -14,6 +14,7 @@ import OPTION from './options';
 
 export const ntscDefaultState = {
   cameraType: 'ntsc',
+  model: INPUT.NTSC,
   input: INPUT.NTSC,
   format: FORMAT.Type480i,
   color: COLOR.COLOR,
