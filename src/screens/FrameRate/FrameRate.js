@@ -114,8 +114,6 @@ class FrameRate extends Component {
             </div>
           </div>
           <div>
-            <button type='button' className={styles.importButton}>IMPORT</button>
-            <button type='button' className={styles.exportButton}>EXPORT</button>
             <div className={styles.buttonSpacer}></div>
             <button type='button' className={styles.clearButton} onClick={this.props.handleClear}>CLEAR</button>
           </div>

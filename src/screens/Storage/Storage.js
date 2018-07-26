@@ -61,8 +61,6 @@ class Storage extends Component {
           </div>
           <div className={styles.spacer}></div>
           <div>
-            <button type='button' className={styles.importButton}>IMPORT</button>
-            <button type='button' className={styles.exportButton}>EXPORT</button>
           </div>
           <div>
             <button type='button' className={styles.clearButton} onClick={this.props.handleClear}>CLEAR</button>
