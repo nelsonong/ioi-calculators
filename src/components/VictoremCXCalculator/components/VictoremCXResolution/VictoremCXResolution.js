@@ -26,7 +26,9 @@ const VictoremCXResolution = ({
   handleChangeWidth,
   handleChangeHeight,
 }) => {
+  const noneSelected = (cameraOption === CAMERA_OPTION.NONE);
   const subSamplingSelected = (cameraOption === CAMERA_OPTION.SUBSAMPLING);
+  const bin2x2Selected = (cameraOption === CAMERA_OPTION.BIN_2X2);
   const resolutionPresetOptions = RESOLUTIONS.map((preset, i) => {
     let presetOption = preset;
     if (!NAN_RESOLUTIONS.includes(preset)) {
@@ -46,7 +48,7 @@ const VictoremCXResolution = ({
         <select
           className={styles.select}
           value={resolutionPreset}
-          disabled={subSamplingSelected}
+          disabled={subSamplingSelected || bin2x2Selected}
           onChange={handleChangeResolutionPreset}
         >
           {resolutionPresetOptions}
@@ -58,7 +60,7 @@ const VictoremCXResolution = ({
           step={widthStep} value={width}
           min='16'
           max={maxWidth}
-          disabled={subSamplingSelected}
+          disabled={!noneSelected}
           onChange={handleChangeWidth}
          />
         <input
@@ -68,7 +70,7 @@ const VictoremCXResolution = ({
           value={height}
           min='4'
           max={maxHeight}
-          disabled={subSamplingSelected}
+          disabled={!noneSelected}
           onChange={handleChangeHeight}
          />
       </div>

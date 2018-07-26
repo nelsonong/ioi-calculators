@@ -61,7 +61,7 @@ const updateResolution = (inputCalculatorState) => {
     cameraOption,
   } = calculatorState;
   let resolutionTooltip = '';
-  if (cameraOption === CAMERA_OPTION.SUBSAMPLING) {
+  if (cameraOption === CAMERA_OPTION.NONE) {
     if (width > maxWidth) {
       resolutionTooltip = `Maximum width is ${maxWidth}px.`;
     }
