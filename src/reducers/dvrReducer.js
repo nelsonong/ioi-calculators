@@ -377,8 +377,8 @@ const dvrReducer = (state = { order: [] }, action) => {
       } = calculatorState;
       switch (raid) {
         case 0:
-          driveAmount = 2;
-          driveAmounts = [2, 3, 4, 5, 6];
+          driveAmount = 1;
+          driveAmounts = [1, 2, 3, 4, 5, 6];
           break;
 
         case 1:

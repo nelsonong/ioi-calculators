@@ -30,8 +30,8 @@ export const dvrDefaultState = {
   totalDataRate: 0,
   raid: 0,
   driveCapacity: 223.6,
-  driveAmount: 2,
-  driveAmounts: [2, 3, 4, 5, 6],
+  driveAmount: 1,
+  driveAmounts: [1, 2, 3, 4, 5, 6],
   totalCapacity: 223.6,
   recordingTime: 'N/A',
 };
