@@ -7,10 +7,6 @@
     background: linear-gradient(to bottom right, $victorem-sdi-background, $victorem-sdi-background-light);
 }
 
-.victorem-sdi-calculator:hover {
-    cursor: move;
-}
-
 .victorem-sdi-fieldset {
     composes: fieldset;
     background: $victorem-sdi-fieldset;

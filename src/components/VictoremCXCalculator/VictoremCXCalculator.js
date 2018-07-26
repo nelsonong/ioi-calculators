@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import cx from 'classnames';
 import { initializeDVRState } from '../../actions/victoremCXActions';
 import CalculatorTopBar from '../CalculatorTopBar';
 import {
@@ -17,8 +18,10 @@ class VictoremCXCalculator extends Component {
     props.handleInitialize();
   }
 
-  render = () => (
-      <div className={styles.root}>
+  render = () => {
+    const root = cx(styles.root, { [styles.draggable]: !this.props.mode });
+    return (
+      <div className={root}>
         <CalculatorTopBar type={'Victorem CX'} cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
         <VictoremCXModel cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
         <VictoremCXFormat cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
@@ -26,7 +29,8 @@ class VictoremCXCalculator extends Component {
         <VictoremCXOptions cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
         <VictoremCXOutput cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
       </div>
-  )
+    );
+  }
 }
 
 const mapDispatchToProps = (dispatch, {

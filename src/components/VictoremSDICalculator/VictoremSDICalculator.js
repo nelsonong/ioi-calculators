@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import cx from 'classnames';
 import { initializeDVRState } from '../../actions/victoremSDIActions';
 import CalculatorTopBar from '../CalculatorTopBar';
 import {
@@ -18,17 +19,20 @@ class VictoremSDICalculator extends Component {
     props.handleInitialize();
   }
 
-  render = () => (
-    <div className={styles.root}>
-      <CalculatorTopBar type={'Victorem SDI'} cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
-      <VictoremSDIModel cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
-      <VictoremSDIInterface cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
-      <VictoremSDIResolution cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
-      <VictoremSDIColor cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
-      <VictoremSDIFrameRate cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
-      <VictoremSDIOutput cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
-    </div>
-  );
+  render = () => {
+    const root = cx(styles.root, { [styles.draggable]: !this.props.mode });
+    return (
+      <div className={root}>
+        <CalculatorTopBar type={'Victorem SDI'} cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+        <VictoremSDIModel cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+        <VictoremSDIInterface cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+        <VictoremSDIResolution cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+        <VictoremSDIColor cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+        <VictoremSDIFrameRate cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+        <VictoremSDIOutput cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+      </div>
+    );
+  }
 }
 
 const mapDispatchToProps = (dispatch, {

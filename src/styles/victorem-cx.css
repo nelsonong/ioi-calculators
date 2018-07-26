@@ -7,10 +7,6 @@
     background: linear-gradient(to bottom right, $victorem-cx-background, $victorem-cx-background-light);
 }
 
-.victorem-cx-calculator:hover {
-    cursor: move;
-}
-
 .victorem-cx-fieldset {
     composes: fieldset;
     background: $victorem-cx-fieldset;
