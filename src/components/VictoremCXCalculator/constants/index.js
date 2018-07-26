@@ -15,10 +15,12 @@ import {
   MAX_RESOLUTIONS,
 } from './resolutions';
 import CAMERA_OPTION from './camera-options';
+import MODE from './modes';
 
 export const victoremCXDefaultState = {
   cameraType: 'victorem-cx',
   model: MODEL.Type51B163MCX,
+  models: MODELS.ALL,
   sensor: SENSOR[MODEL.Type51B163MCX],
   format: FORMAT.CXP2x1,
   formats: FORMATS.CXX,
@@ -52,4 +54,5 @@ export {
   NAN_RESOLUTIONS,
   MAX_RESOLUTIONS,
   CAMERA_OPTION,
+  MODE,
 };

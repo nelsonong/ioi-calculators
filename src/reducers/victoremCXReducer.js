@@ -4,12 +4,14 @@ import {
   FORMATS,
   CAMERA_OPTION,
   RESOLUTION,
+  MODE,
 } from '../components/VictoremCXCalculator/constants';
 import * as resolution from '../components/VictoremCXCalculator/utils/resolution';
 import calculateFrameRate from '../components/VictoremCXCalculator/utils/calculateFrameRate';
 import calculateDataRate from '../components/VictoremCXCalculator/utils/calculateDataRate';
 import * as support from '../components/VictoremCXCalculator/utils/support';
 import {
+  INITIALIZE_VICTOREM_CX_DVR_STATE,
   UPDATE_VICTOREM_CX_MODEL,
   UPDATE_VICTOREM_CX_FORMAT,
   UPDATE_VICTOREM_CX_BIT_DEPTH,
@@ -130,8 +132,28 @@ const victoremCXReducer = (state = { order: [] }, action) => {
   const calculators = { ...state };
   let calculatorState = calculators[cameraId];
   switch (type) {
+    case INITIALIZE_VICTOREM_CX_DVR_STATE: {
+      const { mode } = action;
+      let { models } = calculatorState;
+      if (mode === MODE.DUAL) {
+        models = models.filter(model => !model.startsWith('16B') && !model.startsWith('4B'));
+      }
+
+      const model = models[0];
+      calculatorState = {
+        ...calculatorState,
+        model,
+        models,
+      };
+
+      // Fall-through
+    }
+
     case UPDATE_VICTOREM_CX_MODEL: {
-      const { model } = action;
+      const { model } = action.model ? action : calculatorState;
+
+      // Get sensor
+      const sensor = SENSOR[model];
 
       // Get formats
       let formats;
@@ -141,7 +163,24 @@ const victoremCXReducer = (state = { order: [] }, action) => {
         formats = FORMATS.CX16B;
       } else {
         formats = FORMATS.CXX;
+        const { mode } = calculatorState;
+        if (mode) {
+          switch (mode) {
+            case MODE.SINGLE:
+              formats = formats.filter(format => format.startsWith('1'));
+              break;
+
+            case MODE.DUAL:
+              formats = formats.filter(format => format.startsWith('2'));
+              break;
+
+            default:
+              break;
+          }
+        }
       }
+
+      const format = formats[0];
 
       // Get supported options
       const supports2x2Binning = support.supports2x2Binning(model);
@@ -152,8 +191,8 @@ const victoremCXReducer = (state = { order: [] }, action) => {
       calculatorState = {
         ...calculatorState,
         model,
-        sensor: SENSOR[model],
-        format: FORMAT.CXP2x1,
+        sensor,
+        format,
         formats,
         supports2x2Binning,
         supportsSubSampling,

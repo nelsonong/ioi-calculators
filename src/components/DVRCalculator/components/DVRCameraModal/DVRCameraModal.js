@@ -12,6 +12,7 @@ import CustomCLCalculator from '../../../CustomCLCalculator';
 import CustomCXCalculator from '../../../CustomCXCalculator';
 import GEVCalculator from '../../../GEVCalculator';
 import NTSCCalculator from '../../../NTSCCalculator';
+import { MODE } from '../../constants';
 import styles from './DVRCameraModal.css';
 
 Modal.setAppElement('#root');
@@ -109,6 +110,10 @@ class DVRCameraModal extends Component {
         return this.createButtons(['custom-cl']);
 
       case 'flare-cx':
+        if (this.props.mode === MODE.QUAD) {
+          return this.createButtons(['custom-cx']);
+        }
+
         return this.createButtons(['victorem-cx', 'custom-cx']);
 
       case 'flare-sdi':

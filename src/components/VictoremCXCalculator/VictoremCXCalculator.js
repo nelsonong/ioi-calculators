@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { initializeDVRState } from '../../actions/victoremCXActions';
 import CalculatorTopBar from '../CalculatorTopBar';
 import {
   VictoremCXModel,
@@ -9,15 +11,35 @@ import {
 } from './components';
 import styles from './VictoremCXCalculator.css';
 
-const VictoremCXCalculator = props => (
-  <div className={styles.root}>
-    <CalculatorTopBar type={'Victorem CX'} cameraId={props.cameraId} dvrId={props.dvrId} />
-    <VictoremCXModel cameraId={props.cameraId} dvrId={props.dvrId} />
-    <VictoremCXFormat cameraId={props.cameraId} dvrId={props.dvrId} />
-    <VictoremCXResolution cameraId={props.cameraId} dvrId={props.dvrId} />
-    <VictoremCXOptions cameraId={props.cameraId} dvrId={props.dvrId} />
-    <VictoremCXOutput cameraId={props.cameraId} dvrId={props.dvrId} />
-  </div>
-);
+class VictoremCXCalculator extends Component {
+  constructor(props) {
+    super(props);
+    props.handleInitialize();
+  }
 
-export default VictoremCXCalculator;
+  render = () => (
+      <div className={styles.root}>
+        <CalculatorTopBar type={'Victorem CX'} cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+        <VictoremCXModel cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+        <VictoremCXFormat cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+        <VictoremCXResolution cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+        <VictoremCXOptions cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+        <VictoremCXOutput cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
+      </div>
+  )
+}
+
+const mapDispatchToProps = (dispatch, {
+  cameraId,
+  dvrId,
+  mode,
+}) => ({
+  cameraId,
+  dvrId,
+  mode,
+  handleInitialize: () => {
+    dispatch(initializeDVRState(cameraId, mode, dvrId));
+  },
+});
+
+export default connect(null, mapDispatchToProps)(VictoremCXCalculator);
