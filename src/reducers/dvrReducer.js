@@ -149,7 +149,6 @@ const updateRecordingTime = (calculatorState) => {
     totalDataRate,
   } = calculatorState;
   let { totalCapacity } = calculatorState;
-  const seconds = totalCapacity / totalDataRate * 1024;
   switch (raid) {
     case 1:
       totalCapacity /= 2;
@@ -163,6 +162,7 @@ const updateRecordingTime = (calculatorState) => {
       break;
   }
 
+  const seconds = totalCapacity / totalDataRate * 1024;
   const recordingTime = Number.isFinite(seconds) ? secondsTohhmmss(seconds) : 'N/A';
   return {
     ...calculatorState,
@@ -377,18 +377,18 @@ const dvrReducer = (state = { order: [] }, action) => {
       } = calculatorState;
       switch (raid) {
         case 0:
-          driveAmount = 1;
-          driveAmounts = [1, 2, 3, 4, 5, 6];
+          driveAmount = 2;
+          driveAmounts = [2, 3, 4, 5, 6];
           break;
 
         case 1:
           driveAmount = 2;
-          driveAmounts = [2, 4, 6];
+          driveAmounts = [2, 3, 4, 5, 6];
           break;
 
         case 5:
           driveAmount = 3;
-          driveAmounts = [3, 6];
+          driveAmounts = [3, 4, 5, 6];
           break;
 
         default:
