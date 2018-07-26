@@ -7,7 +7,6 @@ import {
   GEV_CONFIGS, NTSC_CONFIGS,
   DRIVE_CAPACITY, LINK, MODE, MODES,
 } from '../components/DVRCalculator/constants';
-
 import {
   INITIALIZE_DVR_STATE,
   UPDATE_DVR_MODEL,
@@ -15,15 +14,16 @@ import {
   PUSH_DVR_DATA_RATE,
   DELETE_DVR_DATA_RATE,
   REVERT_DVR_CAMERA_STATE,
-  TOGGLE_DVR_CUSTOM_MODE,
+  TOGGLE_DVR_CAMERA_TYPE,
   UPDATE_DVR_RAID,
   UPDATE_DVR_DRIVE_MODEL,
   UPDATE_DVR_DRIVE_AMOUNT,
 } from '../actions/dvrActions';
-
 import { flareCLDefaultState } from '../components/FlareCLCalculator/constants';
 import { flareCXDefaultState } from '../components/FlareCXCalculator/constants';
 import { flareSDIDefaultState } from '../components/FlareSDICalculator/constants';
+import { victoremCXDefaultState } from '../components/VictoremCXCalculator/constants';
+import { victoremSDIDefaultState } from '../components/VictoremSDICalculator/constants';
 import { customCLDefaultState } from '../components/CustomCLCalculator/constants';
 import { customCXDefaultState } from '../components/CustomCXCalculator/constants';
 import { gevDefaultState } from '../components/GEVCalculator/constants';
@@ -46,26 +46,42 @@ const setCameraAdded = (cameraId, calculatorState, added) => {
   };
 };
 
-const generateCameraState = (dvrId, cameraId, link, mode, custom = false) => {
+const generateCameraState = (dvrId, cameraId, cameraType, mode) => {
   let cameraState;
-  switch (link) {
-    case LINK.CL:
-      cameraState = custom ? customCLDefaultState : flareCLDefaultState;
+  switch (cameraType) {
+    case 'flare-cl':
+      cameraState = flareCLDefaultState;
       break;
 
-    case LINK.CX:
-      cameraState = custom ? customCXDefaultState : flareCXDefaultState;
+    case 'flare-cx':
+      cameraState = flareCXDefaultState;
       break;
 
-    case LINK.SDI:
+    case 'flare-sdi':
       cameraState = flareSDIDefaultState;
       break;
 
-    case LINK.GEV:
+    case 'victorem-cx':
+      cameraState = victoremCXDefaultState;
+      break;
+
+    case 'victorem-sdi':
+      cameraState = victoremSDIDefaultState;
+      break;
+
+    case 'custom-cl':
+      cameraState = customCLDefaultState;
+      break;
+
+    case 'custom-cx':
+      cameraState = customCXDefaultState;
+      break;
+
+    case 'gev':
       cameraState = gevDefaultState;
       break;
 
-    case LINK.NTSC:
+    case 'ntsc':
       cameraState = ntscDefaultState;
       break;
 
@@ -87,12 +103,39 @@ const reloadCameras = (calculatorState, dvrId) => {
     configuration,
   } = calculatorState;
 
+  // Get default camera type
+  let cameraType;
+  switch (link) {
+    case LINK.CL:
+      cameraType = 'flare-cl';
+      break;
+
+    case LINK.CX:
+      cameraType = 'flare-cx';
+      break;
+
+    case LINK.SDI:
+      cameraType = 'flare-sdi';
+      break;
+
+    case LINK.GEV:
+      cameraType = 'gev';
+      break;
+
+    case LINK.NTSC:
+      cameraType = 'ntsc';
+      break;
+
+    default:
+      break;
+  }
+
   // Reset cameras / insert mode
   let cameras = { order: [] };
   const modes = MODES[configuration];
   modes.forEach((mode) => {
     const cameraId = uuid();
-    const cameraState = generateCameraState(dvrId, cameraId, link, mode);
+    const cameraState = generateCameraState(dvrId, cameraId, cameraType, mode);
     cameras = {
       ...cameras,
       [cameraId]: cameraState,
@@ -343,20 +386,17 @@ const dvrReducer = (state = { order: [] }, action) => {
       break;
     }
 
-    case TOGGLE_DVR_CUSTOM_MODE: {
-      const { cameraId } = action;
-
-      // Get existing camera properties
-      const { link } = calculatorState;
-      let { cameras } = calculatorState;
+    case TOGGLE_DVR_CAMERA_TYPE: {
+      const {
+        cameraId,
+        cameraType,
+      } = action;
 
       // Generate new camera with properties
+      let { cameras } = calculatorState;
       let cameraState = cameras[cameraId];
-      const {
-        mode, cameraType,
-      } = cameraState;
-      const custom = (cameraType.startsWith('custom'));
-      cameraState = generateCameraState(dvrId, cameraId, link, mode, !custom);
+      const { mode } = cameraState;
+      cameraState = generateCameraState(dvrId, cameraId, cameraType, mode);
 
       // Replace existing camera
       cameras = { ...cameras };

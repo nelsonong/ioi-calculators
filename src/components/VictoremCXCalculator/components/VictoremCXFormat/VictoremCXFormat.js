@@ -36,8 +36,13 @@ const VictoremCXFormat = ({
   );
 };
 
-const mapStateToProps = ({ frameRateCalculators }, { cameraId }) => {
-  const calculatorState = frameRateCalculators[cameraId];
+const mapStateToProps = (state, {
+  cameraId,
+  dvrId,
+}) => {
+  const calculatorState = !dvrId
+    ? state.frameRateCalculators[cameraId]
+    : state.storageCalculators[dvrId].cameras[cameraId];
   const {
     format,
     bitDepth,
@@ -50,15 +55,18 @@ const mapStateToProps = ({ frameRateCalculators }, { cameraId }) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, { cameraId }) => ({
+const mapDispatchToProps = (dispatch, {
+  cameraId,
+  dvrId,
+}) => ({
   handleChangeFormat: (e) => {
     const format = e.target.value;
-    dispatch(updateFormat(cameraId, format));
+    dispatch(updateFormat(cameraId, format, dvrId));
   },
 
   handleChangeBitDepth: (e) => {
     const bitDepth = Number(e.target.value);
-    dispatch(updateBitDepth(cameraId, bitDepth));
+    dispatch(updateBitDepth(cameraId, bitDepth, dvrId));
   },
 });
 

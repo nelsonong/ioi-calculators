@@ -35,10 +35,8 @@ const victoremSDIReducer = (state = { order: [] }, action) => {
     cameraId,
     type,
   } = action;
-
   const calculators = { ...state };
   let calculatorState = calculators[cameraId];
-
   switch (type) {
     case INITIALIZE_VICTOREM_SDI_DVR_STATE: {
       const { mode } = action;

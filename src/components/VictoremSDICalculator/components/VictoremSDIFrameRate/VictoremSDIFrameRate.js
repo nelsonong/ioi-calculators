@@ -21,8 +21,13 @@ const VictoremSDIFrameRate = ({
   );
 };
 
-const mapStateToProps = ({ frameRateCalculators }, { cameraId }) => {
-  const calculatorState = frameRateCalculators[cameraId];
+const mapStateToProps = (state, {
+  cameraId,
+  dvrId,
+}) => {
+  const calculatorState = !dvrId
+    ? state.frameRateCalculators[cameraId]
+    : state.storageCalculators[dvrId].cameras[cameraId];
   const {
     frameRate,
     frameRates,
@@ -33,10 +38,13 @@ const mapStateToProps = ({ frameRateCalculators }, { cameraId }) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, { cameraId }) => ({
+const mapDispatchToProps = (dispatch, {
+  cameraId,
+  dvrId,
+}) => ({
   handleChange: (e) => {
     const frameRate = Number(e.target.value);
-    dispatch(updateFrameRate(cameraId, frameRate));
+    dispatch(updateFrameRate(cameraId, frameRate, dvrId));
   },
 });
 

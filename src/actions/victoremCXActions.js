@@ -17,46 +17,53 @@ const victoremCXActionTypes = [
 ];
 
 // Action generators
-export const updateModel = (cameraId, model) => ({
+export const updateModel = (cameraId, model, dvrId) => ({
   type: UPDATE_VICTOREM_CX_MODEL,
   cameraId,
   model,
+  dvrId,
 });
 
-export const updateFormat = (cameraId, format) => ({
+export const updateFormat = (cameraId, format, dvrId) => ({
   type: UPDATE_VICTOREM_CX_FORMAT,
   cameraId,
   format,
+  dvrId,
 });
 
-export const updateBitDepth = (cameraId, bitDepth) => ({
+export const updateBitDepth = (cameraId, bitDepth, dvrId) => ({
   type: UPDATE_VICTOREM_CX_BIT_DEPTH,
   cameraId,
   bitDepth,
+  dvrId,
 });
 
-export const updateResolutionPreset = (cameraId, resolutionPreset) => ({
+export const updateResolutionPreset = (cameraId, resolutionPreset, dvrId) => ({
   type: UPDATE_VICTOREM_CX_RESOLUTION_PRESET,
   cameraId,
   resolutionPreset,
+  dvrId,
 });
 
-export const updateWidth = (cameraId, width) => ({
+export const updateWidth = (cameraId, width, dvrId) => ({
   type: UPDATE_VICTOREM_CX_WIDTH,
   cameraId,
   width,
+  dvrId,
 });
 
-export const updateHeight = (cameraId, height) => ({
+export const updateHeight = (cameraId, height, dvrId) => ({
   type: UPDATE_VICTOREM_CX_HEIGHT,
   cameraId,
   height,
+  dvrId,
 });
 
-export const updateCameraOption = (cameraId, cameraOption) => ({
+export const updateCameraOption = (cameraId, cameraOption, dvrId) => ({
   type: UPDATE_VICTOREM_CX_CAMERA_OPTION,
   cameraId,
   cameraOption,
+  dvrId,
 });
 
 // Action types

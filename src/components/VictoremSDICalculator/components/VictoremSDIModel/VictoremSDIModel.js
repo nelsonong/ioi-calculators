@@ -18,16 +18,24 @@ const VictoremSDIModel = ({
   );
 };
 
-const mapStateToProps = ({ frameRateCalculators }, { cameraId }) => {
-  const calculatorState = frameRateCalculators[cameraId];
+const mapStateToProps = (state, {
+  cameraId,
+  dvrId,
+}) => {
+  const calculatorState = !dvrId
+    ? state.frameRateCalculators[cameraId]
+    : state.storageCalculators[dvrId].cameras[cameraId];
   const { models } = calculatorState;
   return { models };
 };
 
-const mapDispatchToProps = (dispatch, { cameraId }) => ({
+const mapDispatchToProps = (dispatch, {
+  cameraId,
+  dvrId,
+}) => ({
   handleChange: (e) => {
     const model = e.target.value;
-    dispatch(updateModel(cameraId, model));
+    dispatch(updateModel(cameraId, model, dvrId));
   },
 });
 

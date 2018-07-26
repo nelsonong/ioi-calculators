@@ -2,10 +2,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
-import { toggleCustomMode } from '../../../../actions/dvrActions';
+import { toggleCamera } from '../../../../actions/dvrActions';
 import FlareCLCalculator from '../../../FlareCLCalculator';
 import FlareCXCalculator from '../../../FlareCXCalculator';
 import FlareSDICalculator from '../../../FlareSDICalculator';
+import VictoremCXCalculator from '../../../VictoremCXCalculator';
+import VictoremSDICalculator from '../../../VictoremSDICalculator';
 import CustomCLCalculator from '../../../CustomCLCalculator';
 import CustomCXCalculator from '../../../CustomCXCalculator';
 import GEVCalculator from '../../../GEVCalculator';
@@ -38,6 +40,24 @@ class DVRCameraModal extends Component {
       case 'flare-sdi':
         return (
           <FlareSDICalculator
+            cameraId={this.props.cameraId}
+            dvrId={this.props.dvrId}
+            mode={this.props.mode}
+          />
+        );
+
+      case 'victorem-cx':
+        return (
+          <VictoremCXCalculator
+            cameraId={this.props.cameraId}
+            dvrId={this.props.dvrId}
+            mode={this.props.mode}
+          />
+        );
+
+      case 'victorem-sdi':
+        return (
+          <VictoremSDICalculator
             cameraId={this.props.cameraId}
             dvrId={this.props.dvrId}
             mode={this.props.mode}
@@ -83,35 +103,84 @@ class DVRCameraModal extends Component {
     }
   }
 
-  renderCustomButton = () => {
+  renderCustomButtons = () => {
     switch (this.props.cameraType) {
-      case 'custom-cl':
-        return (
-          <button type='button' className={styles.flareClButton} onClick={this.props.handleToggleCustomMode}>
-            FLARE CL
-          </button>
-        );
+      case 'flare-cl':
+        return this.createButtons(['custom-cl']);
 
-      case 'custom-cx':
-        return (
-          <button type='button' className={styles.flareCxButton} onClick={this.props.handleToggleCustomMode}>
-            FLARE CX
-          </button>
-        );
+      case 'flare-cx':
+        return this.createButtons(['victorem-cx', 'custom-cx']);
 
       case 'flare-sdi':
-      case 'gev':
-      case 'ntsc':
-        return '';
+        return this.createButtons(['victorem-sdi']);
+
+      case 'victorem-cx':
+        return this.createButtons(['flare-cx', 'custom-cx']);
+
+      case 'victorem-sdi':
+        return this.createButtons(['flare-sdi']);
+
+      case 'custom-cl':
+        return this.createButtons(['flare-cl']);
+
+      case 'custom-cx':
+        return this.createButtons(['flare-cx', 'victorem-cx']);
 
       default:
-        return (
-          <button type='button' className={styles.customButton} onClick={this.props.handleToggleCustomMode}>
-            CUSTOM
-          </button>
-        );
+        return '';
     }
   }
+
+  createButtons = cameraTypes => cameraTypes.map((cameraType, i) => {
+    let buttonStyle;
+    let text;
+    switch (cameraType) {
+      case 'flare-cl':
+        buttonStyle = styles.flareClButton;
+        text = 'FLARE';
+        break;
+
+      case 'flare-cx':
+        buttonStyle = styles.flareCxButton;
+        text = 'FLARE';
+        break;
+
+      case 'flare-sdi':
+        buttonStyle = styles.flareSdiButton;
+        text = 'FLARE';
+        break;
+
+      case 'victorem-cx':
+        buttonStyle = styles.victoremCxButton;
+        text = 'VICTOREM';
+        break;
+
+      case 'victorem-sdi':
+        buttonStyle = styles.victoremSdiButton;
+        text = 'VICTOREM';
+        break;
+
+      case 'custom-cl':
+      case 'custom-cx':
+        buttonStyle = styles.customButton;
+        text = 'CUSTOM';
+        break;
+
+      default:
+        return '';
+    }
+
+    return (
+      <button
+        type='button'
+        key={i}
+        className={buttonStyle}
+        onClick={() => this.props.handleToggleCamera(cameraType)}
+      >
+        {text}
+      </button>
+    );
+  });
 
   render = () => (
     <Modal
@@ -132,7 +201,7 @@ class DVRCameraModal extends Component {
         </div>
         {this.renderCamera()}
         <div>
-          {this.renderCustomButton()}
+          {this.renderCustomButtons()}
           <button type='button' className={styles.saveButton} onClick={this.props.saveAndCloseModal}>SAVE</button>
         </div>
       </div>
@@ -172,9 +241,9 @@ const mapDispatchToProps = (dispatch, {
   closeModal,
   saveAndCloseModal,
 }) => ({
-  handleToggleCustomMode: () => dispatch(toggleCustomMode(dvrId, cameraId)),
   closeModal,
   saveAndCloseModal,
+  handleToggleCamera: cameraType => dispatch(toggleCamera(dvrId, cameraId, cameraType)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(DVRCameraModal);
