@@ -8,24 +8,28 @@ import { BIT_DEPTHS } from '../../constants';
 import styles from './VictoremCXFormat.css';
 
 const VictoremCXFormat = ({
+  format,
+  bitDepth,
   formats,
   handleChangeFormat,
   handleChangeBitDepth,
 }) => {
-  const formatOptions = formats.map((format, i) => <option key={i}>{format}</option>);
-  const bitDepthOptions = BIT_DEPTHS.map((bitDepth, i) => (
-    <option key={i} value={bitDepth}>{bitDepth}</option>
+  const formatOptions = formats.map((formatOption, i) => (
+    <option key={i} value={formatOption}>{formatOption}</option>
+  ));
+  const bitDepthOptions = BIT_DEPTHS.map((bitDepthOption, i) => (
+    <option key={i} value={bitDepthOption}>{bitDepthOption}</option>
   ));
   return (
     <fieldset className={styles.root}>
     <legend className={styles.legend}>Output Format</legend>
       <div className={styles.label}>Link:</div>
-      <select className={styles.select} onChange={handleChangeFormat}>
+      <select className={styles.select} value={format} onChange={handleChangeFormat}>
         {formatOptions}
       </select>
 
       <div className={styles.label}>Bit Depth:</div>
-      <select className={styles.select} onChange={handleChangeBitDepth}>
+      <select className={styles.select} value={bitDepth} onChange={handleChangeBitDepth}>
         {bitDepthOptions}
       </select>
     </fieldset>
@@ -34,8 +38,16 @@ const VictoremCXFormat = ({
 
 const mapStateToProps = ({ frameRateCalculators }, { cameraId }) => {
   const calculatorState = frameRateCalculators[cameraId];
-  const { formats } = calculatorState;
-  return { formats };
+  const {
+    format,
+    bitDepth,
+    formats,
+  } = calculatorState;
+  return {
+    format,
+    bitDepth,
+    formats,
+  };
 };
 
 const mapDispatchToProps = (dispatch, { cameraId }) => ({
