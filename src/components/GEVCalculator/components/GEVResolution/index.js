@@ -1,1 +1,1 @@
-export { default as GEVResolution } from './GEVResolution';
+export { default } from './GEVResolution';

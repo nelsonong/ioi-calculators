@@ -1,1 +1,1 @@
-export { default as GEVFrameRate } from './GEVFrameRate';
+export { default } from './GEVFrameRate';

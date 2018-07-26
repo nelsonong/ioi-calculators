@@ -1,1 +1,1 @@
-export { default as FlareCLOptions } from './FlareCLOptions';
+export { default } from './FlareCLOptions';

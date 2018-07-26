@@ -1,1 +1,1 @@
-export { default as VictoremSDIOutput } from './VictoremSDIOutput';
+export { default } from './VictoremSDIOutput';

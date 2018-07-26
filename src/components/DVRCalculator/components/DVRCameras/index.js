@@ -1,1 +1,1 @@
-export { default as DVRCameras } from './DVRCameras';
+export { default } from './DVRCameras';

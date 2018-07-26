@@ -1,1 +1,1 @@
-export { default as CustomCXFormat } from './CustomCXFormat';
+export { default } from './CustomCXFormat';

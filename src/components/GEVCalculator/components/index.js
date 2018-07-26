@@ -1,4 +1,11 @@
-export { GEVFormat } from './GEVFormat';
-export { GEVResolution } from './GEVResolution';
-export { GEVFrameRate } from './GEVFrameRate';
-export { GEVOutput } from './GEVOutput';
+import GEVFormat from './GEVFormat';
+import GEVResolution from './GEVResolution';
+import GEVFrameRate from './GEVFrameRate';
+import GEVOutput from './GEVOutput';
+
+export {
+  GEVFormat,
+  GEVResolution,
+  GEVFrameRate,
+  GEVOutput,
+};

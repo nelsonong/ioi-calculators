@@ -1,1 +1,1 @@
-export { default as CustomCLResolution } from './CustomCLResolution';
+export { default } from './CustomCLResolution';

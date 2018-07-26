@@ -1,1 +1,1 @@
-export { default as CustomCLFrameRate } from './CustomCLFrameRate';
+export { default } from './CustomCLFrameRate';

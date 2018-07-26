@@ -1,1 +1,1 @@
-export { default as FlareCLOutput } from './FlareCLOutput';
+export { default } from './FlareCLOutput';

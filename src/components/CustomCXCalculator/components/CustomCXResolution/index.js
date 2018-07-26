@@ -1,1 +1,1 @@
-export { default as CustomCXResolution } from './CustomCXResolution';
+export { default } from './CustomCXResolution';

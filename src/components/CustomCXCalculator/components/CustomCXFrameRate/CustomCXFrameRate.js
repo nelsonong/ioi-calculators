@@ -4,29 +4,32 @@ import { updateFrameRate } from '../../../../actions/customCXActions';
 import styles from './CustomCXFrameRate.css';
 
 const CustomCXFrameRate = ({
-    frameRate,
-    handleChange
+  frameRate,
+  handleChange,
 }) => (
-    <fieldset className={styles.root}>
-    <legend className={styles.legend}>Frame Rate</legend>
-        <input type="number" className={styles.display} value={frameRate} onChange={handleChange} />
-    </fieldset>
+  <fieldset className={styles.root}>
+  <legend className={styles.legend}>Frame Rate</legend>
+    <input type="number" className={styles.display} value={frameRate} onChange={handleChange} />
+  </fieldset>
 );
 
 const mapStateToProps = ({ storageCalculators }, {
-    cameraId,
-    dvrId
+  cameraId,
+  dvrId,
 }) => {
-    const calculatorState = storageCalculators[dvrId].cameras[cameraId];
-    const { frameRate } = calculatorState;
-    return { frameRate };
+  const calculatorState = storageCalculators[dvrId].cameras[cameraId];
+  const { frameRate } = calculatorState;
+  return { frameRate };
 };
 
-const mapDispatchToProps = (dispatch, { cameraId, dvrId }) => ({
-    handleChange: (e) => {
-        const frameRate = Number(e.target.value);
-        dispatch(updateFrameRate(cameraId, frameRate, dvrId));
-    }
+const mapDispatchToProps = (dispatch, {
+  cameraId,
+  dvrId,
+}) => ({
+  handleChange: (e) => {
+    const frameRate = Number(e.target.value);
+    dispatch(updateFrameRate(cameraId, frameRate, dvrId));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CustomCXFrameRate);

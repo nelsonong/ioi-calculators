@@ -3,37 +3,49 @@ import { connect } from 'react-redux';
 import { updateModel } from '../../../../actions/flareSDIActions';
 import styles from './FlareSDIModel.css';
 
-const FlareSDIModel = ({ models, handleChange }) => {
-    const modelOptions = models.map((model, i) => <option key={i} value={model}>{model}</option>);
-    return (
-        <fieldset className={styles.root}>
-        <legend className={styles.legend}>Model</legend>
-            <select className={styles.select} name='model' onChange={handleChange}>
-                {modelOptions}
-            </select>
-        </fieldset>
-    );
+const FlareSDIModel = ({
+  model,
+  models,
+  handleChange,
+}) => {
+  const modelOptions = models.map((modelOption, i) => (
+    <option key={i} value={modelOption}>{modelOption}</option>
+  ));
+  return (
+    <fieldset className={styles.root}>
+    <legend className={styles.legend}>Model</legend>
+      <select className={styles.select} value={model} onChange={handleChange}>
+        {modelOptions}
+      </select>
+    </fieldset>
+  );
 };
 
 const mapStateToProps = (state, {
-    cameraId,
-    dvrId
+  cameraId,
+  dvrId,
 }) => {
-    const calculatorState = !!!dvrId
-        ? state.frameRateCalculators[cameraId]
-        : state.storageCalculators[dvrId].cameras[cameraId];
-    const { models } = calculatorState;
-    return { models };
+  const calculatorState = !dvrId
+    ? state.frameRateCalculators[cameraId]
+    : state.storageCalculators[dvrId].cameras[cameraId];
+  const {
+    model,
+    models,
+  } = calculatorState;
+  return {
+    model,
+    models,
+  };
 };
 
 const mapDispatchToProps = (dispatch, {
-    cameraId,
-    dvrId
+  cameraId,
+  dvrId,
 }) => ({
-    handleChange: (e) => {
-        const model = e.target.value;
-        dispatch(updateModel(cameraId, model, dvrId));
-    }
+  handleChange: (e) => {
+    const model = e.target.value;
+    dispatch(updateModel(cameraId, model, dvrId));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FlareSDIModel);

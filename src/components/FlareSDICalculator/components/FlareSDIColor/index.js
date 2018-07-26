@@ -1,1 +1,1 @@
-export { default as FlareSDIColor } from './FlareSDIColor';
+export { default } from './FlareSDIColor';

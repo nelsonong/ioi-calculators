@@ -1,1 +1,1 @@
-export { default as FlareCLFormat } from './FlareCLFormat';
+export { default } from './FlareCLFormat';

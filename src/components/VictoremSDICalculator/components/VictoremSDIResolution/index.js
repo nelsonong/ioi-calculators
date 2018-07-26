@@ -1,1 +1,1 @@
-export { default as VictoremSDIResolution } from './VictoremSDIResolution';
+export { default } from './VictoremSDIResolution';

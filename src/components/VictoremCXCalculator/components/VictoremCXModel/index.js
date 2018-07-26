@@ -1,1 +1,1 @@
-export { default as VictoremCXModel } from './VictoremCXModel';
+export { default } from './VictoremCXModel';

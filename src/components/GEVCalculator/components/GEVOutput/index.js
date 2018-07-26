@@ -1,1 +1,1 @@
-export { default as GEVOutput } from './GEVOutput';
+export { default } from './GEVOutput';

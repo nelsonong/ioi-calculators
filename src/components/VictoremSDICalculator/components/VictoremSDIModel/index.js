@@ -1,1 +1,1 @@
-export { default as VictoremSDIModel } from './VictoremSDIModel';
+export { default } from './VictoremSDIModel';

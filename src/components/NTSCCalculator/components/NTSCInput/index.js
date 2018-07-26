@@ -1,1 +1,1 @@
-export { default as NTSCInput } from './NTSCInput';
+export { default } from './NTSCInput';

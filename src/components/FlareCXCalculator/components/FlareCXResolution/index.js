@@ -1,1 +1,1 @@
-export { default as FlareCXResolution } from './FlareCXResolution';
+export { default } from './FlareCXResolution';

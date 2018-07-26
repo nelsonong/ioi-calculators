@@ -1,1 +1,1 @@
-export { default as VictoremCXOptions } from './VictoremCXOptions';
+export { default } from './VictoremCXOptions';

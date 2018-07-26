@@ -1,6 +1,15 @@
-export { VictoremSDIModel } from './VictoremSDIModel';
-export { VictoremSDIInterface } from './VictoremSDIInterface';
-export { VictoremSDIColor } from './VictoremSDIColor';
-export { VictoremSDIResolution } from './VictoremSDIResolution';
-export { VictoremSDIFrameRate } from './VictoremSDIFrameRate';
-export { VictoremSDIOutput } from './VictoremSDIOutput';
+import VictoremSDIModel from './VictoremSDIModel';
+import VictoremSDIInterface from './VictoremSDIInterface';
+import VictoremSDIColor from './VictoremSDIColor';
+import VictoremSDIResolution from './VictoremSDIResolution';
+import VictoremSDIFrameRate from './VictoremSDIFrameRate';
+import VictoremSDIOutput from './VictoremSDIOutput';
+
+export {
+  VictoremSDIModel,
+  VictoremSDIInterface,
+  VictoremSDIColor,
+  VictoremSDIResolution,
+  VictoremSDIFrameRate,
+  VictoremSDIOutput,
+};

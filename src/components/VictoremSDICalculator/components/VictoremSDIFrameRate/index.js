@@ -1,1 +1,1 @@
-export { default as VictoremSDIFrameRate } from './VictoremSDIFrameRate';
+export { default } from './VictoremSDIFrameRate';

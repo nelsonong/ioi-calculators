@@ -1,1 +1,1 @@
-export { default as FlareCLHardwareVersion } from './FlareCLHardwareVersion';
+export { default } from './FlareCLHardwareVersion';

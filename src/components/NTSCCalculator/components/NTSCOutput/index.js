@@ -1,1 +1,1 @@
-export { default as NTSCOutput } from './NTSCOutput';
+export { default } from './NTSCOutput';

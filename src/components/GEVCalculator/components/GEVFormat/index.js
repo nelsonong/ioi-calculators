@@ -1,1 +1,1 @@
-export { default as GEVFormat } from './GEVFormat';
+export { default } from './GEVFormat';

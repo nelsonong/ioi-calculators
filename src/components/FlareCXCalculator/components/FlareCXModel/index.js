@@ -1,1 +1,1 @@
-export { default as FlareCXModel } from './FlareCXModel';
+export { default } from './FlareCXModel';

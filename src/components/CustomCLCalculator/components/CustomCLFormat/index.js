@@ -1,1 +1,1 @@
-export { default as CustomCLFormat } from './CustomCLFormat';
+export { default } from './CustomCLFormat';

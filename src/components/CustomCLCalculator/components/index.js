@@ -1,4 +1,11 @@
-export { CustomCLFormat } from './CustomCLFormat';
-export { CustomCLResolution } from './CustomCLResolution';
-export { CustomCLFrameRate } from './CustomCLFrameRate';
-export { CustomCLOutput } from './CustomCLOutput';
+import CustomCLFormat from './CustomCLFormat';
+import CustomCLResolution from './CustomCLResolution';
+import CustomCLFrameRate from './CustomCLFrameRate';
+import CustomCLOutput from './CustomCLOutput';
+
+export {
+  CustomCLFormat,
+  CustomCLResolution,
+  CustomCLFrameRate,
+  CustomCLOutput,
+};

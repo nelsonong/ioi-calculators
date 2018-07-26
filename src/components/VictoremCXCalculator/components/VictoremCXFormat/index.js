@@ -1,1 +1,1 @@
-export { default as VictoremCXFormat } from './VictoremCXFormat';
+export { default } from './VictoremCXFormat';

@@ -1,6 +1,15 @@
-export { FlareSDIModel } from './FlareSDIModel';
-export { FlareSDIInterface } from './FlareSDIInterface';
-export { FlareSDIColor } from './FlareSDIColor';
-export { FlareSDIResolution } from './FlareSDIResolution';
-export { FlareSDIFrameRate } from './FlareSDIFrameRate';
-export { FlareSDIOutput } from './FlareSDIOutput';
+import FlareSDIModel from './FlareSDIModel';
+import FlareSDIInterface from './FlareSDIInterface';
+import FlareSDIColor from './FlareSDIColor';
+import FlareSDIResolution from './FlareSDIResolution';
+import FlareSDIFrameRate from './FlareSDIFrameRate';
+import FlareSDIOutput from './FlareSDIOutput';
+
+export {
+  FlareSDIModel,
+  FlareSDIInterface,
+  FlareSDIColor,
+  FlareSDIResolution,
+  FlareSDIFrameRate,
+  FlareSDIOutput,
+};

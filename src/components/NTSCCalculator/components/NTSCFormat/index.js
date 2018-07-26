@@ -1,1 +1,1 @@
-export { default as NTSCFormat } from './NTSCFormat';
+export { default } from './NTSCFormat';

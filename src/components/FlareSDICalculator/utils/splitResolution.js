@@ -1,3 +1,1 @@
-export const splitResolution = (resolution) => {
-    return resolution.match(/\((.*)\)/).pop().split('x').map(number => Number(number));
-};
+export default resolution => resolution.match(/\((.*)\)/).pop().split('x').map(number => Number(number));

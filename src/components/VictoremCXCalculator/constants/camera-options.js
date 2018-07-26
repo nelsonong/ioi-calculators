@@ -1,6 +1,6 @@
-export const CAMERA_OPTION = {
-    NONE: 0,
-    SUBSAMPLING: 1,
-    BIN_VERTICAL: 2,
-    BIN_2X2: 3
+export default {
+  NONE: 0,
+  SUBSAMPLING: 1,
+  BIN_VERTICAL: 2,
+  BIN_2X2: 3,
 };

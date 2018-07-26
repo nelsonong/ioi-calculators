@@ -1,1 +1,1 @@
-export { default as FlareSDIModel } from './FlareSDIModel';
+export { default } from './FlareSDIModel';

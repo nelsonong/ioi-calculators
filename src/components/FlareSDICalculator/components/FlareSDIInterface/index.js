@@ -1,1 +1,1 @@
-export { default as FlareSDIInterface } from './FlareSDIInterface';
+export { default } from './FlareSDIInterface';

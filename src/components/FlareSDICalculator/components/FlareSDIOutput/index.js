@@ -1,1 +1,1 @@
-export { default as FlareSDIOutput } from './FlareSDIOutput';
+export { default } from './FlareSDIOutput';

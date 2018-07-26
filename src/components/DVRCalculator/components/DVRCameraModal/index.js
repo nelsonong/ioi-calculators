@@ -1,1 +1,1 @@
-export { default as DVRCameraModal } from './DVRCameraModal';
+export { default } from './DVRCameraModal';

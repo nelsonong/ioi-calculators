@@ -1,1 +1,1 @@
-export { default as NTSCColor } from './NTSCColor';
+export { default } from './NTSCColor';

@@ -1,1 +1,1 @@
-export { default as CustomCLOutput } from './CustomCLOutput';
+export { default } from './CustomCLOutput';

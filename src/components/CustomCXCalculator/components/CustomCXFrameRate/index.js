@@ -1,1 +1,1 @@
-export { default as CustomCXFrameRate } from './CustomCXFrameRate';
+export { default } from './CustomCXFrameRate';

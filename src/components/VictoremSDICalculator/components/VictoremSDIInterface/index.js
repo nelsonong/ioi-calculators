@@ -1,1 +1,1 @@
-export { default as VictoremSDIInterface } from './VictoremSDIInterface';
+export { default } from './VictoremSDIInterface';

@@ -1,6 +1,15 @@
-export { FlareCLModel } from './FlareCLModel';
-export { FlareCLHardwareVersion } from './FlareCLHardwareVersion';
-export { FlareCLFormat } from './FlareCLFormat';
-export { FlareCLResolution } from './FlareCLResolution';
-export { FlareCLOptions } from './FlareCLOptions';
-export { FlareCLOutput } from './FlareCLOutput';
+import FlareCLModel from './FlareCLModel';
+import FlareCLHardwareVersion from './FlareCLHardwareVersion';
+import FlareCLFormat from './FlareCLFormat';
+import FlareCLResolution from './FlareCLResolution';
+import FlareCLOptions from './FlareCLOptions';
+import FlareCLOutput from './FlareCLOutput';
+
+export {
+  FlareCLModel,
+  FlareCLHardwareVersion,
+  FlareCLFormat,
+  FlareCLResolution,
+  FlareCLOptions,
+  FlareCLOutput,
+};

@@ -1,37 +1,50 @@
-import { MODEL, MODELS, COLOR_MODELS } from './models';
-import { FORMAT, DUAL_FORMATS, FORMATS, SLOW_MODE_FORMATS } from './formats';
-import { RESOLUTION, RESOLUTIONS, NAN_RESOLUTIONS } from './resolutions';
-import { MODE } from './modes';
+import {
+  MODEL,
+  MODELS,
+  COLOR_MODELS,
+} from './models';
+import {
+  FORMAT,
+  DUAL_FORMATS,
+  FORMATS,
+  SLOW_MODE_FORMATS,
+} from './formats';
+import {
+  RESOLUTION,
+  RESOLUTIONS,
+  NAN_RESOLUTIONS,
+} from './resolutions';
+import MODE from './modes';
 
 export const flareCLDefaultState = {
-	cameraType: 'flare-cl',					// Camera type
-	model: MODEL.Type2M360MCL,              // Camera model
-	hwversion: 1,                           // Hardware version
-	format: FORMAT.Output2x8,               // Link format (Camera Link)
-	formats: FORMATS.CL2_4m,                // Current formats (changes based on model)
-	resolutionPreset: RESOLUTION.MAXIMUM,   // Resolution preset
-	width: 2048,                            // Resolution - width
-	widthStep: 8,                           // Acceptable width multiple
-	height: 1088,                           // Resolution - height
-	heightStep: 2,                          // Acceptable height multiple
-	resolutionTooltip: '',                  // Warning if incorrect resolution multiple
-	subSampling: false,                     // Sub-sampling enabled
-	slowMode: false,                        // Slow-mode enabled
-	frameRate: 70.95,                       // Maximum frame-rate
-	dataRate: 150.77,                       // Data-rate (in MB/s)
-	error: false,                           // Error occured with an input
+  cameraType: 'flare-cl',
+  model: MODEL.Type2M360MCL,
+  hwversion: 1,
+  format: FORMAT.Output2x8,
+  formats: FORMATS.CL2_4m,
+  resolutionPreset: RESOLUTION.MAXIMUM,
+  width: 2048,
+  widthStep: 8,
+  height: 1088,
+  heightStep: 2,
+  resolutionTooltip: '',
+  subSampling: false,
+  slowMode: false,
+  frameRate: 70.95,
+  dataRate: 150.77,
+  error: false,
 };
 
 export {
-	MODEL,
-	MODELS,
-	COLOR_MODELS,
-	FORMAT,
-	DUAL_FORMATS,
-	FORMATS,
-	SLOW_MODE_FORMATS,
-	RESOLUTION,
-	RESOLUTIONS,
-	NAN_RESOLUTIONS,
-	MODE
+  MODEL,
+  MODELS,
+  COLOR_MODELS,
+  FORMAT,
+  DUAL_FORMATS,
+  FORMATS,
+  SLOW_MODE_FORMATS,
+  RESOLUTION,
+  RESOLUTIONS,
+  NAN_RESOLUTIONS,
+  MODE,
 };

@@ -1,1 +1,1 @@
-export { default as VictoremSDIColor } from './VictoremSDIColor';
+export { default } from './VictoremSDIColor';

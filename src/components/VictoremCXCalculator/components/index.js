@@ -1,5 +1,13 @@
-export { VictoremCXModel } from './VictoremCXModel';
-export { VictoremCXFormat } from './VictoremCXFormat';
-export { VictoremCXResolution } from './VictoremCXResolution';
-export { VictoremCXOptions } from './VictoremCXOptions';
-export { VictoremCXOutput } from './VictoremCXOutput';
+import VictoremCXModel from './VictoremCXModel';
+import VictoremCXFormat from './VictoremCXFormat';
+import VictoremCXResolution from './VictoremCXResolution';
+import VictoremCXOptions from './VictoremCXOptions';
+import VictoremCXOutput from './VictoremCXOutput';
+
+export {
+  VictoremCXModel,
+  VictoremCXFormat,
+  VictoremCXResolution,
+  VictoremCXOptions,
+  VictoremCXOutput,
+};

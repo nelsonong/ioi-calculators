@@ -1,1 +1,1 @@
-export { default as NTSCOptions } from './NTSCOptions';
+export { default } from './NTSCOptions';

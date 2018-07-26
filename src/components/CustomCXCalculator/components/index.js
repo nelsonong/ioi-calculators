@@ -1,4 +1,11 @@
-export { CustomCXFormat } from './CustomCXFormat';
-export { CustomCXResolution } from './CustomCXResolution';
-export { CustomCXFrameRate } from './CustomCXFrameRate';
-export { CustomCXOutput } from './CustomCXOutput';
+import CustomCXFormat from './CustomCXFormat';
+import CustomCXResolution from './CustomCXResolution';
+import CustomCXFrameRate from './CustomCXFrameRate';
+import CustomCXOutput from './CustomCXOutput';
+
+export {
+  CustomCXFormat,
+  CustomCXResolution,
+  CustomCXFrameRate,
+  CustomCXOutput,
+};

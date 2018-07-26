@@ -1,1 +1,1 @@
-export { default as DVRDrives } from './DVRDrives';
+export { default } from './DVRDrives';

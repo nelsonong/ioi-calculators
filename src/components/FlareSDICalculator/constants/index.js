@@ -1,23 +1,38 @@
-export { MODEL, MODELS, COLOR_MODELS } from './models';
-export { INTERFACE } from './interfaces';
-export { RESOLUTION } from './resolutions';
-export { COLOR } from './colors';
-export { MODE } from './modes';
-export { SDI_TREE } from './sdi-tree';
+import {
+  MODEL,
+  MODELS,
+  COLOR_MODELS,
+} from './models';
+import INTERFACE from './interfaces';
+import COLOR from './colors';
+import RESOLUTION from './resolutions';
+import MODE from './modes';
+import SDI_TREE from './sdi-tree';
 
 export const flareSDIDefaultState = {
-	cameraType: 'flare-sdi',
-    model: '',
-    models: [],
-    sdiInterface: '',
-    sdiInterfaces: [],
-    width: 0,
-    height: 0,
-    resolution: '',
-    resolutions: [],
-    color: '',
-    colors: [],
-    frameRate: '',
-    frameRates: [],
-    dataRate: 0
+  cameraType: 'flare-sdi',
+  model: '',
+  models: [],
+  sdiInterface: '',
+  sdiInterfaces: [],
+  width: 0,
+  height: 0,
+  resolution: '',
+  resolutions: [],
+  color: '',
+  colors: [],
+  frameRate: '',
+  frameRates: [],
+  dataRate: 0,
+};
+
+export {
+  MODEL,
+  MODELS,
+  COLOR_MODELS,
+  INTERFACE,
+  RESOLUTION,
+  COLOR,
+  MODE,
+  SDI_TREE,
 };

@@ -1,1 +1,1 @@
-export { default as DVRModelConfiguration } from './DVRModelConfiguration';
+export { default } from './DVRModelConfiguration';

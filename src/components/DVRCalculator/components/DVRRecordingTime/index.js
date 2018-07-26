@@ -1,1 +1,1 @@
-export { default as DVRRecordingTime } from './DVRRecordingTime';
+export { default } from './DVRRecordingTime';

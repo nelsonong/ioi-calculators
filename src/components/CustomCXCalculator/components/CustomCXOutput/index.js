@@ -1,1 +1,1 @@
-export { default as CustomCXOutput } from './CustomCXOutput';
+export { default } from './CustomCXOutput';
