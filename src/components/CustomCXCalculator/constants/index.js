@@ -10,6 +10,7 @@ import MODE from './modes';
 
 export const customCXDefaultState = {
   cameraType: 'custom-cx',
+  model: 'Custom',
   formats: FORMATS.CX2_4m,
   bitDepth: 8,
   linkCount: 1,

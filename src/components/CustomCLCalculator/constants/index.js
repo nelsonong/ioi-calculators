@@ -11,6 +11,7 @@ import MODE from './modes';
 
 export const customCLDefaultState = {
   cameraType: 'custom-cl',
+  model: 'Custom',
   format: FORMAT.Output1x8,
   formats: [],
   resolutionPreset: '1920x1080',

@@ -90,12 +90,9 @@ class DVRCamera extends Component {
     } = this.props;
     return (
       <div>
-        {
-          model
-          && <div className={styles.info}>
-            {model}
-          </div>
-        }
+        <div className={styles.info}>
+          {model}
+        </div>
         <div className={styles.info}>
           {width}x{height}
         </div>
