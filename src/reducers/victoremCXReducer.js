@@ -58,22 +58,25 @@ const updateResolution = (inputCalculatorState) => {
   const {
     width,
     height,
+    cameraOption,
   } = calculatorState;
   let resolutionTooltip = '';
-  if (width > maxWidth) {
-    resolutionTooltip = `Maximum width is ${maxWidth}px.`;
-  }
+  if (cameraOption !== CAMERA_OPTION.SUBSAMPLING) {
+    if (width > maxWidth) {
+      resolutionTooltip = `Maximum width is ${maxWidth}px.`;
+    }
 
-  if (height > maxHeight) {
-    resolutionTooltip = `Maximum height is ${maxHeight}px.`;
-  }
+    if (height > maxHeight) {
+      resolutionTooltip = `Maximum height is ${maxHeight}px.`;
+    }
 
-  if ((width % widthStep) !== 0) {
-    resolutionTooltip = `Width must be a multiple of ${widthStep}.`;
-  }
+    if ((width % widthStep) !== 0) {
+      resolutionTooltip = `Width must be a multiple of ${widthStep}.`;
+    }
 
-  if ((height % heightStep) !== 0) {
-    resolutionTooltip = `Height must be a multiple of ${heightStep}.`;
+    if ((height % heightStep) !== 0) {
+      resolutionTooltip = `Height must be a multiple of ${heightStep}.`;
+    }
   }
 
   const error = resolutionTooltip !== '';
@@ -158,6 +161,7 @@ const victoremCXReducer = (state = { order: [] }, action) => {
         cameraOption: CAMERA_OPTION.NONE,
       };
       calculatorState = updateResolutionConstraints(calculatorState);
+      calculatorState = updateResolution(calculatorState);
       calculatorState = updateOutput(calculatorState);
       break;
     }
@@ -169,6 +173,7 @@ const victoremCXReducer = (state = { order: [] }, action) => {
         format,
       };
       calculatorState = updateResolutionConstraints(calculatorState);
+      calculatorState = updateResolution(calculatorState);
       calculatorState = updateOutput(calculatorState);
       break;
     }
@@ -180,6 +185,7 @@ const victoremCXReducer = (state = { order: [] }, action) => {
         bitDepth,
       };
       calculatorState = updateResolutionConstraints(calculatorState);
+      calculatorState = updateResolution(calculatorState);
       calculatorState = updateOutput(calculatorState);
       break;
     }
@@ -240,8 +246,10 @@ const victoremCXReducer = (state = { order: [] }, action) => {
       calculatorState = {
         ...calculatorState,
         cameraOption,
+        resolutionPreset: RESOLUTION.MAXIMUM,
       };
       calculatorState = updateResolutionConstraints(calculatorState);
+      calculatorState = updateResolution(calculatorState);
       calculatorState = updateOutput(calculatorState);
       break;
     }
