@@ -17,6 +17,7 @@ import MODE from './modes';
 export const flareCXDefaultState = {
   cameraType: 'flare-cx',
   model: MODEL.Type2M280MCX,
+  models: MODELS,
   formats: FORMATS.CX2_4m,
   bitDepth: 8,
   linkCount: 1,

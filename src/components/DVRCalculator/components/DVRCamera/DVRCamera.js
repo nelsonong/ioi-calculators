@@ -104,7 +104,7 @@ class DVRCamera extends Component {
   }
 
   render = () => {
-    const root = cx(styles.root, { [styles.added]: !!this.props.added });
+    const root = cx(styles.root, { [styles.added]: !!this.state.added });
     return (
       <div
         className={root}

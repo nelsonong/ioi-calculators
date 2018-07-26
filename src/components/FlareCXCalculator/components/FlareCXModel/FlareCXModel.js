@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { updateModel } from '../../../../actions/flareCXActions';
-import { MODELS } from '../../constants';
 import styles from './FlareCXModel.css';
 
 const FlareCXModel = ({
   model,
+  models,
   handleChange,
 }) => {
-  const modelOptions = MODELS.map((modelOption, i) => (
+  const modelOptions = models.map((modelOption, i) => (
     <option key={i} value={modelOption}>{modelOption}</option>
   ));
   return (
@@ -28,8 +28,14 @@ const mapStateToProps = (state, {
   const calculatorState = !dvrId
     ? state.frameRateCalculators[cameraId]
     : state.storageCalculators[dvrId].cameras[cameraId];
-  const { model } = calculatorState;
-  return { model };
+  const {
+    model,
+    models,
+  } = calculatorState;
+  return {
+    model,
+    models,
+  };
 };
 
 const mapDispatchToProps = (dispatch, {

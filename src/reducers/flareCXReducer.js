@@ -129,11 +129,24 @@ const flareCXReducer = (state = { order: [] }, action) => {
   let calculatorState = calculators[cameraId];
   switch (type) {
     case INITIALIZE_FLARE_CX_DVR_STATE: {
-      break;
+      const { mode } = action;
+      let { models } = calculatorState;
+      if (mode === MODE.QUAD) {
+        models = models.filter(model => model.startsWith('12M') || model.startsWith('48M'));
+      }
+
+      const model = models[0];
+      calculatorState = {
+        ...calculatorState,
+        model,
+        models,
+      };
+
+      // Fall-through
     }
 
     case UPDATE_FLARE_CX_MODEL: {
-      const { model } = action;
+      const { model } = action.model ? action : calculatorState;
 
       // Get formats
       let formats;
