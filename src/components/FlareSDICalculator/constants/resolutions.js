@@ -1,5 +1,5 @@
 export default {
-  DCI_4K: 'UHD (4096x2160)',
+  DCI_4K: '4K (4096x2160)',
   UHD: 'UHD (3840x2160)',
   DCI_2K: '2K (2048x1080)',
   FHD: 'FHD (1920x1080)',
