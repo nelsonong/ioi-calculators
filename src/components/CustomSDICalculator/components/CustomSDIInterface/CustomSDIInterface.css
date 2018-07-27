@@ -1,0 +1,12 @@
+@import '../../../../styles/custom.css';
+
+.root {
+    composes: custom-fieldset;
+}
+
+@mixin add-left-right 60%, 40%;
+
+.label {
+    display: inline-block;
+    margin: 0 0.3em;
+}

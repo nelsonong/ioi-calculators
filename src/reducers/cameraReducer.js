@@ -6,6 +6,7 @@ import { victoremCXActionTypes } from '../actions/victoremCXActions';
 import { victoremSDIActionTypes } from '../actions/victoremSDIActions';
 import { customCLActionTypes } from '../actions/customCLActions';
 import { customCXActionTypes } from '../actions/customCXActions';
+import { customSDIActionTypes } from '../actions/customSDIActions';
 import { gevActionTypes } from '../actions/gevActions';
 import { ntscActionTypes } from '../actions/ntscActions';
 import managementReducer from './managementReducer';
@@ -16,6 +17,7 @@ import victoremCXReducer from './victoremCXReducer';
 import victoremSDIReducer from './victoremSDIReducer';
 import customCLReducer from './customCLReducer';
 import customCXReducer from './customCXReducer';
+import customSDIReducer from './customSDIReducer';
 import gevReducer from './gevReducer';
 import ntscReducer from './ntscReducer';
 
@@ -54,6 +56,10 @@ const cameraReducer = (state = { order: [] }, action) => {
 
   if (customCXActionTypes.includes(action.type)) {
     return customCXReducer(state, action);
+  }
+
+  if (customSDIActionTypes.includes(action.type)) {
+    return customSDIReducer(state, action);
   }
 
   if (gevActionTypes.includes(action.type)) {

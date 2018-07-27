@@ -10,6 +10,7 @@ import VictoremCXCalculator from '../../../VictoremCXCalculator';
 import VictoremSDICalculator from '../../../VictoremSDICalculator';
 import CustomCLCalculator from '../../../CustomCLCalculator';
 import CustomCXCalculator from '../../../CustomCXCalculator';
+import CustomSDICalculator from '../../../CustomSDICalculator';
 import GEVCalculator from '../../../GEVCalculator';
 import NTSCCalculator from '../../../NTSCCalculator';
 import { MODE } from '../../constants';
@@ -83,6 +84,15 @@ class DVRCameraModal extends Component {
           />
         );
 
+      case 'custom-sdi':
+        return (
+          <CustomSDICalculator
+            cameraId={this.props.cameraId}
+            dvrId={this.props.dvrId}
+            mode={this.props.mode}
+          />
+        );
+
       case 'gev':
         return (
           <GEVCalculator
@@ -117,13 +127,13 @@ class DVRCameraModal extends Component {
         return this.createButtons(['victorem-cx', 'custom-cx']);
 
       case 'flare-sdi':
-        return this.createButtons(['victorem-sdi']);
+        return this.createButtons(['victorem-sdi', 'custom-sdi']);
 
       case 'victorem-cx':
         return this.createButtons(['flare-cx', 'custom-cx']);
 
       case 'victorem-sdi':
-        return this.createButtons(['flare-sdi']);
+        return this.createButtons(['flare-sdi', 'custom-sdi']);
 
       case 'custom-cl':
         return this.createButtons(['flare-cl']);
@@ -134,6 +144,9 @@ class DVRCameraModal extends Component {
         }
 
         return this.createButtons(['flare-cx', 'victorem-cx']);
+
+      case 'custom-sdi':
+        return this.createButtons(['flare-sdi', 'victorem-sdi']);
 
       default:
         return '';
@@ -171,6 +184,7 @@ class DVRCameraModal extends Component {
 
       case 'custom-cl':
       case 'custom-cx':
+      case 'custom-sdi':
         buttonStyle = styles.customButton;
         text = 'CUSTOM';
         break;

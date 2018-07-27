@@ -1,4 +1,5 @@
 import uuid from 'uuid';
+
 import {
   MODEL,
   CL_CONFIGS, CLPLUS_CONFIGS, CLMAX_CONFIGS,
@@ -7,6 +8,7 @@ import {
   GEV_CONFIGS, NTSC_CONFIGS,
   DRIVE_CAPACITY, LINK, MODE, MODES,
 } from '../components/DVRCalculator/constants';
+
 import {
   INITIALIZE_DVR_STATE,
   UPDATE_DVR_MODEL,
@@ -19,6 +21,7 @@ import {
   UPDATE_DVR_DRIVE_MODEL,
   UPDATE_DVR_DRIVE_AMOUNT,
 } from '../actions/dvrActions';
+
 import { flareCLDefaultState } from '../components/FlareCLCalculator/constants';
 import { flareCXDefaultState } from '../components/FlareCXCalculator/constants';
 import { flareSDIDefaultState } from '../components/FlareSDICalculator/constants';
@@ -26,6 +29,7 @@ import { victoremCXDefaultState } from '../components/VictoremCXCalculator/const
 import { victoremSDIDefaultState } from '../components/VictoremSDICalculator/constants';
 import { customCLDefaultState } from '../components/CustomCLCalculator/constants';
 import { customCXDefaultState } from '../components/CustomCXCalculator/constants';
+import { customSDIDefaultState } from '../components/CustomSDICalculator/constants';
 import { gevDefaultState } from '../components/GEVCalculator/constants';
 import { ntscDefaultState } from '../components/NTSCCalculator/constants';
 
@@ -75,6 +79,10 @@ const generateCameraState = (dvrId, cameraId, cameraType, mode) => {
 
     case 'custom-cx':
       cameraState = customCXDefaultState;
+      break;
+
+    case 'custom-sdi':
+      cameraState = customSDIDefaultState;
       break;
 
     case 'gev':
