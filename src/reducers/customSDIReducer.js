@@ -17,10 +17,11 @@ const updateDataRate = (calculatorState) => {
   const {
     width,
     height,
+    interlaced,
     color,
     frameRate,
   } = calculatorState;
-  const dataRate = calculateDataRate(frameRate, width, height, color);
+  const dataRate = calculateDataRate(frameRate, width, height, interlaced, color);
   return {
     ...calculatorState,
     dataRate,
@@ -75,12 +76,13 @@ const customSDIReducer = (state = { order: [] }, action) => {
       const { sdiInterface } = action.sdiInterface ? action : calculatorState;
       const resolutions = Object.keys(SDI_TREE[sdiInterface]);
       const resolution = resolutions[0];
-      const [width, height] = RESOLUTION[resolution];
+      const [width, height, interlaced] = RESOLUTION[resolution];
       calculatorState = {
         ...calculatorState,
         sdiInterface,
         width,
         height,
+        interlaced,
         resolution,
         resolutions,
       };
@@ -91,12 +93,13 @@ const customSDIReducer = (state = { order: [] }, action) => {
       const { sdiInterface } = calculatorState;
       const colors = Object.keys(SDI_TREE[sdiInterface][resolution]);
       const color = colors[0];
-      const [width, height] = RESOLUTION[resolution];
+      const [width, height, interlaced] = RESOLUTION[resolution];
       calculatorState = {
         ...calculatorState,
         resolution,
         width,
         height,
+        interlaced,
         color,
         colors,
       };

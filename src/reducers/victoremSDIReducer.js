@@ -20,10 +20,11 @@ const updateDataRate = (calculatorState) => {
   const {
     width,
     height,
+    interlaced,
     color,
     frameRate,
   } = calculatorState;
-  const dataRate = calculateDataRate(frameRate, width, height, color);
+  const dataRate = calculateDataRate(frameRate, width, height, interlaced, color);
   return {
     ...calculatorState,
     dataRate,
@@ -115,12 +116,17 @@ const victoremSDIReducer = (state = { order: [] }, action) => {
       const { model } = calculatorState;
       const resolutions = Object.keys(SDI_TREE[model][sdiInterface]);
       const resolution = resolutions[0];
-      const [width, height] = RESOLUTION[resolution];
+      const [
+        width,
+        height,
+        interlaced,
+      ] = RESOLUTION[resolution];
       calculatorState = {
         ...calculatorState,
         sdiInterface,
         width,
         height,
+        interlaced,
         resolution,
         resolutions,
       };
@@ -133,12 +139,17 @@ const victoremSDIReducer = (state = { order: [] }, action) => {
       } = calculatorState;
       const colors = Object.keys(SDI_TREE[model][sdiInterface][resolution]);
       const color = colors[0];
-      const [width, height] = RESOLUTION[resolution];
+      const [
+        width,
+        height,
+        interlaced,
+      ] = RESOLUTION[resolution];
       calculatorState = {
         ...calculatorState,
         resolution,
         width,
         height,
+        interlaced,
         color,
         colors,
       };

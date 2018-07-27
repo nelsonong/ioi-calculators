@@ -4,6 +4,7 @@ export default ({
   height,
   frameRate,
 }) => {
-  const dataRate = (bitDepth * width * height * frameRate) / (1024 * 1024) / 8;
+  const bitsPerPixel = bitDepth / 8;
+  const dataRate = (width * height * frameRate * bitsPerPixel) / (1024 * 1024);
   return dataRate.toFixed(2);
 };

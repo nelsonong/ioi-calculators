@@ -1,8 +1,10 @@
 export default ({
-  frameRate,
+  bitDepth,
   width,
   height,
+  frameRate,
 }) => {
-  const dataRate = (frameRate * width * height) / (1024 * 1024);
+  const bytesPerPixel = bitDepth / 8;
+  const dataRate = (1.01 * width * height * frameRate * bytesPerPixel) / (1024 * 1024);
   return dataRate.toFixed(2);
 };

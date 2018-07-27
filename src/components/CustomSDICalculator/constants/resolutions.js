@@ -9,13 +9,14 @@ const LABEL = {
   SD_480i: 'SD (480i)',
 };
 
+// Resolution [Width, Height, Interlaced]
 export default {
-  [LABEL.DCI_4K_2160p]: [4096, 2160],
-  [LABEL.UHD_2160p]: [3840, 2160],
-  [LABEL.DCI_2K_1080p]: [2048, 1080],
-  [LABEL.HD_1080p]: [1920, 1080],
-  [LABEL.HD_1080i]: [1920, 1080],
-  [LABEL.HD_720p]: [1280, 720],
-  [LABEL.SD_576i]: [768, 576],
-  [LABEL.SD_480i]: [640, 480],
+  [LABEL.DCI_4K_2160p]: [4096, 2160, false],
+  [LABEL.UHD_2160p]: [3840, 2160, false],
+  [LABEL.DCI_2K_1080p]: [2048, 1080, false],
+  [LABEL.HD_1080p]: [1920, 1080, false],
+  [LABEL.HD_1080i]: [1920, 1080, true],
+  [LABEL.HD_720p]: [1280, 720, false],
+  [LABEL.SD_576i]: [720, 576, true],
+  [LABEL.SD_480i]: [720, 487, true],
 };

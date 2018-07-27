@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import styles from './CustomCXOutput.css';
 
 const CustomCXOutput = ({
-  frameRate,
+  frameRateOutput,
   dataRate,
   error,
 }) => {
-  const outputText = error ? 'N/A' : `${frameRate} FPS / ${dataRate} MB/s`;
+  const outputText = error ? 'N/A' : `${frameRateOutput} FPS / ${dataRate} MB/s`;
   return (
     <fieldset className={styles.root}>
     <legend className={styles.legend}>Output</legend>
@@ -22,12 +22,12 @@ const mapStateToProps = ({ storageCalculators }, {
 }) => {
   const calculatorState = storageCalculators[dvrId].cameras[cameraId];
   const {
-    frameRate,
+    frameRateOutput,
     dataRate,
     error,
   } = calculatorState;
   return {
-    frameRate,
+    frameRateOutput,
     dataRate,
     error,
   };

@@ -6,7 +6,7 @@ export default ({
   height,
   frameRate,
 }) => {
-  const bitsPerPixel = FORMAT_BITS[format];
-  const dataRate = (bitsPerPixel * width * height * frameRate) / (1024 * 1024) / 8;
+  const bytesPerPixel = FORMAT_BITS[format] / 8;
+  const dataRate = (1.01 * width * height * frameRate * bytesPerPixel) / (1024 * 1024);
   return dataRate.toFixed(2);
 };

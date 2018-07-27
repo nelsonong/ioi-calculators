@@ -11,6 +11,7 @@ export const customSDIDefaultState = {
   sdiInterfaces: [],
   width: 0,
   height: 0,
+  interlaced: false,
   resolution: '',
   resolutions: [],
   color: '',

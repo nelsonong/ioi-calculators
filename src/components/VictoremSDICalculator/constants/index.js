@@ -17,6 +17,7 @@ export const victoremSDIDefaultState = {
   sdiInterfaces: [],
   width: 0,
   height: 0,
+  interlaced: false,
   resolution: '',
   resolutions: [],
   color: '',

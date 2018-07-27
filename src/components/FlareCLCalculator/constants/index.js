@@ -5,9 +5,10 @@ import {
 } from './models';
 import {
   FORMAT,
-  DUAL_FORMATS,
+  DUAL_FORMAT,
   FORMATS,
   SLOW_MODE_FORMATS,
+  FORMAT_BITS,
 } from './formats';
 import {
   RESOLUTION,
@@ -40,9 +41,10 @@ export {
   MODELS,
   COLOR_MODELS,
   FORMAT,
-  DUAL_FORMATS,
+  DUAL_FORMAT,
   FORMATS,
   SLOW_MODE_FORMATS,
+  FORMAT_BITS,
   RESOLUTION,
   RESOLUTIONS,
   NAN_RESOLUTIONS,

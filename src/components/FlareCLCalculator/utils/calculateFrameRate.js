@@ -1,6 +1,6 @@
 import {
   FORMAT,
-  DUAL_FORMATS,
+  DUAL_FORMAT,
 } from '../constants';
 import {
   calculateWidthStep,
@@ -317,8 +317,8 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
 
         break;
 
-      case DUAL_FORMATS.Output16x8:
-      case DUAL_FORMATS.Output16x10:
+      case DUAL_FORMAT.Output16x8:
+      case DUAL_FORMAT.Output16x10:
         if (hwversion === '2') {
           if (width > 2048) {
             frameOverheadTimeUs = 91;
@@ -337,7 +337,7 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
 
         break;
 
-      case DUAL_FORMATS.Output20x8:
+      case DUAL_FORMAT.Output20x8:
         if (hwversion === '2') {
           if (width > 2050) {
             frameOverheadTimeUs = 84;
