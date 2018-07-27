@@ -97,7 +97,7 @@ const victoremSDIReducer = (state = { order: [] }, action) => {
               break;
           }
         } else if (model === MODEL.Type2KSDIMini) {
-          sdiInterfaces = [HD_SDI, S_3G_SDI, S_6G_SDI, S_12G_SDI];
+          sdiInterfaces = [HD_SDI, S_3G_SDI];
         }
       }
 
