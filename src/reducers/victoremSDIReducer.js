@@ -2,10 +2,10 @@ import {
   MODEL,
   MODELS,
   INTERFACE,
+  RESOLUTION,
   MODE,
   SDI_TREE,
 } from '../components/VictoremSDICalculator/constants';
-import splitResolution from '../components/VictoremSDICalculator/utils/splitResolution';
 import calculateDataRate from '../components/VictoremSDICalculator/utils/calculateDataRate';
 import {
   INITIALIZE_VICTOREM_SDI_DVR_STATE,
@@ -115,7 +115,7 @@ const victoremSDIReducer = (state = { order: [] }, action) => {
       const { model } = calculatorState;
       const resolutions = Object.keys(SDI_TREE[model][sdiInterface]);
       const resolution = resolutions[0];
-      const [width, height] = splitResolution(resolution);
+      const [width, height] = RESOLUTION[resolution];
       calculatorState = {
         ...calculatorState,
         sdiInterface,
@@ -133,7 +133,7 @@ const victoremSDIReducer = (state = { order: [] }, action) => {
       } = calculatorState;
       const colors = Object.keys(SDI_TREE[model][sdiInterface][resolution]);
       const color = colors[0];
-      const [width, height] = splitResolution(resolution);
+      const [width, height] = RESOLUTION[resolution];
       calculatorState = {
         ...calculatorState,
         resolution,
