@@ -79,7 +79,7 @@ const flareSDIReducer = (state = { order: [] }, action) => {
           D_3G_SDI,
           Q_3G_SDI,
         } = INTERFACE;
-        if (model === MODEL.Type4KSDIMini) {
+        if (model === MODEL.Type4KSDI) {
           switch (mode) {
             case MODE.DUAL:
               sdiInterfaces = [D_3G_SDI];
@@ -92,7 +92,7 @@ const flareSDIReducer = (state = { order: [] }, action) => {
             default:
               break;
           }
-        } else if (model === MODEL.Type2KSDIMini) {
+        } else if (model === MODEL.Type2KSDI) {
           sdiInterfaces = [HD_SDI, S_3G_SDI, S_3G_SDI_B];
         }
       }
