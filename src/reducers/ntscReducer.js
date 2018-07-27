@@ -4,7 +4,6 @@ import {
   UPDATE_NTSC_INPUT,
   UPDATE_NTSC_FORMAT,
   UPDATE_NTSC_COLOR,
-  UPDATE_NTSC_OPTION,
 } from '../actions/ntscActions';
 import {
   FORMAT,
@@ -71,16 +70,6 @@ const ntscReducer = (state = { order: [] }, action) => {
       calculatorState = {
         ...calculatorState,
         color,
-      };
-      calculatorState = updateOutput(calculatorState);
-      break;
-    }
-
-    case UPDATE_NTSC_OPTION: {
-      const { option } = action;
-      calculatorState = {
-        ...calculatorState,
-        option,
       };
       calculatorState = updateOutput(calculatorState);
       break;

@@ -6,7 +6,6 @@ import {
   NTSCInput,
   NTSCFormat,
   NTSCColor,
-  NTSCOptions,
   NTSCOutput,
 } from './components';
 import styles from './NTSCCalculator.css';
@@ -23,7 +22,6 @@ class NTSCCalculator extends Component {
       <NTSCInput cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
       <NTSCFormat cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
       <NTSCColor cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
-      <NTSCOptions cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
       <NTSCOutput cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
     </div>
   );

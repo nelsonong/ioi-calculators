@@ -2,14 +2,12 @@ const INITIALIZE_NTSC_DVR_STATE = 'INITIALIZE_NTSC_DVR_STATE';
 const UPDATE_NTSC_INPUT = 'UPDATE_NTSC_INPUT';
 const UPDATE_NTSC_FORMAT = 'UPDATE_NTSC_FORMAT';
 const UPDATE_NTSC_COLOR = 'UPDATE_NTSC_COLOR';
-const UPDATE_NTSC_OPTION = 'UPDATE_NTSC_OPTION';
 
 const ntscActionTypes = [
   INITIALIZE_NTSC_DVR_STATE,
   UPDATE_NTSC_INPUT,
   UPDATE_NTSC_FORMAT,
   UPDATE_NTSC_COLOR,
-  UPDATE_NTSC_OPTION,
 ];
 
 // Action generators
@@ -48,19 +46,11 @@ export const updateColor = (cameraId, color, dvrId) => ({
   dvrId,
 });
 
-export const updateOption = (cameraId, option, dvrId) => ({
-  type: UPDATE_NTSC_OPTION,
-  cameraId,
-  option,
-  dvrId,
-});
-
 // Action types
 export {
   INITIALIZE_NTSC_DVR_STATE,
   UPDATE_NTSC_INPUT,
   UPDATE_NTSC_FORMAT,
   UPDATE_NTSC_COLOR,
-  UPDATE_NTSC_OPTION,
   ntscActionTypes,
 };

@@ -10,7 +10,6 @@ import {
   COLOR,
   INPUT_COLOR,
 } from './colors';
-import OPTION from './options';
 
 export const ntscDefaultState = {
   cameraType: 'ntsc',
@@ -20,7 +19,6 @@ export const ntscDefaultState = {
   color: COLOR.COLOR,
   width: 640,
   height: 480,
-  option: OPTION.FIELD_MODE,
   frameRate: 59.94,
   dataRate: 59.32,
 };
@@ -32,5 +30,4 @@ export {
   INPUT_FORMAT,
   COLOR,
   INPUT_COLOR,
-  OPTION,
 };
