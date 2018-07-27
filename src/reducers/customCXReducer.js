@@ -1,4 +1,7 @@
-import { RESOLUTION } from '../components/CustomCXCalculator/constants';
+import {
+  RESOLUTION,
+  MODE,
+} from '../components/CustomCXCalculator/constants';
 import calculateDataRate from '../components/CustomCXCalculator/utils/calculateDataRate';
 import {
   INITIALIZE_CUSTOM_CX_DVR_STATE,
@@ -27,6 +30,30 @@ const customCXReducer = (state = { order: [] }, action) => {
   let calculatorState = calculators[cameraId];
   switch (type) {
     case INITIALIZE_CUSTOM_CX_DVR_STATE: {
+      const { mode } = action;
+      let { linkCount } = calculatorState;
+      switch (mode) {
+        case MODE.SINGLE:
+          linkCount = 1;
+          break;
+
+        case MODE.DUAL:
+          linkCount = 2;
+          break;
+
+        case MODE.QUAD:
+          linkCount = 4;
+          break;
+
+        default:
+          break;
+      }
+
+      calculatorState = {
+        ...calculatorState,
+        linkCount,
+      };
+      calculatorState = updateOutput(calculatorState);
       break;
     }
 

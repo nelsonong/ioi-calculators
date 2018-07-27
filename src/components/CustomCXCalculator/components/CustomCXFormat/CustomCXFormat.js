@@ -4,43 +4,15 @@ import {
   updateBitDepth,
   updateLinkCount,
 } from '../../../../actions/customCXActions';
-import { MODE } from '../../constants';
 import styles from './CustomCXFormat.css';
 
-const renderLinkCountOptions = (formats, mode) => {
-  if (!mode) {
-    return formats.LinkCounts.map((linkCount, i) => (
-      <option key={i} value={linkCount}>{linkCount}</option>
-    ));
-  }
-
-  let linkCount;
-  switch (mode) {
-    case MODE.SINGLE:
-      linkCount = 1;
-      break;
-    case MODE.DUAL:
-      linkCount = 2;
-      break;
-    case MODE.QUAD:
-      linkCount = 4;
-      break;
-    default:
-      break;
-  }
-
-  return <option value={linkCount}>{linkCount}</option>;
-};
-
 const CustomCXFormat = ({
-  formats,
   bitDepth,
   linkCount,
-  mode,
   handleChangeBitDepth,
   handleChangeLinkCount,
 }) => {
-  const bitDepthOptions = formats.BitDepths.map((bitDepthOption, i) => (
+  const bitDepthOptions = [8, 10].map((bitDepthOption, i) => (
     <option key={i} value={bitDepthOption}>{bitDepthOption}</option>
   ));
   return (
@@ -55,7 +27,7 @@ const CustomCXFormat = ({
       <div className={styles.right}>
         <div className={styles.label}>Links:</div>
         <select className={styles.select} value={linkCount} onChange={handleChangeLinkCount}>
-          {renderLinkCountOptions(formats, mode)}
+          <option value={linkCount}>{linkCount}</option>
         </select>
       </div>
     </fieldset>
