@@ -32,26 +32,21 @@
 
 .button {
     color: white;
-    font-size: 1.4rem;
-    font-weight: 700;
-    padding: 1.9rem 1.6rem;
+    font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size: 1.45rem;
+    font-weight: 600;
+    padding: 2rem 1.2rem;
     height: 4rem;
+    opacity: 0.85;
     text-decoration: none;
-    border-left: solid $header 0.3rem;
-    border-right: solid $header 0.3rem ;
 }
 
 .button:hover {
-    opacity: .85;
+    opacity: 1;
 }
 
 .is-active {
-    background: $header-button;
-    outline: none;
-    border-top: 0rem;
-    border-bottom: 0rem;
-    border-left: solid $header-button-border 0.3rem;
-    border-right: solid $header-button-border 0.3rem ;
+    opacity: 1;
 }
 
 .is-active:active, .is-active:focus {

@@ -1,12 +1,11 @@
 /* Header */
-$header: rgb(66, 66, 66);
-$header-button: rgb(80, 80, 80);
-$header-button-border: rgb(54, 54, 54);
+$header: rgb(36, 41, 46);
+$header-button: rgb(36, 41, 46);
 
 /* Container */
 $container-background: rgb(236, 236, 236);
-$container-title: rgb(61, 61, 61);
-$container-border: rgb(61, 61, 61);
+$container-title: rgb(36, 41, 46);
+$container-border: rgb(36, 41, 46);
 $buttons-container-light: rgb(238, 238, 238);
 $buttons-container-dark: rgb(230, 230, 230);
 $import-button: rgb(134, 134, 134);

@@ -14,8 +14,8 @@ const Header = () => (
           <img src={logo} height='25' />
         </Link>
         <div>
-          <NavLink className={styles.button} to='/framerate' activeClassName={styles.isActive}>FRAME RATE</NavLink>
-          <NavLink className={styles.button} to='/storage' activeClassName={styles.isActive}>STORAGE</NavLink>
+          <NavLink className={styles.button} to='/framerate' activeClassName={styles.isActive}>Frame Rate</NavLink>
+          <NavLink className={styles.button} to='/storage' activeClassName={styles.isActive}>Storage</NavLink>
         </div>
       </div>
     </div>
