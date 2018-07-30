@@ -40,7 +40,6 @@
 	composes: button;
 	background: $clear-button;
 	color: black;
-	width: 8rem;
 }
 
 .clear-button:hover {

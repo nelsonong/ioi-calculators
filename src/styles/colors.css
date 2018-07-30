@@ -84,8 +84,8 @@ $dvr-background: rgb(216, 204, 195);
 $dvr-background-light: rgb(247, 240, 234);
 $dvr-fieldset: rgb(247, 242, 237);
 $dvr-output: rgb(90, 82, 82);
-$dvr-button: rgb(90, 82, 82);
-$dvr-button-light: rgb(117, 105, 105);
+$dvr-button: rgb(79, 55, 55);
+$dvr-button-light: rgb(89, 65, 65);
 
 $edit-button: rgb(247, 244, 239);
 $delete-button: rgb(221, 148, 148);
