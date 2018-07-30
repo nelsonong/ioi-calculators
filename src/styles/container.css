@@ -5,8 +5,9 @@
 	background-color: $container-background;
 	margin: 2rem auto 0rem auto;
 	text-align: center;
-	min-height: 50rem;
+	min-width: 32rem;
 	max-width: 90rem;
+	min-height: 50rem;
 	border: solid $container-border;
 	border-width: medium;
 	border-radius: 0.2rem;

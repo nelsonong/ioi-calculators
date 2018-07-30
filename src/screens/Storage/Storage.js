@@ -33,45 +33,10 @@ const CalculatorList = SortableContainer(({ calculatorEntries }) => (
 ));
 
 class Storage extends Component {
-  state = { windowWidth: undefined };
-
   onSortEnd = ({
     oldIndex,
     newIndex,
   }) => this.props.handleMove(oldIndex, newIndex);
-
-  handleResize = () => this.setState({ windowWidth: window.innerWidth });
-
-  componentDidMount() {
-    this.handleResize();
-    window.addEventListener('resize', this.handleResize);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize);
-  }
-
-  renderButtonsContainer = () => {
-    if (this.state.windowWidth > 640) {
-      return (
-        <div className={styles.buttonsContainer}>
-          <div>
-            <button type='button' className={styles.addButton} onClick={() => this.props.handleAdd('dvr')}>
-              + DVR
-            </button>
-          </div>
-          <div className={styles.spacer}></div>
-          <div>
-          </div>
-          <div>
-            <button type='button' className={styles.clearButton} onClick={this.props.handleClear}>CLEAR</button>
-          </div>
-        </div>
-      );
-    }
-
-    return '';
-  }
 
   render = () => {
     const calculatorEntries = this.props.order.map((id) => {
@@ -89,7 +54,19 @@ class Storage extends Component {
           <div className={styles.title}>
             Storage Calculators
           </div>
-          {this.renderButtonsContainer()}
+          <div className={styles.buttonsContainer}>
+            <div>
+              <button type='button' className={styles.addButton} onClick={() => this.props.handleAdd('dvr')}>
+                + DVR
+              </button>
+            </div>
+            <div className={styles.spacer}></div>
+            <div>
+            </div>
+            <div>
+              <button type='button' className={styles.clearButton} onClick={this.props.handleClear}>CLEAR</button>
+            </div>
+          </div>
           {instructionBox}
           <CalculatorList
             calculatorEntries={calculatorEntries}

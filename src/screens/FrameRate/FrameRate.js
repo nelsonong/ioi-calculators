@@ -79,50 +79,83 @@ class FrameRate extends Component {
   }
 
   renderButtonsContainer = () => {
-    if (this.state.windowWidth > 660) {
+    if (this.state.windowWidth < 680) {
       return (
-        <div className={styles.buttonsContainer}>
-          <div>
-            <div className={styles.buttonContainer}>
-              <div className={styles.buttonContainerText}>FLARE</div>
-              <button type='button' className={styles.flareClButton} onClick={() => this.props.handleAdd('flare-cl')}>
-                + CL
+        <div className={`${styles.buttonsContainer} ${styles.blockButtonsContainer}`}>
+          <div className={`${styles.buttonContainer} ${styles.blockButtonContainer}`}>
+            <div className={styles.buttonContainerText}>FLARE</div>
+            <button type='button' className={styles.flareClButton} onClick={() => this.props.handleAdd('flare-cl')}>
+              + CL
+            </button>
+            <button type='button' className={styles.flareCxButton} onClick={() => this.props.handleAdd('flare-cx')}>
+              + CX
+            </button>
+            <button type='button' className={styles.flareSdiButton} onClick={() => this.props.handleAdd('flare-sdi')}>
+              + SDI
               </button>
-              <button type='button' className={styles.flareCxButton} onClick={() => this.props.handleAdd('flare-cx')}>
-                + CX
-              </button>
-              <button type='button' className={styles.flareSdiButton} onClick={() => this.props.handleAdd('flare-sdi')}>
-                + SDI
-                </button>
-            </div>
-            <div className={styles.buttonSpacer}></div>
-            <div className={styles.buttonContainer}>
+          </div>
+          <div className={`${styles.buttonContainer} ${styles.blockButtonContainer}`}>
             <div className={styles.buttonContainerText}>VICTOREM</div>
-              <button
-                type='button'
-                className={styles.victoremCxButton}
-                onClick={() => this.props.handleAdd('victorem-cx')}
-              >
-                + CX
-              </button>
-              <button
-                type='button'
-                className={styles.victoremSdiButton}
-                onClick={() => this.props.handleAdd('victorem-sdi')}
-              >
-                + SDI
-              </button>
-            </div>
+            <button
+              type='button'
+              className={styles.victoremCxButton}
+              onClick={() => this.props.handleAdd('victorem-cx')}
+            >
+              + CX
+            </button>
+            <button
+              type='button'
+              className={styles.victoremSdiButton}
+              onClick={() => this.props.handleAdd('victorem-sdi')}
+            >
+              + SDI
+            </button>
           </div>
-          <div>
-            <div className={styles.buttonSpacer}></div>
-            <button type='button' className={styles.clearButton} onClick={this.props.handleClear}>CLEAR</button>
-          </div>
+          <button type='button' className={`${styles.clearButton} ${styles.blockButton}`} onClick={this.props.handleClear}>CLEAR</button>
         </div>
       );
     }
 
-    return '';
+    return (
+      <div className={styles.buttonsContainer}>
+        <div>
+          <div className={styles.buttonContainer}>
+            <div className={styles.buttonContainerText}>FLARE</div>
+            <button type='button' className={styles.flareClButton} onClick={() => this.props.handleAdd('flare-cl')}>
+              + CL
+            </button>
+            <button type='button' className={styles.flareCxButton} onClick={() => this.props.handleAdd('flare-cx')}>
+              + CX
+            </button>
+            <button type='button' className={styles.flareSdiButton} onClick={() => this.props.handleAdd('flare-sdi')}>
+              + SDI
+              </button>
+          </div>
+          <div className={styles.buttonSpacer}></div>
+          <div className={styles.buttonContainer}>
+          <div className={styles.buttonContainerText}>VICTOREM</div>
+            <button
+              type='button'
+              className={styles.victoremCxButton}
+              onClick={() => this.props.handleAdd('victorem-cx')}
+            >
+              + CX
+            </button>
+            <button
+              type='button'
+              className={styles.victoremSdiButton}
+              onClick={() => this.props.handleAdd('victorem-sdi')}
+            >
+              + SDI
+            </button>
+          </div>
+        </div>
+        <div>
+          <div className={styles.buttonSpacer}></div>
+          <button type='button' className={styles.clearButton} onClick={this.props.handleClear}>CLEAR</button>
+        </div>
+      </div>
+    );
   }
 
   render = () => {

@@ -15,6 +15,12 @@
 	border-width: medium;
 }
 
+.block-buttons-container {
+	display: block;
+	align-items: center;
+	margin: 0 auto;
+}
+
 .left {
 	display: inline-block;
 	text-align: left;
@@ -41,6 +47,11 @@
   outline: none;
 }
 
+.block-button {
+	display: block;
+	margin: 0rem auto;
+}
+
 .button-container {
 	background: aliceblue;
 	display: inline-block;
@@ -62,6 +73,11 @@
 	text-align: center;
 	margin: 0 1.2rem;
 	padding: 0;
+}
+
+.block-button-container {
+	display: flex-box;
+	margin: 0rem 0.5rem 1rem 0.5rem;
 }
 
 .sub-button {
