@@ -173,10 +173,12 @@ const flareCLReducer = (state = { order: [] }, action) => {
       let formats = model.startsWith('12M') ? FORMATS.CL12m : FORMATS.CL2_4m;
       const { mode } = calculatorState;
       formats = mode ? filterFormats(formats, mode) : formats;
+      const format = formats[0];
       calculatorState = {
         ...calculatorState,
         model,
         hwversion,
+        format,
         formats,
       };
       calculatorState = updateResolutionConstraints(calculatorState);
