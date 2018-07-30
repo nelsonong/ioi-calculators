@@ -33,6 +33,16 @@ const CalculatorList = SortableContainer(({ calculatorEntries }) => (
 ));
 
 class Storage extends Component {
+  // Cancel sorting if the event target is an input, textarea, select or option
+  shouldCancelStart = (e) => {
+    console.log(e.target.tagName.toLowerCase());
+    if (['button', 'select', 'svg', 'div', 'path'].includes(e.target.tagName.toLowerCase())) {
+      return true;
+    }
+
+    return false;
+  }
+
   onSortEnd = ({
     oldIndex,
     newIndex,
@@ -71,6 +81,7 @@ class Storage extends Component {
           <CalculatorList
             calculatorEntries={calculatorEntries}
             axis='xy'
+            shouldCancelStart={this.shouldCancelStart}
             onSortStart={(_, event) => event.preventDefault()}
             onSortEnd={this.onSortEnd}
           />

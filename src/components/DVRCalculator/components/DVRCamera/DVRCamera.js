@@ -65,7 +65,7 @@ class DVRCamera extends Component {
     );
     if (this.state.added) {
       contents = this.state.isHovered ? (
-        <div>
+        <div onClick={this.closeHoverOverlay}>
           <button type='button' className={styles.editButton} onClick={this.openModal}>
             <MdCreate size={18} />
           </button>
@@ -89,7 +89,7 @@ class DVRCamera extends Component {
       dataRate,
     } = this.props;
     return (
-      <div>
+      <div onClick={this.openHoverOverlay}>
         <div className={styles.info}>
           {model}
         </div>

@@ -62,6 +62,15 @@ const CalculatorList = SortableContainer(({ calculatorEntries }) => (
 class FrameRate extends Component {
   state = { windowWidth: undefined };
 
+  // Cancel sorting if the event target is an input, textarea, select or option
+  shouldCancelStart = (e) => {
+    if (['button', 'input', 'select', 'option'].includes(e.target.tagName.toLowerCase())) {
+      return true;
+    }
+
+    return false;
+  }
+
   onSortEnd = ({
     oldIndex,
     newIndex,
@@ -179,7 +188,8 @@ class FrameRate extends Component {
           <CalculatorList
             calculatorEntries={calculatorEntries}
             axis='xy'
-            onSortStart={(_, event) => event.preventDefault()}
+            shouldCancelStart={this.shouldCancelStart}
+            onSortStart={(_, e) => e.preventDefault()}
             onSortEnd={this.onSortEnd}
           />
         </div>

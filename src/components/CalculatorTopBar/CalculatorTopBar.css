@@ -2,7 +2,9 @@
 
 .root {
 	background: $calculator-title;
+	font-family: 'Roboto', sans-serif;
 	color: white;
+	font-weight: 500;
 	width: 70%;
 	padding: 0.4rem;
 	margin: 0rem auto;
