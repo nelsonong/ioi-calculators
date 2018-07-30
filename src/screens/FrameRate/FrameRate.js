@@ -60,26 +60,27 @@ const CalculatorList = SortableContainer(({ calculatorEntries }) => (
 ));
 
 class FrameRate extends Component {
+  state = { windowWidth: undefined };
+
   onSortEnd = ({
     oldIndex,
     newIndex,
   }) => this.props.handleMove(oldIndex, newIndex);
 
-  render = () => {
-    const calculatorEntries = this.props.order.map((id) => {
-      const calculatorState = this.props.calculators[id];
-      return {
-        id,
-        calculatorState,
-      };
-    });
-    const text = 'Please select a button above to add a calculator.';
-    const instructionBox = (calculatorEntries.length === 0) ? <InstructionBox text={text} /> : '';
-    return (
-      <div className={styles.root}>
-        <div className={styles.title}>
-          Frame Rate Calculators
-        </div>
+  handleResize = () => this.setState({ windowWidth: window.innerWidth });
+
+  componentDidMount() {
+    this.handleResize();
+    window.addEventListener('resize', this.handleResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
+  }
+
+  renderButtonsContainer = () => {
+    if (this.state.windowWidth > 660) {
+      return (
         <div className={styles.buttonsContainer}>
           <div>
             <div className={styles.buttonContainer}>
@@ -118,13 +119,37 @@ class FrameRate extends Component {
             <button type='button' className={styles.clearButton} onClick={this.props.handleClear}>CLEAR</button>
           </div>
         </div>
-        {instructionBox}
-        <CalculatorList
-          calculatorEntries={calculatorEntries}
-          axis='xy'
-          onSortStart={(_, event) => event.preventDefault()}
-          onSortEnd={this.onSortEnd}
-         />
+      );
+    }
+
+    return '';
+  }
+
+  render = () => {
+    const calculatorEntries = this.props.order.map((id) => {
+      const calculatorState = this.props.calculators[id];
+      return {
+        id,
+        calculatorState,
+      };
+    });
+    const text = 'Please select a button above to add a calculator.';
+    const instructionBox = (calculatorEntries.length === 0) ? <InstructionBox text={text} /> : '';
+    return (
+      <div className={styles.root}>
+        <div className={styles.container}>
+          <div className={styles.title}>
+            Frame Rate Calculators
+          </div>
+          {this.renderButtonsContainer()}
+          {instructionBox}
+          <CalculatorList
+            calculatorEntries={calculatorEntries}
+            axis='xy'
+            onSortStart={(_, event) => event.preventDefault()}
+            onSortEnd={this.onSortEnd}
+          />
+        </div>
       </div>
     );
   }

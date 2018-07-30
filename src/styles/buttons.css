@@ -10,7 +10,7 @@
     );
 	display: flex;
 	justify-content: space-between;
-	padding: 2rem 3rem;
+	padding: 1.6rem 3rem;
 	border-bottom: solid $container-border;
 	border-width: medium;
 }

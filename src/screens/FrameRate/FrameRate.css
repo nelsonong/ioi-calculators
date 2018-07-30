@@ -2,7 +2,7 @@
 @import '../../styles/container.css';
 
 .root {
-	composes: container;
+	margin: 0 1rem;
 }
 
 .flare-cl-button {
