@@ -38,6 +38,11 @@ const customSDIReducer = (state = { order: [] }, action) => {
   switch (type) {
     case INITIALIZE_CUSTOM_SDI_DVR_STATE: {
       const { mode } = action;
+      const { initialized } = calculatorState;
+      if (initialized) {
+        return state;
+      }
+
       let sdiInterfaces = Object.keys(SDI_TREE);
       const {
         SD_SDI,
@@ -69,6 +74,7 @@ const customSDIReducer = (state = { order: [] }, action) => {
         ...calculatorState,
         sdiInterface,
         sdiInterfaces,
+        initialized: true,
       };
     }
 

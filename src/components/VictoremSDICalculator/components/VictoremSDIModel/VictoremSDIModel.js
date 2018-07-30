@@ -4,14 +4,17 @@ import { updateModel } from '../../../../actions/victoremSDIActions';
 import styles from './VictoremSDIModel.css';
 
 const VictoremSDIModel = ({
+  model,
   models,
   handleChange,
 }) => {
-  const modelOptions = models.map((model, i) => <option key={i} value={model}>{model}</option>);
+  const modelOptions = models.map((modelOption, i) => (
+    <option key={i} value={modelOption}>{modelOption}</option>
+  ));
   return (
     <fieldset className={styles.root}>
     <legend className={styles.legend}>Model</legend>
-      <select className={styles.select} onChange={handleChange}>
+      <select className={styles.select} value={model} onChange={handleChange}>
         {modelOptions}
       </select>
     </fieldset>
@@ -25,8 +28,14 @@ const mapStateToProps = (state, {
   const calculatorState = !dvrId
     ? state.frameRateCalculators[cameraId]
     : state.storageCalculators[dvrId].cameras[cameraId];
-  const { models } = calculatorState;
-  return { models };
+  const {
+    model,
+    models,
+  } = calculatorState;
+  return {
+    model,
+    models,
+  };
 };
 
 const mapDispatchToProps = (dispatch, {

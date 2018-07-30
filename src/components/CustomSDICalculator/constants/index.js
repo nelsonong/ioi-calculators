@@ -19,6 +19,7 @@ export const customSDIDefaultState = {
   frameRate: '',
   frameRates: [],
   dataRate: 0,
+  initialized: false,
 };
 
 export {

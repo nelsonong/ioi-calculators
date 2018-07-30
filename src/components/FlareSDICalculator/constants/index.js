@@ -25,6 +25,7 @@ export const flareSDIDefaultState = {
   frameRate: '',
   frameRates: [],
   dataRate: 0,
+  initialized: false,
 };
 
 export {

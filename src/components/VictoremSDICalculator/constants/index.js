@@ -25,6 +25,7 @@ export const victoremSDIDefaultState = {
   frameRate: '',
   frameRates: [],
   dataRate: 0,
+  initialized: false,
 };
 
 export {

@@ -41,6 +41,11 @@ const victoremSDIReducer = (state = { order: [] }, action) => {
   switch (type) {
     case INITIALIZE_VICTOREM_SDI_DVR_STATE: {
       const { mode } = action;
+      const { initialized } = calculatorState;
+      if (initialized) {
+        return state;
+      }
+
       let models = MODELS;
       if (mode) {
         switch (mode) {
@@ -65,6 +70,7 @@ const victoremSDIReducer = (state = { order: [] }, action) => {
         ...calculatorState,
         model,
         models,
+        initialized: true,
       };
     }
 
