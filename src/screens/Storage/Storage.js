@@ -67,7 +67,12 @@ class Storage extends Component {
           </div>
         </div>
         {instructionBox}
-        <CalculatorList calculatorEntries={calculatorEntries} axis='xy' onSortEnd={this.onSortEnd} />
+        <CalculatorList
+          calculatorEntries={calculatorEntries}
+          axis='xy'
+          onSortStart={(_, event) => event.preventDefault()}
+          onSortEnd={this.onSortEnd}
+         />
       </div>
     );
   }
