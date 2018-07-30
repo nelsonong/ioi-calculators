@@ -15,8 +15,12 @@ const FlareCLResolution = ({
   resolutionPreset,
   width,
   widthStep,
+  minWidth,
+  maxWidth,
   height,
   heightStep,
+  minHeight,
+  maxHeight,
   resolutionTooltip,
   handleChangeResolutionPreset,
   handleChangeWidth,
@@ -46,8 +50,24 @@ const FlareCLResolution = ({
           {resolutionPresetOptions}
         </select>
         <br />
-        <input type="number" className={styles.wxh} step={widthStep} value={width} onChange={handleChangeWidth} />
-        <input type="number" className={styles.wxh} step={heightStep} value={height} onChange={handleChangeHeight} />
+        <input
+          type="number"
+          className={styles.wxh}
+          step={widthStep}
+          value={width}
+          min={minWidth}
+          max={maxWidth}
+          onChange={handleChangeWidth}
+         />
+        <input
+        type="number"
+          className={styles.wxh}
+          step={heightStep}
+          value={height}
+          min={minHeight}
+          max={maxHeight}
+          onChange={handleChangeHeight}
+         />
       </div>
       {
         resolutionTooltip !== ''
@@ -70,16 +90,24 @@ const mapStateToProps = (state, {
     resolutionPreset,
     width,
     widthStep,
+    minWidth,
+    maxWidth,
     height,
     heightStep,
+    minHeight,
+    maxHeight,
     resolutionTooltip,
   } = calculatorState;
   return {
     resolutionPreset,
     width,
     widthStep,
+    minWidth,
+    maxWidth,
     height,
     heightStep,
+    minHeight,
+    maxHeight,
     resolutionTooltip,
   };
 };

@@ -16,9 +16,11 @@ const VictoremCXResolution = ({
   resolutionPreset,
   width,
   widthStep,
+  minWidth,
   maxWidth,
   height,
   heightStep,
+  minHeight,
   maxHeight,
   resolutionTooltip,
   cameraOption,
@@ -58,7 +60,7 @@ const VictoremCXResolution = ({
           type="number"
           className={styles.wxh}
           step={widthStep} value={width}
-          min='16'
+          min={minWidth}
           max={maxWidth}
           disabled={!noneSelected}
           onChange={handleChangeWidth}
@@ -68,7 +70,7 @@ const VictoremCXResolution = ({
           className={styles.wxh}
           step={heightStep}
           value={height}
-          min='4'
+          min={minHeight}
           max={maxHeight}
           disabled={!noneSelected}
           onChange={handleChangeHeight}
@@ -95,9 +97,11 @@ const mapStateToProps = (state, {
     resolutionPreset,
     width,
     widthStep,
+    minWidth,
     maxWidth,
     height,
     heightStep,
+    minHeight,
     maxHeight,
     resolutionTooltip,
     cameraOption,
@@ -106,9 +110,11 @@ const mapStateToProps = (state, {
     resolutionPreset,
     width,
     widthStep,
+    minWidth,
     maxWidth,
     height,
     heightStep,
+    minHeight,
     maxHeight,
     resolutionTooltip,
     cameraOption,
