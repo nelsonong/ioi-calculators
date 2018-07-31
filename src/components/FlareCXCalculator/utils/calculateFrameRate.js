@@ -446,8 +446,8 @@ export default ({
   if (subSampling) {
     modifiedWidth /= 2;
     let step = calculateWidthStep(model, format);
-    let clks = width / step;
-    if (width % step) clks += 1;
+    let clks = modifiedWidth / step;
+    if (modifiedWidth % step) clks += 1;
     modifiedWidth = clks * step;
 
     modifiedHeight /= 2;
