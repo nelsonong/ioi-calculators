@@ -1,9 +1,12 @@
+@import './fonts.css';
+
 html {
     font-size: 62.5%;
 }
 
 body {
-    font-family: 'Roboto', Helvetica, Arial, sans-serif;
+    font-family: $roboto;
     font-size: 1.1rem;
+    font-weight: 300;
     margin: 0rem;
 }

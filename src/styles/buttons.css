@@ -1,3 +1,4 @@
+@import './fonts.css';
 @import './colors.css';
 
 .buttons-container {
@@ -34,7 +35,7 @@
 
 .button {
 	font-size: 1.3rem;
-	font-family: 'Roboto', sans-serif;
+	font-family: $roboto;
 	font-weight: 700;
 	color: white;
 	text-align: center;
@@ -74,7 +75,7 @@
 
 .button-container-text {
 	font-size: 1.3rem;
-	font-family: 'Roboto', sans-serif;
+	font-family: $roboto;
 	font-weight: 700;
 	color: black;
 	display: inline-block;
@@ -90,7 +91,7 @@
 
 .sub-button {
 	font-size: 1.3rem;
-	font-family: 'Roboto', sans-serif;
+	font-family: $roboto;
 	font-weight: 700;
 	color: white;
 	display: inline-block;

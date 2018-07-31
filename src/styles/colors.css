@@ -23,6 +23,7 @@ $calculator-title: rgb(77, 60, 60);
 $calculator-border: rgb(90, 90, 90);
 $calculator-border-light: rgb(80, 80, 80);
 $calculator-border-dark: rgb(199, 199, 199);
+$calculator-fieldset: rgba(131, 131, 131, 0.8);
 $calculator-info: rgb(131, 131, 131);
 
 /* Flare CL color scheme */
@@ -89,6 +90,8 @@ $dvr-button-light: rgb(89, 65, 65);
 
 $edit-button: rgb(247, 244, 239);
 $delete-button: rgb(221, 148, 148);
+
+$tooltip: rgb(196, 107, 107);
 
 /* Modal */
 $modal-overlay: rgba(0, 0, 0, 0.35);

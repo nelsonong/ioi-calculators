@@ -1,8 +1,9 @@
+@import '../../styles/fonts.css';
 @import '../../styles/colors.css';
 
 .root {
 	background: $calculator-title;
-	font-family: 'Roboto', sans-serif;
+	font-family: $roboto;
 	color: white;
 	font-weight: 500;
 	width: 70%;
@@ -25,6 +26,7 @@
 	position: absolute;
 	float: right;
 	font-size: 1.2rem;
+	font-weight: 700;
 	padding: 0.3rem 0 0 1.6rem;
 	border: none;
 	outline: none;
