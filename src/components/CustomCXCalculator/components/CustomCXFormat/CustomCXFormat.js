@@ -4,6 +4,7 @@ import {
   updateBitDepth,
   updateLinkCount,
 } from '../../../../actions/customCXActions';
+import { FORMATS } from '../../constants';
 import styles from './CustomCXFormat.css';
 
 const CustomCXFormat = ({
@@ -12,7 +13,7 @@ const CustomCXFormat = ({
   handleChangeBitDepth,
   handleChangeLinkCount,
 }) => {
-  const bitDepthOptions = [8, 10].map((bitDepthOption, i) => (
+  const bitDepthOptions = FORMATS.map((bitDepthOption, i) => (
     <option key={i} value={bitDepthOption}>{bitDepthOption}</option>
   ));
   return (
@@ -20,12 +21,12 @@ const CustomCXFormat = ({
     <legend className={styles.legend}>CoaXPress Format</legend>
       <div className={styles.left}>
         <div className={styles.label}>Bit Depth:</div>
+        <div className={styles.label}>Links:</div>
+      </div>
+      <div className={styles.right}>
         <select className={styles.select} value={bitDepth} onChange={handleChangeBitDepth}>
           {bitDepthOptions}
         </select>
-      </div>
-      <div className={styles.right}>
-        <div className={styles.label}>Links:</div>
         <select className={styles.select} value={linkCount} onChange={handleChangeLinkCount}>
           <option value={linkCount}>{linkCount}</option>
         </select>
@@ -58,7 +59,7 @@ const mapDispatchToProps = (dispatch, {
   dvrId,
 }) => ({
   handleChangeBitDepth: (e) => {
-    const bitDepth = Number(e.target.value);
+    const bitDepth = e.target.value;
     dispatch(updateBitDepth(cameraId, bitDepth, dvrId));
   },
 

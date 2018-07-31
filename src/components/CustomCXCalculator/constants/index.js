@@ -1,3 +1,4 @@
+import FORMATS from './formats';
 import {
   RESOLUTION,
   RESOLUTIONS,
@@ -7,7 +8,7 @@ import MODE from './modes';
 export const customCXDefaultState = {
   cameraType: 'custom-cx',
   model: 'Custom',
-  bitDepth: 8,
+  bitDepth: FORMATS[0],
   linkCount: 1,
   resolutionPreset: '1920x1080',
   width: 1920,
@@ -18,6 +19,7 @@ export const customCXDefaultState = {
 };
 
 export {
+  FORMATS,
   RESOLUTION,
   RESOLUTIONS,
   MODE,

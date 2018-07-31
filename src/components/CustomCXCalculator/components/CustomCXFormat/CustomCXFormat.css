@@ -4,13 +4,4 @@
     composes: custom-fieldset;
 }
 
-@mixin add-left-right;
-
-.label {
-    composes: label;
-    display: inline;
-}
-
-.select {
-    composes: select;
-}
+@mixin add-left-right 28%, 72%;
