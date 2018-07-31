@@ -42,7 +42,7 @@ class Storage extends Component {
 
     if (tagName === 'div') {
       const { className } = e.target;
-      if (className.includes('DVRCamera') || !className) {
+      if (className.includes('DVRCamera')) {
         return true;
       }
     }
