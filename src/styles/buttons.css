@@ -10,6 +10,7 @@
     );
 	display: flex;
 	justify-content: space-between;
+	margin-bottom: 1rem;
 	padding: 1.6rem 3rem;
 	border-bottom: solid $container-border;
 	border-width: medium;
@@ -18,7 +19,7 @@
 .block-buttons-container {
 	display: block;
 	align-items: center;
-	margin: 0 auto;
+	margin: 0 auto 1rem auto;
 }
 
 .left {
@@ -50,6 +51,13 @@
 .block-button {
 	display: block;
 	margin: 0rem auto;
+}
+
+.modal-button {
+	composes: button;
+	font-size: 1.2rem;
+	width: 10rem;
+	margin: 1rem 0.4rem 2.4rem 0.4rem;
 }
 
 .button-container {

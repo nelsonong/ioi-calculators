@@ -35,9 +35,16 @@ const CalculatorList = SortableContainer(({ calculatorEntries }) => (
 class Storage extends Component {
   // Cancel sorting if the event target is an input, textarea, select or option
   shouldCancelStart = (e) => {
-    console.log(e.target.tagName.toLowerCase());
-    if (['button', 'select', 'svg', 'div', 'path'].includes(e.target.tagName.toLowerCase())) {
+    const tagName = e.target.tagName.toLowerCase();
+    if (['button', 'select', 'svg', 'path'].includes(tagName)) {
       return true;
+    }
+
+    if (tagName === 'div') {
+      const { className } = e.target;
+      if (className.includes('DVRCamera') || !className) {
+        return true;
+      }
     }
 
     return false;

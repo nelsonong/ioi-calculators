@@ -8,6 +8,7 @@
 	min-width: 32rem;
 	max-width: 90rem;
 	min-height: 50rem;
+	padding-bottom: 1rem;
 	border: solid $container-border;
 	border-width: medium;
 	border-radius: 0.2rem;
@@ -23,5 +24,4 @@
 
 .list {
 	margin: 0px;
-	padding: 1rem 1rem;
 }

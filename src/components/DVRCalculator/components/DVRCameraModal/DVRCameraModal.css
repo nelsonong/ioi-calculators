@@ -4,10 +4,12 @@
 
 .root {
     composes: container;
-    position: absolute;
+    width: 100%;
+    min-width: 36rem;
+    max-width: 44rem;
+    min-height: fit-content;
+    margin: 3rem;
     outline: none;
-    width: 50rem;
-    min-height: 30rem;
 }
 
 .overlay {
@@ -16,7 +18,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    top: 0;
+    top: -2rem;
     left: 0;
     right: 0;
     bottom: 0;
@@ -25,9 +27,10 @@
 /* Title bar */
 .title {
     composes: title;
-    padding: 1.2rem;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
 }
 
 .left-spacer {
@@ -42,7 +45,7 @@
 .close-button {
     background: transparent;
     color: white;
-    font-size: 2.4rem;
+    font-size: 2rem;
     font-weight: 700;
     margin-right: 0.5rem;
     border: none;
@@ -57,10 +60,8 @@
 }
 
 .flare-cl-button {
-    composes: button;
+    composes: modal-button;
     background: $flare-cl-button;
-    font-size: 1.4rem;
-    margin: 0rem 0.4rem 2.4rem 0.4rem;
 }
 
 .flare-cl-button:hover {
@@ -68,10 +69,8 @@
 }
 
 .flare-cx-button {
-    composes: button;
+    composes: modal-button;
     background: $flare-cx-button;
-    font-size: 1.4rem;
-    margin: 0rem 0.4rem 2.4rem 0.4rem;
 }
 
 .flare-cx-button:hover {
@@ -79,10 +78,8 @@
 }
 
 .flare-sdi-button {
-    composes: button;
+    composes: modal-button;
     background: $flare-sdi-button;
-    font-size: 1.4rem;
-    margin: 0rem 0.4rem 2.4rem 0.4rem;
 }
 
 .flare-sdi-button:hover {
@@ -90,10 +87,8 @@
 }
 
 .victorem-cx-button {
-    composes: button;
+    composes: modal-button;
     background: $victorem-cx-button;
-    font-size: 1.4rem;
-    margin: 0rem 0.4rem 2.4rem 0.4rem;
 }
 
 .victorem-cx-button:hover {
@@ -101,10 +96,8 @@
 }
 
 .victorem-sdi-button {
-    composes: button;
+    composes: modal-button;
     background: $victorem-sdi-button;
-    font-size: 1.4rem;
-    margin: 0rem 0.4rem 2.4rem 0.4rem;
 }
 
 .victorem-sdi-button:hover {
@@ -112,10 +105,8 @@
 }
 
 .custom-button {
-    composes: button;
+    composes: modal-button;
     background: $custom-button;
-    font-size: 1.4rem;
-    margin: 0rem 0.4rem 2.4rem 0.4rem;
 }
 
 .custom-button:hover {
@@ -123,10 +114,8 @@
 }
 
 .save-button {
-    composes: button;
+    composes: modal-button;
     background: $save-button;
-    font-size: 1.4rem;
-    margin: 0rem 0.4rem 2.4rem 0.4rem;
 }
 
 .save-button:hover {
