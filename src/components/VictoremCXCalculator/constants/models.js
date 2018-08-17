@@ -11,6 +11,8 @@ export const MODEL = {
   Type16B276CCX: '16B276CCX',
   Type4B523MCX: '4B523MCX',
   Type4B523CCX: '4B523CCX',
+  Type205R26MCX: '205R26MCX',
+  Type205R26CCX: '205R26CCX',
 };
 
 export const MODELS = {
@@ -38,6 +40,10 @@ export const MODELS = {
   TYPE_287: [
     MODEL.Type4B523MCX,
     MODEL.Type4B523CCX,
+  ],
+  TYPE_183: [
+    MODEL.Type205R26MCX,
+    MODEL.Type205R26CCX,
   ],
   TYPE_MONO: [
     MODEL.Type24A164MCX,

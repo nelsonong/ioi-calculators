@@ -1,7 +1,7 @@
 import {
   MODELS,
   FORMAT,
-  CAMERA_OPTION,
+  SUBSAMPLING_BINNING,
 } from '../constants';
 
 const calculateMinWidth = (model) => {
@@ -13,14 +13,14 @@ const calculateMaxWidth = ({
   model,
   format,
   bitDepth,
-  cameraOption,
+  subSamplingBinning,
 }) => {
   const linkSpeed = Number(format.slice(-1));
   const linkCount = Number(format.slice(0, 1));
-  const binv = (cameraOption === CAMERA_OPTION.BIN_VERTICAL);
-  const bin2 = (cameraOption === CAMERA_OPTION.BIN_2X2);
+  const binv = (subSamplingBinning === SUBSAMPLING_BINNING.BIN_VERTICAL);
+  const bin2 = (subSamplingBinning === SUBSAMPLING_BINNING.BIN_2X2);
   const bin0 = !binv && !bin2;
-  const subSampling = (cameraOption === CAMERA_OPTION.SUBSAMPLING);
+  const subSampling = (subSamplingBinning === SUBSAMPLING_BINNING.SUBSAMPLING);
   if (MODELS.TYPE_250.includes(model)) {
     if (subSampling) {
       if (bin0) return 1232;
@@ -95,7 +95,7 @@ const calculateMaxWidth = ({
 
   if (MODELS.TYPE_287.includes(model)) {
     if (subSampling) return 0;
-    if (cameraOption !== CAMERA_OPTION.NONE) return 0;
+    if (subSamplingBinning !== SUBSAMPLING_BINNING.NONE) return 0;
     if (linkCount === 2) return 0;
     if (linkSpeed === 5 || linkSpeed === 6) return 0;
     return 728;
@@ -110,14 +110,14 @@ const calculateMaxHeight = ({
   model,
   format,
   bitDepth,
-  cameraOption,
+  subSamplingBinning,
 }) => {
   const linkSpeed = Number(format.slice(-1));
   const linkCount = Number(format.slice(0, 1));
-  const binv = (cameraOption === CAMERA_OPTION.BIN_VERTICAL);
-  const bin2 = (cameraOption === CAMERA_OPTION.BIN_2X2);
+  const binv = (subSamplingBinning === SUBSAMPLING_BINNING.BIN_VERTICAL);
+  const bin2 = (subSamplingBinning === SUBSAMPLING_BINNING.BIN_2X2);
   const bin0 = !binv && !bin2;
-  const subSampling = (cameraOption === CAMERA_OPTION.SUBSAMPLING);
+  const subSampling = (subSamplingBinning === SUBSAMPLING_BINNING.SUBSAMPLING);
   if (MODELS.TYPE_250.includes(model)) {
     if (subSampling) {
       if (bin0) return 1028;
@@ -205,7 +205,7 @@ const calculateMaxHeight = ({
 
   if (MODELS.TYPE_287.includes(model)) {
     if (subSampling) return 0;
-    if (cameraOption !== CAMERA_OPTION.NONE) return 0;
+    if (subSamplingBinning !== SUBSAMPLING_BINNING.NONE) return 0;
     if (linkCount === 2) return 0;
     if (linkSpeed === 5 || linkSpeed === 6) return 0;
     return 544;

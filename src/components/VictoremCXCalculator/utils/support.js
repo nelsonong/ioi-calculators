@@ -1,11 +1,4 @@
-import {
-  MODELS,
-  SENSOR,
-  FORMAT,
-  FORMATS,
-  MAX_RESOLUTIONS,
-  CAMERA_OPTION,
-} from '../constants';
+import { MODELS } from '../constants';
 
 const supports2x2Binning = model => MODELS.TYPE_253.includes(model)
   || MODELS.TYPE_255.includes(model)

@@ -1,63 +1,69 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateCameraOption } from '../../../../actions/victoremCXActions';
-import { CAMERA_OPTION } from '../../constants';
+import {
+  updateSubSamplingBinningMode,
+  updateSensorDriveMode,
+} from '../../../../actions/victoremCXActions';
+import {
+  SUBSAMPLING_BINNING,
+  SENSOR_DRIVE_MODES,
+} from '../../constants';
 import styles from './VictoremCXOptions.css';
 
 const VictoremCXOptions = ({
-  cameraOption,
+  cameraMode,
   supports2x2Binning,
   supportsSubSampling,
+  supportsHorizontalBinning,
   supportsVerticalBinning,
-  handleChange,
-}) => (
-  <fieldset className={styles.root}>
-  <legend className={styles.legend}>Options</legend>
-    <div className={styles.center}>
-      <div className={styles.left}>
-        <input
-          type="radio"
-          className={styles.radio}
-          value={CAMERA_OPTION.NONE}
-          checked={cameraOption === CAMERA_OPTION.NONE}
-          onChange={handleChange}
-        />
-        <div className={styles.label}>None</div>
-        <br />
-        <input
-          type="radio"
-          className={styles.radio}
-          value={CAMERA_OPTION.SUBSAMPLING}
-          checked={cameraOption === CAMERA_OPTION.SUBSAMPLING}
-          disabled={!supportsSubSampling}
-          onChange={handleChange}
-        />
-        <div className={styles.label}>Sub-Sample</div>
-      </div>
-      <div className={styles.right}>
-        <input
-          type="radio"
-          className={styles.radio}
-          value={CAMERA_OPTION.BIN_VERTICAL}
-          checked={cameraOption === CAMERA_OPTION.BIN_VERTICAL}
-          disabled={!supportsVerticalBinning}
-          onChange={handleChange}
-        />
-        <div className={styles.label}>Vertical Bin</div>
-        <br />
-        <input
-          type="radio"
-          className={styles.radio}
-          value={CAMERA_OPTION.BIN_2X2}
-          checked={cameraOption === CAMERA_OPTION.BIN_2X2}
-          disabled={!supports2x2Binning}
-          onChange={handleChange}
-        />
-        <div className={styles.label}>2x2 Bin</div>
-      </div>
-    </div>
-  </fieldset>
-);
+  subSamplingBinning,
+  sensorDriveMode,
+  handleChangeSubSamplingBinning,
+  handleChangeSensorDriveMode,
+}) => {
+  const supportedOptions = [SUBSAMPLING_BINNING.NONE];
+  if (supportsSubSampling) supportedOptions.push(SUBSAMPLING_BINNING.SUBSAMPLING);
+  if (supportsHorizontalBinning) supportedOptions.push(SUBSAMPLING_BINNING.BIN_HORIZONTAL);
+  if (supportsVerticalBinning) supportedOptions.push(SUBSAMPLING_BINNING.BIN_VERTICAL);
+  if (supports2x2Binning) supportedOptions.push(SUBSAMPLING_BINNING.BIN_2X2);
+  const subSamplingBinningOptions = supportedOptions.map(
+    (subSamplingBinningOption, i) => (
+      <option key={i} value={subSamplingBinningOption}>
+        {subSamplingBinningOption}
+      </option>
+    ),
+  );
+  const sensorDriveModeOptions = SENSOR_DRIVE_MODES.map(
+    (sensorDriveModeOption, i) => (
+      <option key={i} value={sensorDriveModeOption}>
+        {sensorDriveModeOption}
+      </option>
+    ),
+  );
+  return (
+    <fieldset className={styles.root}>
+    <legend className={styles.legend}>Options</legend>
+        <div className={styles.label}>Sub-Sample / Binning:</div>
+        <select
+          className={styles.select}
+          value={subSamplingBinning}
+          disabled={cameraMode === 1}
+          onChange={handleChangeSubSamplingBinning}
+        >
+          {subSamplingBinningOptions}
+        </select>
+        <div className={styles.label}>Sensor Drive Mode:</div>
+        <select
+          className={styles.select}
+          value={sensorDriveMode}
+          disabled={cameraMode === 0}
+          onChange={handleChangeSensorDriveMode}
+        >
+          {sensorDriveModeOptions}
+        </select>
+    </fieldset>
+  );
+};
 
 const mapStateToProps = (state, {
   cameraId,
@@ -67,16 +73,22 @@ const mapStateToProps = (state, {
     ? state.frameRateCalculators[cameraId]
     : state.storageCalculators[dvrId].cameras[cameraId];
   const {
-    cameraOption,
+    cameraMode,
     supports2x2Binning,
     supportsSubSampling,
+    supportsHorizontalBinning,
     supportsVerticalBinning,
+    subSamplingBinning,
+    sensorDriveMode,
   } = calculatorState;
   return {
-    cameraOption,
+    cameraMode,
     supports2x2Binning,
     supportsSubSampling,
+    supportsHorizontalBinning,
     supportsVerticalBinning,
+    subSamplingBinning,
+    sensorDriveMode,
   };
 };
 
@@ -84,9 +96,13 @@ const mapDispatchToProps = (dispatch, {
   cameraId,
   dvrId,
 }) => ({
-  handleChange: (e) => {
-    const cameraOption = Number(e.target.value);
-    dispatch(updateCameraOption(cameraId, cameraOption, dvrId));
+  handleChangeSubSamplingBinning: (e) => {
+    const subSamplingBinning = e.target.value;
+    dispatch(updateSubSamplingBinningMode(cameraId, subSamplingBinning, dvrId));
+  },
+  handleChangeSensorDriveMode: (e) => {
+    const sensorDriveMode = e.target.value;
+    dispatch(updateSensorDriveMode(cameraId, sensorDriveMode, dvrId));
   },
 });
 

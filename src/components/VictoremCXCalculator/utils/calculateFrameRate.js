@@ -1,8 +1,18 @@
 import {
-  MODELS, CAMERA_OPTION,
+  MODELS,
+  SUBSAMPLING_BINNING,
 } from '../constants';
 
-const getHMaxAndMinVertBlank = (model, bitDepth, linkSpeed, linkCount, subSampling, binv, bin2) => {
+const getHMaxAndMinVertBlank = (
+  model,
+  bitDepth,
+  linkSpeed,
+  linkCount,
+  subSampling,
+  binv,
+  binh,
+  bin2,
+) => {
   let hmax = 0;
   let minVertBlank = 0;
   if (MODELS.TYPE_250.includes(model)) {
@@ -517,19 +527,20 @@ export default ({
   bitDepth,
   width,
   height,
-  cameraOption,
+  subSamplingBinning,
 }) => {
   // Get parameters from parent state
   const linkSpeed = Number(format.slice(-1));
   const linkCount = Number(format.slice(0, 1));
-  const subSampling = (cameraOption === CAMERA_OPTION.SUBSAMPLING);
-  const binv = (cameraOption === CAMERA_OPTION.BIN_VERTICAL);
-  const bin2 = (cameraOption === CAMERA_OPTION.BIN_2X2);
+  const subSampling = (subSamplingBinning === SUBSAMPLING_BINNING.SUBSAMPLING);
+  const binh = (subSamplingBinning === SUBSAMPLING_BINNING.BIN_HORIZONTAL);
+  const binv = (subSamplingBinning === SUBSAMPLING_BINNING.BIN_VERTICAL);
+  const bin2 = (subSamplingBinning === SUBSAMPLING_BINNING.BIN_2X2);
 
   // Determine HMAX and minimum vertical blanking
   const {
     hmax, minVertBlank,
-  } = getHMaxAndMinVertBlank(model, bitDepth, linkSpeed, linkCount, subSampling, binv, bin2);
+  } = getHMaxAndMinVertBlank(model, bitDepth, linkSpeed, linkCount, subSampling, binv, binh, bin2);
   if (hmax === 0) throw new Error("Can't determine HMAX.");
   if (minVertBlank === 0) throw new Error("Can't determine minimum vertical blanking");
 

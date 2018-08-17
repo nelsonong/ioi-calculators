@@ -64,9 +64,9 @@ module.exports = (env) => {
     plugins: [CSSExtract],
     devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
     devServer: {
-      contentBase: path.join(__dirname, 'public'),
+      contentBase: path.join(__dirname, 'public', 'calculator'),
       historyApiFallback: true,
-      publicPath: '/dist/',
+      publicPath: '/calculator/dist/',
     },
   };
 };

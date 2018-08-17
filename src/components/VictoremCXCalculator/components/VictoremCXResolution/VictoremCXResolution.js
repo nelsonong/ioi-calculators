@@ -8,7 +8,7 @@ import {
 import {
   RESOLUTIONS,
   NAN_RESOLUTIONS,
-  CAMERA_OPTION,
+  SUBSAMPLING_BINNING,
 } from '../../constants';
 import styles from './VictoremCXResolution.css';
 
@@ -23,14 +23,14 @@ const VictoremCXResolution = ({
   minHeight,
   maxHeight,
   resolutionTooltip,
-  cameraOption,
+  subSamplingBinning,
   handleChangeResolutionPreset,
   handleChangeWidth,
   handleChangeHeight,
 }) => {
-  const noneSelected = (cameraOption === CAMERA_OPTION.NONE);
-  const subSamplingSelected = (cameraOption === CAMERA_OPTION.SUBSAMPLING);
-  const bin2x2Selected = (cameraOption === CAMERA_OPTION.BIN_2X2);
+  const noneSelected = (subSamplingBinning === SUBSAMPLING_BINNING.NONE);
+  const subSamplingSelected = (subSamplingBinning === SUBSAMPLING_BINNING.SUBSAMPLING);
+  const bin2x2Selected = (subSamplingBinning === SUBSAMPLING_BINNING.BIN_2X2);
   const resolutionPresetOptions = RESOLUTIONS.map((preset, i) => {
     let presetOption = preset;
     if (!NAN_RESOLUTIONS.includes(preset)) {
@@ -104,7 +104,7 @@ const mapStateToProps = (state, {
     minHeight,
     maxHeight,
     resolutionTooltip,
-    cameraOption,
+    subSamplingBinning,
   } = calculatorState;
   return {
     resolutionPreset,
@@ -117,7 +117,7 @@ const mapStateToProps = (state, {
     minHeight,
     maxHeight,
     resolutionTooltip,
-    cameraOption,
+    subSamplingBinning,
   };
 };
 

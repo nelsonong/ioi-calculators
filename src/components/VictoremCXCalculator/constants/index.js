@@ -14,7 +14,11 @@ import {
   NAN_RESOLUTIONS,
   MAX_RESOLUTIONS,
 } from './resolutions';
-import CAMERA_OPTION from './camera-options';
+import {
+  SUBSAMPLING_BINNING,
+  SENSOR_DRIVE_MODE,
+  SENSOR_DRIVE_MODES,
+} from './camera-options';
 import MODE from './modes';
 
 export const victoremCXDefaultState = {
@@ -33,11 +37,14 @@ export const victoremCXDefaultState = {
   heightStep: 4,
   maxHeight: 2056,
   resolutionTooltip: '',
-  cameraOption: CAMERA_OPTION.NONE,
+  cameraMode: 0,
+  subSamplingBinning: SUBSAMPLING_BINNING.NONE,
+  sensorDriveMode: SENSOR_DRIVE_MODE.ALL_12,
   frameRate: 46.66,
   dataRate: 225.43,
   supports2x2Binning: true,
   supportsSubSampling: true,
+  supportsHorizontalBinning: true,
   supportsVerticalBinning: true,
   error: false,
 };
@@ -53,6 +60,8 @@ export {
   RESOLUTIONS,
   NAN_RESOLUTIONS,
   MAX_RESOLUTIONS,
-  CAMERA_OPTION,
+  SUBSAMPLING_BINNING,
+  SENSOR_DRIVE_MODE,
+  SENSOR_DRIVE_MODES,
   MODE,
 };

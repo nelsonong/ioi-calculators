@@ -4,14 +4,8 @@
     composes: victorem-cx-fieldset;
 }
 
-.center {
-    width: 80%;
-    margin: 0 auto;
-}
-
 @mixin add-left-right;
 
 .label {
-    display: inline;
-    margin: auto 0.3rem;
+    margin: 0.3rem 0.3rem 0 0.3rem;
 }

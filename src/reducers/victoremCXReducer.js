@@ -2,7 +2,8 @@ import {
   SENSOR,
   FORMAT,
   FORMATS,
-  CAMERA_OPTION,
+  SUBSAMPLING_BINNING,
+  SENSOR_DRIVE_MODE,
   RESOLUTION,
   MODE,
 } from '../components/VictoremCXCalculator/constants';
@@ -18,7 +19,8 @@ import {
   UPDATE_VICTOREM_CX_RESOLUTION_PRESET,
   UPDATE_VICTOREM_CX_WIDTH,
   UPDATE_VICTOREM_CX_HEIGHT,
-  UPDATE_VICTOREM_CX_CAMERA_OPTION,
+  UPDATE_VICTOREM_CX_SUBSAMPLING_BINNING,
+  UPDATE_VICTOREM_CX_SENSOR_DRIVE_MODE,
 } from '../actions/victoremCXActions';
 
 // Update and validate resolution
@@ -60,10 +62,10 @@ const updateResolution = (inputCalculatorState) => {
   const {
     width,
     height,
-    cameraOption,
+    subSamplingBinning,
   } = calculatorState;
   let resolutionTooltip = '';
-  if (cameraOption === CAMERA_OPTION.NONE) {
+  if (subSamplingBinning === SUBSAMPLING_BINNING.NONE) {
     if (width > maxWidth) {
       resolutionTooltip = `Maximum width is ${maxWidth}px.`;
     }
@@ -197,7 +199,7 @@ const victoremCXReducer = (state = { order: [] }, action) => {
         supports2x2Binning,
         supportsSubSampling,
         supportsVerticalBinning,
-        cameraOption: CAMERA_OPTION.NONE,
+        subSamplingBinning: SUBSAMPLING_BINNING.NONE,
       };
       calculatorState = updateResolutionConstraints(calculatorState);
       calculatorState = updateResolution(calculatorState);
@@ -280,11 +282,24 @@ const victoremCXReducer = (state = { order: [] }, action) => {
       break;
     }
 
-    case UPDATE_VICTOREM_CX_CAMERA_OPTION: {
-      const { cameraOption } = action;
+    case UPDATE_VICTOREM_CX_SUBSAMPLING_BINNING: {
+      const { subSamplingBinning } = action;
       calculatorState = {
         ...calculatorState,
-        cameraOption,
+        subSamplingBinning,
+        resolutionPreset: RESOLUTION.MAXIMUM,
+      };
+      calculatorState = updateResolutionConstraints(calculatorState);
+      calculatorState = updateResolution(calculatorState);
+      calculatorState = updateOutput(calculatorState);
+      break;
+    }
+
+    case UPDATE_VICTOREM_CX_SENSOR_DRIVE_MODE: {
+      const { sensorDriveMode } = action;
+      calculatorState = {
+        ...calculatorState,
+        sensorDriveMode,
         resolutionPreset: RESOLUTION.MAXIMUM,
       };
       calculatorState = updateResolutionConstraints(calculatorState);
