@@ -7,7 +7,7 @@ module.exports = (env) => {
   return {
     entry: './src/index.js',
     output: {
-      path: path.join(__dirname, 'public', 'dist'),
+      path: path.join(__dirname, 'public', 'calculator', 'dist'),
       filename: 'bundle.js',
     },
     mode: 'development',
@@ -47,8 +47,8 @@ module.exports = (env) => {
           loader: 'file-loader',
           options: {
             name: '[name].[ext]',
-            outputPath: 'images/',
-            publicPath: path.join('dist', 'images'),
+            outputPath: 'images',
+            publicPath: path.join('/', 'calculator', 'dist', 'images'),
           },
         },
         {

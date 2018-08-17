@@ -17,7 +17,7 @@ const DVRDrives = ({
   handleChangeDriveAmount,
   handleChangeRaid,
 }) => {
-  const raidOptions = [0, 1, 5].map((raidOption, i) => <option key={i}>{raidOption}</option>);
+  const raidOptions = [0, 1].map((raidOption, i) => <option key={i}>{raidOption}</option>);
   const driveModelOptions = DRIVES.map((driveModelOption, i) => (
     <option key={i}>{driveModelOption}</option>
   ));

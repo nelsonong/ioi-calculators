@@ -16,9 +16,9 @@ const AppRouter = () => (
     <div className={styles.root}>
       <Header />
       <Switch>
-        <Route path='/' component={Home} exact={true} />
-        <Route path='/framerate' component={FrameRate} />
-        <Route path='/storage' component={Storage} />
+        <Route path='/calculator' component={Home} exact={true} />
+        <Route path='/calculator/framerate' component={FrameRate} />
+        <Route path='/calculator/storage' component={Storage} />
       </Switch>
       <Footer />
     </div>

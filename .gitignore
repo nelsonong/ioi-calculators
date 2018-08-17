@@ -64,4 +64,4 @@ typings/
 .vscode/
 
 # Local production build files
-public/dist
+public/calculator/dist
