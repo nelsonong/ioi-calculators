@@ -9,3 +9,8 @@
 .label {
     margin: 0.3rem 0.3rem 0 0.3rem;
 }
+
+.select {
+    composes: select;
+    margin-bottom: 0.3rem;
+}

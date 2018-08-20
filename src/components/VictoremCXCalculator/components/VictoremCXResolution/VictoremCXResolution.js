@@ -31,6 +31,7 @@ const VictoremCXResolution = ({
 }) => {
   const noneSelected = (subSamplingBinning === SUBSAMPLING_BINNING.NONE);
   const subSamplingSelected = (subSamplingBinning === SUBSAMPLING_BINNING.SUBSAMPLING);
+  const binvSelected = (subSamplingBinning === SUBSAMPLING_BINNING.BIN_VERTICAL);
   const bin2x2Selected = (subSamplingBinning === SUBSAMPLING_BINNING.BIN_2X2);
   const resolutionPresetOptions = RESOLUTIONS.map((preset, i) => {
     let presetOption = preset;
@@ -63,7 +64,7 @@ const VictoremCXResolution = ({
           step={widthStep} value={width}
           min={minWidth}
           max={maxWidth}
-          disabled={!noneSelected}
+          disabled={!noneSelected && !binvSelected}
           onChange={handleChangeWidth}
          />
         <input
@@ -73,7 +74,7 @@ const VictoremCXResolution = ({
           value={height}
           min={minHeight}
           max={maxHeight}
-          disabled={!noneSelected}
+          disabled={!noneSelected && !binvSelected}
           onChange={handleChangeHeight}
          />
       </div>
