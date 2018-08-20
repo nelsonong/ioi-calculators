@@ -120,7 +120,12 @@ class FrameRate extends Component {
               + SDI
             </button>
           </div>
-          <button type='button' className={`${styles.clearButton} ${styles.blockButton}`} onClick={this.props.handleClear}>CLEAR</button>
+          <button
+            type='button'
+            className={`${styles.clearButton} ${styles.blockButton}`}
+            onClick={this.props.handleClear}>
+            CLEAR
+          </button>
         </div>
       );
     }

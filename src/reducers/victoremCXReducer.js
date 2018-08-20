@@ -62,10 +62,11 @@ const updateResolution = (inputCalculatorState) => {
   const {
     width,
     height,
+    cameraMode,
     subSamplingBinning,
   } = calculatorState;
   let resolutionTooltip = '';
-  if (subSamplingBinning === SUBSAMPLING_BINNING.NONE) {
+  if (subSamplingBinning === SUBSAMPLING_BINNING.NONE && cameraMode !== 1) {
     if (width > maxWidth) {
       resolutionTooltip = `Maximum width is ${maxWidth}px.`;
     }
@@ -99,9 +100,9 @@ const updateResolutionConstraints = (calculatorState) => {
   const minWidth = resolution.calculateMinWidth(model);
   const maxWidth = resolution.calculateMaxWidth(calculatorState);
   const widthStep = resolution.calculateWidthStep(model);
-  const minHeight = resolution.calculateMinHeight(model);
+  const minHeight = resolution.calculateMinHeight();
   const maxHeight = resolution.calculateMaxHeight(calculatorState);
-  const heightStep = resolution.calculateHeightStep(model);
+  const heightStep = resolution.calculateHeightStep();
   return {
     ...calculatorState,
     minWidth,
@@ -184,6 +185,9 @@ const victoremCXReducer = (state = { order: [] }, action) => {
 
       const format = formats[0];
 
+      // Get camera mode
+      const cameraMode = model.startsWith('205') ? 1 : 0;
+
       // Get supported options
       const supports2x2Binning = support.supports2x2Binning(model);
       const supportsSubSampling = support.supportsSubSampling(model);
@@ -196,6 +200,7 @@ const victoremCXReducer = (state = { order: [] }, action) => {
         sensor,
         format,
         formats,
+        cameraMode,
         supports2x2Binning,
         supportsSubSampling,
         supportsVerticalBinning,

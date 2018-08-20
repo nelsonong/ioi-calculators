@@ -23,6 +23,7 @@ const VictoremCXResolution = ({
   minHeight,
   maxHeight,
   resolutionTooltip,
+  cameraMode,
   subSamplingBinning,
   handleChangeResolutionPreset,
   handleChangeWidth,
@@ -50,7 +51,7 @@ const VictoremCXResolution = ({
         <select
           className={styles.select}
           value={resolutionPreset}
-          disabled={subSamplingSelected || bin2x2Selected}
+          disabled={subSamplingSelected || bin2x2Selected || cameraMode === 1}
           onChange={handleChangeResolutionPreset}
         >
           {resolutionPresetOptions}
@@ -104,6 +105,7 @@ const mapStateToProps = (state, {
     minHeight,
     maxHeight,
     resolutionTooltip,
+    cameraMode,
     subSamplingBinning,
   } = calculatorState;
   return {
@@ -116,6 +118,7 @@ const mapStateToProps = (state, {
     heightStep,
     minHeight,
     maxHeight,
+    cameraMode,
     resolutionTooltip,
     subSamplingBinning,
   };
