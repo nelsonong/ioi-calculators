@@ -9,6 +9,7 @@ import {
   RESOLUTIONS,
   NAN_RESOLUTIONS,
   SUBSAMPLING_BINNING,
+  SENSOR_DRIVE_MODE,
 } from '../../constants';
 import styles from './VictoremCXResolution.css';
 
@@ -25,14 +26,11 @@ const VictoremCXResolution = ({
   resolutionTooltip,
   cameraMode,
   subSamplingBinning,
+  sensorDriveMode,
   handleChangeResolutionPreset,
   handleChangeWidth,
   handleChangeHeight,
 }) => {
-  const noneSelected = (subSamplingBinning === SUBSAMPLING_BINNING.NONE);
-  const subSamplingSelected = (subSamplingBinning === SUBSAMPLING_BINNING.SUBSAMPLING);
-  const binvSelected = (subSamplingBinning === SUBSAMPLING_BINNING.BIN_VERTICAL);
-  const bin2x2Selected = (subSamplingBinning === SUBSAMPLING_BINNING.BIN_2X2);
   const resolutionPresetOptions = RESOLUTIONS.map((preset, i) => {
     let presetOption = preset;
     if (!NAN_RESOLUTIONS.includes(preset)) {
@@ -41,6 +39,22 @@ const VictoremCXResolution = ({
 
     return <option key={i} value={presetOption}>{presetOption}</option>;
   });
+  let enableResolution = false;
+  switch (cameraMode) {
+    case 0: {
+      const noneSelected = (subSamplingBinning === SUBSAMPLING_BINNING.NONE);
+      const binvSelected = (subSamplingBinning === SUBSAMPLING_BINNING.BIN_VERTICAL);
+      enableResolution = (noneSelected || binvSelected);
+      break;
+    }
+
+    case 1:
+      enableResolution = (sensorDriveMode === SENSOR_DRIVE_MODE.ALL_10);
+
+    default:
+      break;
+  }
+
   return (
     <fieldset className={styles.root}>
     <legend className={styles.legend}>Resolution</legend>
@@ -52,7 +66,7 @@ const VictoremCXResolution = ({
         <select
           className={styles.select}
           value={resolutionPreset}
-          disabled={subSamplingSelected || bin2x2Selected || cameraMode === 1}
+          disabled={!enableResolution}
           onChange={handleChangeResolutionPreset}
         >
           {resolutionPresetOptions}
@@ -64,7 +78,7 @@ const VictoremCXResolution = ({
           step={widthStep} value={width}
           min={minWidth}
           max={maxWidth}
-          disabled={!noneSelected && !binvSelected}
+          disabled={!enableResolution}
           onChange={handleChangeWidth}
          />
         <input
@@ -74,7 +88,7 @@ const VictoremCXResolution = ({
           value={height}
           min={minHeight}
           max={maxHeight}
-          disabled={!noneSelected && !binvSelected}
+          disabled={!enableResolution}
           onChange={handleChangeHeight}
          />
       </div>
@@ -108,6 +122,7 @@ const mapStateToProps = (state, {
     resolutionTooltip,
     cameraMode,
     subSamplingBinning,
+    sensorDriveMode,
   } = calculatorState;
   return {
     resolutionPreset,
@@ -122,6 +137,7 @@ const mapStateToProps = (state, {
     cameraMode,
     resolutionTooltip,
     subSamplingBinning,
+    sensorDriveMode,
   };
 };
 

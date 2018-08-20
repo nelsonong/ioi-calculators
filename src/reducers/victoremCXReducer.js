@@ -196,6 +196,9 @@ const victoremCXReducer = (state = { order: [] }, action) => {
       const bitDepths = support.supportedBitDepths(calculatorState);
       const bitDepth = bitDepths[0];
 
+      // Change resolution back to Maximum preset
+      const resolutionPreset = RESOLUTION.MAXIMUM;
+
       // Update state
       calculatorState = {
         ...calculatorState,
@@ -205,6 +208,7 @@ const victoremCXReducer = (state = { order: [] }, action) => {
         formats,
         bitDepth,
         bitDepths,
+        resolutionPreset,
         cameraMode,
         supports2x2Binning,
         supportsSubSampling,
