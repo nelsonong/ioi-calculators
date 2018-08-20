@@ -11,22 +11,22 @@ export const FORMAT = {
 
 export const FORMATS = {
   CX4B: [
-    FORMAT.CXP2x1,
     FORMAT.CXP3x1,
+    FORMAT.CXP2x1,
   ],
   CX16B: [
-    FORMAT.CXP2x1,
-    FORMAT.CXP3x1,
     FORMAT.CXP5x1,
+    FORMAT.CXP3x1,
+    FORMAT.CXP2x1,
   ],
   CXX: [
-    FORMAT.CXP2x1,
-    FORMAT.CXP3x1,
-    FORMAT.CXP5x1,
-    FORMAT.CXP6x1,
-    FORMAT.CXP2x2,
-    FORMAT.CXP3x2,
-    FORMAT.CXP5x2,
     FORMAT.CXP6x2,
+    FORMAT.CXP5x2,
+    FORMAT.CXP3x2,
+    FORMAT.CXP2x2,
+    FORMAT.CXP6x1,
+    FORMAT.CXP5x1,
+    FORMAT.CXP3x1,
+    FORMAT.CXP2x1,
   ],
 };

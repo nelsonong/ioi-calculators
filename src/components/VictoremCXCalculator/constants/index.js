@@ -25,7 +25,7 @@ export const victoremCXDefaultState = {
   model: MODEL.Type51B163MCX,
   models: MODELS.ALL,
   sensor: SENSOR[MODEL.Type51B163MCX],
-  format: FORMAT.CXP2x1,
+  format: FORMAT.CXP6x2,
   formats: FORMATS.CXX,
   bitDepth: 8,
   bitDepths: [8, 10, 12],
