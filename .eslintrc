@@ -2,6 +2,7 @@
   "parser": "babel-eslint",
   "extends": "airbnb-base",
   "rules": {
+    "max-len": ["error", 120, 2],
     "no-unused-vars": 0,
     "object-curly-newline": ["error", {
       "ObjectExpression": { "multiline": true, "minProperties": 2 },
