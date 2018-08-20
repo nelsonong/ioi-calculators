@@ -30,5 +30,3 @@ export const FORMATS = {
     FORMAT.CXP6x2,
   ],
 };
-
-export const BIT_DEPTHS = [8, 10, 12];

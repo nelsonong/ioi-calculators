@@ -6,7 +6,6 @@ import SENSOR from './sensors';
 import {
   FORMAT,
   FORMATS,
-  BIT_DEPTHS,
 } from './formats';
 import {
   RESOLUTION,
@@ -29,6 +28,7 @@ export const victoremCXDefaultState = {
   format: FORMAT.CXP2x1,
   formats: FORMATS.CXX,
   bitDepth: 8,
+  bitDepths: [8, 10, 12],
   resolutionPreset: RESOLUTION.MAXIMUM,
   width: 2464,
   widthStep: 16,
@@ -55,7 +55,6 @@ export {
   SENSOR,
   FORMAT,
   FORMATS,
-  BIT_DEPTHS,
   RESOLUTION,
   RESOLUTIONS,
   NAN_RESOLUTIONS,

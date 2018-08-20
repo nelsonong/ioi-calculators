@@ -4,12 +4,12 @@ import {
   updateFormat,
   updateBitDepth,
 } from '../../../../actions/victoremCXActions';
-import { BIT_DEPTHS } from '../../constants';
 import styles from './VictoremCXFormat.css';
 
 const VictoremCXFormat = ({
   format,
   bitDepth,
+  bitDepths,
   formats,
   handleChangeFormat,
   handleChangeBitDepth,
@@ -17,7 +17,7 @@ const VictoremCXFormat = ({
   const formatOptions = formats.map((formatOption, i) => (
     <option key={i} value={formatOption}>{formatOption}</option>
   ));
-  const bitDepthOptions = BIT_DEPTHS.map((bitDepthOption, i) => (
+  const bitDepthOptions = bitDepths.map((bitDepthOption, i) => (
     <option key={i} value={bitDepthOption}>{bitDepthOption}</option>
   ));
   return (
@@ -46,11 +46,13 @@ const mapStateToProps = (state, {
   const {
     format,
     bitDepth,
+    bitDepths,
     formats,
   } = calculatorState;
   return {
     format,
     bitDepth,
+    bitDepths,
     formats,
   };
 };

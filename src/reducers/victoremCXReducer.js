@@ -193,6 +193,9 @@ const victoremCXReducer = (state = { order: [] }, action) => {
       const supportsSubSampling = support.supportsSubSampling(model);
       const supportsVerticalBinning = support.supportsVerticalBinning(model);
 
+      const bitDepths = support.supportedBitDepths(calculatorState);
+      const bitDepth = bitDepths[0];
+
       // Update state
       calculatorState = {
         ...calculatorState,
@@ -200,6 +203,8 @@ const victoremCXReducer = (state = { order: [] }, action) => {
         sensor,
         format,
         formats,
+        bitDepth,
+        bitDepths,
         cameraMode,
         supports2x2Binning,
         supportsSubSampling,
@@ -305,6 +310,14 @@ const victoremCXReducer = (state = { order: [] }, action) => {
       calculatorState = {
         ...calculatorState,
         sensorDriveMode,
+        resolutionPreset: RESOLUTION.MAXIMUM,
+      };
+      const bitDepths = support.supportedBitDepths(calculatorState);
+      const bitDepth = bitDepths[0];
+      calculatorState = {
+        ...calculatorState,
+        bitDepth,
+        bitDepths,
         resolutionPreset: RESOLUTION.MAXIMUM,
       };
       calculatorState = updateResolutionConstraints(calculatorState);
