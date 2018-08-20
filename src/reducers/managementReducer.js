@@ -63,10 +63,22 @@ const managementReducer = (inputState = { order: [] }, action) => {
       } = action;
       const { order } = state;
 
-      // Swap
-      const temp = order[oldIndex];
-      order[oldIndex] = order[newIndex];
-      order[newIndex] = temp;
+      // Shift elements left or right
+      if (oldIndex < newIndex) {
+        const temp = order[oldIndex];
+        for (let i = oldIndex; i <= newIndex - 1; i += 1) {
+          order[i] = order[i + 1];
+        }
+
+        order[newIndex] = temp;
+      } else if (oldIndex > newIndex) {
+        const temp = order[oldIndex];
+        for (let i = oldIndex; i >= newIndex + 1; i -= 1) {
+          order[i] = order[i - 1];
+        }
+
+        order[newIndex] = temp;
+      }
 
       // Return swapped
       return {
