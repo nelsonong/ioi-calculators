@@ -9,9 +9,11 @@ import {
 } from './formats';
 import {
   RESOLUTION,
+  RESOLUTION_VALUES,
   RESOLUTIONS,
   NAN_RESOLUTIONS,
   MAX_RESOLUTIONS,
+  RESOLUTION_PRESETS,
 } from './resolutions';
 import {
   SUBSAMPLING_BINNING,
@@ -30,6 +32,7 @@ export const victoremCXDefaultState = {
   bitDepth: 8,
   bitDepths: [8, 10, 12],
   resolutionPreset: RESOLUTION.MAXIMUM,
+  resolutionPresets: RESOLUTION_PRESETS[MODEL.Type51B163MCX],
   width: 2464,
   widthStep: 16,
   maxWidth: 2464,
@@ -56,9 +59,11 @@ export {
   FORMAT,
   FORMATS,
   RESOLUTION,
+  RESOLUTION_VALUES,
   RESOLUTIONS,
   NAN_RESOLUTIONS,
   MAX_RESOLUTIONS,
+  RESOLUTION_PRESETS,
   SUBSAMPLING_BINNING,
   SENSOR_DRIVE_MODE,
   SENSOR_DRIVE_MODES,

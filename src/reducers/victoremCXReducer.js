@@ -1,10 +1,10 @@
 import {
   SENSOR,
-  FORMAT,
   FORMATS,
   SUBSAMPLING_BINNING,
-  SENSOR_DRIVE_MODE,
   RESOLUTION,
+  RESOLUTION_VALUES,
+  RESOLUTION_PRESETS,
   MODE,
 } from '../components/VictoremCXCalculator/constants';
 import * as resolution from '../components/VictoremCXCalculator/utils/resolution';
@@ -197,7 +197,8 @@ const victoremCXReducer = (state = { order: [] }, action) => {
       const bitDepth = bitDepths[0];
 
       // Change resolution back to Maximum preset
-      const resolutionPreset = RESOLUTION.MAXIMUM;
+      const resolutionPresets = RESOLUTION_PRESETS[model];
+      const resolutionPreset = resolutionPresets[0];
 
       // Update state
       calculatorState = {
@@ -209,6 +210,7 @@ const victoremCXReducer = (state = { order: [] }, action) => {
         bitDepth,
         bitDepths,
         resolutionPreset,
+        resolutionPresets,
         cameraMode,
         supports2x2Binning,
         supportsSubSampling,
@@ -258,11 +260,11 @@ const victoremCXReducer = (state = { order: [] }, action) => {
           break;
 
         default: {
-          const [width, height] = resolutionPreset.split('x');
+          const [width, height] = RESOLUTION_VALUES[resolutionPreset];
           calculatorState = {
             ...calculatorState,
-            width: Number(width),
-            height: Number(height),
+            width,
+            height,
           };
         }
       }

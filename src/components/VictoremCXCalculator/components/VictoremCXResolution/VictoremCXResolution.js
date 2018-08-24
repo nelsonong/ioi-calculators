@@ -15,6 +15,7 @@ import styles from './VictoremCXResolution.css';
 
 const VictoremCXResolution = ({
   resolutionPreset,
+  resolutionPresets,
   width,
   widthStep,
   minWidth,
@@ -31,14 +32,9 @@ const VictoremCXResolution = ({
   handleChangeWidth,
   handleChangeHeight,
 }) => {
-  const resolutionPresetOptions = RESOLUTIONS.map((preset, i) => {
-    let presetOption = preset;
-    if (!NAN_RESOLUTIONS.includes(preset)) {
-      presetOption = `${preset[0]}x${preset[1]}`;
-    }
-
-    return <option key={i} value={presetOption}>{presetOption}</option>;
-  });
+  const resolutionPresetOptions = resolutionPresets.map((resolutionPresetOption, i) => (
+    <option key={i} value={resolutionPresetOption}>{resolutionPresetOption}</option>
+  ));
   let enableResolution = false;
   switch (cameraMode) {
     case 0: {
@@ -111,6 +107,7 @@ const mapStateToProps = (state, {
     : state.storageCalculators[dvrId].cameras[cameraId];
   const {
     resolutionPreset,
+    resolutionPresets,
     width,
     widthStep,
     minWidth,
@@ -126,6 +123,7 @@ const mapStateToProps = (state, {
   } = calculatorState;
   return {
     resolutionPreset,
+    resolutionPresets,
     width,
     widthStep,
     minWidth,
