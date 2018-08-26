@@ -5,12 +5,21 @@ import {
 import {
   loadState,
   saveState,
+  loadVersion,
+  saveVersion,
 } from './localStorage';
 import cameraReducer from '../reducers/cameraReducer';
 import storageReducer from '../reducers/storageReducer';
 
-// localStorage.removeItem('state');
-const persistedState = loadState();
+const version = '1.00';
+const persistedVersion = loadVersion();
+let persistedState = loadState();
+
+// Check for version change
+if (persistedVersion !== version) {
+  persistedState = undefined;
+  saveVersion(version);
+}
 
 const configureStore = () => {
   const store = createStore(

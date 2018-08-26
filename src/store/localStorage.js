@@ -19,3 +19,24 @@ export const saveState = (state) => {
     // console.log(err);
   }
 };
+
+export const loadVersion = () => {
+  try {
+    const version = localStorage.getItem('version');
+    if (version === null) {
+      return undefined;
+    }
+
+    return version;
+  } catch (err) {
+    return undefined;
+  }
+};
+
+export const saveVersion = (version) => {
+  try {
+    localStorage.setItem('version', version);
+  } catch (err) {
+    // console.log(err);
+  }
+};
