@@ -11,7 +11,7 @@ import {
 import cameraReducer from '../reducers/cameraReducer';
 import storageReducer from '../reducers/storageReducer';
 
-const version = '1.00';
+const version = '1.01';
 const persistedVersion = loadVersion();
 let persistedState = loadState();
 
