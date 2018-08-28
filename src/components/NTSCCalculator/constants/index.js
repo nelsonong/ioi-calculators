@@ -21,6 +21,7 @@ export const ntscDefaultState = {
   height: 480,
   frameRate: 59.94,
   dataRate: 59.32,
+  initialized: false,
 };
 
 export {

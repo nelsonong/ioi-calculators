@@ -16,6 +16,7 @@ export const customCXDefaultState = {
   frameRate: 30,
   frameRateOutput: 30,
   dataRate: 59.32,
+  initialized: false,
 };
 
 export {

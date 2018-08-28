@@ -28,7 +28,10 @@ const gevReducer = (state = { order: [] }, action) => {
 
   switch (type) {
     case INITIALIZE_GEV_DVR_STATE: {
-      break;
+      const { initialized } = calculatorState;
+      if (initialized) {
+        return state;
+      }
     }
 
     case UPDATE_GEV_BIT_DEPTH: {

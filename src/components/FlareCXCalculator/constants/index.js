@@ -35,6 +35,7 @@ export const flareCXDefaultState = {
   frameRate: 132.72,
   dataRate: 282.03,
   error: false,
+  initialized: false,
 };
 
 export {

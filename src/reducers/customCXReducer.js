@@ -31,6 +31,11 @@ const customCXReducer = (state = { order: [] }, action) => {
   switch (type) {
     case INITIALIZE_CUSTOM_CX_DVR_STATE: {
       const { mode } = action;
+      const { initialized } = calculatorState;
+      if (initialized) {
+        return state;
+      }
+
       let { linkCount } = calculatorState;
       switch (mode) {
         case MODE.SINGLE:
@@ -55,6 +60,7 @@ const customCXReducer = (state = { order: [] }, action) => {
         ...calculatorState,
         linkCount,
         frameRateOutput,
+        initialized: true,
       };
       calculatorState = updateOutput(calculatorState);
       break;

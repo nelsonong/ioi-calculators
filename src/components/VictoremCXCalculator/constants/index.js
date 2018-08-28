@@ -50,6 +50,7 @@ export const victoremCXDefaultState = {
   supportsHorizontalBinning: true,
   supportsVerticalBinning: true,
   error: false,
+  initialized: false,
 };
 
 export {

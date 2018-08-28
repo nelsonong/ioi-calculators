@@ -130,6 +130,11 @@ const flareCXReducer = (state = { order: [] }, action) => {
   switch (type) {
     case INITIALIZE_FLARE_CX_DVR_STATE: {
       const { mode } = action;
+      const { initialized } = calculatorState;
+      if (initialized) {
+        return state;
+      }
+
       let { models } = calculatorState;
       if (mode === MODE.QUAD) {
         models = models.filter(model => model.startsWith('12M') || model.startsWith('48M'));
@@ -140,6 +145,7 @@ const flareCXReducer = (state = { order: [] }, action) => {
         ...calculatorState,
         model,
         models,
+        initialized: true,
       };
 
       // Fall-through

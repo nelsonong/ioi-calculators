@@ -137,6 +137,11 @@ const victoremCXReducer = (state = { order: [] }, action) => {
   switch (type) {
     case INITIALIZE_VICTOREM_CX_DVR_STATE: {
       const { mode } = action;
+      const { initialized } = calculatorState;
+      if (initialized) {
+        return state;
+      }
+
       let { models } = calculatorState;
       if (mode === MODE.DUAL) {
         models = models.filter(model => !model.startsWith('16B') && !model.startsWith('4B'));
@@ -147,6 +152,7 @@ const victoremCXReducer = (state = { order: [] }, action) => {
         ...calculatorState,
         model,
         models,
+        initialized: true,
       };
 
       // Fall-through

@@ -147,7 +147,12 @@ const flareCLReducer = (state = { order: [] }, action) => {
       const {
         model,
         mode,
+        initialized,
       } = calculatorState;
+      if (initialized) {
+        return state;
+      }
+
       let formats = model.startsWith('12M') ? FORMATS.CL12m : FORMATS.CL2_4m;
       if (mode) {
         formats = filterFormats(formats, mode);

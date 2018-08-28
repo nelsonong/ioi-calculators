@@ -34,6 +34,7 @@ export const flareCLDefaultState = {
   frameRate: 70.95,
   dataRate: 150.77,
   error: false,
+  initialized: false,
 };
 
 export {

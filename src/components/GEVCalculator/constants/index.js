@@ -13,6 +13,7 @@ export const gevDefaultState = {
   height: 1080,
   frameRate: 30,
   dataRate: 59.32,
+  initialized: false,
 };
 
 export {

@@ -28,7 +28,10 @@ const ntscReducer = (state = { order: [] }, action) => {
   let calculatorState = calculators[cameraId];
   switch (type) {
     case INITIALIZE_NTSC_DVR_STATE: {
-      break;
+      const { initialized } = calculatorState;
+      if (initialized) {
+        return state;
+      }
     }
 
     case UPDATE_NTSC_INPUT: {

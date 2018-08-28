@@ -44,10 +44,16 @@ const customCLReducer = (state = { order: [] }, action) => {
   switch (type) {
     case INITIALIZE_CUSTOM_CL_DVR_STATE: {
       const { mode } = action;
+      const { initialized } = calculatorState;
+      if (initialized) {
+        return state;
+      }
+
       const formats = filterFormats(FORMATS, mode);
       calculatorState = {
         ...calculatorState,
         formats,
+        initialized: true,
       };
       calculatorState = updateOutput(calculatorState);
       break;
