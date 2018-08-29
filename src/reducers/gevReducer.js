@@ -32,6 +32,11 @@ const gevReducer = (state = { order: [] }, action) => {
       if (initialized) {
         return state;
       }
+
+      calculatorState = {
+        ...calculatorState,
+        initialized: true,
+      };
     }
 
     case UPDATE_GEV_BIT_DEPTH: {

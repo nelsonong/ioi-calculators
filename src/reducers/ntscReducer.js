@@ -32,6 +32,11 @@ const ntscReducer = (state = { order: [] }, action) => {
       if (initialized) {
         return state;
       }
+
+      calculatorState = {
+        ...calculatorState,
+        initialized: true,
+      };
     }
 
     case UPDATE_NTSC_INPUT: {
