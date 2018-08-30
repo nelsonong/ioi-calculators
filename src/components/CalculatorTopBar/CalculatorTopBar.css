@@ -17,7 +17,7 @@
 	border-bottom-right-radius: 0.5rem;
 }
 
-.storage-root {
+.expanded-root {
 	width: 60%;
 }
 
@@ -36,7 +36,7 @@
 	color: grey;
 }
 
-.storage-close-button {
+.expanded-close-button {
 	padding-left: 5.2rem;
 	font-weight: 700;
 }

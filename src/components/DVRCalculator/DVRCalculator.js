@@ -35,7 +35,7 @@ class DVRCalculator extends Component {
     const root = cx(styles.root, { [styles.scale]: this.state.windowWidth < 520 });
     return (
       <div className={root}>
-        <CalculatorTopBar type={'DVR Storage'} dvrId={this.props.dvrId} storage={true} />
+        <CalculatorTopBar type={'DVR Storage'} dvrId={this.props.dvrId} storage={true} expanded={true} />
         <DVRModelConfiguration dvrId={this.props.dvrId} />
         <DVRCameras dvrId={this.props.dvrId} />
         <DVRDrives dvrId={this.props.dvrId} />

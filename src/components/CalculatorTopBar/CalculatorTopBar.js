@@ -8,16 +8,17 @@ const CalculatorTopBar = ({
   type,
   inDVR,
   storage,
+  expanded,
   handleDelete,
 }) => {
   const text = (!inDVR || storage) ? `${type} Calculator` : `${type} Camera`;
-  const closeButton = cx(styles.closeButton, { [styles.storageCloseButton]: storage });
+  const closeButton = cx(styles.closeButton, { [styles.expandedCloseButton]: expanded });
   const button = (!inDVR || storage) ? (
     <button type='button' className={closeButton} onClick={handleDelete}>
       ✖
     </button>
   ) : '';
-  const root = cx(styles.root, { [styles.storageRoot]: storage });
+  const root = cx(styles.root, { [styles.expandedRoot]: expanded });
   return (
     <div>
       <div className={root}>{text}</div>
@@ -31,10 +32,12 @@ const mapDispatchToProps = (dispatch, {
   dvrId,
   type,
   storage,
+  expanded,
 }) => ({
   type,
   inDVR: !!dvrId,
   storage: !!storage,
+  expanded: !!expanded,
   handleDelete: () => {
     if (dvrId) {
       dispatch(deleteCalculator(dvrId, !!storage));
