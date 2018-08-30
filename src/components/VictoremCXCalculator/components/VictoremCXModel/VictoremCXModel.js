@@ -16,11 +16,36 @@ const VictoremCXModel = ({
     <fieldset className={styles.root}>
     <legend className={styles.legend}>Model</legend>
       <div className={styles.left}>
+        <div className={styles.label}>Sensors:</div>
+        <br />
+        <div className={styles.label}>Type:</div>
+      </div>
+      <div className={styles.right}>
+        <input type='checkbox' className={styles.checkbox} checked />
+        <div className={styles.label}>183</div>
+        <input type='checkbox' className={styles.checkbox} checked />
+        <div className={styles.label}>250</div>
+        <input type='checkbox' className={styles.checkbox} checked />
+        <div className={styles.label}>252</div>
+        <input type='checkbox' className={styles.checkbox} checked />
+        <div className={styles.label}>253</div>
+        <input type='checkbox' className={styles.checkbox} checked />
+        <div className={styles.label}>255</div>
+        <input type='checkbox' className={styles.checkbox} checked />
+        <div className={styles.label}>273</div>
+        <input type='checkbox' className={styles.checkbox} checked />
+        <div className={styles.label}>287</div>
+        <br />
+        <input type='checkbox' className={styles.checkbox} checked />
+        <div className={styles.label}>Color</div>
+        <input type='checkbox' className={styles.checkbox} checked />
+        <div className={styles.label}>Mono</div>
+      </div>
+      <br />
+      <div className={styles.center}>
         <select className={styles.select} value={model} onChange={handleChange}>
           {modelOptions}
         </select>
-      </div>
-      <div className={styles.right}>
         <input type='text' className={styles.display} disabled value={sensor} />
       </div>
     </fieldset>
