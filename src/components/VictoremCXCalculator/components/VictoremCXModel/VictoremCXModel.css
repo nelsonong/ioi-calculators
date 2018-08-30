@@ -4,10 +4,17 @@
     composes: victorem-cx-fieldset;
 }
 
-@mixin add-left-right 14%, 86%;
+@mixin add-left-right 12%, 88%;
 
-.center {
-    text-align: center;
+.left2 {
+    composes: left;
+    width: 36%;
+}
+
+.right2 {
+    composes: right;
+    width: 64%;
+    text-align: right;
 }
 
 .display {
@@ -16,25 +23,20 @@
     text-align: center;
     display: inline-block;
     height: 1.2rem;
-    margin: 0 0.4rem;
+    margin: 0.3rem 0.2rem;
     max-width: 8rem;
-    padding: 0.1rem 0.2rem;
+    padding: 0.1rem 0.3rem 0.1rem 0.1rem;
     border: solid $calculator-info;
-    border-radius: 2px;
+    border-radius: 0.2rem;
 }
 
 .label {
     composes: label;
     display: inline-block;
-    margin: 0.2rem 0;
-}
-
-.select {
-    composes: select;
-    margin-top: 1rem;
+    margin: 0.5rem 0rem;
 }
 
 .checkbox {
     composes: checkbox;
-    margin-left: 0.7rem;
+    margin-left: 0.6rem;
 }

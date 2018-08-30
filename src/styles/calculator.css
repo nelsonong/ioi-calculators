@@ -47,6 +47,9 @@
 }
 
 .checkbox {
+    vertical-align: middle;
+    position: relative;
+    bottom: 0.1rem;
     margin: 0.2rem;
 }
 
