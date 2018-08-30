@@ -4,4 +4,9 @@
     composes: victorem-cx-fieldset;
 }
 
-@mixin add-left-right 22%, 78%;
+.wxh {
+    composes: wxh;
+    width: 30%;
+}
+
+@mixin add-left-right 18%, 82%;

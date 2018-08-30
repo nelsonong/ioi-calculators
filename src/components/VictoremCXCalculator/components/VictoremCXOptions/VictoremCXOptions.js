@@ -43,16 +43,11 @@ const VictoremCXOptions = ({
   return (
     <fieldset className={styles.root}>
     <legend className={styles.legend}>Options</legend>
+      <div className={styles.left}>
         <div className={styles.label}>Sub-Sample / Binning:</div>
-        <select
-          className={styles.select}
-          value={subSamplingBinning}
-          disabled={cameraMode === 1}
-          onChange={handleChangeSubSamplingBinning}
-        >
-          {subSamplingBinningOptions}
-        </select>
         <div className={styles.label}>Sensor Drive Mode:</div>
+      </div>
+      <div className={styles.right}>
         <select
           className={styles.select}
           value={sensorDriveMode}
@@ -61,6 +56,15 @@ const VictoremCXOptions = ({
         >
           {sensorDriveModeOptions}
         </select>
+        <select
+          className={styles.select}
+          value={subSamplingBinning}
+          disabled={cameraMode === 1}
+          onChange={handleChangeSubSamplingBinning}
+        >
+          {subSamplingBinningOptions}
+        </select>
+      </div>
     </fieldset>
   );
 };

@@ -11,4 +11,5 @@
 
 .select {
     composes: select;
+    margin-right: 2rem;
 }

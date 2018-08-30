@@ -5,6 +5,7 @@
     composes: calculator;
     background: $victorem-cx-background;
     background: linear-gradient(to bottom right, $victorem-cx-background, $victorem-cx-background-light);
+    width: 36rem;
 }
 
 .victorem-cx-fieldset {
@@ -15,4 +16,5 @@
 .victorem-cx-input {
     composes: input;
     background: $victorem-cx-output;
+    width: 60%;
 }
