@@ -1,4 +1,5 @@
 import {
+  MODELS,
   SENSOR,
   FORMATS,
   SUBSAMPLING_BINNING,
@@ -14,6 +15,7 @@ import * as support from '../components/VictoremCXCalculator/utils/support';
 import {
   INITIALIZE_VICTOREM_CX_DVR_STATE,
   UPDATE_VICTOREM_CX_MODEL,
+  UPDATE_VICTOREM_CX_MODEL_FILTERS,
   UPDATE_VICTOREM_CX_FORMAT,
   UPDATE_VICTOREM_CX_BIT_DEPTH,
   UPDATE_VICTOREM_CX_RESOLUTION_PRESET,
@@ -158,6 +160,53 @@ const victoremCXReducer = (state = { order: [] }, action) => {
       // Fall-through
     }
 
+    case UPDATE_VICTOREM_CX_MODEL_FILTERS: {
+      const {
+        modelFilter,
+        enabled,
+      } = action;
+
+      let { modelFilters } = calculatorState;
+      if (modelFilter) {
+        if (enabled) {
+          // Model filter should already be in filters array -> remove it
+          modelFilters = modelFilters.filter(existingModelFilter => existingModelFilter !== modelFilter);
+        } else {
+          // Model filter should not already be in filters array -> add it
+          modelFilters = modelFilters.concat(modelFilter);
+        }
+      }
+
+      let models = MODELS.ALL;
+
+      // Filter out models that exist in modelFilters
+      models = models.filter((model) => {
+        let includeModel = true;
+        modelFilters.forEach((existingModelFilter) => {
+          if (MODELS[existingModelFilter].includes(model)) {
+            includeModel = false;
+          }
+        });
+        return includeModel;
+      });
+      const newModel = models[0];
+
+      const { model } = calculatorState;
+      const updateModel = (model !== newModel);
+
+      // Update state
+      calculatorState = {
+        ...calculatorState,
+        model: newModel,
+        models,
+        modelFilters,
+      };
+
+      if (!updateModel) {
+        break;
+      }
+    }
+
     case UPDATE_VICTOREM_CX_MODEL: {
       const { model } = action.model ? action : calculatorState;
 
@@ -170,6 +219,8 @@ const victoremCXReducer = (state = { order: [] }, action) => {
         formats = FORMATS.CX4B;
       } else if (model.startsWith('16B')) {
         formats = FORMATS.CX16B;
+      } else if (model.startsWith('24A')) {
+        formats = FORMATS.CX24A;
       } else {
         formats = FORMATS.CXX;
         const { mode } = calculatorState;

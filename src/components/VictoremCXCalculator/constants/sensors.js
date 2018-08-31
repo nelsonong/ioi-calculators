@@ -15,4 +15,6 @@ export default {
   [MODEL.Type4B523CCX]: 'Sony IMX287',
   [MODEL.Type205R26MCX]: 'Sony IMX183',
   [MODEL.Type205R26CCX]: 'Sony IMX183',
+  [MODEL.Type24A164MCX]: 'Sony IMX174',
+  [MODEL.Type24A164CCX]: 'Sony IMX174',
 };

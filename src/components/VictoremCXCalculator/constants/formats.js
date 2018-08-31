@@ -19,6 +19,14 @@ export const FORMATS = {
     FORMAT.CXP3x1,
     FORMAT.CXP2x1,
   ],
+  CX24A: [
+    FORMAT.CXP3x2,
+    FORMAT.CXP2x2,
+    FORMAT.CXP6x1,
+    FORMAT.CXP5x1,
+    FORMAT.CXP3x1,
+    FORMAT.CXP2x1,
+  ],
   CXX: [
     FORMAT.CXP6x2,
     FORMAT.CXP5x2,
