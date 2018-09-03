@@ -50,19 +50,19 @@ const VictoremCXOptions = ({
       <div className={styles.right}>
         <select
           className={styles.select}
-          value={sensorDriveMode}
-          disabled={cameraMode === 0}
-          onChange={handleChangeSensorDriveMode}
-        >
-          {sensorDriveModeOptions}
-        </select>
-        <select
-          className={styles.select}
           value={subSamplingBinning}
-          disabled={cameraMode === 1}
+          disabled={cameraMode !== 0}
           onChange={handleChangeSubSamplingBinning}
         >
           {subSamplingBinningOptions}
+        </select>
+        <select
+          className={styles.select}
+          value={sensorDriveMode}
+          disabled={cameraMode !== 1}
+          onChange={handleChangeSensorDriveMode}
+        >
+          {sensorDriveModeOptions}
         </select>
       </div>
     </fieldset>

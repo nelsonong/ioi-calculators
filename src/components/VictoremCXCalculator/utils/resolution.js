@@ -63,6 +63,10 @@ const calculateMaxWidth = ({
     const subSampling = (subSamplingBinning === SUBSAMPLING_BINNING.SUBSAMPLING);
     const binv = (subSamplingBinning === SUBSAMPLING_BINNING.BIN_VERTICAL);
     const bin2 = (subSamplingBinning === SUBSAMPLING_BINNING.BIN_2X2);
+    if (MODELS.TYPE_174.includes(model)) {
+      return 1936;
+    }
+
     if (MODELS.TYPE_250.includes(model)) {
       if (subSampling) {
         return 1232;
@@ -183,6 +187,10 @@ const calculateMaxHeight = ({
     const subSampling = (subSamplingBinning === SUBSAMPLING_BINNING.SUBSAMPLING);
     const binv = (subSamplingBinning === SUBSAMPLING_BINNING.BIN_VERTICAL);
     const bin2 = (subSamplingBinning === SUBSAMPLING_BINNING.BIN_2X2);
+    if (MODELS.TYPE_174.includes(model)) {
+      return 1216;
+    }
+
     if (MODELS.TYPE_250.includes(model)) {
       if (subSampling) {
         return 1028;

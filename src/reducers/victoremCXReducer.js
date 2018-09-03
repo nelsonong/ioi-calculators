@@ -244,15 +244,33 @@ const victoremCXReducer = (state = { order: [] }, action) => {
       const format = formats[0];
 
       // Get camera mode
-      const cameraMode = model.startsWith('205') ? 1 : 0;
+      let cameraMode;
+      if (model.startsWith('24A')) {
+        cameraMode = 2;
+      } else if (model.startsWith('205')) {
+        cameraMode = 1;
+      } else {
+        cameraMode = 0;
+      }
+
+      // Reset subSamplingBinning
+      const subSamplingBinning = SUBSAMPLING_BINNING.NONE;
 
       // Get supported options
       const supports2x2Binning = support.supports2x2Binning(model);
       const supportsSubSampling = support.supportsSubSampling(model);
       const supportsVerticalBinning = support.supportsVerticalBinning(model);
+      const {
+        linkSpeed,
+        linkCount,
+      } = calculatorState;
+      const supportsOutputBitDepths = support.supportsOutputBitDepth(model, subSamplingBinning, linkSpeed, linkCount);
 
-      const bitDepths = support.supportedBitDepths(calculatorState);
-      const bitDepth = bitDepths[0];
+      const adcBitDepths = support.supportedBitDepths({
+        ...calculatorState,
+        model,
+      });
+      const adcBitDepth = adcBitDepths[0];
 
       // Change resolution back to Maximum preset
       const resolutionPresets = RESOLUTION_PRESETS[model];
@@ -265,15 +283,16 @@ const victoremCXReducer = (state = { order: [] }, action) => {
         sensor,
         format,
         formats,
-        bitDepth,
-        bitDepths,
+        adcBitDepth,
+        adcBitDepths,
         resolutionPreset,
         resolutionPresets,
         cameraMode,
         supports2x2Binning,
         supportsSubSampling,
         supportsVerticalBinning,
-        subSamplingBinning: SUBSAMPLING_BINNING.NONE,
+        supportsOutputBitDepths,
+        subSamplingBinning,
       };
       calculatorState = updateResolutionConstraints(calculatorState);
       calculatorState = updateResolution(calculatorState);
@@ -283,9 +302,17 @@ const victoremCXReducer = (state = { order: [] }, action) => {
 
     case UPDATE_VICTOREM_CX_FORMAT: {
       const { format } = action;
+      const {
+        model,
+        subSamplingBinning,
+      } = calculatorState;
+      const linkSpeed = Number(format.slice(-1));
+      const linkCount = Number(format.slice(0, 1));
+      const supportsOutputBitDepths = support.supportsOutputBitDepth(model, subSamplingBinning, linkSpeed, linkCount);
       calculatorState = {
         ...calculatorState,
         format,
+        supportsOutputBitDepths,
       };
       calculatorState = updateResolutionConstraints(calculatorState);
       calculatorState = updateResolution(calculatorState);
@@ -370,9 +397,16 @@ const victoremCXReducer = (state = { order: [] }, action) => {
 
     case UPDATE_VICTOREM_CX_SUBSAMPLING_BINNING: {
       const { subSamplingBinning } = action;
+      const {
+        model,
+        linkSpeed,
+        linkCount,
+      } = calculatorState;
+      const supportsOutputBitDepths = support.supportsOutputBitDepth(model, subSamplingBinning, linkSpeed, linkCount);
       calculatorState = {
         ...calculatorState,
         subSamplingBinning,
+        supportsOutputBitDepths,
         resolutionPreset: RESOLUTION.MAXIMUM,
       };
       calculatorState = updateResolutionConstraints(calculatorState);
@@ -388,12 +422,12 @@ const victoremCXReducer = (state = { order: [] }, action) => {
         sensorDriveMode,
         resolutionPreset: RESOLUTION.MAXIMUM,
       };
-      const bitDepths = support.supportedBitDepths(calculatorState);
-      const bitDepth = bitDepths[0];
+      const adcBitDepths = support.supportedBitDepths(calculatorState);
+      const adcBitDepth = adcBitDepths[0];
       calculatorState = {
         ...calculatorState,
-        bitDepth,
-        bitDepths,
+        adcBitDepth,
+        adcBitDepths,
         resolutionPreset: RESOLUTION.MAXIMUM,
       };
       calculatorState = updateResolutionConstraints(calculatorState);

@@ -1,6 +1,7 @@
 import {
   MODELS,
   SENSOR_DRIVE_MODE,
+  SUBSAMPLING_BINNING,
 } from '../constants';
 
 const supports2x2Binning = model => MODELS.TYPE_253.includes(model)
@@ -25,15 +26,22 @@ const isConfiguration = (
   targetLinkCount,
 ) => (linkSpeed === targetLinkSpeed) && (linkCount === targetLinkCount);
 
+const supportsOutputBitDepth = (model, subSamplingBinning, linkSpeed, linkCount) => {
+  if (!MODELS.TYPE_253.includes(model)) return false;
+  if (subSamplingBinning !== SUBSAMPLING_BINNING.NONE) return false;
+  if (isConfiguration(linkSpeed, linkCount, 6, 2)) return false;
+  return true;
+};
+
 const supportedBitDepths = ({
   model,
   format,
   sensorDriveMode,
 }) => {
+  const adcBitDepths = [];
   if (MODELS.TYPE_183.includes(model)) {
     const linkSpeed = Number(format.slice(-1));
     const linkCount = Number(format.slice(0, 1));
-    const adcBitDepths = [];
     if (sensorDriveMode === SENSOR_DRIVE_MODE.ALL_12
       || sensorDriveMode === SENSOR_DRIVE_MODE.ALL_10
       || sensorDriveMode === SENSOR_DRIVE_MODE.UHD_10
@@ -83,12 +91,21 @@ const supportedBitDepths = ({
     return adcBitDepths;
   }
 
-  return [8, 10, 12];
+  // All other models
+  if (!MODELS.TYPE_174.includes(model)) {
+    adcBitDepths.push(8);
+  }
+
+  adcBitDepths.push(10);
+  adcBitDepths.push(12);
+
+  return adcBitDepths;
 };
 
 export {
   supports2x2Binning,
   supportsVerticalBinning,
   supportsSubSampling,
+  supportsOutputBitDepth,
   supportedBitDepths,
 };

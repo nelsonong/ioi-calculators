@@ -47,6 +47,9 @@ const VictoremCXResolution = ({
     case 1:
       enableResolution = (sensorDriveMode === SENSOR_DRIVE_MODE.ALL_10);
 
+    case 2:
+      enableResolution = true;
+
     default:
       break;
   }

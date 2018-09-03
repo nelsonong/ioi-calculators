@@ -11,6 +11,7 @@ const VictoremCXFormat = ({
   format,
   adcBitDepth,
   adcBitDepths,
+  supportsOutputBitDepths,
   outputBitDepth,
   formats,
   handleChangeFormat,
@@ -38,7 +39,12 @@ const VictoremCXFormat = ({
         {adcBitDepthOptions}
       </select>
       <div className={styles.label}>Output Bit Depth:</div>
-      <select className={styles.select} value={outputBitDepth} onChange={handleChangeOutputBitDepth}>
+      <select
+        className={styles.select}
+        value={outputBitDepth}
+        disabled={!supportsOutputBitDepths}
+        onChange={handleChangeOutputBitDepth}
+      >
         {outputBitDepthOptions}
       </select>
     </fieldset>
@@ -56,6 +62,7 @@ const mapStateToProps = (state, {
     format,
     adcBitDepth,
     adcBitDepths,
+    supportsOutputBitDepths,
     outputBitDepth,
     formats,
   } = calculatorState;
@@ -63,6 +70,7 @@ const mapStateToProps = (state, {
     format,
     adcBitDepth,
     adcBitDepths,
+    supportsOutputBitDepths,
     outputBitDepth,
     formats,
   };
