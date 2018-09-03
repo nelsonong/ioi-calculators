@@ -6,8 +6,34 @@ import {
 } from '../../../../actions/victoremCXActions';
 import styles from './VictoremCXModel.css';
 
-const toggleCheckBox = (cameraId, modelType) => {
-  const documentId = `${cameraId}_${modelType.toLowerCase()}`;
+const modelSensors = [
+  'TYPE_174',
+  'TYPE_183',
+  'TYPE_250',
+  'TYPE_252',
+  'TYPE_253',
+  'TYPE_255',
+  'TYPE_273',
+  'TYPE_287',
+];
+
+const modelColors = [
+  'TYPE_COLOR',
+  'TYPE_MONO',
+];
+
+const allFiltersUsed = (existingModelFilters, filters) => {
+  let enabledFilters = 0;
+  filters.forEach((filter) => {
+    if (existingModelFilters.includes(filter)) {
+      enabledFilters += 1;
+    }
+  });
+  return (enabledFilters + 1) >= filters.length;
+};
+
+const toggleCheckBox = (cameraId, modelFilter) => {
+  const documentId = `${cameraId}_${modelFilter.toLowerCase()}`;
   const checkbox = document.getElementById(documentId);
   checkbox.checked = true;
 };
@@ -18,19 +44,12 @@ class VictoremCXModel extends Component {
       cameraId,
       modelFilters,
     } = this.props;
-    const modelTypes = [
-      'TYPE_174',
-      'TYPE_183',
-      'TYPE_250',
-      'TYPE_252',
-      'TYPE_253',
-      'TYPE_255',
-      'TYPE_273',
-      'TYPE_287',
-      'TYPE_COLOR',
-      'TYPE_MONO',
-    ];
-    modelTypes.forEach((modelType) => {
+    modelSensors.forEach((modelType) => {
+      if (!modelFilters.includes(modelType)) {
+        toggleCheckBox(cameraId, modelType);
+      }
+    });
+    modelColors.forEach((modelType) => {
       if (!modelFilters.includes(modelType)) {
         toggleCheckBox(cameraId, modelType);
       }
@@ -176,14 +195,16 @@ const mapDispatchToProps = (dispatch, {
   },
   handleUpdateModelFilters: (modelFilter, modelFilters, e) => {
     const enabled = e.target.checked;
-    if (modelFilter === 'TYPE_COLOR' && enabled === false && modelFilters.includes('TYPE_MONO')) {
-      toggleCheckBox('TYPE_COLOR');
-      return;
-    }
+    if (enabled === false) {
+      if (modelSensors.includes(modelFilter) && allFiltersUsed(modelFilters, modelSensors)) {
+        toggleCheckBox(cameraId, modelFilter);
+        return;
+      }
 
-    if (modelFilter === 'TYPE_MONO' && enabled === false && modelFilters.includes('TYPE_COLOR')) {
-      toggleCheckBox('TYPE_MONO');
-      return;
+      if (modelColors.includes(modelFilter) && allFiltersUsed(modelFilters, modelColors)) {
+        toggleCheckBox(cameraId, modelFilter);
+        return;
+      }
     }
 
     dispatch(updateModelFilters(cameraId, modelFilter, enabled, dvrId));
