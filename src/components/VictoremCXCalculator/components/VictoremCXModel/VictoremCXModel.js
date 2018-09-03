@@ -6,14 +6,18 @@ import {
 } from '../../../../actions/victoremCXActions';
 import styles from './VictoremCXModel.css';
 
-const toggleCheckBox = (modelType) => {
-  const checkbox = document.getElementById(modelType.toLowerCase());
-  checkbox.click();
+const toggleCheckBox = (cameraId, modelType) => {
+  const documentId = `${cameraId}_${modelType.toLowerCase()}`;
+  const checkbox = document.getElementById(documentId);
+  checkbox.checked = true;
 };
 
 class VictoremCXModel extends Component {
   componentDidMount = () => {
-    const { modelFilters } = this.props;
+    const {
+      cameraId,
+      modelFilters,
+    } = this.props;
     const modelTypes = [
       'TYPE_174',
       'TYPE_183',
@@ -28,13 +32,14 @@ class VictoremCXModel extends Component {
     ];
     modelTypes.forEach((modelType) => {
       if (!modelFilters.includes(modelType)) {
-        toggleCheckBox(modelType);
+        toggleCheckBox(cameraId, modelType);
       }
     });
   }
 
   render = () => {
     const {
+      cameraId,
       model,
       models,
       modelFilters,
@@ -56,56 +61,56 @@ class VictoremCXModel extends Component {
         <div className={styles.right}>
           <input
             type='checkbox'
-            id='type_174'
+            id={`${cameraId}_type_174`}
             className={styles.checkbox}
             onChange={e => handleUpdateModelFilters('TYPE_174', modelFilters, e)}
           />
           <div className={styles.label}>174</div>
           <input
             type='checkbox'
-            id='type_183'
+            id={`${cameraId}_type_183`}
             className={styles.checkbox}
             onChange={e => handleUpdateModelFilters('TYPE_183', modelFilters, e)}
           />
           <div className={styles.label}>183</div>
           <input
             type='checkbox'
-            id='type_250'
+            id={`${cameraId}_type_250`}
             className={styles.checkbox}
             onChange={e => handleUpdateModelFilters('TYPE_250', modelFilters, e)}
           />
           <div className={styles.label}>250</div>
           <input
             type='checkbox'
-            id='type_252'
+            id={`${cameraId}_type_252`}
             className={styles.checkbox}
             onChange={e => handleUpdateModelFilters('TYPE_252', modelFilters, e)}
           />
           <div className={styles.label}>252</div>
           <input
             type='checkbox'
-            id='type_253'
+            id={`${cameraId}_type_253`}
             className={styles.checkbox}
             onChange={e => handleUpdateModelFilters('TYPE_253', modelFilters, e)}
           />
           <div className={styles.label}>253</div>
           <input
             type='checkbox'
-            id='type_255'
+            id={`${cameraId}_type_255`}
             className={styles.checkbox}
             onChange={e => handleUpdateModelFilters('TYPE_255', modelFilters, e)}
           />
           <div className={styles.label}>255</div>
           <input
             type='checkbox'
-            id='type_273'
+            id={`${cameraId}_type_273`}
             className={styles.checkbox}
             onChange={e => handleUpdateModelFilters('TYPE_273', modelFilters, e)}
           />
           <div className={styles.label}>273</div>
           <input
             type='checkbox'
-            id='type_287'
+            id={`${cameraId}_type_287`}
             className={styles.checkbox}
             onChange={e => handleUpdateModelFilters('TYPE_287', modelFilters, e)}
           />
@@ -114,14 +119,14 @@ class VictoremCXModel extends Component {
           <div className={styles.left2}>
             <input
               type='checkbox'
-              id='type_color'
+              id={`${cameraId}_type_color`}
               className={styles.checkbox}
               onChange={e => handleUpdateModelFilters('TYPE_COLOR', modelFilters, e)}
             />
             <div className={styles.label}>Color</div>
             <input
               type='checkbox'
-              id='type_mono'
+              id={`${cameraId}_type_mono`}
               className={styles.checkbox}
               onChange={e => handleUpdateModelFilters('TYPE_MONO', modelFilters, e)}
             />
@@ -153,6 +158,7 @@ const mapStateToProps = (state, {
     sensor,
   } = calculatorState;
   return {
+    cameraId,
     model,
     models,
     modelFilters,
