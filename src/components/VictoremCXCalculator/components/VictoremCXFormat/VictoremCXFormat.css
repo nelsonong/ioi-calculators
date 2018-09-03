@@ -7,9 +7,10 @@
 .label {
     composes: label;
     display: inline;
+    margin-right: 0.2rem;
 }
 
 .select {
     composes: select;
-    margin-right: 2rem;
+    margin-right: 0.6rem;
 }

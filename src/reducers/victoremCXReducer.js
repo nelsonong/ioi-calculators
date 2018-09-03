@@ -17,7 +17,8 @@ import {
   UPDATE_VICTOREM_CX_MODEL,
   UPDATE_VICTOREM_CX_MODEL_FILTERS,
   UPDATE_VICTOREM_CX_FORMAT,
-  UPDATE_VICTOREM_CX_BIT_DEPTH,
+  UPDATE_VICTOREM_CX_ADC_BIT_DEPTH,
+  UPDATE_VICTOREM_CX_OUTPUT_BIT_DEPTH,
   UPDATE_VICTOREM_CX_RESOLUTION_PRESET,
   UPDATE_VICTOREM_CX_WIDTH,
   UPDATE_VICTOREM_CX_HEIGHT,
@@ -292,11 +293,23 @@ const victoremCXReducer = (state = { order: [] }, action) => {
       break;
     }
 
-    case UPDATE_VICTOREM_CX_BIT_DEPTH: {
-      const { bitDepth } = action;
+    case UPDATE_VICTOREM_CX_ADC_BIT_DEPTH: {
+      const { adcBitDepth } = action;
       calculatorState = {
         ...calculatorState,
-        bitDepth,
+        adcBitDepth,
+      };
+      calculatorState = updateResolutionConstraints(calculatorState);
+      calculatorState = updateResolution(calculatorState);
+      calculatorState = updateOutput(calculatorState);
+      break;
+    }
+
+    case UPDATE_VICTOREM_CX_OUTPUT_BIT_DEPTH: {
+      const { outputBitDepth } = action;
+      calculatorState = {
+        ...calculatorState,
+        outputBitDepth,
       };
       calculatorState = updateResolutionConstraints(calculatorState);
       calculatorState = updateResolution(calculatorState);

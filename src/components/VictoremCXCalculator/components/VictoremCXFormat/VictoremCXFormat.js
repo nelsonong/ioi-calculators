@@ -2,23 +2,29 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {
   updateFormat,
-  updateBitDepth,
+  updateADCBitDepth,
+  updateOutputBitDepth,
 } from '../../../../actions/victoremCXActions';
 import styles from './VictoremCXFormat.css';
 
 const VictoremCXFormat = ({
   format,
-  bitDepth,
-  bitDepths,
+  adcBitDepth,
+  adcBitDepths,
+  outputBitDepth,
   formats,
   handleChangeFormat,
-  handleChangeBitDepth,
+  handleChangeADCBitDepth,
+  handleChangeOutputBitDepth,
 }) => {
   const formatOptions = formats.map((formatOption, i) => (
     <option key={i} value={formatOption}>{formatOption}</option>
   ));
-  const bitDepthOptions = bitDepths.map((bitDepthOption, i) => (
-    <option key={i} value={bitDepthOption}>{bitDepthOption}</option>
+  const adcBitDepthOptions = adcBitDepths.map((adcBitDepthOption, i) => (
+    <option key={i} value={adcBitDepthOption}>{adcBitDepthOption}</option>
+  ));
+  const outputBitDepthOptions = [8, 10, 12].map((outputBitDepthOption, i) => (
+    <option key={i} value={outputBitDepthOption}>{outputBitDepthOption}</option>
   ));
   return (
     <fieldset className={styles.root}>
@@ -27,10 +33,13 @@ const VictoremCXFormat = ({
       <select className={styles.select} value={format} onChange={handleChangeFormat}>
         {formatOptions}
       </select>
-
-      <div className={styles.label}>Bit Depth:</div>
-      <select className={styles.select} value={bitDepth} onChange={handleChangeBitDepth}>
-        {bitDepthOptions}
+      <div className={styles.label}>ADC Bit Depth:</div>
+      <select className={styles.select} value={adcBitDepth} onChange={handleChangeADCBitDepth}>
+        {adcBitDepthOptions}
+      </select>
+      <div className={styles.label}>Output Bit Depth:</div>
+      <select className={styles.select} value={outputBitDepth} onChange={handleChangeOutputBitDepth}>
+        {outputBitDepthOptions}
       </select>
     </fieldset>
   );
@@ -45,14 +54,16 @@ const mapStateToProps = (state, {
     : state.storageCalculators[dvrId].cameras[cameraId];
   const {
     format,
-    bitDepth,
-    bitDepths,
+    adcBitDepth,
+    adcBitDepths,
+    outputBitDepth,
     formats,
   } = calculatorState;
   return {
     format,
-    bitDepth,
-    bitDepths,
+    adcBitDepth,
+    adcBitDepths,
+    outputBitDepth,
     formats,
   };
 };
@@ -65,10 +76,13 @@ const mapDispatchToProps = (dispatch, {
     const format = e.target.value;
     dispatch(updateFormat(cameraId, format, dvrId));
   },
-
-  handleChangeBitDepth: (e) => {
-    const bitDepth = Number(e.target.value);
-    dispatch(updateBitDepth(cameraId, bitDepth, dvrId));
+  handleChangeADCBitDepth: (e) => {
+    const adcBitDepth = Number(e.target.value);
+    dispatch(updateADCBitDepth(cameraId, adcBitDepth, dvrId));
+  },
+  handleChangeOutputBitDepth: (e) => {
+    const outputBitDepth = Number(e.target.value);
+    dispatch(updateOutputBitDepth(cameraId, outputBitDepth, dvrId));
   },
 });
 

@@ -33,7 +33,7 @@ const supportedBitDepths = ({
   if (MODELS.TYPE_183.includes(model)) {
     const linkSpeed = Number(format.slice(-1));
     const linkCount = Number(format.slice(0, 1));
-    const bitDepths = [];
+    const adcBitDepths = [];
     if (sensorDriveMode === SENSOR_DRIVE_MODE.ALL_12
       || sensorDriveMode === SENSOR_DRIVE_MODE.ALL_10
       || sensorDriveMode === SENSOR_DRIVE_MODE.UHD_10
@@ -51,7 +51,7 @@ const supportedBitDepths = ({
         || isConfiguration(linkSpeed, linkCount, 2, 1))
       )
     ) {
-      bitDepths.push(8);
+      adcBitDepths.push(8);
     }
 
     if (sensorDriveMode === SENSOR_DRIVE_MODE.ALL_12
@@ -71,16 +71,16 @@ const supportedBitDepths = ({
         || isConfiguration(linkSpeed, linkCount, 2, 1))
       )
     ) {
-      bitDepths.push(10);
+      adcBitDepths.push(10);
     }
 
     if (sensorDriveMode === SENSOR_DRIVE_MODE.ALL_12
       || sensorDriveMode === SENSOR_DRIVE_MODE.BIN_12_16_9
       || sensorDriveMode === SENSOR_DRIVE_MODE.BIN_12) {
-      bitDepths.push(12);
+      adcBitDepths.push(12);
     }
 
-    return bitDepths;
+    return adcBitDepths;
   }
 
   return [8, 10, 12];

@@ -20,7 +20,7 @@ const calculateMinWidth = (model) => {
 const calculateMaxWidth = ({
   model,
   format,
-  bitDepth,
+  adcBitDepth,
   subSamplingBinning,
   sensorDriveMode,
 }) => {
@@ -72,15 +72,15 @@ const calculateMaxWidth = ({
         return 2464;
       }
 
-      if (bitDepth === 10 && isConfiguration(linkSpeed, linkCount, 3, 2)) {
+      if (adcBitDepth === 10 && isConfiguration(linkSpeed, linkCount, 3, 2)) {
         return 1232;
       }
 
-      if (bitDepth === 10 && isConfiguration(linkSpeed, linkCount, 6, 1)) {
+      if (adcBitDepth === 10 && isConfiguration(linkSpeed, linkCount, 6, 1)) {
         return 1232;
       }
 
-      if (bitDepth === 12 && isConfiguration(linkSpeed, linkCount, 2, 2)) {
+      if (adcBitDepth === 12 && isConfiguration(linkSpeed, linkCount, 2, 2)) {
         return 2200;
       }
 
@@ -144,7 +144,7 @@ const calculateMinHeight = () => 4;
 const calculateMaxHeight = ({
   model,
   format,
-  bitDepth,
+  adcBitDepth,
   subSamplingBinning,
   sensorDriveMode,
 }) => {
@@ -204,11 +204,11 @@ const calculateMaxHeight = ({
         return 772;
       }
 
-      if (bitDepth === 12 && isConfiguration(linkSpeed, linkCount, 6, 2)) {
+      if (adcBitDepth === 12 && isConfiguration(linkSpeed, linkCount, 6, 2)) {
         return 1080;
       }
 
-      if (bitDepth === 12 && isConfiguration(linkSpeed, linkCount, 5, 2)) {
+      if (adcBitDepth === 12 && isConfiguration(linkSpeed, linkCount, 5, 2)) {
         return 1080;
       }
 
