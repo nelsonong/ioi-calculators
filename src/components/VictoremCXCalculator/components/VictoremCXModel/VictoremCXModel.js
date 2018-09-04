@@ -75,7 +75,7 @@ class VictoremCXModel extends Component {
         <div className={styles.left}>
           <div className={styles.label}>Sensors:</div>
           <br />
-          <div className={styles.label}>Type:</div>
+          <div className={styles.label}>Types:</div>
         </div>
         <div className={styles.right}>
           <input

@@ -4,7 +4,7 @@
     composes: victorem-cx-fieldset;
 }
 
-@mixin add-left-right 38%, 62%;
+@mixin add-left-right 36%, 64%;
 
 .select {
     composes: select;
