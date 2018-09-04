@@ -193,7 +193,6 @@ const victoremCXReducer = (state = { order: [] }, action) => {
       const newModel = models[0];
 
       const { model } = calculatorState;
-      const updateModel = (model !== newModel);
 
       // Update state
       calculatorState = {
@@ -202,10 +201,6 @@ const victoremCXReducer = (state = { order: [] }, action) => {
         models,
         modelFilters,
       };
-
-      if (!updateModel) {
-        break;
-      }
     }
 
     case UPDATE_VICTOREM_CX_MODEL: {
@@ -224,6 +219,9 @@ const victoremCXReducer = (state = { order: [] }, action) => {
         formats = FORMATS.CX24A;
       } else {
         formats = FORMATS.CXX;
+      }
+
+      if (formats === FORMATS.CX24A || formats === FORMATS.CXX) {
         const { mode } = calculatorState;
         if (mode) {
           switch (mode) {

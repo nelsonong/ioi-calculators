@@ -6,7 +6,7 @@
     composes: container;
     width: 100%;
     min-width: 36rem;
-    max-width: 44rem;
+    max-width: 48rem;
     min-height: fit-content;
     margin: 3rem;
     outline: none;
