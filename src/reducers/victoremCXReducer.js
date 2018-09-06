@@ -15,7 +15,6 @@ import * as support from '../components/VictoremCXCalculator/utils/support';
 import {
   INITIALIZE_VICTOREM_CX_DVR_STATE,
   UPDATE_VICTOREM_CX_MODEL,
-  UPDATE_VICTOREM_CX_MODEL_FILTERS,
   UPDATE_VICTOREM_CX_FORMAT,
   UPDATE_VICTOREM_CX_ADC_BIT_DEPTH,
   UPDATE_VICTOREM_CX_OUTPUT_BIT_DEPTH,
@@ -159,48 +158,6 @@ const victoremCXReducer = (state = { order: [] }, action) => {
       };
 
       // Fall-through
-    }
-
-    case UPDATE_VICTOREM_CX_MODEL_FILTERS: {
-      const {
-        modelFilter,
-        enabled,
-      } = action;
-
-      let { modelFilters } = calculatorState;
-      if (modelFilter) {
-        if (enabled) {
-          // Model filter should already be in filters array -> remove it
-          modelFilters = modelFilters.filter(existingModelFilter => existingModelFilter !== modelFilter);
-        } else {
-          // Model filter should not already be in filters array -> add it
-          modelFilters = modelFilters.concat(modelFilter);
-        }
-      }
-
-      let models = MODELS.ALL;
-
-      // Filter out models that exist in modelFilters
-      models = models.filter((model) => {
-        let includeModel = true;
-        modelFilters.forEach((existingModelFilter) => {
-          if (MODELS[existingModelFilter].includes(model)) {
-            includeModel = false;
-          }
-        });
-        return includeModel;
-      });
-      const newModel = models[0];
-
-      const { model } = calculatorState;
-
-      // Update state
-      calculatorState = {
-        ...calculatorState,
-        model: newModel,
-        models,
-        modelFilters,
-      };
     }
 
     case UPDATE_VICTOREM_CX_MODEL: {

@@ -4,18 +4,7 @@
     composes: victorem-cx-fieldset;
 }
 
-@mixin add-left-right 12%, 88%;
-
-.left2 {
-    composes: left;
-    width: 36%;
-}
-
-.right2 {
-    composes: right;
-    width: 64%;
-    text-align: right;
-}
+@mixin add-left-right;
 
 .display {
     color: black;
@@ -28,15 +17,4 @@
     padding: 0.1rem 0.3rem 0.1rem 0.1rem;
     border: solid $calculator-info;
     border-radius: 0.2rem;
-}
-
-.label {
-    composes: label;
-    display: inline-block;
-    margin: 0.5rem 0rem;
-}
-
-.checkbox {
-    composes: checkbox;
-    margin-left: 0.6rem;
 }
