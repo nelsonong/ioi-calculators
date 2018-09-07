@@ -6,6 +6,11 @@
 
 @mixin add-left-right;
 
+.right {
+    composes: right;
+    text-align: right;
+}
+
 .display {
     color: black;
 	font-size: 1.1rem;

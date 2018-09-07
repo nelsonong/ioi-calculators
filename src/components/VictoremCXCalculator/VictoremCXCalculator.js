@@ -22,12 +22,7 @@ class VictoremCXCalculator extends Component {
     const root = cx(styles.root, { [styles.draggable]: !this.props.mode });
     return (
       <div className={root}>
-        <CalculatorTopBar
-          type={'Victorem CX'}
-          cameraId={this.props.cameraId}
-          dvrId={this.props.dvrId}
-          expanded={true}
-        />
+        <CalculatorTopBar type={'Victorem CX'} cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
         <VictoremCXModel cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
         <VictoremCXFormat cameraId={this.props.cameraId} dvrId={this.props.dvrId} />
         <VictoremCXResolution cameraId={this.props.cameraId} dvrId={this.props.dvrId} />

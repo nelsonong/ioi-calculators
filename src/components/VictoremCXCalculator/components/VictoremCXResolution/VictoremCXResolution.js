@@ -57,35 +57,40 @@ const VictoremCXResolution = ({
   return (
     <fieldset className={styles.root}>
     <legend className={styles.legend}>Resolution</legend>
-      <div className={styles.label}>Presets:</div>
-      <select
-        className={styles.select}
-        value={resolutionPreset}
-        disabled={!enableResolution}
-        onChange={handleChangeResolutionPreset}
-      >
-        {resolutionPresetOptions}
-      </select>
-      <div className={styles.label}>W x H:</div>
-      <input
-        type="number"
-        className={styles.wxh}
-        step={widthStep} value={width}
-        min={minWidth}
-        max={maxWidth}
-        disabled={!enableResolution}
-        onChange={handleChangeWidth}
-        />
-      <input
-        type="number"
-        className={styles.wxh}
-        step={heightStep}
-        value={height}
-        min={minHeight}
-        max={maxHeight}
-        disabled={!enableResolution}
-        onChange={handleChangeHeight}
-      />
+      <div className={styles.left}>
+        <div className={styles.label}>Presets:</div>
+        <div className={styles.label}>W x H:</div>
+      </div>
+      <div className={styles.right}>
+        <select
+          className={styles.select}
+          value={resolutionPreset}
+          disabled={!enableResolution}
+          onChange={handleChangeResolutionPreset}
+        >
+          {resolutionPresetOptions}
+        </select>
+        <br />
+        <input
+          type="number"
+          className={styles.wxh}
+          step={widthStep} value={width}
+          min={minWidth}
+          max={maxWidth}
+          disabled={!enableResolution}
+          onChange={handleChangeWidth}
+         />
+        <input
+          type="number"
+          className={styles.wxh}
+          step={heightStep}
+          value={height}
+          min={minHeight}
+          max={maxHeight}
+          disabled={!enableResolution}
+          onChange={handleChangeHeight}
+         />
+      </div>
       {
         resolutionTooltip !== ''
         && <div className={styles.tooltip}>
