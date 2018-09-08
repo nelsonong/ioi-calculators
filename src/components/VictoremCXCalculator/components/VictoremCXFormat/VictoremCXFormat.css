@@ -4,21 +4,16 @@
     composes: victorem-cx-fieldset;
 }
 
-@mixin add-left-right 29%, 71%;
+@mixin add-left-right 45%, 55%;
 
 .label {
     composes: label;
-    display: inline-block;
-    margin-right: 0.2rem;
-    margin-bottom: 0.4rem;
-}
-
-.italics {
-    font-weight: bold;
-    font-style: italic;
+    display: block;
+    margin: 0.8rem 0;
 }
 
 .select {
     composes: select;
-    margin-right: 0.6rem;
+    display: block;
+    margin: 0.3rem;
 }

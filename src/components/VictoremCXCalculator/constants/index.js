@@ -26,7 +26,6 @@ export const victoremCXDefaultState = {
   cameraType: 'victorem-cx',
   model: MODEL.Type24A164MCX,
   models: MODELS.ALL,
-  modelFilters: [],
   sensor: SENSOR[MODEL.Type24A164MCX],
   format: FORMAT.CXP3x2,
   formats: FORMATS.CX24A,

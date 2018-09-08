@@ -32,18 +32,16 @@ const VictoremCXFormat = ({
     <legend className={styles.legend}>Output Format</legend>
       <div className={styles.left}>
         <div className={styles.label}>Link:</div>
-        <div className={`${styles.label} ${styles.italics}`}>Bit Depths</div>
+        <div className={styles.label}>ADC Bit Depth:</div>
+        <div className={styles.label}>Output Bit Depth:</div>
       </div>
       <div className={styles.right}>
         <select className={styles.select} value={format} onChange={handleChangeFormat}>
           {formatOptions}
         </select>
-        <br />
-        <div className={styles.label}>ADC</div>
         <select className={styles.select} value={adcBitDepth} onChange={handleChangeADCBitDepth}>
           {adcBitDepthOptions}
         </select>
-        <div className={styles.label}>Output:</div>
         <select
           className={styles.select}
           value={outputBitDepth}
