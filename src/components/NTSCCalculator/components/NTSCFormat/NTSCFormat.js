@@ -8,7 +8,7 @@ const NTSCFormat = ({
   handleChange,
 }) => (
     <fieldset className={styles.root}>
-    <legend className={styles.legend}>Format</legend>
+    <legend className={styles.legend}>Output Format</legend>
       <select className={styles.select} value={format} onChange={handleChange}>
         <option value={format}>{format}</option>
       </select>

@@ -13,7 +13,7 @@ const GEVFormat = ({
   ));
   return (
     <fieldset className={styles.root}>
-    <legend className={styles.legend}>GEV Format</legend>
+    <legend className={styles.legend}>Output Format</legend>
       <div className={styles.label}>Bit Depth:</div>
       <select className={styles.select} value={bitDepth} onChange={handleChangeBitDepth}>
         {bitDepthOptions}

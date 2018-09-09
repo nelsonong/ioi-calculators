@@ -29,7 +29,7 @@ const FlareCXFormat = ({
   ));
   return (
     <fieldset className={styles.root}>
-    <legend className={styles.legend}>CoaXPress Format</legend>
+    <legend className={styles.legend}>Output Format</legend>
     <div className={styles.left}>
       <div className={styles.labels}>
         <div className={styles.label}>Bit Depth:</div>

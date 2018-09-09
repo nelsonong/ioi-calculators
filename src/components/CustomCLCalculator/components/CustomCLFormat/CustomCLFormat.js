@@ -11,7 +11,7 @@ const CustomCLFormat = ({
   const formatOptions = formats.map((formatOption, i) => <option key={i}>{formatOption}</option>);
   return (
     <fieldset className={styles.root}>
-    <legend className={styles.legend}>Camera Link Format</legend>
+    <legend className={styles.legend}>Output Format</legend>
       <select className={styles.select} value={format} onChange={handleChange}>
         {formatOptions}
       </select>
