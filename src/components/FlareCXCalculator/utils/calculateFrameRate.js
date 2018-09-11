@@ -348,6 +348,15 @@ const calculateCXOverheadAndLineTime = (model, bitDepth, width, height, linkSpee
     } else {
       throw new Error('Unsupported mode.');
     }
+
+    // custom calculation for CXP 12M
+    const framePeriodUs = Math.ceil(Math.ceil(frameOverheadTimeUs) + (height / 2) * lineTimeUs);
+    const customFrameRate = framePeriodUs > 0 ? 1000000.0 / framePeriodUs : 0;
+    return {
+      frameOverheadTimeUs,
+      lineTimeUs,
+      customFrameRate,
+    };
   } else if (model.startsWith('48M')) {
     let widthModeParam = 0;
     if (is2G) {
@@ -413,11 +422,11 @@ const calculateCXOverheadAndLineTime = (model, bitDepth, width, height, linkSpee
     const readoutOverhead = 2 * Math.ceil(1173 / widthFactor) + 7;
     const readoutTime = (readoutOverhead + height) * widthFactor * 0.014458;
     const framePeriod = 150 + readoutTime;
-    const frameRate48m = 1000000 / framePeriod;
+    const customFrameRate = 1000000 / framePeriod;
     return {
       frameOverheadTimeUs,
       lineTimeUs,
-      frameRate48m,
+      customFrameRate,
     };
   } else {
     throw new Error('Unsupported camera type.');
@@ -461,7 +470,7 @@ export default ({
   const {
     frameOverheadTimeUs,
     lineTimeUs,
-    frameRate48m,
+    customFrameRate,
   } = calculateCXOverheadAndLineTime(
     model,
     bitDepth,
@@ -470,21 +479,17 @@ export default ({
     linkSpeed,
     linkCount,
   );
-  if (frameRate48m > 0) {
-    return frameRate48m.toFixed(2);
+  if (customFrameRate > 0) {
+    return customFrameRate.toFixed(2);
   }
-
-  if (frameOverheadTimeUs === 0) throw new Error('Frame overhead time is zero.');
-  if (lineTimeUs === 0) throw new Error('Line time is zero.');
 
   // Line scale factor
   const lineScaleFactor = model.startsWith('12M') ? 2 : 1;
 
   // Frame period
   const framePeriodUs = frameOverheadTimeUs + (modifiedHeight / lineScaleFactor * lineTimeUs);
-  if (framePeriodUs === 0) throw new Error('Frame period is zero.');
 
   // Calculate and return framerate
-  const frameRate = (1000000.0 / framePeriodUs).toFixed(2);
-  return frameRate;
+  const frameRate = framePeriodUs > 0 ? 1000000.0 / framePeriodUs : 0;
+  return frameRate.toFixed(2);
 };
