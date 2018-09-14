@@ -3,3 +3,9 @@
 .root {
     composes: flare-cl-fieldset;
 }
+
+.label {
+    composes: label;
+    display: inline-block;
+    margin: 0 0.6rem 0 0.2rem;
+}

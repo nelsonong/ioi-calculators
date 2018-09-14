@@ -9,6 +9,7 @@ import calculateDataRate from '../components/FlareCLCalculator/utils/calculateDa
 import {
   INITIALIZE_FLARE_CL_DVR_STATE,
   UPDATE_FLARE_CL_MODEL,
+  UPDATE_FLARE_CL_HW_VERSION,
   UPDATE_FLARE_CL_FORMAT,
   UPDATE_FLARE_CL_RESOLUTION_PRESET,
   UPDATE_FLARE_CL_WIDTH,
@@ -189,6 +190,16 @@ const flareCLReducer = (state = { order: [] }, action) => {
       };
       calculatorState = updateResolutionConstraints(calculatorState);
       calculatorState = updateResolution(calculatorState);
+      calculatorState = updateOutput(calculatorState);
+      break;
+    }
+
+    case UPDATE_FLARE_CL_HW_VERSION: {
+      const { hwversion } = action;
+      calculatorState = {
+        ...calculatorState,
+        hwversion,
+      };
       calculatorState = updateOutput(calculatorState);
       break;
     }

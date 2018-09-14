@@ -191,7 +191,7 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
     switch (format) {
       case FORMAT.Output2x8:
       case FORMAT.Output2x10:
-        if (hwversion === '2') {
+        if (hwversion === 2) {
           if (width > 2048) {
             frameOverheadTimeUs = 207;
             lineTimeUs = 51 + 615.0 / 1024.0;
@@ -216,7 +216,7 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
         break;
 
       case FORMAT.Output3x8:
-        if (hwversion === '2') {
+        if (hwversion === 2) {
           if (width > 2040) {
             frameOverheadTimeUs = 172;
             lineTimeUs = 34 + 410.0 / 1024.0;
@@ -242,7 +242,7 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
 
       case FORMAT.Output4x8:
       case FORMAT.Output4x10:
-        if (hwversion === '2') {
+        if (hwversion === 2) {
           if (width > 2048) {
             frameOverheadTimeUs = 129;
             lineTimeUs = 25 + 820.0 / 1024.0;
@@ -268,7 +268,7 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
 
       case FORMAT.Output8x8:
       case FORMAT.Output8x10:
-        if (hwversion === '2') {
+        if (hwversion === 2) {
           if (width > 2048) {
             frameOverheadTimeUs = 104;
             lineTimeUs = 12 + 922.0 / 1024.0;
@@ -293,7 +293,7 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
         break;
 
       case FORMAT.Output10x8:
-        if (hwversion === '2') {
+        if (hwversion === 2) {
           if (width > 2050) {
             frameOverheadTimeUs = 104;
             lineTimeUs = 10 + 392.0 / 1024.0;
@@ -319,7 +319,7 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
 
       case DUAL_FORMAT.Output16x8:
       case DUAL_FORMAT.Output16x10:
-        if (hwversion === '2') {
+        if (hwversion === 2) {
           if (width > 2048) {
             frameOverheadTimeUs = 91;
             lineTimeUs = 6 + 461.0 / 1024.0;
@@ -338,7 +338,7 @@ const calculateCLOverheadAndLineTime = (model, hwversion, format, width, slowMod
         break;
 
       case DUAL_FORMAT.Output20x8:
-        if (hwversion === '2') {
+        if (hwversion === 2) {
           if (width > 2050) {
             frameOverheadTimeUs = 84;
             lineTimeUs = 5 + 196.0 / 1024.0;
