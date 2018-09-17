@@ -40,27 +40,41 @@ const VictoremCXOptions = ({
       </option>
     ),
   );
+  const optionsExist = cameraMode === 0 || cameraMode === 1;
   return (
     <fieldset className={styles.root}>
     <legend className={styles.legend}>Options</legend>
-      <div className={styles.label}>Sub-Sample / Binning:</div>
-      <select
-        className={styles.select}
-        value={subSamplingBinning}
-        disabled={cameraMode !== 0}
-        onChange={handleChangeSubSamplingBinning}
-      >
-        {subSamplingBinningOptions}
-      </select>
-      <div className={styles.label}>Sensor Drive Mode:</div>
-      <select
-        className={styles.select}
-        value={sensorDriveMode}
-        disabled={cameraMode !== 1}
-        onChange={handleChangeSensorDriveMode}
-      >
-        {sensorDriveModeOptions}
-      </select>
+      { !optionsExist && <div className={styles.message}>No options available for this model.</div> }
+      { optionsExist
+      && <div>
+        { cameraMode === 0
+          && <div className={styles.label}>Sub-Sample / Binning:</div>
+        }
+        { cameraMode === 0
+          && <select
+            className={styles.select}
+            value={subSamplingBinning}
+            disabled={cameraMode !== 0}
+            onChange={handleChangeSubSamplingBinning}
+          >
+            {subSamplingBinningOptions}
+          </select>
+        }
+        { cameraMode === 1
+          && <div className={styles.label}>Sensor Drive Mode:</div>
+        }
+        { cameraMode === 1
+          && <select
+            className={styles.select}
+            value={sensorDriveMode}
+            disabled={cameraMode !== 1}
+            onChange={handleChangeSensorDriveMode}
+          >
+            {sensorDriveModeOptions}
+          </select>
+        }
+      </div>
+    }
     </fieldset>
   );
 };

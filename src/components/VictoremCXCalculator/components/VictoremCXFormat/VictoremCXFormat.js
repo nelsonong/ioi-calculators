@@ -33,7 +33,9 @@ const VictoremCXFormat = ({
       <div className={styles.left}>
         <div className={styles.label}>Link:</div>
         <div className={styles.label}>ADC Bit Depth:</div>
-        <div className={styles.label}>Output Bit Depth:</div>
+        {supportsOutputBitDepths
+          && <div className={styles.label}>Output Bit Depth:</div>
+        }
       </div>
       <div className={styles.right}>
         <select className={styles.select} value={format} onChange={handleChangeFormat}>
@@ -42,14 +44,16 @@ const VictoremCXFormat = ({
         <select className={styles.select} value={adcBitDepth} onChange={handleChangeADCBitDepth}>
           {adcBitDepthOptions}
         </select>
-        <select
-          className={styles.select}
-          value={outputBitDepth}
-          disabled={!supportsOutputBitDepths}
-          onChange={handleChangeOutputBitDepth}
-        >
-          {outputBitDepthOptions}
-        </select>
+        {supportsOutputBitDepths
+          && <select
+            className={styles.select}
+            value={outputBitDepth}
+            disabled={!supportsOutputBitDepths}
+            onChange={handleChangeOutputBitDepth}
+          >
+            {outputBitDepthOptions}
+          </select>
+        }
       </div>
     </fieldset>
   );

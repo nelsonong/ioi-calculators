@@ -5,7 +5,14 @@
 }
 
 .label {
-    margin: 0.3rem 0.3rem 0 0.3rem;
+    margin: 0.3rem 0.3rem 0.1rem 0.3rem;
+}
+
+.message {
+    composes: label;
+    text-align: center;
+    font-style: italic;
+    margin: 0.3rem auto;
 }
 
 .select {
