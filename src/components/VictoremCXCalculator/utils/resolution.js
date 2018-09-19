@@ -172,20 +172,8 @@ const calculateMaxHeight = ({
     }
 
     if (MODELS.TYPE_252.includes(model)) {
-      if (subSampling) {
+      if (subSampling || binv) {
         return 772;
-      }
-
-      if (binv) {
-        return 772;
-      }
-
-      if (adcBitDepth === 12 && isConfiguration(linkSpeed, linkCount, 6, 2)) {
-        return 1080;
-      }
-
-      if (adcBitDepth === 12 && isConfiguration(linkSpeed, linkCount, 5, 2)) {
-        return 1080;
       }
 
       return 1544;
