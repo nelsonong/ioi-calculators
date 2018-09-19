@@ -543,15 +543,19 @@ const calculateSubSamplingBinningFrameRate = (
     if (isConfiguration(linkSpeed, linkCount, 5, 1)) {
       hmaxCalc = hmaxFast;
     } else if (isConfiguration(linkSpeed, linkCount, 3, 1)) {
-      if (bin2 || subSampling || binv) {
+      if (bin2 || subSampling) {
         hmaxCalc = hmaxFast;
-      } else {
+      } else if (binv) {
         hmax = 356; // 8-Bit
-        if (adcBitDepth === 10) hmax = 445;
+        if (adcBitDepth === 10) hmax = 450;
         if (adcBitDepth === 12) hmax = 534;
+      } else {
+        hmax = 360; // 8-Bit
+        if (adcBitDepth === 10) hmax = 450;
+        if (adcBitDepth === 12) hmax = 540;
       }
     } else if (isConfiguration(linkSpeed, linkCount, 2, 1)) {
-      if (bin2 || subSampling || binv) {
+      if (bin2 || subSampling) {
         hmaxCalc = hmaxFast;
       } else {
         hmax = 444; // 8-Bit
