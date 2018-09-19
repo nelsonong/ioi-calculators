@@ -20,7 +20,6 @@ const calculateMinWidth = (model) => {
 const calculateMaxWidth = ({
   model,
   format,
-  adcBitDepth,
   subSamplingBinning,
   sensorDriveMode,
 }) => {
@@ -84,15 +83,7 @@ const calculateMaxWidth = ({
     }
 
     if (MODELS.TYPE_253.includes(model) || MODELS.TYPE_255.includes(model)) {
-      if (subSampling) {
-        return 2056;
-      }
-
-      if (binv) {
-        return 4112;
-      }
-
-      if (bin2) {
+      if (subSampling || bin2) {
         return 2056;
       }
 
@@ -100,7 +91,11 @@ const calculateMaxWidth = ({
     }
 
     if (MODELS.TYPE_273.includes(model)) {
-      return (subSampling || bin2) ? 728 : 1456;
+      if (subSampling || bin2) {
+        return 728;
+      }
+
+      return 1456;
     }
 
     if (MODELS.TYPE_287.includes(model)) {
@@ -115,39 +110,30 @@ const calculateMinHeight = () => 4;
 
 const calculateMaxHeight = ({
   model,
-  format,
-  adcBitDepth,
   subSamplingBinning,
   sensorDriveMode,
 }) => {
-  const linkSpeed = Number(format.slice(-1));
-  const linkCount = Number(format.slice(0, 1));
   if (MODELS.TYPE_183.includes(model)) {
     switch (sensorDriveMode) {
       case SENSOR_DRIVE_MODE.ALL_12:
-      case SENSOR_DRIVE_MODE.ALL_10:
-      {
+      case SENSOR_DRIVE_MODE.ALL_10: {
         return 3672;
       }
 
       case SENSOR_DRIVE_MODE.UHD_10:
-      case SENSOR_DRIVE_MODE.UHD_10_OC:
-      {
+      case SENSOR_DRIVE_MODE.UHD_10_OC: {
         return 2168;
       }
 
-      case SENSOR_DRIVE_MODE.BIN_12_16_9:
-      {
+      case SENSOR_DRIVE_MODE.BIN_12_16_9: {
         return 1548;
       }
 
-      case SENSOR_DRIVE_MODE.BIN_12:
-      {
+      case SENSOR_DRIVE_MODE.BIN_12: {
         return 1836;
       }
 
-      default:
-      {
+      default: {
         return 0;
       }
     }
@@ -160,11 +146,7 @@ const calculateMaxHeight = ({
     }
 
     if (MODELS.TYPE_250.includes(model)) {
-      if (subSampling) {
-        return 1028;
-      }
-
-      if (binv) {
+      if (subSampling || binv) {
         return 1028;
       }
 
@@ -180,15 +162,7 @@ const calculateMaxHeight = ({
     }
 
     if (MODELS.TYPE_253.includes(model)) {
-      if (subSampling) {
-        return 1504;
-      }
-
-      if (binv) {
-        return 1504;
-      }
-
-      if (bin2) {
+      if (subSampling || binv || bin2) {
         return 1504;
       }
 
@@ -196,15 +170,7 @@ const calculateMaxHeight = ({
     }
 
     if (MODELS.TYPE_255.includes(model)) {
-      if (subSampling) {
-        return 1088;
-      }
-
-      if (binv) {
-        return 1088;
-      }
-
-      if (bin2) {
+      if (subSampling || binv || bin2) {
         return 1088;
       }
 
@@ -212,15 +178,7 @@ const calculateMaxHeight = ({
     }
 
     if (MODELS.TYPE_273.includes(model)) {
-      if (subSampling) {
-        return 544;
-      }
-
-      if (binv) {
-        return 544;
-      }
-
-      if (bin2) {
+      if (subSampling || binv || bin2) {
         return 544;
       }
 
