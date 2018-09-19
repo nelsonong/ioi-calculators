@@ -100,19 +100,7 @@ const calculateMaxWidth = ({
     }
 
     if (MODELS.TYPE_273.includes(model)) {
-      if (subSampling) {
-        return 728;
-      }
-
-      if (binv) {
-        return 728;
-      }
-
-      if (bin2) {
-        return 728;
-      }
-
-      return 1456;
+      return (subSampling || bin2) ? 728 : 1456;
     }
 
     if (MODELS.TYPE_287.includes(model)) {
