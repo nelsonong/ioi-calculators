@@ -68,27 +68,7 @@ const calculateMaxWidth = ({
     }
 
     if (MODELS.TYPE_250.includes(model)) {
-      if (subSampling) {
-        return 1232;
-      }
-
-      if (binv) {
-        return 2464;
-      }
-
-      if (adcBitDepth === 10 && isConfiguration(linkSpeed, linkCount, 3, 2)) {
-        return 1232;
-      }
-
-      if (adcBitDepth === 10 && isConfiguration(linkSpeed, linkCount, 6, 1)) {
-        return 1232;
-      }
-
-      if (adcBitDepth === 12 && isConfiguration(linkSpeed, linkCount, 2, 2)) {
-        return 2200;
-      }
-
-      return 2464;
+      return subSampling ? 1232 : 2464;
     }
 
     if (MODELS.TYPE_252.includes(model)) {
