@@ -29,34 +29,24 @@ const calculateMaxWidth = ({
     switch (sensorDriveMode) {
       case SENSOR_DRIVE_MODE.ALL_12:
       case SENSOR_DRIVE_MODE.ALL_10:
-      {
         return 5472;
-      }
 
       case SENSOR_DRIVE_MODE.UHD_10:
-      {
         return 4096;
-      }
 
       case SENSOR_DRIVE_MODE.UHD_10_OC:
-      {
         if (isConfiguration(linkSpeed, linkCount, 3, 1) || isConfiguration(linkSpeed, linkCount, 2, 1)) {
           return 4128;
         }
 
         return 4096;
-      }
 
       case SENSOR_DRIVE_MODE.BIN_12_16_9:
       case SENSOR_DRIVE_MODE.BIN_12:
-      {
         return 2736;
-      }
 
       default:
-      {
         return 0;
-      }
     }
   } else {
     const subSampling = (subSamplingBinning === SUBSAMPLING_BINNING.SUBSAMPLING);
@@ -116,26 +106,21 @@ const calculateMaxHeight = ({
   if (MODELS.TYPE_183.includes(model)) {
     switch (sensorDriveMode) {
       case SENSOR_DRIVE_MODE.ALL_12:
-      case SENSOR_DRIVE_MODE.ALL_10: {
+      case SENSOR_DRIVE_MODE.ALL_10:
         return 3672;
-      }
 
       case SENSOR_DRIVE_MODE.UHD_10:
-      case SENSOR_DRIVE_MODE.UHD_10_OC: {
+      case SENSOR_DRIVE_MODE.UHD_10_OC:
         return 2168;
-      }
 
-      case SENSOR_DRIVE_MODE.BIN_12_16_9: {
+      case SENSOR_DRIVE_MODE.BIN_12_16_9:
         return 1548;
-      }
 
-      case SENSOR_DRIVE_MODE.BIN_12: {
+      case SENSOR_DRIVE_MODE.BIN_12:
         return 1836;
-      }
 
-      default: {
+      default:
         return 0;
-      }
     }
   } else {
     const subSampling = (subSamplingBinning === SUBSAMPLING_BINNING.SUBSAMPLING);
