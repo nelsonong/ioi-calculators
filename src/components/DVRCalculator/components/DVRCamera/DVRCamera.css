@@ -22,8 +22,8 @@
     display: inline-block;
     vertical-align: top;
     text-align: center;
-    width: 21%;
-    height: 11rem;
+    width: 21.5%;
+    height: 13.2rem;
     margin: 0.3rem;
     padding: 0;
     border: solid $calculator-border;
@@ -67,16 +67,21 @@
 .info {
     background: $mini-fieldset;
     text-align: center;
-    margin: 0.2rem 0.2rem;
+    margin: 0.2rem 0.28rem;
     padding: 0.3rem;
     border: solid 0.2rem $calculator-title;
     border-radius: 0.2rem;
 }
 
+.info-small {
+    composes: info;
+    font-size: 1rem;
+}
+
 .data-rate {
     background: $mini-output;
     text-align: center;
-    margin: 0.3rem 0.2rem;
+    margin: 0.3rem 0.28rem;
     padding: 0.3rem;
     border: solid 0.3rem $calculator-border-light;
     border-radius: 0.2rem;
@@ -84,7 +89,7 @@
 
 .add-button {
     background: transparent;
-    margin-top: 1.6rem;
+    margin-top: 2.3rem;
     border: none;
     opacity: 0.8;
     transition: 0.3s;
@@ -100,7 +105,7 @@
 }
 
 .button {
-    margin: 2.2rem 0.15rem;
+    margin: 3rem 0.15rem;
     padding: 0.2rem 0.3rem;
     border: solid 0.3rem $calculator-border;
     border-radius: 0.3rem;

@@ -11,6 +11,8 @@ import {
   deleteDataRate,
   revertCameraState,
 } from '../../../../actions/dvrActions';
+import { FORMAT_BITS as FLARE_CL_BIT_DEPTH } from '../../../FlareCLCalculator/constants/formats';
+import { FORMAT_BITS as CUSTOM_CL_BIT_DEPTH } from '../../../CustomCLCalculator/constants/formats';
 import DVRCameraModal from '../DVRCameraModal';
 import styles from './DVRCamera.css';
 
@@ -59,7 +61,7 @@ class DVRCamera extends Component {
     let contents = (
       <div className={styles.addButtonContainer} onClick={this.openModal}>
         <button type='button' className={styles.addButton}>
-          <MdAddCircle size={43} />
+          <MdAddCircle size={46} />
         </button>
       </div>
     );
@@ -67,10 +69,10 @@ class DVRCamera extends Component {
       contents = this.state.isHovered ? (
         <div onClick={this.closeHoverOverlay}>
           <button type='button' className={styles.editButton} onClick={this.openModal}>
-            <MdCreate size={18} />
+            <MdCreate size={20} />
           </button>
           <button type='button' className={styles.deleteButton} onClick={this.deleteCamera}>
-            <MdClear size={18} />
+            <MdClear size={20} />
           </button>
         </div>
       ) : (
@@ -86,8 +88,30 @@ class DVRCamera extends Component {
       model,
       width,
       height,
+      bitDepth,
+      outputBitDepth,
+      adcBitDepth,
+      format,
+      frameRate,
       dataRate,
     } = this.props;
+    let bitDepthValue;
+    if (bitDepth) {
+      bitDepthValue = bitDepth;
+    } else if (outputBitDepth) {
+      bitDepthValue = outputBitDepth;
+    } else if (adcBitDepth) {
+      bitDepthValue = adcBitDepth;
+    } else if (format) {
+      // Bit-depth from CL calculator (either Flare or custom). Check both.
+      bitDepthValue = FLARE_CL_BIT_DEPTH[format];
+      if (!bitDepthValue) {
+        bitDepthValue = CUSTOM_CL_BIT_DEPTH[format];
+      }
+    }
+
+    const bitDepthStyle = bitDepthValue >= 10 ? styles.infoSmall : styles.info;
+    const bitDepthText = bitDepthValue ? `${bitDepthValue}-bit` : '';
     return (
       <div onClick={this.openHoverOverlay}>
         <div className={styles.info}>
@@ -95,6 +119,9 @@ class DVRCamera extends Component {
         </div>
         <div className={styles.info}>
           {width}x{height}
+        </div>
+        <div className={bitDepthStyle}>
+          {bitDepthText} {Math.round(Number(frameRate))}fps
         </div>
         <div className={styles.dataRate}>
           {(dataRate / 1024).toFixed(2)} GB/s
@@ -144,6 +171,11 @@ const mapStateToProps = ({ storageCalculators }, {
     model,
     width,
     height,
+    bitDepth,
+    adcBitDepth,
+    outputBitDepth,
+    format,
+    frameRate,
     dataRate,
     added,
   } = cameraState;
@@ -155,6 +187,11 @@ const mapStateToProps = ({ storageCalculators }, {
     model,
     width,
     height,
+    bitDepth,
+    adcBitDepth,
+    outputBitDepth,
+    format,
+    frameRate,
     dataRate,
     added: !!added,
     cameraState,

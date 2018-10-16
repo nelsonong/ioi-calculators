@@ -5,7 +5,7 @@
     composes: calculator;
     background: $dvr-background;
     background: linear-gradient(to bottom right, $dvr-background, $dvr-background-light);
-    width: 38rem;
+    width: 39.4rem;
 }
 
 .dvr-fieldset {
