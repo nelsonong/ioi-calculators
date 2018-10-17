@@ -11,7 +11,6 @@ const VictoremCXFormat = ({
   format,
   adcBitDepth,
   adcBitDepths,
-  supportsOutputBitDepths,
   outputBitDepth,
   formats,
   handleChangeFormat,
@@ -24,7 +23,8 @@ const VictoremCXFormat = ({
   const adcBitDepthOptions = adcBitDepths.map((adcBitDepthOption, i) => (
     <option key={i} value={adcBitDepthOption}>{adcBitDepthOption}</option>
   ));
-  const outputBitDepthOptions = [8, 10, 12].map((outputBitDepthOption, i) => (
+  const outputBitDepths = [8, 10, 12].filter(e => e <= adcBitDepth);
+  const outputBitDepthOptions = outputBitDepths.map((outputBitDepthOption, i) => (
     <option key={i} value={outputBitDepthOption}>{outputBitDepthOption}</option>
   ));
   return (
@@ -33,9 +33,7 @@ const VictoremCXFormat = ({
       <div className={styles.left}>
         <div className={styles.label}>Link:</div>
         <div className={styles.label}>ADC Bit Depth:</div>
-        {supportsOutputBitDepths
-          && <div className={styles.label}>Output Bit Depth:</div>
-        }
+        <div className={styles.label}>Output Bit Depth:</div>
       </div>
       <div className={styles.right}>
         <select className={styles.select} value={format} onChange={handleChangeFormat}>
@@ -44,16 +42,13 @@ const VictoremCXFormat = ({
         <select className={styles.select} value={adcBitDepth} onChange={handleChangeADCBitDepth}>
           {adcBitDepthOptions}
         </select>
-        {supportsOutputBitDepths
-          && <select
-            className={styles.select}
-            value={outputBitDepth}
-            disabled={!supportsOutputBitDepths}
-            onChange={handleChangeOutputBitDepth}
-          >
-            {outputBitDepthOptions}
-          </select>
-        }
+        <select
+          className={styles.select}
+          value={outputBitDepth}
+          onChange={handleChangeOutputBitDepth}
+        >
+          {outputBitDepthOptions}
+        </select>
       </div>
     </fieldset>
   );
@@ -70,7 +65,6 @@ const mapStateToProps = (state, {
     format,
     adcBitDepth,
     adcBitDepths,
-    supportsOutputBitDepths,
     outputBitDepth,
     formats,
   } = calculatorState;
@@ -78,7 +72,6 @@ const mapStateToProps = (state, {
     format,
     adcBitDepth,
     adcBitDepths,
-    supportsOutputBitDepths,
     outputBitDepth,
     formats,
   };

@@ -219,7 +219,6 @@ const victoremCXReducer = (state = { order: [] }, action) => {
         linkSpeed,
         linkCount,
       } = calculatorState;
-      const supportsOutputBitDepths = support.supportsOutputBitDepth(model, subSamplingBinning, linkSpeed, linkCount);
 
       const adcBitDepths = support.supportedBitDepths({
         ...calculatorState,
@@ -246,7 +245,6 @@ const victoremCXReducer = (state = { order: [] }, action) => {
         supports2x2Binning,
         supportsSubSampling,
         supportsVerticalBinning,
-        supportsOutputBitDepths,
         subSamplingBinning,
       };
       calculatorState = updateResolutionConstraints(calculatorState);
@@ -263,11 +261,9 @@ const victoremCXReducer = (state = { order: [] }, action) => {
       } = calculatorState;
       const linkSpeed = Number(format.slice(-1));
       const linkCount = Number(format.slice(0, 1));
-      const supportsOutputBitDepths = support.supportsOutputBitDepth(model, subSamplingBinning, linkSpeed, linkCount);
       calculatorState = {
         ...calculatorState,
         format,
-        supportsOutputBitDepths,
       };
       calculatorState = updateResolutionConstraints(calculatorState);
       calculatorState = updateResolution(calculatorState);
@@ -277,9 +273,15 @@ const victoremCXReducer = (state = { order: [] }, action) => {
 
     case UPDATE_VICTOREM_CX_ADC_BIT_DEPTH: {
       const { adcBitDepth } = action;
+      let { outputBitDepth } = calculatorState;
+      const prevAdcBitDepth = calculatorState.adcBitDepth;
+      if (adcBitDepth < prevAdcBitDepth) {
+        outputBitDepth = adcBitDepth;
+      }
       calculatorState = {
         ...calculatorState,
         adcBitDepth,
+        outputBitDepth,
       };
       calculatorState = updateResolutionConstraints(calculatorState);
       calculatorState = updateResolution(calculatorState);
@@ -357,11 +359,9 @@ const victoremCXReducer = (state = { order: [] }, action) => {
         linkSpeed,
         linkCount,
       } = calculatorState;
-      const supportsOutputBitDepths = support.supportsOutputBitDepth(model, subSamplingBinning, linkSpeed, linkCount);
       calculatorState = {
         ...calculatorState,
         subSamplingBinning,
-        supportsOutputBitDepths,
         resolutionPreset: RESOLUTION.MAXIMUM,
       };
       calculatorState = updateResolutionConstraints(calculatorState);

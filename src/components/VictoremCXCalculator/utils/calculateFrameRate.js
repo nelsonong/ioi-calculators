@@ -386,9 +386,9 @@ const calculateSubSamplingBinningFrameRate = (
       if (subSampling || bin2) {
         hmaxCalc = hmaxFast;
       } else {
-        hmax = binv ? 504 : 512; // 8-Bit
-        if (adcBitDepth === 10) hmax = binv ? 630 : 640;
-        if (adcBitDepth === 12) hmax = binv ? 756 : 768;
+        hmax = 512; // 8-Bit
+        if (adcBitDepth === 10) hmax = 640;
+        if (adcBitDepth === 12) hmax = 768;
       }
     } else if (isConfiguration(linkSpeed, linkCount, 5, 1)) {
       if ((subSampling || bin2) && adcBitDepth !== 10) {
@@ -407,46 +407,46 @@ const calculateSubSamplingBinningFrameRate = (
       if ((subSampling || bin2) && adcBitDepth !== 10) {
         hmaxCalc = hmaxFast;
       } else {
-        hmax = binv ? 628 : 640; // 8-Bit
+        hmax = 640; // 8-Bit
         if (adcBitDepth === 10) {
           if (subSampling) hmax = 420;
-          else if (binv) hmax = 785;
+          else if (binv) hmax = 796;
           else if (bin2) hmax = 390;
           else hmax = 800;
         }
-        if (adcBitDepth === 12) hmax = binv ? 942 : 960;
+        if (adcBitDepth === 12) hmax = 960;
       }
     } else if (isConfiguration(linkSpeed, linkCount, 3, 1)) {
       if (adcBitDepth === 8) {
         if (subSampling) hmax = 504;
-        else if (binv) hmax = 1004;
+        else if (binv) hmax = 1024;
         else if (bin2) hmax = 504;
         else hmax = 1024;
       } else if (adcBitDepth === 10) {
         if (subSampling) hmax = 630;
-        else if (binv) hmax = 1255;
+        else if (binv) hmax = 1280;
         else if (bin2) hmax = 630;
         else hmax = 1280;
       } else if (adcBitDepth === 12) {
         if (subSampling) hmax = 756;
-        else if (binv) hmax = 1506;
+        else if (binv) hmax = 1536;
         else if (bin2) hmax = 756;
         else hmax = 1536;
       }
     } else if (isConfiguration(linkSpeed, linkCount, 2, 1)) {
       if (adcBitDepth === 8) {
         if (subSampling) hmax = 628;
-        else if (binv) hmax = 1256;
+        else if (binv) hmax = 1280;
         else if (bin2) hmax = 628;
         else hmax = 1280;
       } else if (adcBitDepth === 10) {
         if (subSampling) hmax = 785;
-        else if (binv) hmax = 1570;
+        else if (binv) hmax = 1600;
         else if (bin2) hmax = 785;
         else hmax = 1600;
       } else if (adcBitDepth === 12) {
         if (subSampling) hmax = 942;
-        else if (binv) hmax = 1884;
+        else if (binv) hmax = 1920;
         else if (bin2) hmax = 942;
         else hmax = 1920;
       }
@@ -589,29 +589,19 @@ const calculateSubSamplingBinningFrameRate = (
   }
 
   // Calculate the frame rate
-  let frameRate;
-  if (supportsOutputBitDepth(model, subSamplingBinning, linkSpeed, linkCount) && outputBitDepth < adcBitDepth) {
-    const adcBitDepthIs12 = (adcBitDepth === 12);
-    let adcBitRatio;
-    if (adcBitDepthIs12) {
-      adcBitRatio = outputBitDepth === 8 ? 43691 : 54614;
-    } else {
-      adcBitRatio = 52429;
-    }
-    adcBitRatio /= 65536.0;
-
-    if (hmaxMod * (Math.ceil((hmaxCalc * adcBitRatio) / hmaxMod)) > hmaxFast) {
-      frameRate = 1 / ((hmaxMod * (Math.ceil((hmaxCalc * adcBitRatio) / hmaxMod))
-        * (1 / 74.25)) * (height + minVertBlank) / 1000000);
-    } else {
-      const linetime = hmaxFast / 74.25;
-      frameRate = 1 / (linetime * (height + minVertBlank) / 1000000);
-    }
+  let linetime;
+  if (outputBitDepth < adcBitDepth && !isConfiguration(linkSpeed, linkCount, 6, 2)) {
+    let adcBitRatio = 0;
+    if (outputBitDepth === 8 && adcBitDepth === 12) adcBitRatio = 0.66667;
+    if (outputBitDepth === 8 && adcBitDepth === 10) adcBitRatio = 0.8;
+    if (outputBitDepth === 10 && adcBitDepth === 12) adcBitRatio = 0.83334;
+    const factor = hmaxMod * Math.ceil((hmaxCalc * adcBitRatio) / hmaxMod);
+    linetime = Math.max(factor, hmaxFast) / 74.25;
   } else {
-    const linetime = hmaxCalc / 74.25;
-    frameRate = 1 / (linetime * (height + minVertBlank) / 1000000);
+    linetime = hmaxCalc / 74.25;
   }
 
+  const frameRate = 1 / (linetime * (height + minVertBlank) / 1000000);
   return frameRate;
 };
 
