@@ -55,6 +55,16 @@
 	background: $victorem-sdi-button-light;
 }
 
+.volucam-button {
+	composes: sub-button;
+	background: $volucam-button;
+	@mixin left-divider;
+}
+
+.volucam-button:hover {
+	background: $volucam-button-light;
+}
+
 .import-button {
 	composes: button;
 	background: $import-button;

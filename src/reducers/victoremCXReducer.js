@@ -120,7 +120,8 @@ const updateResolutionConstraints = (calculatorState) => {
 const updateOutput = (calculatorState) => {
   const frameRate = calculateFrameRate(calculatorState);
   const dataRate = calculateDataRate({
-    ...calculatorState, frameRate,
+    ...calculatorState,
+    frameRate,
   });
   return {
     ...calculatorState,
@@ -215,6 +216,7 @@ const victoremCXReducer = (state = { order: [] }, action) => {
       const supports2x2Binning = support.supports2x2Binning(model);
       const supportsSubSampling = support.supportsSubSampling(model);
       const supportsVerticalBinning = support.supportsVerticalBinning(model);
+      const supportsHorizontalBinning = support.supportsHorizontalBinning(model);
       const {
         linkSpeed,
         linkCount,
@@ -245,6 +247,7 @@ const victoremCXReducer = (state = { order: [] }, action) => {
         supports2x2Binning,
         supportsSubSampling,
         supportsVerticalBinning,
+        supportsHorizontalBinning,
         subSamplingBinning,
       };
       calculatorState = updateResolutionConstraints(calculatorState);
@@ -275,7 +278,7 @@ const victoremCXReducer = (state = { order: [] }, action) => {
       const { adcBitDepth } = action;
       let { outputBitDepth } = calculatorState;
       const prevAdcBitDepth = calculatorState.adcBitDepth;
-      if (adcBitDepth < prevAdcBitDepth) {
+      if (adcBitDepth < prevAdcBitDepth && outputBitDepth > adcBitDepth) {
         outputBitDepth = adcBitDepth;
       }
       calculatorState = {

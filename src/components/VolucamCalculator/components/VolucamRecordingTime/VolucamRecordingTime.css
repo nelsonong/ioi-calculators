@@ -1,0 +1,73 @@
+@import '../../../../styles/volucam.css';
+
+.root {
+    composes: volucam-fieldset;
+    margin-bottom: 0.6rem;
+}
+
+.center {
+    text-align: center;
+}
+
+.display {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0.5rem 0.3rem 0.1rem 0.3rem;
+    border: solid $calculator-info;
+    border-radius: 0.2rem;
+}
+
+.display-fps-text {
+    background: gainsboro;
+    width: 15%;
+}
+
+.display-fps-text:hover {
+    cursor: pointer;
+}
+
+.display-fps-text:focus {
+    outline: none;
+}
+
+.display-fps {
+    width: 26%;
+}
+
+.display-fps:focus {
+    outline: none;
+}
+
+.display-custom {
+    background: rgb(247, 203, 131);
+    font-style: italic;
+}
+
+.display-data-rate {
+    width: 37%;
+}
+
+.display-fps::-webkit-inner-spin-button, 
+.display-fps::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.left-bar {
+    border-left: solid $calculator-info 0.2rem;
+    border-top-left-radius: 0rem;
+    border-bottom-left-radius: 0rem;
+    margin-left: 0rem;
+}
+
+.right-bar {
+    border-right: solid $calculator-info 0.2em;
+    border-top-right-radius: 0rem;
+    border-bottom-right-radius: 0rem;
+    margin-right: 0rem;
+}
+
+.input {
+    composes: volucam-input;
+}

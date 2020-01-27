@@ -1,0 +1,7 @@
+@import '../../../../styles/volucam.css';
+
+.root {
+    composes: volucam-fieldset;
+}
+
+@mixin add-left-right 22%, 78%;

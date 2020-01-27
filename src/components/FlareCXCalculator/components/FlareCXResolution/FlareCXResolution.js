@@ -57,7 +57,9 @@ const FlareCXResolution = ({
           value={width}
           min={minWidth}
           max={maxWidth}
+          placeholder=""
           onChange={handleChangeWidth}
+          onClick={e => e.target.select()}
          />
         <input
           type="number"
@@ -67,6 +69,7 @@ const FlareCXResolution = ({
           min={minHeight}
           max={maxHeight}
           onChange={handleChangeHeight}
+          onClick={e => e.target.select()}
          />
       </div>
       {
@@ -122,12 +125,14 @@ const mapDispatchToProps = (dispatch, {
   },
 
   handleChangeWidth: (e) => {
-    const width = Number(e.target.value);
+    const width = parseInt(Number(e.target.value), 10);
+    e.target.value = width;
     dispatch(updateWidth(cameraId, width, dvrId));
   },
 
   handleChangeHeight: (e) => {
-    const height = Number(e.target.value);
+    const height = parseInt(Number(e.target.value), 10);
+    e.target.value = height;
     dispatch(updateHeight(cameraId, height, dvrId));
   },
 });

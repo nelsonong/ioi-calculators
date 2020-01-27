@@ -15,6 +15,7 @@ import FlareCXCalculator from '../../components/FlareCXCalculator';
 import FlareSDICalculator from '../../components/FlareSDICalculator';
 import VictoremCXCalculator from '../../components/VictoremCXCalculator';
 import VictoremSDICalculator from '../../components/VictoremSDICalculator';
+import VolucamCalculator from '../../components/VolucamCalculator';
 import InstructionBox from '../../components/InstructionBox';
 import styles from './FrameRate.css';
 
@@ -38,6 +39,9 @@ const Calculator = SortableElement(({
 
     case 'victorem-sdi':
       return <VictoremSDICalculator cameraId={id} />;
+
+    case 'volucam':
+      return <VolucamCalculator cameraId={id} />;
 
     default:
       return '';
@@ -88,7 +92,7 @@ class FrameRate extends Component {
   }
 
   renderButtonsContainer = () => {
-    if (this.state.windowWidth < 680) {
+    if (this.state.windowWidth < 825) {
       return (
         <div className={`${styles.buttonsContainer} ${styles.blockButtonsContainer}`}>
           <div className={`${styles.buttonContainer} ${styles.blockButtonContainer}`}>
@@ -120,6 +124,12 @@ class FrameRate extends Component {
               + SDI
             </button>
           </div>
+          <div className={`${styles.buttonContainer} ${styles.blockButtonContainer}`}>
+            <div className={styles.buttonContainerText}>VOLUCAM</div>
+            <button type='button' className={styles.volucamButton} onClick={() => this.props.handleAdd('volucam')}>
+              +
+            </button>
+          </div>
           <button
             type='button'
             className={`${styles.clearButton} ${styles.blockButton}`}
@@ -143,26 +153,34 @@ class FrameRate extends Component {
             </button>
             <button type='button' className={styles.flareSdiButton} onClick={() => this.props.handleAdd('flare-sdi')}>
               + SDI
-              </button>
+            </button>
           </div>
           <div className={styles.buttonSpacer}></div>
           <div className={styles.buttonContainer}>
-          <div className={styles.buttonContainerText}>VICTOREM</div>
-            <button
-              type='button'
-              className={styles.victoremCxButton}
-              onClick={() => this.props.handleAdd('victorem-cx')}
-            >
-              + CX
-            </button>
-            <button
-              type='button'
-              className={styles.victoremSdiButton}
-              onClick={() => this.props.handleAdd('victorem-sdi')}
-            >
-              + SDI
+            <div className={styles.buttonContainerText}>VICTOREM</div>
+              <button
+                type='button'
+                className={styles.victoremCxButton}
+                onClick={() => this.props.handleAdd('victorem-cx')}
+              >
+                + CX
+              </button>
+              <button
+                type='button'
+                className={styles.victoremSdiButton}
+                onClick={() => this.props.handleAdd('victorem-sdi')}
+              >
+                + SDI
+              </button>
+            </div>
+          <div className={styles.buttonSpacer}></div>
+          <div className={styles.buttonContainer}>
+            <div className={styles.buttonContainerText}>VOLUCAM</div>
+            <button type='button' className={styles.volucamButton} onClick={() => this.props.handleAdd('volucam')}>
+              +
             </button>
           </div>
+          <div className={styles.buttonSpacer}></div>
         </div>
         <div>
           <div className={styles.buttonSpacer}></div>

@@ -14,7 +14,7 @@ const VictoremCXOptions = ({
   cameraMode,
   supports2x2Binning,
   supportsSubSampling,
-  // supportsHorizontalBinning,
+  supportsHorizontalBinning,
   supportsVerticalBinning,
   subSamplingBinning,
   sensorDriveMode,
@@ -23,7 +23,7 @@ const VictoremCXOptions = ({
 }) => {
   const supportedOptions = [SUBSAMPLING_BINNING.NONE];
   if (supportsSubSampling) supportedOptions.push(SUBSAMPLING_BINNING.SUBSAMPLING);
-  // if (supportsHorizontalBinning) supportedOptions.push(SUBSAMPLING_BINNING.BIN_HORIZONTAL);
+  if (supportsHorizontalBinning) supportedOptions.push(SUBSAMPLING_BINNING.BIN_HORIZONTAL);
   if (supportsVerticalBinning) supportedOptions.push(SUBSAMPLING_BINNING.BIN_VERTICAL);
   if (supports2x2Binning) supportedOptions.push(SUBSAMPLING_BINNING.BIN_2X2);
   const subSamplingBinningOptions = supportedOptions.map(
@@ -90,7 +90,7 @@ const mapStateToProps = (state, {
     cameraMode,
     supports2x2Binning,
     supportsSubSampling,
-    // supportsHorizontalBinning,
+    supportsHorizontalBinning,
     supportsVerticalBinning,
     subSamplingBinning,
     sensorDriveMode,
@@ -99,7 +99,7 @@ const mapStateToProps = (state, {
     cameraMode,
     supports2x2Binning,
     supportsSubSampling,
-    // supportsHorizontalBinning,
+    supportsHorizontalBinning,
     supportsVerticalBinning,
     subSamplingBinning,
     sensorDriveMode,

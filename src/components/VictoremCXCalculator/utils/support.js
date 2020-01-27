@@ -6,18 +6,26 @@ import {
 
 const supports2x2Binning = model => MODELS.TYPE_253.includes(model)
   || MODELS.TYPE_255.includes(model)
-  || MODELS.TYPE_273.includes(model);
+  || MODELS.TYPE_273.includes(model)
+  || MODELS.TYPE_505.includes(model);
 
 const supportsSubSampling = model => MODELS.TYPE_250.includes(model)
   || MODELS.TYPE_252.includes(model)
   || MODELS.TYPE_253.includes(model)
   || MODELS.TYPE_255.includes(model)
-  || MODELS.TYPE_273.includes(model);
+  || MODELS.TYPE_273.includes(model)
+  || MODELS.TYPE_505.includes(model);
 
 const supportsVerticalBinning = model => MODELS.TYPE_250.includes(model)
   || MODELS.TYPE_252.includes(model)
   || MODELS.TYPE_253.includes(model)
-  || MODELS.TYPE_255.includes(model);
+  || MODELS.TYPE_255.includes(model)
+  || MODELS.TYPE_505.includes(model);
+
+const supportsHorizontalBinning = model => MODELS.TYPE_253.includes(model)
+|| MODELS.TYPE_255.includes(model)
+|| MODELS.TYPE_273.includes(model)
+|| MODELS.TYPE_505.includes(model);
 
 const isConfiguration = (
   linkSpeed,
@@ -92,11 +100,14 @@ const supportedBitDepths = ({
   }
 
   // All other models
-  if (!MODELS.TYPE_174.includes(model)) {
+  if (!MODELS.TYPE_174.includes(model) && !MODELS.TYPE_505.includes(model)) {
     adcBitDepths.push(8);
   }
 
-  adcBitDepths.push(10);
+  if (!MODELS.TYPE_505.includes(model)) {
+    adcBitDepths.push(10);
+  }
+
   adcBitDepths.push(12);
 
   return adcBitDepths;
@@ -105,6 +116,7 @@ const supportedBitDepths = ({
 export {
   supports2x2Binning,
   supportsVerticalBinning,
+  supportsHorizontalBinning,
   supportsSubSampling,
   supportsOutputBitDepth,
   supportedBitDepths,

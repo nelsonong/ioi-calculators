@@ -4,6 +4,7 @@ import { flareCXActionTypes } from '../actions/flareCXActions';
 import { flareSDIActionTypes } from '../actions/flareSDIActions';
 import { victoremCXActionTypes } from '../actions/victoremCXActions';
 import { victoremSDIActionTypes } from '../actions/victoremSDIActions';
+import { volucamActionTypes } from '../actions/volucamActions';
 import { customCLActionTypes } from '../actions/customCLActions';
 import { customCXActionTypes } from '../actions/customCXActions';
 import { customSDIActionTypes } from '../actions/customSDIActions';
@@ -15,6 +16,7 @@ import flareCXReducer from './flareCXReducer';
 import flareSDIReducer from './flareSDIReducer';
 import victoremCXReducer from './victoremCXReducer';
 import victoremSDIReducer from './victoremSDIReducer';
+import volucamReducer from './volucamReducer';
 import customCLReducer from './customCLReducer';
 import customCXReducer from './customCXReducer';
 import customSDIReducer from './customSDIReducer';
@@ -48,6 +50,10 @@ const cameraReducer = (state = { order: [] }, action) => {
 
   if (victoremSDIActionTypes.includes(action.type)) {
     return victoremSDIReducer(state, action);
+  }
+
+  if (volucamActionTypes.includes(action.type)) {
+    return volucamReducer(state, action);
   }
 
   if (customCLActionTypes.includes(action.type)) {

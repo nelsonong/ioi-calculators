@@ -186,9 +186,10 @@ const calculateSubSamplingBinningFrameRate = (
   linkCount,
   subSamplingBinning,
 ) => {
-  const subSampling = (subSamplingBinning === SUBSAMPLING_BINNING.SUBSAMPLING);
-  const binv = (subSamplingBinning === SUBSAMPLING_BINNING.BIN_VERTICAL);
-  const bin2 = (subSamplingBinning === SUBSAMPLING_BINNING.BIN_2X2);
+  const subSampling = subSamplingBinning === SUBSAMPLING_BINNING.SUBSAMPLING;
+  const binv = subSamplingBinning === SUBSAMPLING_BINNING.BIN_VERTICAL;
+  const bin2 = subSamplingBinning === SUBSAMPLING_BINNING.BIN_2X2;
+  const binh = subSamplingBinning === SUBSAMPLING_BINNING.BIN_HORIZONTAL;
 
   let hmaxMod;
   if (adcBitDepth === 8) hmaxMod = 1;
@@ -569,12 +570,54 @@ const calculateSubSamplingBinningFrameRate = (
     hmaxCalc = 242; // 8-Bit
     if (adcBitDepth === 10) hmaxCalc = 290;
     if (adcBitDepth === 12) hmaxCalc = 396;
+  } else if (MODELS.TYPE_505.includes(model)) {
+    minVertBlank = 14;
+
+    if (outputBitDepth === 12) hmaxFast = (bin2 || subSampling) ? 372 : 528;
+    else if (outputBitDepth === 10) hmaxFast = (bin2 || subSampling) ? 372 : 444;
+    else hmaxFast = 372; // 8-Bit
+
+    if (isConfiguration(linkSpeed, linkCount, 6, 2)) {
+      hmaxCalc = hmaxFast;
+    } else if (isConfiguration(linkSpeed, linkCount, 5, 2)) {
+      if (bin2 || subSampling) {
+        hmaxCalc = 372;
+      } else {
+        hmaxCalc = 480; // 8-Bit
+        if (outputBitDepth === 10) hmaxCalc = 600;
+        if (outputBitDepth === 12) hmaxCalc = 720;
+      }
+    } else if (isConfiguration(linkSpeed, linkCount, 6, 1) || isConfiguration(linkSpeed, linkCount, 3, 2)) {
+      if ((subSampling || bin2 || binh) && outputBitDepth === 8) {
+        hmaxCalc = hmaxFast; // 8-bit
+      } else {
+        hmaxCalc = 696; // 8-Bit
+        if (outputBitDepth === 10) hmaxCalc = (subSampling || bin2 || binh) ? 444 : 876;
+        if (outputBitDepth === 12) hmaxCalc = (subSampling || bin2 || binh) ? 528 : 1044;
+      }
+    } else if (isConfiguration(linkSpeed, linkCount, 5, 1)) {
+      hmaxCalc = (subSampling || bin2 || binh) ? 480 : 960; // 8-Bit
+      if (outputBitDepth === 10) hmaxCalc = (subSampling || bin2 || binh) ? 600 : 1188;
+      if (outputBitDepth === 12) hmaxCalc = (subSampling || bin2 || binh) ? 720 : 1428;
+    } else if (isConfiguration(linkSpeed, linkCount, 2, 2)) {
+      hmaxCalc = (subSampling || bin2 || binh) ? 444 : 876; // 8-Bit
+      if (outputBitDepth === 10) hmaxCalc = (subSampling || bin2 || binh) ? 552 : 1092;
+      if (outputBitDepth === 12) hmaxCalc = (subSampling || bin2 || binh) ? 660 : 1308;
+    } else if (isConfiguration(linkSpeed, linkCount, 3, 1)) {
+      hmaxCalc = (subSampling || bin2 || binh) ? 696 : 1392; // 8-Bit
+      if (outputBitDepth === 10) hmaxCalc = (subSampling || bin2 || binh) ? 876 : 1740;
+      if (outputBitDepth === 12) hmaxCalc = (subSampling || bin2 || binh) ? 1044 : 2088;
+    } else if (isConfiguration(linkSpeed, linkCount, 2, 1)) {
+      hmaxCalc = (subSampling || bin2 || binh) ? 876 : 1740; // 8-Bit
+      if (outputBitDepth === 10) hmaxCalc = (subSampling || bin2 || binh) ? 1092 : 2172;
+      if (outputBitDepth === 12) hmaxCalc = (subSampling || bin2 || binh) ? 1308 : 2604;
+    }
   } else {
     throw new Error('Unsupported model');
   }
 
   if (hmax > 0) {
-    if (bin2) {
+    if (bin2 || binh) {
       if (Math.ceil(hmax - (((maxWidth - width) / 16) * FixedPoint)) > hmaxFast) {
         hmaxCalc = Math.ceil(hmax - (((maxWidth - width) / 16) * FixedPoint));
       } else {
@@ -590,18 +633,31 @@ const calculateSubSamplingBinningFrameRate = (
 
   // Calculate the frame rate
   let linetime;
-  if (outputBitDepth < adcBitDepth && !isConfiguration(linkSpeed, linkCount, 6, 2)) {
+  if (MODELS.TYPE_505.includes(model)) {
+    linetime = hmaxCalc / 80;
+  } else if (outputBitDepth < adcBitDepth && !isConfiguration(linkSpeed, linkCount, 6, 2)) {
     let adcBitRatio = 0;
     if (outputBitDepth === 8 && adcBitDepth === 12) adcBitRatio = 0.66667;
     if (outputBitDepth === 8 && adcBitDepth === 10) adcBitRatio = 0.8;
     if (outputBitDepth === 10 && adcBitDepth === 12) adcBitRatio = 0.83334;
     const factor = hmaxMod * Math.ceil((hmaxCalc * adcBitRatio) / hmaxMod);
-    linetime = Math.max(factor, hmaxFast) / 74.25;
+    linetime = Math.max(factor, hmaxCalc) / 74.25;
   } else {
     linetime = hmaxCalc / 74.25;
   }
 
-  const frameRate = 1 / (linetime * (height + minVertBlank) / 1000000);
+  let frameRate;
+  if (MODELS.TYPE_505.includes(model)) {
+    const heightCalc = (binv || bin2) ? (height * 2) : height;
+    const readoutTimeRounded = Math.ceil((heightCalc + minVertBlank) * linetime);
+    const fotRounded = Math.ceil(4 * hmaxCalc / 80);
+    const frameTime = fotRounded + readoutTimeRounded;
+
+    frameRate = 1 / frameTime * 1000000;
+  } else {
+    frameRate = 1 / (linetime * (height + minVertBlank) / 1000000);
+  }
+
   return frameRate;
 };
 
@@ -641,5 +697,5 @@ export default ({
     );
   }
 
-  return frameRate.toFixed(2);
+  return frameRate;
 };

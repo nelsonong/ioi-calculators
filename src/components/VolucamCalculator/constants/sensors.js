@@ -1,0 +1,21 @@
+import { MODEL } from './models';
+
+export default {
+  [MODEL.Type51B163MV]: 'Sony IMX250',
+  [MODEL.Type51B163CV]: 'Sony IMX250',
+  [MODEL.Type32B216MV]: 'Sony IMX252',
+  [MODEL.Type32B216CV]: 'Sony IMX252',
+  [MODEL.Type32B55CV]: 'Sony IMX265',
+  [MODEL.Type120B68MV]: 'Sony IMX253',
+  [MODEL.Type120B68CV]: 'Sony IMX253',
+  [MODEL.Type89B93MV]: 'Sony IMX255',
+  [MODEL.Type89B93CV]: 'Sony IMX255',
+  [MODEL.Type89B64CV]: 'Sony IMX305',
+  [MODEL.Type24A164MV]: 'Sony IMX174',
+  [MODEL.Type24A164CV]: 'Sony IMX174',
+  [MODEL.Type24A164MV]: 'Sony IMX174',
+  [MODEL.Type262G41MV]: 'Gpixel GMAX0505',
+  [MODEL.Type262G41CV]: 'Gpixel GMAX0505',
+  [MODEL.Type205R26MCX]: 'Sony IMX183',
+  [MODEL.Type205R26CCX]: 'Sony IMX183',
+};

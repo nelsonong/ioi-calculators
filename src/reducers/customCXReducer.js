@@ -55,7 +55,7 @@ const customCXReducer = (state = { order: [] }, action) => {
       }
 
       const { frameRate } = calculatorState;
-      const frameRateOutput = frameRate * linkCount;
+      const frameRateOutput = frameRate;
       calculatorState = {
         ...calculatorState,
         linkCount,
@@ -79,7 +79,7 @@ const customCXReducer = (state = { order: [] }, action) => {
     case UPDATE_CUSTOM_CX_LINK_COUNT: {
       const { linkCount } = action;
       const { frameRate } = calculatorState;
-      const frameRateOutput = frameRate * linkCount;
+      const frameRateOutput = frameRate;
       calculatorState = {
         ...calculatorState,
         linkCount,
@@ -138,8 +138,7 @@ const customCXReducer = (state = { order: [] }, action) => {
 
     case UPDATE_CUSTOM_CX_FRAME_RATE: {
       const { frameRate } = action;
-      const { linkCount } = calculatorState;
-      const frameRateOutput = frameRate * linkCount;
+      const frameRateOutput = frameRate;
       calculatorState = {
         ...calculatorState,
         frameRate,

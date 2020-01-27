@@ -4883,6 +4883,11 @@ react-dom@^16.4.1:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
+react-favicon@^0.0.17:
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/react-favicon/-/react-favicon-0.0.17.tgz#a49bd96794e833e83f29cf776c36426fdd2e5ac7"
+  integrity sha512-p8Xj4gq0lp0H/h2HRa8R++W1cSZEuPDnkDCNMvWcOTlo2K5A2Od663loVjDRP/dOs6NeHblVZ5vYRAkurNrQYw==
+
 react-icon-base@2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-icon-base/-/react-icon-base-2.1.0.tgz#a196e33fdf1e7aaa1fda3aefbb68bdad9e82a79d"

@@ -43,8 +43,20 @@ const CustomCXResolution = ({
           {resolutionPresetOptions}
         </select>
         <br />
-        <input type="number" className={styles.wxh} value={width} onChange={handleChangeWidth} />
-        <input type="number" className={styles.wxh} value={height} onChange={handleChangeHeight} />
+        <input
+          type="number"
+          className={styles.wxh}
+          value={width}
+          onChange={handleChangeWidth}
+          onClick={e => e.target.select()}
+        />
+        <input
+          type="number"
+          className={styles.wxh}
+          value={height}
+          onChange={handleChangeHeight}
+          onClick={e => e.target.select()}
+        />
       </div>
     </fieldset>
   );
@@ -77,12 +89,14 @@ const mapDispatchToProps = (dispatch, {
   },
 
   handleChangeWidth: (e) => {
-    const width = Number(e.target.value);
+    const width = parseInt(Number(e.target.value), 10);
+    e.target.value = width;
     dispatch(updateWidth(cameraId, width, dvrId));
   },
 
   handleChangeHeight: (e) => {
-    const height = Number(e.target.value);
+    const height = parseInt(Number(e.target.value), 10);
+    e.target.value = height;
     dispatch(updateHeight(cameraId, height, dvrId));
   },
 });

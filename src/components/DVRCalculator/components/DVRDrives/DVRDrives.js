@@ -16,6 +16,7 @@ const DVRDrives = ({
   handleChangeDriveModel,
   handleChangeDriveAmount,
   handleChangeRaid,
+  driveTooltip,
 }) => {
   const raidOptions = [0, 1].map((raidOption, i) => <option key={i}>{raidOption}</option>);
   const driveModelOptions = DRIVES.map((driveModelOption, i) => (
@@ -51,6 +52,16 @@ const DVRDrives = ({
           {driveAmountOptions}
         </select>
       </div>
+      {
+        driveTooltip !== ''
+        && <div className={styles.tooltip}>
+          {driveTooltip}
+          <br />
+          {`For fewer drives, contact IO Industries or complete the 
+          calculations in the DVR user's manuals to confirm the DVR will support recording 
+          your camera sources with no dropped frames.`}
+        </div>
+      }
     </fieldset>
   );
 };
@@ -62,12 +73,14 @@ const mapStateToProps = ({ storageCalculators }, { dvrId }) => {
     driveModel,
     driveAmount,
     driveAmounts,
+    driveTooltip,
   } = calculatorState;
   return {
     raid,
     driveModel,
     driveAmount,
     driveAmounts,
+    driveTooltip,
   };
 };
 

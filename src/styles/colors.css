@@ -24,6 +24,7 @@ $calculator-border: rgb(90, 90, 90);
 $calculator-border-light: rgb(80, 80, 80);
 $calculator-border-dark: rgb(199, 199, 199);
 $calculator-fieldset: rgba(131, 131, 131, 0.8);
+$calculator-legend: rgb(128, 116, 116);
 $calculator-info: rgb(131, 131, 131);
 
 /* Flare CL color scheme */
@@ -80,6 +81,14 @@ $victorem-sdi-output: rgb(160, 102, 186);
 $victorem-sdi-button: rgb(160, 102, 186);
 $victorem-sdi-button-light: rgb(177, 118, 204);
 
+/* Volucam color scheme */
+$volucam-background: rgb(245, 149, 149);
+$volucam-background-light: rgb(240, 183, 163);
+$volucam-fieldset: rgb(255, 226, 226);
+$volucam-output: rgb(181, 56, 56);
+$volucam-button: rgb(181, 56, 56);
+$volucam-button-light: rgb(194, 72, 72);
+
 /* DVR color scheme */
 $dvr-background: rgb(216, 204, 195);
 $dvr-background-light: rgb(247, 240, 234);
@@ -91,9 +100,12 @@ $dvr-button-light: rgb(89, 65, 65);
 $edit-button: rgb(247, 244, 239);
 $delete-button: rgb(221, 148, 148);
 
-$tooltip: rgb(196, 107, 107);
+$tooltip: rgb(145, 71, 71);
 
 /* Modal */
 $modal-overlay: rgba(0, 0, 0, 0.35);
 $save-button: rgb(124, 221, 153);
 $save-button-light: rgb(139, 229, 167);
+
+/* Misc */
+$disabled: rgb(235, 235, 228);

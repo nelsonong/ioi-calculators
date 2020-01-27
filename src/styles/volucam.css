@@ -1,0 +1,18 @@
+@import './colors.css';
+@import './calculator.css';
+
+.volucam-calculator {
+    composes: calculator;
+    background: $volucam-background;
+    background: linear-gradient(to bottom right, $volucam-background, $volucam-background-light);
+}
+
+.volucam-fieldset {
+    composes: fieldset;
+    background: $volucam-fieldset;
+}
+
+.volucam-input {
+    composes: input;
+    background: $volucam-output;
+}

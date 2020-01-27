@@ -31,6 +31,7 @@ export const victoremCXDefaultState = {
   formats: FORMATS.CX24A,
   adcBitDepth: 10,
   adcBitDepths: [10, 12],
+  outputBitDepth: 8,
   resolutionPreset: RESOLUTION.MAXIMUM,
   resolutionPresets: RESOLUTION_PRESETS[MODEL.Type24A164MCX],
   width: 1936,

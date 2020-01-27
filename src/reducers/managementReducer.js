@@ -3,6 +3,7 @@ import { flareCXDefaultState } from '../components/FlareCXCalculator/constants';
 import { flareSDIDefaultState } from '../components/FlareSDICalculator/constants';
 import { victoremCXDefaultState } from '../components/VictoremCXCalculator/constants';
 import { victoremSDIDefaultState } from '../components/VictoremSDICalculator/constants';
+import { volucamDefaultState } from '../components/VolucamCalculator/constants';
 import { dvrDefaultState } from '../components/DVRCalculator/constants';
 import {
   ADD_CALCULATOR,
@@ -39,6 +40,10 @@ const managementReducer = (inputState = { order: [] }, action) => {
 
         case 'victorem-sdi':
           defaultState = victoremSDIDefaultState;
+          break;
+
+        case 'volucam':
+          defaultState = volucamDefaultState;
           break;
 
         case 'dvr':

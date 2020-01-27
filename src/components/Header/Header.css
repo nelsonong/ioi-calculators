@@ -21,7 +21,7 @@
 .logo {
     color: white;
     text-decoration: none;
-    margin: 1.4rem;
+    margin: 1.4rem 1rem 1.2rem 1rem;
 }
 
 .logo:active, .logo:focus {

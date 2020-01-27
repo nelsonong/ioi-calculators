@@ -55,7 +55,7 @@ export const SDI_CONFIGS = Object.values(CONFIG.SDI);
 
 export const SDIMAX_CONFIGS = [
   CONFIG.SDI.SINGLEx4,
-  CONFIG.SDI.DUALx2,
+  // CONFIG.SDI.DUALx2,
   CONFIG.SDI.QUAD,
 ];
 

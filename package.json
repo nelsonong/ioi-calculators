@@ -37,6 +37,7 @@
     "postcss-simple-vars": "^4.1.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-favicon": "^0.0.17",
     "react-icons": "^2.2.7",
     "react-modal": "^3.4.5",
     "react-redux": "^5.0.7",

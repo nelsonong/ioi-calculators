@@ -38,17 +38,19 @@ const VictoremCXResolution = ({
   let enableResolution = false;
   switch (cameraMode) {
     case 0: {
-      const noneSelected = (subSamplingBinning === SUBSAMPLING_BINNING.NONE);
-      const binvSelected = (subSamplingBinning === SUBSAMPLING_BINNING.BIN_VERTICAL);
-      enableResolution = (noneSelected || binvSelected);
+      enableResolution = subSamplingBinning === SUBSAMPLING_BINNING.NONE;
       break;
     }
 
-    case 1:
-      enableResolution = (sensorDriveMode === SENSOR_DRIVE_MODE.ALL_10);
+    case 1: {
+      enableResolution = sensorDriveMode === SENSOR_DRIVE_MODE.ALL_10;
+      break;
+    }
 
-    case 2:
+    case 2: {
       enableResolution = true;
+      break;
+    }
 
     default:
       break;
@@ -79,6 +81,7 @@ const VictoremCXResolution = ({
           max={maxWidth}
           disabled={!enableResolution}
           onChange={handleChangeWidth}
+          onClick={e => e.target.select()}
          />
         <input
           type="number"
@@ -89,6 +92,7 @@ const VictoremCXResolution = ({
           max={maxHeight}
           disabled={!enableResolution}
           onChange={handleChangeHeight}
+          onClick={e => e.target.select()}
          />
       </div>
       {
@@ -152,12 +156,14 @@ const mapDispatchToProps = (dispatch, {
   },
 
   handleChangeWidth: (e) => {
-    const width = Number(e.target.value);
+    const width = parseInt(Number(e.target.value), 10);
+    e.target.value = width;
     dispatch(updateWidth(cameraId, width, dvrId));
   },
 
   handleChangeHeight: (e) => {
-    const height = Number(e.target.value);
+    const height = parseInt(Number(e.target.value), 10);
+    e.target.value = height;
     dispatch(updateHeight(cameraId, height, dvrId));
   },
 });

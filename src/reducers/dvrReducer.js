@@ -168,14 +168,35 @@ const loadCameras = (calculatorState, dvrId) => {
 };
 
 const updateTotalDataRate = (calculatorState) => {
-  const { dataRates } = calculatorState;
+  const {
+    model,
+    dataRates,
+  } = calculatorState;
   let totalDataRate = 0;
   dataRates.forEach((dataRate) => {
     totalDataRate += Number(dataRate.value);
   });
   totalDataRate = totalDataRate.toFixed(2);
+  let dataRateTooltip = '';
+  switch (model) {
+    case MODEL.CORE2CLMAX:
+    case MODEL.CORE2CXMAX:
+    case MODEL.CORE2SDIMAX:
+    case MODEL.COREGEV:
+    case MODEL.CORENTSC:
+      break;
+
+    default:
+      if (totalDataRate > 1620) {
+        dataRateTooltip = `For accumulated data rates approaching 1620 MB/s, please
+        contact IO Industries or complete the calculations in the DVR user's manuals to 
+        confirm the DVR will support recording your camera sources with no dropped frames.`;
+      }
+  }
+
   return {
     ...calculatorState,
+    dataRateTooltip,
     totalDataRate,
   };
 };
@@ -221,6 +242,36 @@ const updateRecordingTime = (calculatorState) => {
   };
 };
 
+const updateDriveAmount = (calculatorState) => {
+  const { model } = calculatorState;
+  let {
+    driveAmount,
+    driveAmounts,
+  } = calculatorState;
+  switch (model) {
+    case MODEL.CORE2CLMAX:
+    case MODEL.CORE2CXMAX:
+    case MODEL.CORE2SDIMAX:
+      driveAmount = 6;
+      driveAmounts = [1, 2, 3, 4, 5, 6];
+      break;
+
+    default:
+      driveAmount = 4;
+      driveAmounts = [1, 2, 3, 4];
+      break;
+  }
+
+  const { driveCapacity } = calculatorState;
+  const totalCapacity = driveAmount * driveCapacity;
+  return {
+    ...calculatorState,
+    driveAmount,
+    driveAmounts,
+    totalCapacity,
+  };
+};
+
 const dvrReducer = (state = { order: [] }, action) => {
   const {
     dvrId,
@@ -232,6 +283,7 @@ const dvrReducer = (state = { order: [] }, action) => {
   switch (type) {
     case INITIALIZE_DVR_STATE:
       calculatorState = loadCameras(calculatorState, dvrId);
+      calculatorState = updateTotalDataRate(calculatorState);
       calculatorState = updateRecordingTime(calculatorState);
       break;
 
@@ -315,6 +367,8 @@ const dvrReducer = (state = { order: [] }, action) => {
         mode,
       };
       calculatorState = reloadCameras(calculatorState, dvrId);
+      calculatorState = updateDriveAmount(calculatorState);
+      calculatorState = updateTotalDataRate(calculatorState);
       calculatorState = updateRecordingTime(calculatorState);
       break;
     }
@@ -419,29 +473,7 @@ const dvrReducer = (state = { order: [] }, action) => {
 
     case UPDATE_DVR_RAID: {
       const { raid } = action;
-      let {
-        driveAmount,
-        driveAmounts,
-      } = calculatorState;
-      switch (raid) {
-        case 0:
-          driveAmount = 1;
-          driveAmounts = [1, 2, 3, 4, 5, 6];
-          break;
-
-        case 1:
-          driveAmount = 2;
-          driveAmounts = [2, 3, 4, 5, 6];
-          break;
-
-        case 5:
-          driveAmount = 3;
-          driveAmounts = [3, 4, 5, 6];
-          break;
-
-        default:
-          break;
-      }
+      const { driveAmount } = calculatorState;
 
       const { driveCapacity } = calculatorState;
       const totalCapacity = driveAmount * driveCapacity;
@@ -449,9 +481,9 @@ const dvrReducer = (state = { order: [] }, action) => {
         ...calculatorState,
         raid,
         driveAmount,
-        driveAmounts,
         totalCapacity,
       };
+      calculatorState = updateTotalDataRate(calculatorState);
       calculatorState = updateRecordingTime(calculatorState);
       break;
     }
@@ -467,17 +499,41 @@ const dvrReducer = (state = { order: [] }, action) => {
         driveCapacity,
         totalCapacity,
       };
+      calculatorState = updateTotalDataRate(calculatorState);
       calculatorState = updateRecordingTime(calculatorState);
       break;
     }
 
     case UPDATE_DVR_DRIVE_AMOUNT: {
       const { driveAmount } = action;
-      const { driveCapacity } = calculatorState;
+      const {
+        model,
+        driveCapacity,
+      } = calculatorState;
       const totalCapacity = driveAmount * driveCapacity;
+
+      let driveTooltip = '';
+      switch (model) {
+        case MODEL.CORE2CLMAX:
+        case MODEL.CORE2CXMAX:
+        case MODEL.CORE2SDIMAX:
+          if (driveAmount !== 6) {
+            driveTooltip = 'For Core 2 MAX DVRs, 6 drives are recommended.';
+          }
+
+          break;
+
+        default:
+          if (driveAmount !== 4) {
+            driveTooltip = 'For most DVRs, configurations of 4 drives are recommended.';
+            break;
+          }
+      }
+
       calculatorState = {
         ...calculatorState,
         driveAmount,
+        driveTooltip,
         totalCapacity,
       };
       calculatorState = updateRecordingTime(calculatorState);

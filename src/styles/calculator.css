@@ -26,6 +26,10 @@
 .legend {
     font-family: $roboto;
     font-weight: 500;
+    color: white;
+	background: $calculator-legend;
+    border: 0.1em solid $calculator-legend;
+    border-radius: 0.3rem;
     padding: 0 0.3rem;
 }
 
@@ -101,10 +105,9 @@
     font-weight: 700;
     font-style: italic;
     text-align: center;
-    width: 90%;
-    height: 1.6rem;
+    width: 85%;
     margin: 0.3rem auto;
-    padding-top: 0.4rem;
+    padding: 0.4rem 0.4rem;
     border: 0.2rem solid $calculator-info;
     border-radius: 0.3rem;
     animation: fadeIn 0.1s ease-in-out;

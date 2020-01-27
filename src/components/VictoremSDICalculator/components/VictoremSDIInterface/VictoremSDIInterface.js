@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { updateInterface } from '../../../../actions/victoremSDIActions';
+import INTERFACES from '../../constants/interfaces';
 import styles from './VictoremSDIInterface.css';
 
 const VictoremSDIInterface = ({
@@ -28,10 +29,9 @@ const mapStateToProps = (state, {
   const calculatorState = !dvrId
     ? state.frameRateCalculators[cameraId]
     : state.storageCalculators[dvrId].cameras[cameraId];
-  const {
-    sdiInterface,
-    sdiInterfaces,
-  } = calculatorState;
+  const { sdiInterface } = calculatorState;
+  let { sdiInterfaces } = calculatorState;
+  if (dvrId) sdiInterfaces = sdiInterfaces.filter(e => e !== INTERFACES.S_6G_SDI && e !== INTERFACES.S_12G_SDI);
   return {
     sdiInterface,
     sdiInterfaces,

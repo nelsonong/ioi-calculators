@@ -26,13 +26,15 @@ export const dvrDefaultState = {
   configurations: CL_CONFIGS,
   cameras: null,
   cameraContainers: [],
+  dataRateTooltip: '',
   dataRates: [],
   totalDataRate: 0,
   raid: 0,
   driveCapacity: 223.6,
-  driveAmount: 1,
-  driveAmounts: [1, 2, 3, 4, 5, 6],
-  totalCapacity: 223.6,
+  driveAmount: 4,
+  driveAmounts: [1, 2, 3, 4],
+  driveTooltip: '',
+  totalCapacity: 894.4,
   recordingTime: 'N/A',
 };
 
