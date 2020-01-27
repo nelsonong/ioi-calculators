@@ -573,14 +573,14 @@ const calculateSubSamplingBinningFrameRate = (
   } else if (MODELS.TYPE_505.includes(model)) {
     minVertBlank = 14;
 
-    if (outputBitDepth === 12) hmaxFast = (bin2 || subSampling) ? 372 : 528;
-    else if (outputBitDepth === 10) hmaxFast = (bin2 || subSampling) ? 372 : 444;
+    if (outputBitDepth === 12) hmaxFast = (bin2 || binh || subSampling) ? 372 : 528;
+    else if (outputBitDepth === 10) hmaxFast = (bin2 || binh || subSampling) ? 372 : 444;
     else hmaxFast = 372; // 8-Bit
 
     if (isConfiguration(linkSpeed, linkCount, 6, 2)) {
       hmaxCalc = hmaxFast;
     } else if (isConfiguration(linkSpeed, linkCount, 5, 2)) {
-      if (bin2 || subSampling) {
+      if (bin2 || binh || subSampling) {
         hmaxCalc = 372;
       } else {
         hmaxCalc = 480; // 8-Bit
