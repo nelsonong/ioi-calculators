@@ -191,6 +191,8 @@ const calculateSubSamplingBinningFrameRate = (
   const bin2 = subSamplingBinning === SUBSAMPLING_BINNING.BIN_2X2;
   const binh = subSamplingBinning === SUBSAMPLING_BINNING.BIN_HORIZONTAL;
 
+  const heightSensor = (binv || bin2) ? (height * 2) : height;
+
   let hmaxMod;
   if (adcBitDepth === 8) hmaxMod = 1;
   else if (adcBitDepth === 10) hmaxMod = 5;
@@ -577,9 +579,12 @@ const calculateSubSamplingBinningFrameRate = (
     else if (outputBitDepth === 10) hmaxFast = (bin2 || binh || subSampling) ? 372 : 444;
     else hmaxFast = 372; // 8-Bit
 
+    let targetDataRate;
     if (isConfiguration(linkSpeed, linkCount, 6, 2)) {
+      targetDataRate = 1120;
       hmaxCalc = hmaxFast;
     } else if (isConfiguration(linkSpeed, linkCount, 5, 2)) {
+      targetDataRate = 820;
       if (bin2 || binh || subSampling) {
         hmaxCalc = 372;
       } else {
@@ -588,6 +593,7 @@ const calculateSubSamplingBinningFrameRate = (
         if (outputBitDepth === 12) hmaxCalc = 720;
       }
     } else if (isConfiguration(linkSpeed, linkCount, 6, 1) || isConfiguration(linkSpeed, linkCount, 3, 2)) {
+      targetDataRate = 560;
       if ((subSampling || bin2 || binh) && outputBitDepth === 8) {
         hmaxCalc = hmaxFast; // 8-bit
       } else {
@@ -596,22 +602,39 @@ const calculateSubSamplingBinningFrameRate = (
         if (outputBitDepth === 12) hmaxCalc = (subSampling || bin2 || binh) ? 528 : 1044;
       }
     } else if (isConfiguration(linkSpeed, linkCount, 5, 1)) {
+      targetDataRate = 410;
       hmaxCalc = (subSampling || bin2 || binh) ? 480 : 960; // 8-Bit
       if (outputBitDepth === 10) hmaxCalc = (subSampling || bin2 || binh) ? 600 : 1188;
       if (outputBitDepth === 12) hmaxCalc = (subSampling || bin2 || binh) ? 720 : 1428;
     } else if (isConfiguration(linkSpeed, linkCount, 2, 2)) {
+      targetDataRate = 450;
       hmaxCalc = (subSampling || bin2 || binh) ? 444 : 876; // 8-Bit
       if (outputBitDepth === 10) hmaxCalc = (subSampling || bin2 || binh) ? 552 : 1092;
       if (outputBitDepth === 12) hmaxCalc = (subSampling || bin2 || binh) ? 660 : 1308;
     } else if (isConfiguration(linkSpeed, linkCount, 3, 1)) {
+      targetDataRate = 280;
       hmaxCalc = (subSampling || bin2 || binh) ? 696 : 1392; // 8-Bit
       if (outputBitDepth === 10) hmaxCalc = (subSampling || bin2 || binh) ? 876 : 1740;
       if (outputBitDepth === 12) hmaxCalc = (subSampling || bin2 || binh) ? 1044 : 2088;
     } else if (isConfiguration(linkSpeed, linkCount, 2, 1)) {
+      targetDataRate = 225;
       hmaxCalc = (subSampling || bin2 || binh) ? 876 : 1740; // 8-Bit
       if (outputBitDepth === 10) hmaxCalc = (subSampling || bin2 || binh) ? 1092 : 2172;
       if (outputBitDepth === 12) hmaxCalc = (subSampling || bin2 || binh) ? 1308 : 2604;
     }
+
+    const hMaxScaler = (1000000 * outputBitDepth * 5120 * 80) / (1048576 * 8
+      * (4 + 5120 + minVertBlank) * targetDataRate);
+    const hMaxScalerFixedPoint = Math.floor(hMaxScaler * 65536) / 65536;
+
+    let hmaxTemp = Math.ceil(hMaxScalerFixedPoint * width);
+
+    const mod12add = 12 - (hmaxTemp % 12);
+    if (mod12add !== 12) {
+      hmaxTemp += mod12add;
+    }
+
+    hmaxCalc = (hmaxTemp < 372) ? 372 : hmaxTemp;
   } else {
     throw new Error('Unsupported model');
   }
@@ -648,8 +671,7 @@ const calculateSubSamplingBinningFrameRate = (
 
   let frameRate;
   if (MODELS.TYPE_505.includes(model)) {
-    const heightCalc = (binv || bin2) ? (height * 2) : height;
-    const readoutTimeRounded = Math.ceil((heightCalc + minVertBlank) * linetime);
+    const readoutTimeRounded = Math.ceil((heightSensor + minVertBlank) * linetime);
     const fotRounded = Math.ceil(4 * hmaxCalc / 80);
     const frameTime = fotRounded + readoutTimeRounded;
 
