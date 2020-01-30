@@ -13,7 +13,9 @@ const supportsSubSampling = model => MODELS.TYPE_250.includes(model)
   || MODELS.TYPE_252.includes(model)
   || MODELS.TYPE_253.includes(model)
   || MODELS.TYPE_255.includes(model)
+  || MODELS.TYPE_265.includes(model)
   || MODELS.TYPE_273.includes(model)
+  || MODELS.TYPE_305.includes(model)
   || MODELS.TYPE_505.includes(model);
 
 const supportsVerticalBinning = model => MODELS.TYPE_250.includes(model)

@@ -169,7 +169,7 @@ const victoremCXReducer = (state = { order: [] }, action) => {
 
       // Get formats
       let formats;
-      if (model.startsWith('4B')) {
+      if (model.startsWith('4B') || model.startsWith('32B55')) {
         formats = FORMATS.CX4B;
       } else if (model.startsWith('16B')) {
         formats = FORMATS.CX16B;

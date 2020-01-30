@@ -62,7 +62,7 @@ const calculateMaxWidth = ({
       return subSampling ? 1232 : 2464;
     }
 
-    if (MODELS.TYPE_252.includes(model)) {
+    if (MODELS.TYPE_252.includes(model) || MODELS.TYPE_265.includes(model)) {
       if (subSampling) {
         return 1032;
       }
@@ -74,7 +74,7 @@ const calculateMaxWidth = ({
       return 2064;
     }
 
-    if (MODELS.TYPE_253.includes(model) || MODELS.TYPE_255.includes(model)) {
+    if (MODELS.TYPE_253.includes(model) || MODELS.TYPE_255.includes(model) || MODELS.TYPE_305.includes(model)) {
       if (subSampling || bin2) {
         return 2056;
       }
@@ -148,7 +148,7 @@ const calculateMaxHeight = ({
       return 2056;
     }
 
-    if (MODELS.TYPE_252.includes(model)) {
+    if (MODELS.TYPE_252.includes(model) || MODELS.TYPE_265.includes(model)) {
       if (subSampling || binv) {
         return 772;
       }
@@ -164,7 +164,7 @@ const calculateMaxHeight = ({
       return 3008;
     }
 
-    if (MODELS.TYPE_255.includes(model)) {
+    if (MODELS.TYPE_255.includes(model) || MODELS.TYPE_305.includes(model)) {
       if (subSampling || binv || bin2) {
         return 1088;
       }

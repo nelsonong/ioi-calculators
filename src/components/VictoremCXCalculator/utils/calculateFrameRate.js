@@ -536,6 +536,27 @@ const calculateSubSamplingBinningFrameRate = (
         else hmax = 1914;
       }
     }
+  } else if (MODELS.TYPE_265.includes(model)) {
+    minVertBlank = 32;
+
+    hmaxFast = 846;
+
+    if (isConfiguration(linkSpeed, linkCount, 3, 1)) {
+      if (subSampling) {
+        hmaxCalc = 792;
+      } else {
+        hmaxCalc = hmaxFast;
+      }
+    } else if (isConfiguration(linkSpeed, linkCount, 2, 1)) {
+      if (subSampling) {
+        hmaxCalc = 792;
+      } else {
+        hmaxCalc = hmaxFast; // 8-Bit / 12-bit
+        if (adcBitDepth === 12) {
+          hmax = 954;
+        }
+      }
+    }
   } else if (MODELS.TYPE_273.includes(model)) {
     minVertBlank = 42;
 
@@ -564,6 +585,60 @@ const calculateSubSamplingBinningFrameRate = (
         hmax = 444; // 8-Bit
         if (adcBitDepth === 10) hmax = 555;
         if (adcBitDepth === 12) hmax = 666;
+      }
+    }
+  } else if (MODELS.TYPE_305.includes(model)) {
+    minVertBlank = 54;
+
+    hmaxFast = 522;
+
+    if (isConfiguration(linkSpeed, linkCount, 6, 2)) {
+      hmaxCalc = hmaxFast;
+    } else if (isConfiguration(linkSpeed, linkCount, 5, 2)) {
+      hmaxCalc = hmaxFast;
+    } else if (isConfiguration(linkSpeed, linkCount, 6, 1) || isConfiguration(linkSpeed, linkCount, 3, 2)) {
+      if (subSampling) {
+        hmaxCalc = hmaxFast;
+      } else {
+        hmax = 522; // 8-Bit
+        if (adcBitDepth === 10) hmax = 640;
+        if (adcBitDepth === 12) hmax = 768;
+      }
+    } else if (isConfiguration(linkSpeed, linkCount, 5, 1)) {
+      if (subSampling) {
+        hmaxCalc = hmaxFast;
+      } else {
+        hmax = 692; // 8-Bit
+        if (adcBitDepth === 10) hmax = 865;
+        if (adcBitDepth === 12) hmax = 1038;
+      }
+    } else if (isConfiguration(linkSpeed, linkCount, 2, 2)) {
+      if (subSampling) {
+        hmaxCalc = hmaxFast;
+      } else {
+        hmax = 636; // 8-Bit
+        if (adcBitDepth === 10) hmax = 795;
+        if (adcBitDepth === 12) hmax = 954;
+      }
+    } else if (isConfiguration(linkSpeed, linkCount, 3, 1)) {
+      if (subSampling) {
+        hmax = 500; // 8-Bit
+        if (adcBitDepth === 10) hmax = 625;
+        if (adcBitDepth === 12) hmax = 500;
+      } else {
+        hmax = 1020; // 8-Bit
+        if (adcBitDepth === 10) hmax = 1275;
+        if (adcBitDepth === 12) hmax = 1530;
+      }
+    } else if (isConfiguration(linkSpeed, linkCount, 2, 1)) {
+      if (subSampling) {
+        hmax = 624; // 8-Bit
+        if (adcBitDepth === 10) hmax = 780;
+        if (adcBitDepth === 12) hmax = 936;
+      } else {
+        hmax = 1276; // 8-Bit
+        if (adcBitDepth === 10) hmax = 1595;
+        if (adcBitDepth === 12) hmax = 1914;
       }
     }
   } else if (MODELS.TYPE_287.includes(model)) {
