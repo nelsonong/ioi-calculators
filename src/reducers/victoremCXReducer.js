@@ -201,7 +201,7 @@ const victoremCXReducer = (state = { order: [] }, action) => {
 
       // Get camera mode
       let cameraMode;
-      if (model.startsWith('24A')) {
+      if (model.startsWith('4B') || model.startsWith('24A')) {
         cameraMode = 2;
       } else if (model.startsWith('205')) {
         cameraMode = 1;
