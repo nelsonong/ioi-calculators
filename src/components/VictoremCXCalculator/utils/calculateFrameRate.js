@@ -551,7 +551,7 @@ const calculateSubSamplingBinningFrameRate = (
       if (subSampling) {
         hmaxCalc = 792;
       } else {
-        hmaxCalc = hmaxFast; // 8-Bit / 12-bit
+        hmax = hmaxFast; // 8-Bit / 10-bit
         if (adcBitDepth === 12) {
           hmax = 954;
         }
@@ -739,7 +739,7 @@ const calculateSubSamplingBinningFrameRate = (
     if (outputBitDepth === 8 && adcBitDepth === 10) adcBitRatio = 0.8;
     if (outputBitDepth === 10 && adcBitDepth === 12) adcBitRatio = 0.83334;
     const factor = hmaxMod * Math.ceil((hmaxCalc * adcBitRatio) / hmaxMod);
-    linetime = Math.max(factor, hmaxCalc) / 74.25;
+    linetime = Math.max(factor, hmaxFast) / 74.25;
   } else {
     linetime = hmaxCalc / 74.25;
   }
