@@ -7,6 +7,7 @@ import {
   VolucamModel,
   VolucamFormat,
   VolucamResolution,
+  VolucamFrameRate,
   VolucamStorage,
   VolucamRecordingTime,
 } from './components';
@@ -26,6 +27,7 @@ class VolucamCalculator extends Component {
         <VolucamModel cameraId={this.props.cameraId} />
         <VolucamFormat cameraId={this.props.cameraId} />
         <VolucamResolution cameraId={this.props.cameraId} />
+        <VolucamFrameRate cameraId={this.props.cameraId} />
         <VolucamStorage cameraId={this.props.cameraId} />
         <VolucamRecordingTime cameraId={this.props.cameraId} />
       </div>
