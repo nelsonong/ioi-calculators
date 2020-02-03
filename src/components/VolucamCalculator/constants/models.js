@@ -60,7 +60,7 @@ export const MODELS = {
     MODEL.Type89B93MV,
     MODEL.Type120B68MV,
     MODEL.Type262G41MV,
-    MODEL.Type205R26MCX,
+    MODEL.Type205R26MV,
   ],
   TYPE_COLOR: [
     MODEL.Type24A164CV,
@@ -71,6 +71,6 @@ export const MODELS = {
     MODEL.Type89B93CV,
     MODEL.Type120B68CV,
     MODEL.Type262G41CV,
-    MODEL.Type205R26CCX,
+    MODEL.Type205R26CV,
   ],
 };

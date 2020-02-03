@@ -16,6 +16,6 @@ export default {
   [MODEL.Type24A164MV]: 'Sony IMX174',
   [MODEL.Type262G41MV]: 'Gpixel GMAX0505',
   [MODEL.Type262G41CV]: 'Gpixel GMAX0505',
-  [MODEL.Type205R26MCX]: 'Sony IMX183',
-  [MODEL.Type205R26CCX]: 'Sony IMX183',
+  [MODEL.Type205R26MV]: 'Sony IMX183',
+  [MODEL.Type205R26CV]: 'Sony IMX183',
 };
