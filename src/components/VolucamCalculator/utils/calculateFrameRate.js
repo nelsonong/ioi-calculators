@@ -124,10 +124,24 @@ const calculateFrameRate = (
     hmaxCalc = 522;
   } else if (MODELS.TYPE_505.includes(model)) {
     minVertBlank = 14;
+    const targetDataRate = 1120;
 
-    if (adcBitDepth === 12) hmaxCalc = 528;
-    else if (adcBitDepth === 10) hmaxCalc = 444;
+    if (outputBitDepth === 12) hmaxCalc = 528;
+    else if (outputBitDepth === 10) hmaxCalc = 444;
     else hmaxCalc = 372; // 8-Bit
+
+    const hMaxScaler = (1000000 * outputBitDepth * 5120 * 80) / (1048576 * 8
+      * (4 + 5120 + minVertBlank) * targetDataRate);
+    const hMaxScalerFixedPoint = Math.floor(hMaxScaler * 65536) / 65536;
+
+    let hmaxTemp = Math.ceil(hMaxScalerFixedPoint * width);
+
+    const mod12add = 12 - (hmaxTemp % 12);
+    if (mod12add !== 12) {
+      hmaxTemp += mod12add;
+    }
+
+    hmaxCalc = (hmaxTemp < 372) ? 372 : hmaxTemp;
   } else {
     throw new Error('Unsupported model');
   }
@@ -141,15 +155,15 @@ const calculateFrameRate = (
 
   // Calculate the frame rate
   let linetime;
-  if (outputBitDepth < adcBitDepth && !isConfiguration(linkSpeed, linkCount, 6, 2)) {
+  if (MODELS.TYPE_505.includes(model)) {
+    linetime = hmaxCalc / 80;
+  } else if (outputBitDepth < adcBitDepth && !isConfiguration(linkSpeed, linkCount, 6, 2)) {
     let adcBitRatio = 0;
     if (outputBitDepth === 8 && adcBitDepth === 12) adcBitRatio = 0.66667;
     if (outputBitDepth === 8 && adcBitDepth === 10) adcBitRatio = 0.8;
     if (outputBitDepth === 10 && adcBitDepth === 12) adcBitRatio = 0.83334;
     const factor = hmaxMod * Math.ceil((hmaxCalc * adcBitRatio) / hmaxMod);
     linetime = Math.max(factor, hmaxCalc) / 74.25;
-  } else if (MODELS.TYPE_505.includes(model)) {
-    linetime = hmaxCalc / 80;
   } else {
     linetime = hmaxCalc / 74.25;
   }

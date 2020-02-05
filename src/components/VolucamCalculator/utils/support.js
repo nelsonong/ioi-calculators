@@ -25,11 +25,14 @@ export default ({
   }
 
   // All other models
-  if (!MODELS.TYPE_174.includes(model)) {
+  if (!MODELS.TYPE_174.includes(model) && !MODELS.TYPE_505.includes(model)) {
     adcBitDepths.push(8);
   }
 
-  adcBitDepths.push(10);
+  if (!MODELS.TYPE_505.includes(model)) {
+    adcBitDepths.push(10);
+  }
+
   adcBitDepths.push(12);
   return adcBitDepths;
 };

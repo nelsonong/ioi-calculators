@@ -13,8 +13,8 @@ export const MODEL = {
   Type120B68CV: '120B68CV',
   Type205R26MV: '205R26MV',
   Type205R26CV: '205R26CV',
-  // Type262G41MV: '262G41MV',
-  // Type262G41CV: '262G41CV',
+  Type262G41MV: '262G41MV',
+  Type262G41CV: '262G41CV',
 };
 
 export const MODELS = {
