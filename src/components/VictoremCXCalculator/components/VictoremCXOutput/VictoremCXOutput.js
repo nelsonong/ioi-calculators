@@ -8,7 +8,7 @@ const VictoremCXOutput = ({
   error,
 }) => {
   const frameRateDisplay = Number(frameRate).toFixed(2);
-  const outputText = error ? 'N/A' : `${frameRateDisplay} FPS / ${dataRate} MB/s`;
+  const outputText = error ? 'N/A' : `${frameRateDisplay} FPS ┋ ${dataRate} MB/s`;
   return (
     <fieldset className={styles.root}>
     <legend className={styles.legend}>Output</legend>

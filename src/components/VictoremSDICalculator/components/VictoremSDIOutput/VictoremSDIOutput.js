@@ -6,7 +6,7 @@ const VictoremSDIOutput = ({
   frameRate,
   dataRate,
 }) => {
-  const frameRateInput = `${frameRate} FPS / ${dataRate} MB/s`;
+  const frameRateInput = `${frameRate} FPS ┋ ${dataRate} MB/s`;
   return (
     <fieldset className={styles.root}>
     <legend className={styles.legend}>Output</legend>

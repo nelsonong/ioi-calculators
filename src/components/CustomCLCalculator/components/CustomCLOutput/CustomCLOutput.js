@@ -6,7 +6,7 @@ const CustomCLOutput = ({
   frameRate,
   dataRate,
 }) => {
-  const outputText = `${frameRate} FPS / ${dataRate} MB/s`;
+  const outputText = `${frameRate} FPS ┋ ${dataRate} MB/s`;
   return (
     <fieldset className={styles.root}>
     <legend className={styles.legend}>Output</legend>

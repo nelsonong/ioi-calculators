@@ -27,6 +27,11 @@
     width: 23%;
 }
 
+.display-fps:hover {
+    background: rgb(247, 203, 131);
+    cursor: pointer;
+}
+
 .display-fps:focus {
     outline: none;
 }
