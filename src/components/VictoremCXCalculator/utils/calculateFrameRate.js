@@ -177,9 +177,10 @@ const calculateDriveModeFrameRate = (height, adcBitDepth, linkSpeed, linkCount, 
 
 const calculateSubSamplingBinningFrameRate = (
   model,
-  width,
+  widthSensor,
   maxWidth,
   height,
+  heightSensor,
   adcBitDepth,
   outputBitDepth,
   linkSpeed,
@@ -190,8 +191,6 @@ const calculateSubSamplingBinningFrameRate = (
   const binv = subSamplingBinning === SUBSAMPLING_BINNING.BIN_VERTICAL;
   const bin2 = subSamplingBinning === SUBSAMPLING_BINNING.BIN_2X2;
   const binh = subSamplingBinning === SUBSAMPLING_BINNING.BIN_HORIZONTAL;
-
-  const heightSensor = (binv || bin2) ? (height * 2) : height;
 
   let hmaxMod;
   if (adcBitDepth === 8) hmaxMod = 1;
@@ -702,7 +701,7 @@ const calculateSubSamplingBinningFrameRate = (
       * (4 + 5120 + minVertBlank) * targetDataRate);
     const hMaxScalerFixedPoint = Math.floor(hMaxScaler * 65536) / 65536;
 
-    let hmaxTemp = Math.ceil(hMaxScalerFixedPoint * width);
+    let hmaxTemp = Math.ceil(hMaxScalerFixedPoint * widthSensor);
 
     const mod12add = 12 - (hmaxTemp % 12);
     if (mod12add !== 12) {
@@ -716,14 +715,14 @@ const calculateSubSamplingBinningFrameRate = (
 
   if (hmax > 0) {
     if (bin2 || binh) {
-      if (Math.ceil(hmax - (((maxWidth - width) / 16) * FixedPoint)) > hmaxFast) {
-        hmaxCalc = Math.ceil(hmax - (((maxWidth - width) / 16) * FixedPoint));
+      if (Math.ceil(hmax - (((maxWidth - widthSensor) / 16) * FixedPoint)) > hmaxFast) {
+        hmaxCalc = Math.ceil(hmax - (((maxWidth - widthSensor) / 16) * FixedPoint));
       } else {
         hmaxCalc = hmaxFast;
       }
-    } else if ((hmaxMod * Math.ceil((Math.ceil((hmax - (((maxWidth - width) / 16)
+    } else if ((hmaxMod * Math.ceil((Math.ceil((hmax - (((maxWidth - widthSensor) / 16)
       * FixedPoint)))) / hmaxMod) > hmaxFast)) {
-      hmaxCalc = hmaxMod * Math.ceil((Math.ceil((hmax - (((maxWidth - width) / 16) * FixedPoint)))) / hmaxMod);
+      hmaxCalc = hmaxMod * Math.ceil((Math.ceil((hmax - (((maxWidth - widthSensor) / 16) * FixedPoint)))) / hmaxMod);
     } else {
       hmaxCalc = hmaxFast;
     }
@@ -763,9 +762,10 @@ export default ({
   format,
   adcBitDepth,
   outputBitDepth,
-  width,
+  widthSensor,
   maxWidth,
   height,
+  heightSensor,
   subSamplingBinning,
   sensorDriveMode,
 }) => {
@@ -783,9 +783,10 @@ export default ({
   } else {
     frameRate = calculateSubSamplingBinningFrameRate(
       model,
-      width,
+      widthSensor,
       maxWidth,
       height,
+      heightSensor,
       adcBitDepth,
       outputBitDepth,
       linkSpeed,

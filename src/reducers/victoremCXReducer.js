@@ -36,6 +36,7 @@ const updateResolution = (inputCalculatorState) => {
     widthStep,
     heightStep,
     resolutionPreset,
+    subSamplingBinning,
   } = calculatorState;
 
   // If min/max preset, update values
@@ -65,10 +66,9 @@ const updateResolution = (inputCalculatorState) => {
     width,
     height,
     cameraMode,
-    subSamplingBinning,
   } = calculatorState;
   let resolutionTooltip = '';
-  if (subSamplingBinning === SUBSAMPLING_BINNING.NONE && cameraMode !== 1) {
+  if (cameraMode !== 1) {
     if (width > maxWidth) {
       resolutionTooltip = `Maximum width is ${maxWidth}px.`;
     }
@@ -86,11 +86,29 @@ const updateResolution = (inputCalculatorState) => {
     }
   }
 
+  const subSampling = subSamplingBinning === SUBSAMPLING_BINNING.SUBSAMPLING;
+  const bin2 = subSamplingBinning === SUBSAMPLING_BINNING.BIN_2X2;
+  const binh = subSamplingBinning === SUBSAMPLING_BINNING.BIN_HORIZONTAL;
+  const binv = subSamplingBinning === SUBSAMPLING_BINNING.BIN_VERTICAL;
+
+  const widthSensor = (bin2 || binh) ? width / 2 : width;
+  const widthOutput = (bin2 || binh || subSampling) ? width / 2 : width;
+
+  const heightSensor = subSampling ? (height / 2) : height;
+  const heightOutput = (bin2 || binv || subSampling) ? height / 2 : height;
+
+  console.log('width', width, 'widthSensor', widthSensor, 'widthOutput', widthOutput);
+  console.log('height', height, 'heightSensor', heightSensor, 'heightOutput', heightOutput);
+
   const error = resolutionTooltip !== '';
   return {
     ...calculatorState,
     width,
+    widthSensor,
+    widthOutput,
     height,
+    heightSensor,
+    heightOutput,
     resolutionTooltip,
     error,
   };
@@ -217,10 +235,6 @@ const victoremCXReducer = (state = { order: [] }, action) => {
       const supportsSubSampling = support.supportsSubSampling(model);
       const supportsVerticalBinning = support.supportsVerticalBinning(model);
       const supportsHorizontalBinning = support.supportsHorizontalBinning(model);
-      const {
-        linkSpeed,
-        linkCount,
-      } = calculatorState;
 
       const adcBitDepths = support.supportedBitDepths({
         ...calculatorState,
@@ -258,12 +272,6 @@ const victoremCXReducer = (state = { order: [] }, action) => {
 
     case UPDATE_VICTOREM_CX_FORMAT: {
       const { format } = action;
-      const {
-        model,
-        subSamplingBinning,
-      } = calculatorState;
-      const linkSpeed = Number(format.slice(-1));
-      const linkCount = Number(format.slice(0, 1));
       calculatorState = {
         ...calculatorState,
         format,
@@ -357,15 +365,16 @@ const victoremCXReducer = (state = { order: [] }, action) => {
 
     case UPDATE_VICTOREM_CX_SUBSAMPLING_BINNING: {
       const { subSamplingBinning } = action;
-      const {
-        model,
-        linkSpeed,
-        linkCount,
-      } = calculatorState;
+
+      let { resolutionPreset } = calculatorState;
+      if (subSamplingBinning === SUBSAMPLING_BINNING.SUBSAMPLING) {
+        resolutionPreset = RESOLUTION.MAXIMUM;
+      }
+
       calculatorState = {
         ...calculatorState,
+        resolutionPreset,
         subSamplingBinning,
-        resolutionPreset: RESOLUTION.MAXIMUM,
       };
       calculatorState = updateResolutionConstraints(calculatorState);
       calculatorState = updateResolution(calculatorState);

@@ -14,7 +14,7 @@ const isConfiguration = (
 const calculateMinWidth = (model) => {
   if (MODELS.TYPE_183.includes(model)) return 32;
   if (MODELS.TYPE_287.includes(model)) return 8;
-  if (MODELS.TYPE_505.includes(model)) return 32;
+  if (MODELS.TYPE_505.includes(model)) return 64;
   return 16;
 };
 
@@ -95,10 +95,6 @@ const calculateMaxWidth = ({
     }
 
     if (MODELS.TYPE_505.includes(model)) {
-      if (subSampling || bin2 || binh) {
-        return 2560;
-      }
-
       return 5120;
     }
   }
@@ -185,10 +181,6 @@ const calculateMaxHeight = ({
     }
 
     if (MODELS.TYPE_505.includes(model)) {
-      if (subSampling || bin2 || binv) {
-        return 2560;
-      }
-
       return 5120;
     }
   }
@@ -199,7 +191,7 @@ const calculateMaxHeight = ({
 const calculateWidthStep = (model) => {
   if (MODELS.TYPE_183.includes(model)) return 32;
   if (MODELS.TYPE_287.includes(model)) return 8;
-  if (MODELS.TYPE_505.includes(model)) return 32;
+  if (MODELS.TYPE_505.includes(model)) return 64;
   return 16;
 };
 

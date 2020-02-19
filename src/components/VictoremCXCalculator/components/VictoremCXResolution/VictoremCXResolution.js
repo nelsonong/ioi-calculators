@@ -6,8 +6,6 @@ import {
   updateHeight,
 } from '../../../../actions/victoremCXActions';
 import {
-  RESOLUTIONS,
-  NAN_RESOLUTIONS,
   SUBSAMPLING_BINNING,
   SENSOR_DRIVE_MODE,
 } from '../../constants';
@@ -38,7 +36,8 @@ const VictoremCXResolution = ({
   let enableResolution = false;
   switch (cameraMode) {
     case 0: {
-      enableResolution = subSamplingBinning === SUBSAMPLING_BINNING.NONE;
+      enableResolution = subSamplingBinning === SUBSAMPLING_BINNING.NONE
+        || subSamplingBinning !== SUBSAMPLING_BINNING.SUBSAMPLING;
       break;
     }
 
