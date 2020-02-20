@@ -91,8 +91,8 @@ const updateResolution = (inputCalculatorState) => {
   const binh = subSamplingBinning === SUBSAMPLING_BINNING.BIN_HORIZONTAL;
   const binv = subSamplingBinning === SUBSAMPLING_BINNING.BIN_VERTICAL;
 
-  const widthSensor = (bin2 || binh) ? width / 2 : width;
-  const widthOutput = (bin2 || binh || subSampling) ? width / 2 : width;
+  const widthSensor = (bin2 || binh || subSampling) ? width / 2 : width;
+  const widthOutput = widthSensor;
 
   const heightSensor = subSampling ? (height / 2) : height;
   const heightOutput = (bin2 || binv || subSampling) ? height / 2 : height;
