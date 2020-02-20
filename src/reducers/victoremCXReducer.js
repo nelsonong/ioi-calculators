@@ -97,9 +97,6 @@ const updateResolution = (inputCalculatorState) => {
   const heightSensor = subSampling ? (height / 2) : height;
   const heightOutput = (bin2 || binv || subSampling) ? height / 2 : height;
 
-  console.log('width', width, 'widthSensor', widthSensor, 'widthOutput', widthOutput);
-  console.log('height', height, 'heightSensor', heightSensor, 'heightOutput', heightOutput);
-
   const error = resolutionTooltip !== '';
   return {
     ...calculatorState,
