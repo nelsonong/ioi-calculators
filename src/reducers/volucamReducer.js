@@ -222,6 +222,7 @@ const volucamReducer = (state = { order: [] }, action) => {
         model,
       });
       const adcBitDepth = adcBitDepths[0];
+      const outputBitDepth = 8;
 
       // Change resolution back to Maximum preset
       const resolutionPresets = RESOLUTION_PRESETS[model];
@@ -235,6 +236,7 @@ const volucamReducer = (state = { order: [] }, action) => {
         format,
         adcBitDepth,
         adcBitDepths,
+        outputBitDepth,
         cameraMode,
         resolutionPreset,
         resolutionPresets,
