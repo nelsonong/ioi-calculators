@@ -1,0 +1,18 @@
+@import './colors.css';
+@import './calculator.css';
+
+.redwood-calculator {
+    composes: calculator;
+    background: $redwood-background;
+    background: linear-gradient(to bottom right, $redwood-background, $redwood-background-light);
+}
+
+.redwood-fieldset {
+    composes: fieldset;
+    background: $redwood-fieldset;
+}
+
+.redwood-input {
+    composes: input;
+    background: $redwood-output;
+}

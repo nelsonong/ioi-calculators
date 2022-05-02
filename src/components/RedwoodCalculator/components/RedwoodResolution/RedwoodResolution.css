@@ -1,0 +1,7 @@
+@import '../../../../styles/redwood.css';
+
+.root {
+    composes: redwood-fieldset;
+}
+
+@mixin add-left-right 22%, 78%;

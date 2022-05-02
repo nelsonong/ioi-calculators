@@ -62,8 +62,16 @@ const calculateMaxWidth = ({
       return 4096;
     }
 
-    if (MODELS.TYPE_505.includes(model)) {
+    if (MODELS.TYPE_530.includes(model)) {
+      return 5312;
+    }
+
+    if (MODELS.TYPE_0505.includes(model)) {
       return 5120;
+    }
+
+    if (MODELS.TYPE_2509.includes(model)) {
+      return 4224;
     }
   }
 
@@ -101,7 +109,7 @@ const calculateMaxHeight = ({
     }
 
     if (MODELS.TYPE_250.includes(model)) {
-      return 2048;
+      return 2056;
     }
 
     if (MODELS.TYPE_252.includes(model) || MODELS.TYPE_265.includes(model)) {
@@ -116,20 +124,25 @@ const calculateMaxHeight = ({
       return 2176;
     }
 
-    if (MODELS.TYPE_505.includes(model)) {
+    if (MODELS.TYPE_530.includes(model)) {
+      return 4608;
+    }
+
+    if (MODELS.TYPE_0505.includes(model)) {
       return 5120;
+    }
+
+    if (MODELS.TYPE_2509.includes(model)) {
+      return 2160;
     }
   }
 
   return 0;
 };
 
-const calculateWidthStep = (model) => {
-  if (MODELS.TYPE_183.includes(model)) return 32;
-  return 64;
-};
+const calculateWidthStep = model => calculateMinWidth(model);
 
-const calculateHeightStep = () => 8;
+const calculateHeightStep = () => calculateMinHeight();
 
 export {
   calculateMinWidth,

@@ -32,6 +32,7 @@ export const flareCLDefaultState = {
   subSampling: false,
   slowMode: false,
   frameRate: 70.95,
+  maxFrameRate: 70.95,
   dataRate: 150.77,
   error: false,
   initialized: false,

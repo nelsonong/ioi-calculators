@@ -3,10 +3,14 @@ import { connect } from 'react-redux';
 import styles from './CustomSDIOutput.css';
 
 const CustomSDIOutput = ({
+  interlaced,
   frameRate,
   dataRate,
 }) => {
-  const frameRateInput = `${frameRate} FPS ┋ ${dataRate} MB/s`;
+  const interlacedDivider = interlaced ? 2 : 1;
+  const displayFrameRate = (frameRate / interlacedDivider).toFixed(2);
+  const displayDataRate = (dataRate / interlacedDivider).toFixed(2);
+  const frameRateInput = `${displayFrameRate} FPS ┋ ${displayDataRate} MB/s`;
   return (
     <fieldset className={styles.root}>
     <legend className={styles.legend}>Output</legend>
@@ -23,10 +27,12 @@ const mapStateToProps = (state, {
     ? state.frameRateCalculators[cameraId]
     : state.storageCalculators[dvrId].cameras[cameraId];
   const {
+    interlaced,
     frameRate,
     dataRate,
   } = calculatorState;
   return {
+    interlaced,
     frameRate,
     dataRate,
   };

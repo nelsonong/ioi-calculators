@@ -14,11 +14,11 @@ const Header = () => (
           <img src={logo} height='25' />
         </Link>
         <div>
-          <NavLink className={styles.button} to='/calculator/framerate' activeClassName={styles.isActive}>
-            Frame Rate
+          <NavLink className={styles.button} to='/calculator/cameras' activeClassName={styles.isActive}>
+            Cameras
           </NavLink>
-          <NavLink className={styles.button} to='/calculator/storage' activeClassName={styles.isActive}>
-            Storage
+          <NavLink className={styles.button} to='/calculator/DVRs' activeClassName={styles.isActive}>
+            DVRs
           </NavLink>
         </div>
       </div>

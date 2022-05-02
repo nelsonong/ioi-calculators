@@ -16,6 +16,8 @@ import {
   UPDATE_FLARE_CL_HEIGHT,
   UPDATE_FLARE_CL_SUB_SAMPLING,
   UPDATE_FLARE_CL_SLOW_MODE,
+  UPDATE_FLARE_CL_FRAME_RATE,
+  RESET_FLARE_CL_FRAME_RATE,
 } from '../actions/flareCLActions';
 
 // Validate and set resolution
@@ -110,15 +112,22 @@ const updateResolutionConstraints = (calculatorState) => {
 };
 
 // Update output
-const updateOutput = (calculatorState) => {
-  const frameRate = calculateFrameRate(calculatorState);
+const updateOutput = (calculatorState, dontResetFrameRate) => {
+  const maxFrameRate = calculateFrameRate(calculatorState);
+  let { frameRate } = calculatorState;
+  if (!dontResetFrameRate) {
+    frameRate = Number(maxFrameRate.toFixed(2));
+  }
+
   const dataRate = calculateDataRate({
     ...calculatorState,
     frameRate,
   });
+
   return {
     ...calculatorState,
     frameRate,
+    maxFrameRate,
     dataRate,
   };
 };
@@ -134,6 +143,16 @@ const filterFormats = (formats, mode) => {
     default:
       throw new Error('Mode not found.');
   }
+};
+
+const countDecimalPlaces = (number) => {
+  const str = `${number}`;
+  const index = str.indexOf('.');
+  if (index >= 0) {
+    return str.length - index - 1;
+  }
+
+  return 0;
 };
 
 const flareCLReducer = (state = { order: [] }, action) => {
@@ -285,6 +304,30 @@ const flareCLReducer = (state = { order: [] }, action) => {
         slowMode,
       };
       calculatorState = updateResolutionConstraints(calculatorState);
+      calculatorState = updateOutput(calculatorState);
+      break;
+    }
+
+    case UPDATE_FLARE_CL_FRAME_RATE: {
+      let { frameRate } = action;
+      const { maxFrameRate } = calculatorState;
+      const decimalPlaces = countDecimalPlaces(frameRate);
+      const invalidFrameRate = decimalPlaces > 2 || Number(frameRate.toFixed(2)) > Number(maxFrameRate.toFixed(2));
+      if (invalidFrameRate) {
+        return state;
+      } if (frameRate === 0) {
+        frameRate = 1;
+      }
+
+      calculatorState = {
+        ...calculatorState,
+        frameRate,
+      };
+      calculatorState = updateOutput(calculatorState, true);
+      break;
+    }
+
+    case RESET_FLARE_CL_FRAME_RATE: {
       calculatorState = updateOutput(calculatorState);
       break;
     }

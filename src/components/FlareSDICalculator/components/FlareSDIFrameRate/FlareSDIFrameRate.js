@@ -6,14 +6,16 @@ import styles from './FlareSDIFrameRate.css';
 const FlareSDIFrameRate = ({
   frameRate,
   frameRates,
+  interlaced,
   handleChange,
 }) => {
   const frameRateOptions = frameRates.map((frameRateOption, i) => (
     <option key={i} value={frameRateOption}>{frameRateOption}</option>
   ));
+  const label = interlaced ? 'Field Rate' : 'Frame Rate';
   return (
     <fieldset className={styles.root}>
-    <legend className={styles.legend}>Frame Rate</legend>
+    <legend className={styles.legend}>{label}</legend>
       <select className={styles.select} value={frameRate} onChange={handleChange}>
         {frameRateOptions}
       </select>
@@ -31,10 +33,12 @@ const mapStateToProps = (state, {
   const {
     frameRate,
     frameRates,
+    interlaced,
   } = calculatorState;
   return {
     frameRate,
     frameRates,
+    interlaced,
   };
 };
 

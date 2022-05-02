@@ -1,0 +1,134 @@
+@import '../../../../styles/colors.css';
+@import '../../../../styles/buttons.css';
+@import '../../../../styles/container.css';
+
+.root {
+    composes: container;
+    width: 100%;
+    min-width: 36rem;
+    max-width: 44rem;
+    min-height: fit-content;
+    margin: 3rem;
+    padding-bottom: 0rem;
+    outline: none;
+}
+
+.overlay {
+    background-color: $modal-overlay;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -2rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Title bar */
+.title {
+    composes: title;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+}
+
+.left-spacer {
+    margin-left: 1rem;
+    width: 3.2rem;
+}
+
+.text {
+    padding: 0.5rem 0.1rem 0.1rem 0.1rem;
+}
+
+.close-button {
+    background: transparent;
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-right: 0.5rem;
+    border: none;
+}
+
+.close-button:hover {
+    color: lightgrey;
+}
+
+.close-button:focus {
+    outline: none;
+}
+
+.flare-cl-button {
+    composes: modal-button;
+    background: $flare-cl-button;
+}
+
+.flare-cl-button:hover {
+    background: $flare-cl-button-light;
+}
+
+.flare-cx-button {
+    composes: modal-button;
+    background: $flare-cx-button;
+}
+
+.flare-cx-button:hover {
+    background: $flare-cx-button-light;
+}
+
+.flare-sdi-button {
+    composes: modal-button;
+    background: $flare-sdi-button;
+}
+
+.flare-sdi-button:hover {
+    background: $flare-sdi-button-light;
+}
+
+.redwood-button {
+    composes: modal-button;
+    background: $redwood-button;
+}
+
+.redwood-button:hover {
+    background: $redwood-button-light;
+}
+
+.victorem-cx-button {
+    composes: modal-button;
+    background: $victorem-cx-button;
+}
+
+.victorem-cx-button:hover {
+    background: $victorem-cx-button-light;
+}
+
+.victorem-sdi-button {
+    composes: modal-button;
+    background: $victorem-sdi-button;
+}
+
+.victorem-sdi-button:hover {
+    background: $victorem-sdi-button-light;
+}
+
+.custom-button {
+    composes: modal-button;
+    background: $custom-button;
+}
+
+.custom-button:hover {
+    background: $custom-button-light;
+}
+
+.save-button {
+    composes: modal-button;
+    background: $save-button;
+    width: 5rem;
+}
+
+.save-button:hover {
+    background: $save-button-light;
+}

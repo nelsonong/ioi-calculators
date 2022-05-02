@@ -480,7 +480,7 @@ export default ({
     linkCount,
   );
   if (customFrameRate > 0) {
-    return customFrameRate.toFixed(2);
+    return Number(customFrameRate.toFixed(2));
   }
 
   // Line scale factor
@@ -491,5 +491,5 @@ export default ({
 
   // Calculate and return framerate
   const frameRate = framePeriodUs > 0 ? 1000000.0 / framePeriodUs : 0;
-  return frameRate.toFixed(2);
+  return Number(frameRate.toFixed(2));
 };

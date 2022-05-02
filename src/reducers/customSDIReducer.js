@@ -4,6 +4,7 @@ import {
   MODE,
   SDI_TREE,
 } from '../components/CustomSDICalculator/constants';
+import { MODEL } from '../components/Core2Calculator/constants';
 import calculateDataRate from '../components/CustomSDICalculator/utils/calculateDataRate';
 import {
   INITIALIZE_CUSTOM_SDI_DVR_STATE,
@@ -14,14 +15,7 @@ import {
 } from '../actions/customSDIActions';
 
 const updateDataRate = (calculatorState) => {
-  const {
-    width,
-    height,
-    interlaced,
-    color,
-    frameRate,
-  } = calculatorState;
-  const dataRate = calculateDataRate(frameRate, width, height, interlaced, color);
+  const dataRate = calculateDataRate(calculatorState);
   return {
     ...calculatorState,
     dataRate,
@@ -37,7 +31,10 @@ const customSDIReducer = (state = { order: [] }, action) => {
   let calculatorState = calculators[cameraId];
   switch (type) {
     case INITIALIZE_CUSTOM_SDI_DVR_STATE: {
-      const { mode } = action;
+      const {
+        mode,
+        model,
+      } = action;
       const { initialized } = calculatorState;
       if (initialized) {
         return state;
@@ -54,7 +51,13 @@ const customSDIReducer = (state = { order: [] }, action) => {
       if (mode) {
         switch (mode) {
           case MODE.SINGLE:
-            sdiInterfaces = [SD_SDI, HD_SDI, S_3G_SDI];
+            if (model === MODEL.CORE2SDI) {
+              sdiInterfaces = [SD_SDI];
+            } else {
+              sdiInterfaces = [];
+            }
+
+            sdiInterfaces = [...sdiInterfaces, HD_SDI, S_3G_SDI];
             break;
 
           case MODE.DUAL:
@@ -115,6 +118,7 @@ const customSDIReducer = (state = { order: [] }, action) => {
       const { color } = action.color ? action : calculatorState;
       const {
         sdiInterface,
+        interlaced,
         resolution,
       } = calculatorState;
       const frameRates = SDI_TREE[sdiInterface][resolution][color];

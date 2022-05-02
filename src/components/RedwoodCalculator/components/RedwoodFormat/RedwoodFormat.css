@@ -1,0 +1,19 @@
+@import '../../../../styles/redwood.css';
+
+.root {
+    composes: redwood-fieldset;
+}
+
+@mixin add-left-right 55%, 45%;
+
+.label {
+    composes: label;
+    display: block;
+    margin: 0.8rem 0;
+}
+
+.select {
+    composes: select;
+    display: block;
+    margin: 0.3rem;
+}

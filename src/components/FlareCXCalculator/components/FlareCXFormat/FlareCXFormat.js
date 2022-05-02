@@ -6,14 +6,17 @@ import {
   updateLinkSpeed,
 } from '../../../../actions/flareCXActions';
 import styles from './FlareCXFormat.css';
+import { MODEL } from '../../../Core2Calculator/constants';
 
 const FlareCXFormat = ({
+  model,
   bitDepth,
   bitDepths,
   linkCount,
   linkCounts,
   linkSpeed,
   linkSpeeds,
+  handleInitFormat,
   handleChangeBitDepth,
   handleChangeLinkCount,
   handleChangeLinkSpeed,
@@ -21,9 +24,41 @@ const FlareCXFormat = ({
   const bitDepthOptions = bitDepths.map((bitDepthOption, i) => (
     <option key={i} value={bitDepthOption}>{bitDepthOption}</option>
   ));
-  const linkSpeedOptions = linkSpeeds.map((linkSpeedOption, i) => (
-    <option key={i} value={linkSpeedOption}>{linkSpeedOption}</option>
-  ));
+
+  // Limit CXP speed options depending on Core type.
+  let maxLinkSpeed = 12;
+  if (model) {
+    if (model === MODEL.CORE2CX) {
+      maxLinkSpeed = 3;
+    } else if (model === MODEL.CORE2CXPLUS || model === MODEL.CORE2CXMAX) {
+      maxLinkSpeed = 6;
+    }
+  }
+
+  let selectedSpeedDeleted = true;
+  let selectedSpeedOption;
+  const linkSpeedOptions = linkSpeeds.map((linkSpeedOption, i) => {
+    const trailingNumbers = linkSpeedOption.match(/\d+$/);
+    const speed = Number(trailingNumbers[0]);
+    if (speed <= maxLinkSpeed) {
+      if (linkSpeed === linkSpeedOption) {
+        selectedSpeedDeleted = false;
+      }
+
+      if (!selectedSpeedOption) {
+        selectedSpeedOption = linkSpeedOption;
+      }
+
+      return <option key={i} value={linkSpeedOption}>{linkSpeedOption}</option>;
+    }
+
+    return '';
+  });
+
+  if (selectedSpeedDeleted) {
+    handleInitFormat(selectedSpeedOption);
+  }
+
   const linkCountOptions = linkCounts.map((linkCountOption, i) => (
     <option key={i} value={linkCountOption}>{linkCountOption}</option>
   ));
@@ -58,9 +93,15 @@ const mapStateToProps = (state, {
   cameraId,
   dvrId,
 }) => {
-  const calculatorState = !dvrId
-    ? state.frameRateCalculators[cameraId]
-    : state.storageCalculators[dvrId].cameras[cameraId];
+  let calculatorState;
+  let model;
+  if (!dvrId) {
+    calculatorState = state.frameRateCalculators[cameraId];
+  } else {
+    calculatorState = state.storageCalculators[dvrId].cameras[cameraId];
+    ({ model } = state.storageCalculators[dvrId]);
+  }
+
   const {
     bitDepth,
     bitDepths,
@@ -70,6 +111,7 @@ const mapStateToProps = (state, {
     linkSpeeds,
   } = calculatorState;
   return {
+    model,
     bitDepth,
     bitDepths,
     linkCount,
@@ -83,6 +125,9 @@ const mapDispatchToProps = (dispatch, {
   cameraId,
   dvrId,
 }) => ({
+  handleInitFormat: (linkSpeed) => {
+    dispatch(updateLinkSpeed(cameraId, linkSpeed, dvrId));
+  },
   handleChangeBitDepth: (e) => {
     const bitDepth = Number(e.target.value);
     dispatch(updateBitDepth(cameraId, bitDepth, dvrId));

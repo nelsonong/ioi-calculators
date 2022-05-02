@@ -1,0 +1,9 @@
+@import '../../../../styles/rodeo.css';
+
+.root {
+    composes: rodeo-fieldset;
+}
+
+.container {
+    text-align: center;
+}

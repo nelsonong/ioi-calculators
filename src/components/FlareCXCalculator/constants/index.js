@@ -33,6 +33,7 @@ export const flareCXDefaultState = {
   resolutionTooltip: '',
   subSampling: false,
   frameRate: 132.72,
+  maxFrameRate: 132.72,
   dataRate: 282.03,
   error: false,
   initialized: false,

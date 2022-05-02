@@ -1,0 +1,94 @@
+@import '../../../../styles/flare-cx.css';
+
+.root {
+    composes: flare-cx-fieldset;
+    margin-bottom: 0.6rem;
+}
+
+.center {
+    text-align: center;
+}
+
+.display {
+    text-align: center;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin: 0.7rem 0rem 0.2rem 0rem;
+    border: solid $calculator-info;
+    border-radius: 0.2rem;
+}
+
+.display-fps-text {
+    background: gainsboro;
+    width: 12%;
+}
+
+.display-fps {
+    width: 25%;
+}
+
+.display-fps:hover {
+    background: rgb(247, 203, 131);
+    cursor: pointer;
+}
+
+.display-fps:focus {
+    outline: none;
+}
+
+.display-reset-text {
+    background: $flare-cx-output;
+    color: white;
+    width: 9%;
+    margin-right: 0.6rem;
+}
+
+.display-reset-text:hover {
+    background: $flare-cx-output-light;
+    cursor: pointer;
+}
+
+.display-reset-text:focus {
+    outline: none;
+}
+
+.display-custom {
+    background: rgb(247, 203, 131);
+    font-style: italic;
+}
+
+.display-max-text {
+    background: gainsboro;
+    font-size: 1rem;
+    width: 15%;
+}
+
+.display-max {
+    background: seashell;
+    width: 16%;
+    font-size: 1rem;
+}
+
+.display-fps::-webkit-inner-spin-button, 
+.display-fps::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.left-bar {
+    border-left: solid $calculator-info 0.2rem;
+    border-top-left-radius: 0rem;
+    border-bottom-left-radius: 0rem;
+    margin-left: 0rem;
+}
+
+.right-bar {
+    border-right: solid $calculator-info 0.2em;
+    border-top-right-radius: 0rem;
+    border-bottom-right-radius: 0rem;
+    margin-right: 0rem;
+}
+
+.input {
+    composes: flare-cx-input;
+}

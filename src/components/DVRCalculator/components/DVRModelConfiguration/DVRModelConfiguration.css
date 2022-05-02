@@ -1,5 +1,0 @@
-@import '../../../../styles/dvr.css';
-
-.root {
-    composes: dvr-fieldset;
-}

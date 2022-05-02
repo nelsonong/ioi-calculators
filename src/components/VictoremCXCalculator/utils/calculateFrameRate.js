@@ -12,6 +12,8 @@ const isConfiguration = (
   targetLinkCount,
 ) => (linkSpeed === targetLinkSpeed) && (linkCount === targetLinkCount);
 
+const isGpixel = model => MODELS.TYPE_0505.includes(model) || MODELS.TYPE_2509.includes(model);
+
 const calculateDriveModeFrameRate = (height, adcBitDepth, linkSpeed, linkCount, sensorDriveMode) => {
   // Determine hmaxMin (the minimum possible value of hmax)
   let hmaxMin;
@@ -552,7 +554,7 @@ const calculateSubSamplingBinningFrameRate = (
       } else {
         hmax = hmaxFast; // 8-Bit / 10-bit
         if (adcBitDepth === 12) {
-          hmax = 954;
+          hmax = 960;
         }
       }
     }
@@ -646,7 +648,7 @@ const calculateSubSamplingBinningFrameRate = (
     hmaxCalc = 242; // 8-Bit
     if (adcBitDepth === 10) hmaxCalc = 290;
     if (adcBitDepth === 12) hmaxCalc = 396;
-  } else if (MODELS.TYPE_505.includes(model)) {
+  } else if (isGpixel(model)) {
     minVertBlank = 14;
 
     if (outputBitDepth === 12) hmaxFast = (bin2 || binh || subSampling) ? 372 : 528;
@@ -730,7 +732,7 @@ const calculateSubSamplingBinningFrameRate = (
 
   // Calculate the frame rate
   let linetime;
-  if (MODELS.TYPE_505.includes(model)) {
+  if (isGpixel(model)) {
     linetime = hmaxCalc / 80;
   } else if (outputBitDepth < adcBitDepth && !isConfiguration(linkSpeed, linkCount, 6, 2)) {
     let adcBitRatio = 0;
@@ -744,7 +746,7 @@ const calculateSubSamplingBinningFrameRate = (
   }
 
   let frameRate;
-  if (MODELS.TYPE_505.includes(model)) {
+  if (isGpixel(model)) {
     const readoutTimeRounded = Math.ceil((heightSensor + minVertBlank) * linetime);
     const fotRounded = Math.ceil(4 * hmaxCalc / 80);
     const frameTime = fotRounded + readoutTimeRounded;

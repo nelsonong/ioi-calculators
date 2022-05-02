@@ -1,6 +1,14 @@
 import { COLOR } from '../constants';
 
-export default (frameRate, width, height, interlaced, color) => {
+export default ({
+  mode,
+  width,
+  height,
+  color,
+  frameRate,
+}) => {
+  const dvrMultiplier = mode ? 1.01 : 1.0;
+
   let bytesPerPixel;
   if (color === COLOR.YCbCr) {
     bytesPerPixel = 2.5;
@@ -8,9 +16,8 @@ export default (frameRate, width, height, interlaced, color) => {
     bytesPerPixel = 5;
   }
 
-  const interlacedDivider = interlaced ? 2 : 1;
   const packedWidth = Math.ceil(width * bytesPerPixel / 2048) * 2048;
-  const pixels = packedWidth * height / interlacedDivider;
-  const dataRate = (1.01 * pixels * frameRate) / (1024 * 1024);
+  const pixels = packedWidth * height;
+  const dataRate = (dvrMultiplier * pixels * frameRate) / (1024 * 1024);
   return dataRate.toFixed(2);
 };

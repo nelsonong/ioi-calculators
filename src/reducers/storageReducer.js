@@ -1,13 +1,17 @@
-import { dvrActionTypes } from '../actions/dvrActions';
+import { core2ActionTypes } from '../actions/core2Actions';
+import { rodeoActionTypes } from '../actions/rodeoActions';
 import { managementActionTypes } from '../actions/managementActions';
-import dvrReducer from './dvrReducer';
+import core2Reducer from './core2Reducer';
+import rodeoReducer from './rodeoReducer';
 import managementReducer from './managementReducer';
 import cameraReducer from './cameraReducer';
 
 const storageReducer = (state = { order: [] }, inputAction) => {
   const action = { ...inputAction };
-  if (dvrActionTypes.includes(action.type)) {
-    return dvrReducer(state, action);
+  if (core2ActionTypes.includes(action.type)) {
+    return core2Reducer(state, action);
+  } if (rodeoActionTypes.includes(action.type)) {
+    return rodeoReducer(state, action);
   }
 
   if (action.storage && managementActionTypes.includes(action.type)) {

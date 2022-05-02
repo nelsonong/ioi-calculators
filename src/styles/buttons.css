@@ -17,6 +17,21 @@
 	border-width: medium;
 }
 
+.modal-buttons-container {
+    background: repeating-linear-gradient(
+        45deg,
+        $buttons-container-light,
+        $buttons-container-light 1rem,
+        $buttons-container-dark 1rem,
+        $buttons-container-dark 2rem
+    );
+	display: flex;
+	justify-content: space-between;
+	margin-top: 1.2rem;
+	padding: 0.4rem 3rem;
+	border-top: solid $container-border;
+}
+
 .block-buttons-container {
 	display: block;
 	align-items: center;
@@ -46,7 +61,7 @@
 	border-width: medium;
 	border-radius: 0.3rem;
 	border-color: $button-border;
-  outline: none;
+	outline: none;
 }
 
 .block-button {
@@ -57,8 +72,8 @@
 .modal-button {
 	composes: button;
 	font-size: 1.2rem;
-	width: 10rem;
-	margin: 1rem 0.4rem 2.4rem 0.4rem;
+	width: 9rem;
+	margin: 1.4rem 0.4rem 1.6rem 0.4rem;
 }
 
 .button-container {
@@ -117,5 +132,5 @@
 
 .button-spacer {
 	display: inline-block;
-	margin: 1rem;
+	margin: 0.6rem;
 }

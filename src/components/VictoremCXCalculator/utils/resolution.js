@@ -12,9 +12,11 @@ const isConfiguration = (
 ) => (linkSpeed === targetLinkSpeed) && (linkCount === targetLinkCount);
 
 const calculateMinWidth = (model) => {
+  if (MODELS.TYPE_174.includes(model)) return 32;
   if (MODELS.TYPE_183.includes(model)) return 32;
   if (MODELS.TYPE_287.includes(model)) return 8;
-  if (MODELS.TYPE_505.includes(model)) return 64;
+  if (MODELS.TYPE_0505.includes(model)) return 32;
+  if (MODELS.TYPE_2509.includes(model)) return 32;
   return 16;
 };
 
@@ -94,8 +96,12 @@ const calculateMaxWidth = ({
       return 720;
     }
 
-    if (MODELS.TYPE_505.includes(model)) {
+    if (MODELS.TYPE_0505.includes(model)) {
       return 5120;
+    }
+
+    if (MODELS.TYPE_2509.includes(model)) {
+      return 4224;
     }
   }
 
@@ -180,22 +186,21 @@ const calculateMaxHeight = ({
       return 544;
     }
 
-    if (MODELS.TYPE_505.includes(model)) {
+    if (MODELS.TYPE_0505.includes(model)) {
       return 5120;
+    }
+
+    if (MODELS.TYPE_2509.includes(model)) {
+      return 2160;
     }
   }
 
   return 0;
 };
 
-const calculateWidthStep = (model) => {
-  if (MODELS.TYPE_183.includes(model)) return 32;
-  if (MODELS.TYPE_287.includes(model)) return 8;
-  if (MODELS.TYPE_505.includes(model)) return 64;
-  return 16;
-};
+const calculateWidthStep = model => calculateMinWidth(model);
 
-const calculateHeightStep = () => 4;
+const calculateHeightStep = () => calculateMinHeight();
 
 export {
   calculateMinWidth,

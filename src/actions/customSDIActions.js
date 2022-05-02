@@ -13,10 +13,11 @@ const customSDIActionTypes = [
 ];
 
 // Action generators
-export const initializeDVRState = (cameraId, mode, dvrId) => ({
+export const initializeDVRState = (cameraId, mode, model, dvrId) => ({
   type: INITIALIZE_CUSTOM_SDI_DVR_STATE,
   cameraId,
   mode,
+  model,
   dvrId,
 });
 

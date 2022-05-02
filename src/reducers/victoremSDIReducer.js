@@ -17,14 +17,7 @@ import {
 } from '../actions/victoremSDIActions';
 
 const updateDataRate = (calculatorState) => {
-  const {
-    width,
-    height,
-    interlaced,
-    color,
-    frameRate,
-  } = calculatorState;
-  const dataRate = calculateDataRate(frameRate, width, height, interlaced, color);
+  const dataRate = calculateDataRate(calculatorState);
   return {
     ...calculatorState,
     dataRate,

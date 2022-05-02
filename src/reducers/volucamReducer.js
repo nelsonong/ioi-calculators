@@ -6,6 +6,7 @@ import {
   RESOLUTION_VALUES,
   RESOLUTION_PRESETS,
   DRIVE_CAPACITY,
+  FIRMWARE,
 } from '../components/VolucamCalculator/constants';
 import * as resolution from '../components/VolucamCalculator/utils/resolution';
 import calculateMaxFrameRate from '../components/VolucamCalculator/utils/calculateFrameRate';
@@ -19,6 +20,9 @@ import {
   UPDATE_VOLUCAM_RESOLUTION_PRESET,
   UPDATE_VOLUCAM_WIDTH,
   UPDATE_VOLUCAM_HEIGHT,
+  UPDATE_VOLUCAM_FIRMWARE,
+  UPDATE_VOLUCAM_SCALING,
+  UPDATE_VOLUCAM_DUAL_GAIN,
   UPDATE_VOLUCAM_SENSOR_DRIVE_MODE,
   UPDATE_VOLUCAM_DRIVE_MODEL,
   UPDATE_VOLUCAM_FRAME_RATE,
@@ -132,8 +136,9 @@ const secondsTohhmmss = (totalSeconds) => {
 
 // Update output
 const updateOutput = (calculatorState, dontResetFrameRate) => {
-  const maxFrameRate = calculateMaxFrameRate(calculatorState);
   let { frameRate } = calculatorState;
+  const { scaling } = calculatorState;
+  const maxFrameRate = scaling ? 64.7 : calculateMaxFrameRate(calculatorState);
   if (!dontResetFrameRate) {
     frameRate = maxFrameRate.toFixed(1);
   }
@@ -234,6 +239,7 @@ const volucamReducer = (state = { order: [] }, action) => {
         model,
         sensor,
         format,
+        scaling: false,
         adcBitDepth,
         adcBitDepths,
         outputBitDepth,
@@ -323,6 +329,66 @@ const volucamReducer = (state = { order: [] }, action) => {
         height,
         resolutionPreset: RESOLUTION.CUSTOM,
       };
+      calculatorState = updateResolution(calculatorState);
+      calculatorState = updateOutput(calculatorState);
+      break;
+    }
+
+    case UPDATE_VOLUCAM_FIRMWARE: {
+      const { firmware } = action;
+      let {
+        adcBitDepth,
+        outputBitDepth,
+      } = calculatorState;
+
+      // output bit depth is fixed to compression firmware
+      if (firmware === FIRMWARE.COMPRESSED_8) outputBitDepth = 8;
+      else if (firmware === FIRMWARE.COMPRESSED_10) outputBitDepth = 10;
+      else if (firmware === FIRMWARE.COMPRESSED_12) outputBitDepth = 12;
+
+      // adc bit depth can't be higher than output bit depth
+      if (adcBitDepth < outputBitDepth) adcBitDepth = outputBitDepth;
+
+      calculatorState = {
+        ...calculatorState,
+        firmware,
+        adcBitDepth,
+        outputBitDepth,
+        dualGain: false,
+      };
+      calculatorState = updateResolutionConstraints(calculatorState);
+      calculatorState = updateResolution(calculatorState);
+      calculatorState = updateOutput(calculatorState);
+      break;
+    }
+
+    case UPDATE_VOLUCAM_SCALING: {
+      const { scaling } = action;
+      calculatorState = {
+        ...calculatorState,
+        scaling,
+      };
+      if (scaling) {
+        calculatorState = {
+          ...calculatorState,
+          adcBitDepth: 10,
+          outputBitDepth: 8,
+          resolutionPreset: RESOLUTION.CUSTOM,
+          width: 2688,
+          height: 2000,
+        };
+      }
+      calculatorState = updateOutput(calculatorState);
+      break;
+    }
+
+    case UPDATE_VOLUCAM_DUAL_GAIN: {
+      const { dualGain } = action;
+      calculatorState = {
+        ...calculatorState,
+        dualGain,
+      };
+      calculatorState = updateResolutionConstraints(calculatorState);
       calculatorState = updateResolution(calculatorState);
       calculatorState = updateOutput(calculatorState);
       break;

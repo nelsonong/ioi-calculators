@@ -1,0 +1,21 @@
+@import './colors.css';
+@import './calculator.css';
+
+.core2-calculator {
+    composes: calculator;
+    background: $core2-background;
+    background: linear-gradient(to bottom right, $core2-background, $core2-background-light);
+    width: 39.4rem;
+}
+
+.core2-fieldset {
+    composes: fieldset;
+    background: $core2-fieldset;
+    margin: 0rem 0.1rem 0.3rem 0.1rem;
+}
+
+.core2-input {
+    composes: input;
+    background: $core2-output;
+    width: 60%;
+}

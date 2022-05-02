@@ -53,7 +53,7 @@
 }
 
 .display-custom {
-    background: rgb(247, 203, 131);
+    background: $volucam-edit;
     font-style: italic;
 }
 
@@ -64,7 +64,8 @@
 }
 
 .display-max {
-    width: 19%;
+    background: seashell;
+    width: 15%;
     font-size: 1rem;
 }
 

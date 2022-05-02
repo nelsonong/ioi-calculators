@@ -1,0 +1,20 @@
+@import '../../../../styles/rodeo.css';
+
+.root {
+    composes: rodeo-fieldset;
+    margin-bottom: 0.6rem;
+}
+
+.label {
+    display: inline-block;
+    margin-right: 0.5rem;
+}
+
+.drive {
+    display: inline-block;
+    margin-right: 0.7rem;
+}
+
+.center {
+    text-align: center;
+}

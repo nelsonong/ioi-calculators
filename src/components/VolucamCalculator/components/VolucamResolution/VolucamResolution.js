@@ -10,6 +10,7 @@ import styles from './VolucamResolution.css';
 
 const VolucamResolution = ({
   cameraMode,
+  scaling,
   sensorDriveMode,
   resolutionPreset,
   resolutionPresets,
@@ -29,7 +30,7 @@ const VolucamResolution = ({
   const resolutionPresetOptions = resolutionPresets.map((resolutionPresetOption, i) => (
     <option key={i} value={resolutionPresetOption}>{resolutionPresetOption}</option>
   ));
-  const disableResolution = (cameraMode === 1) && (sensorDriveMode !== SENSOR_DRIVE_MODE.ALL_10);
+  const disableResolution = ((cameraMode === 1) && (sensorDriveMode !== SENSOR_DRIVE_MODE.ALL_10)) || scaling;
   return (
     <fieldset className={styles.root}>
     <legend className={styles.legend}>Resolution</legend>
@@ -84,6 +85,7 @@ const mapStateToProps = (state, { cameraId }) => {
   const calculatorState = state.frameRateCalculators[cameraId];
   const {
     cameraMode,
+    scaling,
     sensorDriveMode,
     resolutionPreset,
     resolutionPresets,
@@ -99,6 +101,7 @@ const mapStateToProps = (state, { cameraId }) => {
   } = calculatorState;
   return {
     cameraMode,
+    scaling,
     sensorDriveMode,
     resolutionPreset,
     resolutionPresets,

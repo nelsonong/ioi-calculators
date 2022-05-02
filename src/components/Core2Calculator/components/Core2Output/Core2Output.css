@@ -1,0 +1,40 @@
+@import '../../../../styles/core2.css';
+
+.root {
+    composes: core2-fieldset;
+    margin-bottom: 0.6rem;
+}
+
+.label {
+    display: inline-block;
+    margin-right: 0.4rem;
+}
+
+.raid, .drive, .amount {
+    display: inline-block;
+    margin-right: 0rem;
+}
+
+.center {
+    text-align: center;
+}
+
+.drive-select {
+    composes: select;
+    margin-right: 0rem;
+}
+
+.display {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0.5rem 0.5rem 0.1rem 0.5rem;
+    width: 18%;
+    border: solid $calculator-info;
+    border-radius: 0.2rem;
+}
+
+.input {
+    composes: core2-input;
+    display: inline-block;
+}

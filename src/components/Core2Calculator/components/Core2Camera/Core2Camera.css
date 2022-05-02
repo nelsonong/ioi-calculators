@@ -1,0 +1,182 @@
+@import '../../../../styles/fonts.css';
+@import '../../../../styles/colors.css';
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+}
+
+.root {
+    background: $mini-background;
+    background: repeating-linear-gradient(
+        45deg,
+        $mini-background,
+        $mini-background 1rem,
+        $mini-background-dark 1rem,
+        $mini-background-dark 2rem
+    );
+    font-family: $roboto;
+    font-size: 1.1rem;
+    font-weight: 500;
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    width: 21.5%;
+    height: 13.2rem;
+    margin: auto 0.3rem;
+    padding: 0;
+    border: solid $calculator-border;
+    border-width: medium;
+    border-radius: 0.5rem;
+    opacity: 0.85;
+    transition: 0.3s;
+}
+
+.root:hover {
+    opacity: 1.0;
+}
+
+.add-button-container {
+    height: 9rem;
+    cursor: pointer;
+}
+
+.hover-container {
+    margin: 0.1rem 0;
+    padding: 0rem 0;
+}
+
+.added {
+    opacity: 1.0;
+}
+
+.added:hover {
+    cursor: default;
+}
+
+.title {
+    background: $calculator-title;
+    color: white;
+    width: 70%;
+    padding: 0.1rem;
+    margin: 0rem auto;
+    margin-bottom: 0.5rem;
+    display: inline-block;
+    border: solid $calculator-title;
+    border-top-style: none;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+.info {
+    background: $mini-fieldset;
+    text-align: center;
+    margin: 0.2rem 0.28rem;
+    padding: 0.3rem;
+    border: solid 0.2rem $calculator-title;
+    border-radius: 0.2rem;
+}
+
+.info-small {
+    composes: info;
+    font-size: 1rem;
+}
+
+.data-rate {
+    background: $mini-output;
+    text-align: center;
+    margin: 0.3rem 0.28rem;
+    padding: 0.3rem;
+    border: solid 0.3rem $calculator-border-light;
+    border-radius: 0.2rem;
+}
+
+.add-button {
+    background: transparent;
+    margin-top: 2.3rem;
+    border: none;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+.add-button:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.add-button:focus {
+    outline: none;
+}
+
+.button {
+    font-weight: bold;
+    margin: 0.15rem 0.15rem;
+    padding: 0.2rem 0.3rem;
+    border: solid 0.3rem $calculator-border;
+    border-radius: 0.3rem;
+    opacity: 0.85;
+    transition: 0.3s;
+}
+
+.edit-button {
+    composes: button;
+    background: $edit-button;
+    width: 38%;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.edit-button:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.delete-button {
+    composes: button;
+    background: $delete-button;
+    width: 38%;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.delete-button:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.copy-button {
+    composes: button;
+    background: $copy-button;
+    width: 80%;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.copy-button:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.paste-button {
+    composes: button;
+    background: $paste-button;
+    width: 80%;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.paste-button:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.duplicate-button {
+    composes: button;
+    color: white;
+    background: $calculator-border;
+    width: 80%;
+    opacity: 0.9;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.duplicate-button:hover {
+    opacity: 1;
+    cursor: pointer;
+}

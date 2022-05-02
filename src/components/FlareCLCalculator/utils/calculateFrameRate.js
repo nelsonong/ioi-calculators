@@ -419,5 +419,5 @@ export default ({
 
   // Calculate and return framerate
   const frameRate = 1000000.0 / framePeriodUs;
-  return frameRate.toFixed(2);
+  return Number(frameRate.toFixed(2));
 };

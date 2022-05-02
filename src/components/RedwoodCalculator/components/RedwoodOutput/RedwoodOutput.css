@@ -1,0 +1,15 @@
+@import '../../../../styles/redwood.css';
+
+.root {
+    composes: redwood-fieldset;
+    margin-bottom: 0.6rem;
+}
+
+.center {
+    text-align: center;
+}
+
+.input {
+    composes: redwood-input;
+    width: 85%;
+}

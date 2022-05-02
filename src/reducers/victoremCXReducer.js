@@ -23,6 +23,8 @@ import {
   UPDATE_VICTOREM_CX_HEIGHT,
   UPDATE_VICTOREM_CX_SUBSAMPLING_BINNING,
   UPDATE_VICTOREM_CX_SENSOR_DRIVE_MODE,
+  UPDATE_VICTOREM_CX_FRAME_RATE,
+  RESET_VICTOREM_CX_FRAME_RATE,
 } from '../actions/victoremCXActions';
 
 // Update and validate resolution
@@ -132,17 +134,34 @@ const updateResolutionConstraints = (calculatorState) => {
 };
 
 // Update output
-const updateOutput = (calculatorState) => {
-  const frameRate = calculateFrameRate(calculatorState);
+const updateOutput = (calculatorState, dontResetFrameRate) => {
+  const maxFrameRate = calculateFrameRate(calculatorState);
+  let { frameRate } = calculatorState;
+  if (!dontResetFrameRate) {
+    frameRate = Number(maxFrameRate.toFixed(2));
+  }
+
   const dataRate = calculateDataRate({
     ...calculatorState,
     frameRate,
   });
+
   return {
     ...calculatorState,
     frameRate,
+    maxFrameRate,
     dataRate,
   };
+};
+
+const countDecimalPlaces = (number) => {
+  const str = `${number}`;
+  const index = str.indexOf('.');
+  if (index >= 0) {
+    return str.length - index - 1;
+  }
+
+  return 0;
 };
 
 const victoremCXReducer = (state = { order: [] }, action) => {
@@ -396,6 +415,30 @@ const victoremCXReducer = (state = { order: [] }, action) => {
       };
       calculatorState = updateResolutionConstraints(calculatorState);
       calculatorState = updateResolution(calculatorState);
+      calculatorState = updateOutput(calculatorState);
+      break;
+    }
+
+    case UPDATE_VICTOREM_CX_FRAME_RATE: {
+      let { frameRate } = action;
+      const { maxFrameRate } = calculatorState;
+      const decimalPlaces = countDecimalPlaces(frameRate);
+      const invalidFrameRate = decimalPlaces > 2 || Number(frameRate.toFixed(2)) > Number(maxFrameRate.toFixed(2));
+      if (invalidFrameRate) {
+        return state;
+      } if (frameRate === 0) {
+        frameRate = 1;
+      }
+
+      calculatorState = {
+        ...calculatorState,
+        frameRate,
+      };
+      calculatorState = updateOutput(calculatorState, true);
+      break;
+    }
+
+    case RESET_VICTOREM_CX_FRAME_RATE: {
       calculatorState = updateOutput(calculatorState);
       break;
     }

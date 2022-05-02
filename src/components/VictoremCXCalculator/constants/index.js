@@ -49,6 +49,7 @@ export const victoremCXDefaultState = {
   subSamplingBinning: SUBSAMPLING_BINNING.NONE,
   sensorDriveMode: SENSOR_DRIVE_MODE.ALL_12,
   frameRate: 523.581,
+  maxFrameRate: 523.581,
   dataRate: 195.576,
   supports2x2Binning: false,
   supportsSubSampling: false,

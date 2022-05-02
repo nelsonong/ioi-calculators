@@ -1,10 +1,12 @@
 import { flareCLDefaultState } from '../components/FlareCLCalculator/constants';
 import { flareCXDefaultState } from '../components/FlareCXCalculator/constants';
 import { flareSDIDefaultState } from '../components/FlareSDICalculator/constants';
+import { redwoodDefaultState } from '../components/RedwoodCalculator/constants';
 import { victoremCXDefaultState } from '../components/VictoremCXCalculator/constants';
 import { victoremSDIDefaultState } from '../components/VictoremSDICalculator/constants';
 import { volucamDefaultState } from '../components/VolucamCalculator/constants';
-import { dvrDefaultState } from '../components/DVRCalculator/constants';
+import { core2DefaultState } from '../components/Core2Calculator/constants';
+import { rodeoDefaultState } from '../components/RodeoCalculator/constants';
 import {
   ADD_CALCULATOR,
   DELETE_CALCULATOR,
@@ -34,6 +36,10 @@ const managementReducer = (inputState = { order: [] }, action) => {
           defaultState = flareSDIDefaultState;
           break;
 
+        case 'redwood':
+          defaultState = redwoodDefaultState;
+          break;
+
         case 'victorem-cx':
           defaultState = victoremCXDefaultState;
           break;
@@ -46,8 +52,12 @@ const managementReducer = (inputState = { order: [] }, action) => {
           defaultState = volucamDefaultState;
           break;
 
-        case 'dvr':
-          defaultState = dvrDefaultState;
+        case 'core2':
+          defaultState = core2DefaultState;
+          break;
+
+        case 'rodeo':
+          defaultState = rodeoDefaultState;
           break;
 
         default:

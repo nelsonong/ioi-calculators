@@ -1,4 +1,5 @@
 import {
+  FIRMWARE,
   MODELS,
   SENSOR_DRIVE_MODE,
 } from '../constants';
@@ -9,6 +10,8 @@ const isConfiguration = (
   targetLinkSpeed,
   targetLinkCount,
 ) => (linkSpeed === targetLinkSpeed) && (linkCount === targetLinkCount);
+
+const isGpixel = model => MODELS.TYPE_0505.includes(model) || MODELS.TYPE_2509.includes(model);
 
 const calculateDriveModeFrameRate = (height, adcBitDepth, linkSpeed, linkCount, sensorDriveMode) => {
   // Determine hmaxMin (the minimum possible value of hmax)
@@ -55,10 +58,12 @@ const calculateFrameRate = (
   width,
   maxWidth,
   height,
+  firmware,
   adcBitDepth,
   outputBitDepth,
   linkSpeed,
   linkCount,
+  dualGain,
 ) => {
   let hmaxMod;
   if (adcBitDepth === 8) hmaxMod = 1;
@@ -122,26 +127,54 @@ const calculateFrameRate = (
   } else if (MODELS.TYPE_305.includes(model)) {
     minVertBlank = 54;
     hmaxCalc = 522;
-  } else if (MODELS.TYPE_505.includes(model)) {
+  } else if (MODELS.TYPE_530.includes(model)) {
+    if (adcBitDepth === 12) {
+      if (firmware === FIRMWARE.COMPRESSED_12) {
+        // 12-bit ADC and 12-bit output is forced in this mode
+        hmaxCalc = 256;
+      } else if (dualGain) hmaxCalc = 418;
+      else if (outputBitDepth === 10) hmaxCalc = 320;
+      else if (outputBitDepth === 8) hmaxCalc = 256;
+      else hmaxCalc = 383;
+    } else if (adcBitDepth === 10) {
+      if (outputBitDepth === 8) hmaxCalc = 255;
+      else hmaxCalc = 318;
+    } else hmaxCalc = 255;
+
+    if (adcBitDepth === 12) {
+      if (firmware === FIRMWARE.COMPRESSED_12) {
+        // 12-bit ADC and 12-bit output is forced in this mode
+        minVertBlank = 164;
+      } else if (dualGain) {
+        minVertBlank = 120;
+      } else minVertBlank = 164;
+    } else if (adcBitDepth === 10) minVertBlank = 184;
+    else minVertBlank = 184;
+  } else if (isGpixel(model)) {
     minVertBlank = 14;
-    const targetDataRate = 1120;
+    if (MODELS.TYPE_0505.includes(model)) {
+      const hmaxMin = 124;
+      hmaxCalc = hmaxMin;
+      if (outputBitDepth === 10 || outputBitDepth === 12) {
+        const hmaxCalcMod = 4;
+        let fixedPoint = 0.027984619140625;
+        if (outputBitDepth === 12) fixedPoint = 0.033584594726563;
 
-    if (outputBitDepth === 12) hmaxCalc = 528;
-    else if (outputBitDepth === 10) hmaxCalc = 444;
-    else hmaxCalc = 372; // 8-Bit
+        hmaxCalc = hmaxCalcMod * Math.ceil((Math.ceil(width * fixedPoint) / hmaxCalcMod));
+        if (hmaxCalc < hmaxMin) hmaxCalc = hmaxMin;
+      }
+    } else if (MODELS.TYPE_2509.includes(model)) {
+      const hmaxMin = 152;
+      hmaxCalc = hmaxMin;
+      if (outputBitDepth === 10 || outputBitDepth === 12) {
+        const hmaxCalcMod = 4;
+        let fixedPoint = 0.041793823242188;
+        if (outputBitDepth === 12) fixedPoint = 0.050140380859375;
 
-    const hMaxScaler = (1000000 * outputBitDepth * 5120 * 80) / (1048576 * 8
-      * (4 + 5120 + minVertBlank) * targetDataRate);
-    const hMaxScalerFixedPoint = Math.floor(hMaxScaler * 65536) / 65536;
-
-    let hmaxTemp = Math.ceil(hMaxScalerFixedPoint * width);
-
-    const mod12add = 12 - (hmaxTemp % 12);
-    if (mod12add !== 12) {
-      hmaxTemp += mod12add;
+        hmaxCalc = hmaxCalcMod * Math.ceil((Math.ceil(width * fixedPoint) / hmaxCalcMod));
+        if (hmaxCalc < hmaxMin) hmaxCalc = hmaxMin;
+      }
     }
-
-    hmaxCalc = (hmaxTemp < 372) ? 372 : hmaxTemp;
   } else {
     throw new Error('Unsupported model');
   }
@@ -155,8 +188,9 @@ const calculateFrameRate = (
 
   // Calculate the frame rate
   let linetime;
-  if (MODELS.TYPE_505.includes(model)) {
-    linetime = hmaxCalc / 80;
+  if (isGpixel(model)) {
+    if (MODELS.TYPE_0505.includes(model)) linetime = 3 * hmaxCalc / 80;
+    if (MODELS.TYPE_2509.includes(model)) linetime = 2 * hmaxCalc / 80;
   } else if (outputBitDepth < adcBitDepth && !isConfiguration(linkSpeed, linkCount, 6, 2)) {
     let adcBitRatio = 0;
     if (outputBitDepth === 8 && adcBitDepth === 12) adcBitRatio = 0.66667;
@@ -169,9 +203,12 @@ const calculateFrameRate = (
   }
 
   let frameRate;
-  if (MODELS.TYPE_505.includes(model)) {
+  if (isGpixel(model)) {
     const readoutTimeRounded = Math.ceil((height + minVertBlank) * linetime);
-    const fotRounded = Math.ceil(4 * hmaxCalc / 80);
+    let fotVal;
+    if (MODELS.TYPE_0505.includes(model)) fotVal = 12;
+    if (MODELS.TYPE_2509.includes(model)) fotVal = 13;
+    const fotRounded = Math.ceil(fotVal * hmaxCalc / 80);
     const frameTime = fotRounded + readoutTimeRounded;
 
     frameRate = 1 / frameTime * 1000000;
@@ -185,11 +222,13 @@ const calculateFrameRate = (
 export default ({
   model,
   format,
+  firmware,
   adcBitDepth,
   outputBitDepth,
   width,
   maxWidth,
   height,
+  dualGain,
   sensorDriveMode,
 }) => {
   const linkSpeed = Number(format.slice(-1));
@@ -209,10 +248,12 @@ export default ({
       width,
       maxWidth,
       height,
+      firmware,
       adcBitDepth,
       outputBitDepth,
       linkSpeed,
       linkCount,
+      dualGain,
     );
   }
 

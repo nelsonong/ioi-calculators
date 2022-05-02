@@ -1,0 +1,50 @@
+@import './colors.css';
+@import './calculator.css';
+
+.rodeo-calculator {
+    composes: calculator;
+    background: $rodeo-background;
+    background: linear-gradient(to bottom right, $rodeo-background, $rodeo-background-light);
+    width: 25rem;
+}
+
+.rodeo-fieldset {
+    composes: fieldset;
+    background: $rodeo-fieldset;
+    margin: 0rem 0.1rem 0.3rem 0.1rem;
+}
+
+.rodeo-input {
+    composes: input;
+    background: $rodeo-output;
+    width: 60%;
+}
+
+.rodeo-input-top {
+    composes: input;
+    background: $rodeo-output;
+    width: 85%;
+    border-bottom: none;
+    border-bottom-left-radius: 0rem;
+    border-bottom-right-radius: 0rem;
+    margin: 0.2rem auto;
+    margin-bottom: 0rem;
+}
+
+.rodeo-tooltip {
+    composes: input;
+    background: $rodeo-compression;
+    color: black;
+    font-size: 1rem;
+    font-weight: 700;
+    font-style: italic;
+    width: 85%;
+    height: 2.7rem;
+    border-top-left-radius: 0rem;
+    border-top-right-radius: 0rem;
+    margin: 0.2rem auto;
+    margin-top: 0rem;
+    resize: none;
+    overflow: hidden;
+    animation: fadeIn 0.1s ease-in-out;
+}

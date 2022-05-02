@@ -6,8 +6,8 @@ import {
 } from 'react-router-dom';
 import Header from '../../components/Header';
 import Home from '../../screens/Home';
-import FrameRate from '../../screens/FrameRate';
-import Storage from '../../screens/Storage';
+import Cameras from '../../screens/Cameras';
+import DVRs from '../../screens/DVRs';
 import Footer from '../../components/Footer';
 import styles from '../../index.css';
 
@@ -17,8 +17,10 @@ const AppRouter = () => (
       <Header />
       <Switch>
         <Route path='/calculator' component={Home} exact={true} />
-        <Route path='/calculator/framerate' component={FrameRate} />
-        <Route path='/calculator/storage' component={Storage} />
+        <Route path='/calculator/cameras' component={Cameras} />
+        <Route path='/calculator/DVRs' component={DVRs} />
+        <Route path='/calculator/framerate' component={Cameras} />
+        <Route path='/calculator/storage' component={DVRs} />
       </Switch>
       <Footer />
     </div>

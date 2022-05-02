@@ -11,10 +11,14 @@ export const MODEL = {
   Type89B93CV: '89B93CV',
   Type120B68MV: '120B68MV',
   Type120B68CV: '120B68CV',
+  Type245D60MV: '245D60MV',
+  Type245D60CV: '245D60CV',
+  // Type205R26MV: '205R26MV',
+  // Type205R26CV: '205R26CV',
   Type262G41MV: '262G41MV',
   Type262G41CV: '262G41CV',
-  Type205R26MV: '205R26MV',
-  Type205R26CV: '205R26CV',
+  Type90G120MV: '90G120MV',
+  Type90G120CV: '90G120CV',
 };
 
 export const MODELS = {
@@ -45,13 +49,21 @@ export const MODELS = {
     MODEL.Type120B68MV,
     MODEL.Type120B68CV,
   ],
-  TYPE_505: [
-    MODEL.Type262G41MV,
-    MODEL.Type262G41CV,
-  ],
   TYPE_183: [
     MODEL.Type205R26MV,
     MODEL.Type205R26CV,
+  ],
+  TYPE_530: [
+    MODEL.Type245D60MV,
+    MODEL.Type245D60CV,
+  ],
+  TYPE_0505: [
+    MODEL.Type262G41MV,
+    MODEL.Type262G41CV,
+  ],
+  TYPE_2509: [
+    MODEL.Type90G120MV,
+    MODEL.Type90G120CV,
   ],
   TYPE_MONO: [
     MODEL.Type24A164MV,
@@ -59,8 +71,9 @@ export const MODELS = {
     MODEL.Type51B163MV,
     MODEL.Type89B93MV,
     MODEL.Type120B68MV,
-    MODEL.Type262G41MV,
     MODEL.Type205R26MV,
+    MODEL.Type262G41MV,
+    MODEL.Type90G120MV,
   ],
   TYPE_COLOR: [
     MODEL.Type24A164CV,
@@ -70,7 +83,8 @@ export const MODELS = {
     MODEL.Type89B64CV,
     MODEL.Type89B93CV,
     MODEL.Type120B68CV,
-    MODEL.Type262G41CV,
     MODEL.Type205R26CV,
+    MODEL.Type262G41CV,
+    MODEL.Type90G120CV,
   ],
 };

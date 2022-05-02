@@ -1,0 +1,14 @@
+@import '../../styles/core2.css';
+
+.root {
+    composes: core2-calculator;
+}
+
+.root:hover {
+    cursor: move;
+}
+
+.scale {
+    transform: scale(0.9);
+    margin: 0 auto;
+}

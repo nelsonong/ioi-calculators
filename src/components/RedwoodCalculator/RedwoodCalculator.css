@@ -1,0 +1,5 @@
+@import '../../styles/redwood.css';
+
+.root {
+    composes: redwood-calculator;
+}

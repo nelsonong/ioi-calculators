@@ -7,6 +7,8 @@ const UPDATE_FLARE_CX_RESOLUTION_PRESET = 'UPDATE_FLARE_CX_RESOLUTION_PRESET';
 const UPDATE_FLARE_CX_WIDTH = 'UPDATE_FLARE_CX_WIDTH';
 const UPDATE_FLARE_CX_HEIGHT = 'UPDATE_FLARE_CX_HEIGHT';
 const UPDATE_FLARE_CX_SUB_SAMPLING = 'UPDATE_FLARE_CX_SUB_SAMPLING';
+const UPDATE_FLARE_CX_FRAME_RATE = 'UPDATE_FLARE_CX_FRAME_RATE';
+const RESET_FLARE_CX_FRAME_RATE = 'RESET_FLARE_CX_FRAME_RATE';
 
 const flareCXActionTypes = [
   INITIALIZE_FLARE_CX_DVR_STATE,
@@ -18,6 +20,8 @@ const flareCXActionTypes = [
   UPDATE_FLARE_CX_WIDTH,
   UPDATE_FLARE_CX_HEIGHT,
   UPDATE_FLARE_CX_SUB_SAMPLING,
+  UPDATE_FLARE_CX_FRAME_RATE,
+  RESET_FLARE_CX_FRAME_RATE,
 ];
 
 // Action generators
@@ -84,6 +88,19 @@ export const updateSubSampling = (cameraId, subSampling, dvrId) => ({
   dvrId,
 });
 
+export const updateFrameRate = (cameraId, frameRate, dvrId) => ({
+  type: UPDATE_FLARE_CX_FRAME_RATE,
+  cameraId,
+  frameRate,
+  dvrId,
+});
+
+export const resetFrameRate = (cameraId, dvrId) => ({
+  type: RESET_FLARE_CX_FRAME_RATE,
+  cameraId,
+  dvrId,
+});
+
 // Action types
 export {
   INITIALIZE_FLARE_CX_DVR_STATE,
@@ -95,5 +112,7 @@ export {
   UPDATE_FLARE_CX_WIDTH,
   UPDATE_FLARE_CX_HEIGHT,
   UPDATE_FLARE_CX_SUB_SAMPLING,
+  UPDATE_FLARE_CX_FRAME_RATE,
+  RESET_FLARE_CX_FRAME_RATE,
   flareCXActionTypes,
 };

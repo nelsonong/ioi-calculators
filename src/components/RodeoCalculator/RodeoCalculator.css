@@ -1,0 +1,14 @@
+@import '../../styles/rodeo.css';
+
+.root {
+    composes: rodeo-calculator;
+}
+
+.root:hover {
+    cursor: move;
+}
+
+.scale {
+    transform: scale(0.9);
+    margin: 0 auto;
+}

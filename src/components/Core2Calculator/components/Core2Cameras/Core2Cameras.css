@@ -1,0 +1,9 @@
+@import '../../../../styles/core2.css';
+
+.root {
+    composes: core2-fieldset;
+}
+
+.container {
+    text-align: center;
+}

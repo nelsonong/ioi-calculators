@@ -1,0 +1,59 @@
+@import '../../styles/colors.css';
+@import '../../styles/container.css';
+
+.root {
+	margin: 0 1rem;
+	min-width: 42rem;
+}
+
+.buttons-inner {
+	margin-right: 1em;
+}
+
+.add-core2-button {
+	composes: sub-button;
+	background: $core2-button;
+	@mixin left-divider;
+}
+
+.add-core2-button:hover {
+	background: $core2-button-light;
+}
+
+.add-rodeo-button {
+	composes: sub-button;
+	background: $rodeo-button;
+	@mixin left-divider;
+}
+
+.add-rodeo-button:hover {
+	background: $rodeo-button-light;
+}
+
+.import-button {
+	composes: button;
+	background: $import-button;
+}
+
+.import-button:hover {
+	background: $import-button-light;
+}
+
+.export-button {
+	composes: button;
+	background: $export-button;
+}
+
+.export-button:hover {
+	background: $export-button-light;
+}
+
+.clear-button {
+	composes: button;
+	background: $clear-button;
+	color: black;
+}
+
+.clear-button:hover {
+	background: $clear-button-light;
+}

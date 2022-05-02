@@ -8,8 +8,7 @@ import {
   VolucamFormat,
   VolucamResolution,
   VolucamFrameRate,
-  VolucamStorage,
-  VolucamRecordingTime,
+  VolucamOutput,
 } from './components';
 import styles from './VolucamCalculator.css';
 
@@ -28,8 +27,7 @@ class VolucamCalculator extends Component {
         <VolucamFormat cameraId={this.props.cameraId} />
         <VolucamResolution cameraId={this.props.cameraId} />
         <VolucamFrameRate cameraId={this.props.cameraId} />
-        <VolucamStorage cameraId={this.props.cameraId} />
-        <VolucamRecordingTime cameraId={this.props.cameraId} />
+        <VolucamOutput cameraId={this.props.cameraId} />
       </div>
     );
   }

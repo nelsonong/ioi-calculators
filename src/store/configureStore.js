@@ -11,14 +11,25 @@ import {
 import cameraReducer from '../reducers/cameraReducer';
 import storageReducer from '../reducers/storageReducer';
 
-const version = '1.09';
+const version = '1.14';
 const persistedVersion = loadVersion();
 let persistedState = loadState();
 
 // Check for version change
 if (persistedVersion !== version) {
+  if (!persistedState) {
+    // eslint-disable-next-line no-console
+    console.log(`v${version} initialized.`);
+  } else {
+    // eslint-disable-next-line no-console
+    console.log(`Version change detected: v${version}. Resetting saved state and loading new version.`);
+  }
   persistedState = undefined;
   saveVersion(version);
+  saveState(persistedState);
+} else {
+  // eslint-disable-next-line no-console
+  console.log(`v${version} loaded.`);
 }
 
 const configureStore = () => {

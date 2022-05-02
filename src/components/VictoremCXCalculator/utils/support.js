@@ -4,10 +4,12 @@ import {
   SUBSAMPLING_BINNING,
 } from '../constants';
 
+const isGpixel = model => MODELS.TYPE_0505.includes(model) || MODELS.TYPE_2509.includes(model);
+
 const supports2x2Binning = model => MODELS.TYPE_253.includes(model)
   || MODELS.TYPE_255.includes(model)
   || MODELS.TYPE_273.includes(model)
-  || MODELS.TYPE_505.includes(model);
+  || isGpixel(model);
 
 const supportsSubSampling = model => MODELS.TYPE_250.includes(model)
   || MODELS.TYPE_252.includes(model)
@@ -16,18 +18,18 @@ const supportsSubSampling = model => MODELS.TYPE_250.includes(model)
   || MODELS.TYPE_265.includes(model)
   || MODELS.TYPE_273.includes(model)
   || MODELS.TYPE_305.includes(model)
-  || MODELS.TYPE_505.includes(model);
+  || isGpixel(model);
 
 const supportsVerticalBinning = model => MODELS.TYPE_250.includes(model)
   || MODELS.TYPE_252.includes(model)
   || MODELS.TYPE_253.includes(model)
   || MODELS.TYPE_255.includes(model)
-  || MODELS.TYPE_505.includes(model);
+  || isGpixel(model);
 
 const supportsHorizontalBinning = model => MODELS.TYPE_253.includes(model)
 || MODELS.TYPE_255.includes(model)
 || MODELS.TYPE_273.includes(model)
-|| MODELS.TYPE_505.includes(model);
+|| isGpixel(model);
 
 const isConfiguration = (
   linkSpeed,
@@ -102,11 +104,11 @@ const supportedBitDepths = ({
   }
 
   // All other models
-  if (!MODELS.TYPE_174.includes(model) && !MODELS.TYPE_505.includes(model)) {
+  if (!MODELS.TYPE_174.includes(model) && !isGpixel(model)) {
     adcBitDepths.push(8);
   }
 
-  if (!MODELS.TYPE_505.includes(model)) {
+  if (!isGpixel(model)) {
     adcBitDepths.push(10);
   }
 

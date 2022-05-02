@@ -4,6 +4,7 @@ import {
 } from './models';
 import SENSOR from './sensors';
 import FORMAT from './formats';
+import FIRMWARE from './firmware';
 import {
   RESOLUTION,
   RESOLUTION_VALUES,
@@ -32,6 +33,9 @@ export const volucamDefaultState = {
   adcBitDepths: [10, 12],
   outputBitDepth: 10,
   cameraMode: 0,
+  firmware: FIRMWARE.STANDARD,
+  scaling: false,
+  dualGain: false,
   sensorDriveMode: SENSOR_DRIVE_MODE.ALL_12,
   resolutionPreset: RESOLUTION.MAXIMUM,
   resolutionPresets: RESOLUTION_PRESETS[MODEL.Type24A164MV],
@@ -57,6 +61,7 @@ export {
   MODELS,
   SENSOR,
   FORMAT,
+  FIRMWARE,
   RESOLUTION,
   RESOLUTION_VALUES,
   RESOLUTIONS,

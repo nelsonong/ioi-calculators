@@ -1,0 +1,37 @@
+export const FORMAT = {
+  CXP12x4: '4 x CXP12',
+  CXP10x4: '4 x CXP10',
+  CXP6x4: '4 x CXP6',
+  CXP5x4: '4 x CXP5',
+  CXP3x4: '4 x CXP3',
+  CXP12x2: '2 x CXP12',
+  CXP10x2: '2 x CXP10',
+  CXP6x2: '2 x CXP6',
+  CXP5x2: '2 x CXP5',
+  CXP3x2: '2 x CXP3',
+  CXP12x1: '1 x CXP12',
+  CXP10x1: '1 x CXP10',
+  CXP6x1: '1 x CXP6',
+  CXP5x1: '1 x CXP5',
+  CXP3x1: '1 x CXP3',
+};
+
+export const FORMATS = {
+  CXX: [
+    FORMAT.CXP12x4,
+    FORMAT.CXP10x4,
+    FORMAT.CXP6x4,
+    FORMAT.CXP5x4,
+    FORMAT.CXP3x4,
+    FORMAT.CXP12x2,
+    FORMAT.CXP10x2,
+    FORMAT.CXP6x2,
+    FORMAT.CXP5x2,
+    FORMAT.CXP3x2,
+    FORMAT.CXP12x1,
+    FORMAT.CXP10x1,
+    FORMAT.CXP6x1,
+    FORMAT.CXP5x1,
+    FORMAT.CXP3x1,
+  ],
+};

@@ -1,0 +1,21 @@
+@import '../../../../styles/redwood.css';
+
+.root {
+    composes: redwood-fieldset;
+}
+
+.label {
+    margin: 0.3rem 0.3rem 0.1rem 0.3rem;
+}
+
+.message {
+    composes: label;
+    text-align: center;
+    font-style: italic;
+    margin: 0.3rem auto;
+}
+
+.select {
+    composes: select;
+    margin-bottom: 0.3rem;
+}

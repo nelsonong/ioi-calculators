@@ -6,20 +6,54 @@ import {
   updateOutputBitDepth,
 } from '../../../../actions/victoremCXActions';
 import styles from './VictoremCXFormat.css';
+import { MODEL } from '../../../Core2Calculator/constants';
 
 const VictoremCXFormat = ({
+  model,
   format,
   adcBitDepth,
   adcBitDepths,
   outputBitDepth,
   formats,
+  handleInitFormat,
   handleChangeFormat,
   handleChangeADCBitDepth,
   handleChangeOutputBitDepth,
 }) => {
-  const formatOptions = formats.map((formatOption, i) => (
-    <option key={i} value={formatOption}>{formatOption}</option>
-  ));
+  // Limit CXP speed options depending on Core type.
+  let maxLinkSpeed = 12;
+  if (model) {
+    if (model === MODEL.CORE2CX) {
+      maxLinkSpeed = 3;
+    } else if (model === MODEL.CORE2CXPLUS || model === MODEL.CORE2CXMAX) {
+      maxLinkSpeed = 6;
+    }
+  }
+
+  let selectedFormatDeleted = true;
+  let selectedFormat;
+  const formatOptions = formats.map((formatOption, i) => {
+    const trailingNumbers = formatOption.match(/\d+$/);
+    const linkSpeed = Number(trailingNumbers[0]);
+    if (linkSpeed <= maxLinkSpeed) {
+      if (format === formatOption) {
+        selectedFormatDeleted = false;
+      }
+
+      if (!selectedFormat) {
+        selectedFormat = formatOption;
+      }
+
+      return <option key={i} value={formatOption}>{formatOption}</option>;
+    }
+
+    return '';
+  });
+
+  if (selectedFormatDeleted) {
+    handleInitFormat(selectedFormat);
+  }
+
   const adcBitDepthOptions = adcBitDepths.map((adcBitDepthOption, i) => (
     <option key={i} value={adcBitDepthOption}>{adcBitDepthOption}</option>
   ));
@@ -58,9 +92,15 @@ const mapStateToProps = (state, {
   cameraId,
   dvrId,
 }) => {
-  const calculatorState = !dvrId
-    ? state.frameRateCalculators[cameraId]
-    : state.storageCalculators[dvrId].cameras[cameraId];
+  let calculatorState;
+  let model;
+  if (!dvrId) {
+    calculatorState = state.frameRateCalculators[cameraId];
+  } else {
+    calculatorState = state.storageCalculators[dvrId].cameras[cameraId];
+    ({ model } = state.storageCalculators[dvrId]);
+  }
+
   const {
     format,
     adcBitDepth,
@@ -69,6 +109,7 @@ const mapStateToProps = (state, {
     formats,
   } = calculatorState;
   return {
+    model,
     format,
     adcBitDepth,
     adcBitDepths,
@@ -81,6 +122,9 @@ const mapDispatchToProps = (dispatch, {
   cameraId,
   dvrId,
 }) => ({
+  handleInitFormat: (format) => {
+    dispatch(updateFormat(cameraId, format, dvrId));
+  },
   handleChangeFormat: (e) => {
     const format = e.target.value;
     dispatch(updateFormat(cameraId, format, dvrId));

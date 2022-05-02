@@ -4,7 +4,7 @@
     composes: volucam-fieldset;
 }
 
-@mixin add-left-right 42%, 58%;
+@mixin add-left-right 45%, 55%;
 
 .label {
     composes: label;
@@ -16,4 +16,12 @@
     composes: select;
     display: block;
     margin: 0.3rem;
+}
+
+.compression-select {
+    composes: select;
+    display: block;
+    margin: 0.3rem;
+    background: $volucam-compression;
+    font-style: italic;
 }

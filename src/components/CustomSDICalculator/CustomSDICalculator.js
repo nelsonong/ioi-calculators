@@ -37,11 +37,12 @@ const mapDispatchToProps = (dispatch, {
   cameraId,
   dvrId,
   mode,
+  model,
 }) => ({
   cameraId,
   dvrId,
   mode,
-  handleInitialize: () => dispatch(initializeDVRState(cameraId, mode, dvrId)),
+  handleInitialize: () => dispatch(initializeDVRState(cameraId, mode, model, dvrId)),
 });
 
 export default connect(null, mapDispatchToProps)(CustomSDICalculator);

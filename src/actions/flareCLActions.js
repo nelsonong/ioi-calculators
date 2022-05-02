@@ -7,6 +7,8 @@ const UPDATE_FLARE_CL_WIDTH = 'UPDATE_FLARE_CL_WIDTH';
 const UPDATE_FLARE_CL_HEIGHT = 'UPDATE_FLARE_CL_HEIGHT';
 const UPDATE_FLARE_CL_SUB_SAMPLING = 'UPDATE_FLARE_CL_SUB_SAMPLING';
 const UPDATE_FLARE_CL_SLOW_MODE = 'UPDATE_FLARE_CL_SLOW_MODE';
+const UPDATE_FLARE_CL_FRAME_RATE = 'UPDATE_FLARE_CL_FRAME_RATE';
+const RESET_FLARE_CL_FRAME_RATE = 'RESET_FLARE_CL_FRAME_RATE';
 
 const flareCLActionTypes = [
   INITIALIZE_FLARE_CL_DVR_STATE,
@@ -18,6 +20,8 @@ const flareCLActionTypes = [
   UPDATE_FLARE_CL_HEIGHT,
   UPDATE_FLARE_CL_SUB_SAMPLING,
   UPDATE_FLARE_CL_SLOW_MODE,
+  UPDATE_FLARE_CL_FRAME_RATE,
+  RESET_FLARE_CL_FRAME_RATE,
 ];
 
 // Action generators
@@ -84,6 +88,19 @@ export const updateSlowMode = (cameraId, slowMode, dvrId) => ({
   dvrId,
 });
 
+export const updateFrameRate = (cameraId, frameRate, dvrId) => ({
+  type: UPDATE_FLARE_CL_FRAME_RATE,
+  cameraId,
+  frameRate,
+  dvrId,
+});
+
+export const resetFrameRate = (cameraId, dvrId) => ({
+  type: RESET_FLARE_CL_FRAME_RATE,
+  cameraId,
+  dvrId,
+});
+
 // Action types
 export {
   INITIALIZE_FLARE_CL_DVR_STATE,
@@ -95,5 +112,7 @@ export {
   UPDATE_FLARE_CL_HEIGHT,
   UPDATE_FLARE_CL_SUB_SAMPLING,
   UPDATE_FLARE_CL_SLOW_MODE,
+  UPDATE_FLARE_CL_FRAME_RATE,
+  RESET_FLARE_CL_FRAME_RATE,
   flareCLActionTypes,
 };

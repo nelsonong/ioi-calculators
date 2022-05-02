@@ -2,6 +2,7 @@ import { managementActionTypes } from '../actions/managementActions';
 import { flareCLActionTypes } from '../actions/flareCLActions';
 import { flareCXActionTypes } from '../actions/flareCXActions';
 import { flareSDIActionTypes } from '../actions/flareSDIActions';
+import { redwoodActionTypes } from '../actions/redwoodActions';
 import { victoremCXActionTypes } from '../actions/victoremCXActions';
 import { victoremSDIActionTypes } from '../actions/victoremSDIActions';
 import { volucamActionTypes } from '../actions/volucamActions';
@@ -14,6 +15,7 @@ import managementReducer from './managementReducer';
 import flareCLReducer from './flareCLReducer';
 import flareCXReducer from './flareCXReducer';
 import flareSDIReducer from './flareSDIReducer';
+import redwoodReducer from './redwoodReducer';
 import victoremCXReducer from './victoremCXReducer';
 import victoremSDIReducer from './victoremSDIReducer';
 import volucamReducer from './volucamReducer';
@@ -42,6 +44,10 @@ const cameraReducer = (state = { order: [] }, action) => {
 
   if (flareSDIActionTypes.includes(action.type)) {
     return flareSDIReducer(state, action);
+  }
+
+  if (redwoodActionTypes.includes(action.type)) {
+    return redwoodReducer(state, action);
   }
 
   if (victoremCXActionTypes.includes(action.type)) {

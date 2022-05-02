@@ -1,4 +1,7 @@
-import { DRIVE } from '../constants';
+import {
+  DRIVE,
+  FIRMWARE,
+} from '../constants';
 
 const getCapacity = (driveModel) => {
   const fileSystemSize = 256 * 1024;
@@ -30,24 +33,25 @@ export default ({
   width,
   height,
   driveModel,
+  firmware,
   frameRate,
 }) => {
+  const FRAME_HEADER_SIZE = 64;
   const capacity = getCapacity(driveModel);
-
-  const bytesPerPixel = outputBitDepth / 8;
-  const frameHeader = 64;
-  let frameSize = frameHeader + (width * height * bytesPerPixel);
-  if (frameSize % 512 !== 0) {
-    const padding = frameSize % 512;
-    frameSize += padding;
-  }
-
   const freeBlocks = Math.floor(capacity / 512);
-  const blocksPerFrame = Math.ceil((width * height * bytesPerPixel + frameHeader) / 2048) * 4;
-  const blocksPerSecond = blocksPerFrame * frameRate;
-  const secondsRemaining = freeBlocks / blocksPerSecond;
+  const firmwareEnabled = firmware !== FIRMWARE.STANDARD;
+  const firmwareFactor = firmwareEnabled ? 2.0 : 1.0;
 
-  const dataRate = (frameSize * frameRate) / (1024 * 1024);
+  let secondsRemaining = 0;
+  const frameSize = Math.ceil(width * height * outputBitDepth / 8.0) + FRAME_HEADER_SIZE;
+  const blocksPerFrame = Math.ceil(frameSize / 2048) * 4;
+  const blocksPerSecond = blocksPerFrame * frameRate;
+  if (blocksPerSecond > 0) secondsRemaining = freeBlocks / blocksPerSecond;
+  secondsRemaining *= firmwareFactor;
+
+  let dataRate = (frameSize * frameRate) / (1024 * 1024);
+  dataRate /= firmwareFactor;
+
   return {
     dataRate,
     secondsRemaining,

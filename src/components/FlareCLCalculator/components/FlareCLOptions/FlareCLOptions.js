@@ -10,6 +10,8 @@ import styles from './FlareCLOptions.css';
 const FlareCLOptions = ({
   model,
   format,
+  subSampling,
+  slowMode,
   handleChangeSubSampling,
   handleChangeSlowMode,
 }) => {
@@ -18,16 +20,22 @@ const FlareCLOptions = ({
   return (
     <fieldset className={styles.root}>
     <legend className={styles.legend}>Options</legend>
-        <input type="checkbox"
+        <input
+          type="checkbox"
+          key={Math.random()}
           className={styles.checkbox}
           disabled={subSamplingDisabled}
+          defaultChecked={subSampling}
           onChange={handleChangeSubSampling}
         />
         <div className={styles.text}>Enable sub-sampling</div>
         <br />
-        <input type="checkbox"
+        <input
+          type="checkbox"
+          key={Math.random()}
           className={styles.checkbox}
           disabled={slowModeDisabled}
+          defaultChecked={slowMode}
           onChange={handleChangeSlowMode}
         />
         <div className={styles.text}>Enabled reduced line rate mode</div>
@@ -45,10 +53,14 @@ const mapStateToProps = (state, {
   const {
     model,
     format,
+    subSampling,
+    slowMode,
   } = calculatorState;
   return {
     model,
     format,
+    subSampling,
+    slowMode,
   };
 };
 
