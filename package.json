@@ -1,12 +1,39 @@
 {
   "name": "ioi-calculators",
-  "version": "1.0.0",
-  "main": "index.js",
+  "author": "IO Industries",
+  "description": "IOI Calculator",
+  "version": "1.1.0",
+  "homepage": "./",
+  "main": "./public/electron.js",
   "scripts": {
     "build": "webpack -p --env production",
     "dev": "webpack-dev-server",
     "start": "node server/server.js",
+    "electron-dev": "concurrently \"npm start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-pack": "electron-builder -c.extraMetadata.main=public/electron.js",
+    "preelectron-pack": "yarn build",
     "heroku-postbuild": "yarn build"
+  },
+  "build": {
+    "productName": "IOI Calculator",
+    "appId": "com.electron.ioi-calculator",
+    "win": {
+      "icon": "public/ioi-icon.png",
+      "target": "nsis"
+    },
+    "nsis": {
+      "allowElevation": false,
+      "allowToChangeInstallationDirectory": true,
+      "oneClick": false,
+      "perMachine": true
+    },
+    "files": [
+      "public/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "public"
+    }
   },
   "dependencies": {
     "autoprefixer": "^8.6.5",
@@ -19,6 +46,7 @@
     "babel-preset-react": "^6.24.1",
     "classnames": "^2.2.6",
     "css-loader": "^0.28.11",
+    "electron-is-dev": "^1.2.0",
     "eslint": "4.19.1",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-loader": "^2.1.0",
@@ -51,6 +79,11 @@
     "webpack-cli": "^3.0.8"
   },
   "devDependencies": {
+    "concurrently": "^5.3.0",
+    "cross-env": "^7.0.2",
+    "electron": "^10.1.1",
+    "electron-builder": "^22.8.0",
+    "wait-on": "^5.2.0",
     "webpack-dev-server": "^3.1.4"
   }
 }
